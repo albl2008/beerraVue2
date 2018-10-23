@@ -243,7 +243,7 @@ methods:{
     axios.get('http://localhost:3000/brewery')
     .then(res=>{
       console.log(res);
-      this.breweries = res.data.breweries;
+      this.breweries = res.data.Breweries;
     })
     .catch(e =>{
       console.log(e)

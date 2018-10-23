@@ -11,6 +11,9 @@
       <li class="nav-item">
         <a class="nav-link " href="http://localhost:8080/#/brewery">Brewery</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link " href="http://localhost:8080/#/bottle">Bottles</a>
+      </li>
     </ul>
   </nav>
   <div id="app">

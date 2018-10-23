@@ -2,26 +2,21 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-sm-12  col-md-5">
-           <form v-on:submit.prevent="addKeg" >
+           <form v-on:submit.prevent="addBottle" >
 
           <div class="input-group-pretend mb-3">
-            <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Beer" required>
-              <select v-model="newKeg.quantity" class="custom-select mb-1" required >
+            <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="Beer" required>
+              <select v-model="newBottle.quantity" class="custom-select mb-1" required >
                  <option disabled value="" label="holaaa"></option>
               <option v-for="q in quantities" v-bind:value="q.text">
                 {{q.text}}
               </option>
 
             </select>
-            <label >Estado: </label>
-            <div v-for="s in status" class="form-check form-check-inline">
-              <input required type="radio"  name="status" v-bind:value="s.value"  v-model="newKeg.status" class="form-check-input mb-1" >
-              <label for="one">{{s.text}}</label>
-
-            </div>
-            <input type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="IBU" required>
-            <input type="text" class="form-control mb-1" v-model="newKeg.alcohol" placeholder="Alcohol" required>
-            <select v-model="newKeg.brewery" class="custom-select mb-1" required>
+           <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="tamaño" required>
+            <input type="text" class="form-control mb-1" v-model="newBottle.ibu" placeholder="IBU" required>
+            <input type="text" class="form-control mb-1" v-model="newBottle.alcohol" placeholder="Alcohol" required>
+            <select v-model="newBottle.brewery" class="custom-select mb-1" required>
               <option value="" disabled hidden>Brewery</option>
               <option v-for="brewery in breweries" v-bind:value="brewery._id">
                 {{ brewery.name }}
@@ -43,21 +38,23 @@
               <thead>
               <th>Cerveza</th>
               <th>Cantidad</th>
-              <th>Estado</th>
+              <th>Size</th>
               <th>IBU</th>
               <th>alcohol</th>
               <th>brewery</th>
+              <th>Precio</th>
               </thead>
               <tbody>
-                <tr v-for="keg in kegs" >
-                  <td>{{keg.beer}}</td>
-                  <td>{{keg.quantity}}</td>
-                  <td>{{keg.status}}</td>
-                  <td>{{keg.ibu}}</td>
-                  <td>{{keg.alcohol}}</td>
-                  <td>{{keg.brewery.name}}</td>
-                  <td><button class="btn btn-danger btn-sm" v-on:click="deleteKeg(keg._id)"><i class="material-icons">delete</i></button></td>
-                  <td><button class="btn btn-primary btn-sm" v-on:click="updateKeg(keg._id)"><i class="material-icons">edit</i></button></td>
+                <tr v-for="bottle in bottles" >
+                  <td>{{bottle.beer}}</td>
+                  <td>{{bottle.quantity}}</td>
+                  <td>{{bottle.size}}</td>
+                  <td>{{bottle.ibu}}</td>
+                  <td>{{bottle.alcohol}}</td>
+                  <td>{{bottle.brewery.name}}</td>
+                  <td>{{bottle.price}}</td>
+                  <td><button class="btn btn-danger btn-sm" v-on:click="deleteBottle(bottle._id)"><i class="material-icons">delete</i></button></td>
+                  <td><button class="btn btn-primary btn-sm" v-on:click="updateBottle(bottle._id)"><i class="material-icons">edit</i></button></td>
                 </tr>
               </tbody>
             </table>
@@ -71,12 +68,13 @@
 import Vue from 'vue'
 const axios = require('axios')
 
-class newKeg{
-      constructor(id,beer,quantity,status,ibu,alcohol,brewery){
+class newBottle{
+      constructor(id,beer,quantity,size,ibu,alcohol,brewery,price){
         this.id = id
         this.beer = beer
         this.quantity = quantity
-        this.status = status
+        this.size = size
+        this.price = price
         this.ibu = ibu
         this.alcohol = alcohol
         this.brewery = brewery
@@ -87,48 +85,44 @@ class newKeg{
 export default {
   data(){
     return{
-      newKeg:{},
-      kegs:[],
+      newBottle:{},
+      bottles:[],
       breweries:[],
       quantities:[
         {text: '20'},
         {text: '30'},
         {text: '50'}
       ],
-      status:[
-        {text: 'Lleno', value: 1},
-        {text: 'Empesado', value: 2},
-        {text: 'Vacio', value: 3}
-      ],
+     
       edit: false,
-      kegToEdit:'',
+      bottleToEdit:'',
 
 
 
     }
   },
   created(){
-        this.getKegs();
+        this.getBottles();
         this.getBreweries();
     },
    methods:{
-     getKegs(){
-    axios.get('http://localhost:3000/keg')
+     getBottles(){
+    axios.get('http://localhost:3000/bottle')
       .then(response =>{
         console.log(response)
-        this.kegs = response.data.Kegs
+        this.bottles = response.data.bottles
 
       }).catch(e => {
         console.log(e)
 
       })
     },
-    addKeg(){
+    addBottle(){
 
       if(this.edit === false ){
 
-      axios.post('http://localhost:3000/keg',
-        this.newKeg,
+      axios.post('http://localhost:3000/bottle',
+        this.newBottle,
       ).then(res =>{
 
         if(res.status === 200 ){
@@ -139,8 +133,8 @@ export default {
           text: res.data.mensaje
         })
       }
-      this.getKegs(),
-      this.newKeg = {}
+      this.getBottles(),
+      this.newBottle = {}
      })
       .catch(e => {
         Vue.notify({
@@ -151,8 +145,8 @@ export default {
       })
       })
       }else{
-        axios.put(`http://localhost:3000/keg/${this.newKeg.id}`,
-          this.newKeg
+        axios.put(`http://localhost:3000/bottle/${this.newBottle.id}`,
+          this.newBottle
         ).then(res => {
            if(res.status === 200 ){
             Vue.notify({
@@ -161,8 +155,8 @@ export default {
               title: 'Barril',
               text: res.data.mensaje
             })
-          this.getKegs()
-          this.newKeg = {}
+          this.getBottles()
+          this.newBottle = {}
           this.edit = false
            }
         }).catch(e =>{
@@ -183,8 +177,8 @@ export default {
         console.log(response);
       })
     },
-    deleteKeg(idKeg){
-      axios.delete(`http://localhost:3000/keg/${idKeg}`)
+    deleteBottle(idBottle){
+      axios.delete(`http://localhost:3000/bottle/${idBottle}`)
       .then(res =>
       {
          if(res.status === 200 ){
@@ -195,7 +189,7 @@ export default {
               text: res.data.mensaje
             })
         console.log(res)
-        this.getKegs()
+        this.getBottles()
          }
         }).catch(e =>{
           Vue.notify({
@@ -206,13 +200,13 @@ export default {
         })
       })
     },
-    updateKeg(idKeg){
-      axios.get(`http://localhost:3000/keg/${idKeg}`)
+    updateBottle(idBottle){
+      axios.get(`http://localhost:3000/bottle/${idBottle}`)
       .then(res => {
         console.log(res)
-        this.newKeg = new newKeg(res.data.keg._id,res.data.keg.beer,
-        res.data.keg.quantity,res.data.keg.status,res.data.keg.ibu,
-        res.data.keg.alcohol, res.data.keg.brewery
+        this.newBottle = new newBottle  (res.data.bottle._id,res.data.bottle.beer,
+        res.data.bottle.quantity,res.data.bottle.size,res.data.bottle.ibu,
+        res.data.bottle.alcohol, res.data.bottle.brewery,res.data.bottle.price
         )
           this.edit = true;
       })
