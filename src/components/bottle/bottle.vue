@@ -2,7 +2,12 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-sm-12  col-md-5">
-           <form v-on:submit.prevent="addBottle" >
+          <div class="card">
+            <div class="card-header">
+               <h3>Nueva Botella</h3> 
+            </div>
+            <div class="card-body">
+                           <form v-on:submit.prevent="addBottle" >
 
           <div class="input-group-pretend mb-3">
             <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="Beer" required>
@@ -14,6 +19,7 @@
 
             </select>
            <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="tamaño" required>
+           <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="precio" required>
             <input type="text" class="form-control mb-1" v-model="newBottle.ibu" placeholder="IBU" required>
             <input type="text" class="form-control mb-1" v-model="newBottle.alcohol" placeholder="Alcohol" required>
             <select v-model="newBottle.brewery" class="custom-select mb-1" required>
@@ -32,9 +38,17 @@
               </template>
 
         </form>
+            </div>
+          </div>
+
       </div>
           <div class="col-12 col-sm-12 col-md-7">
-            <table class="table table-dark table-striped">
+            <div class="card">
+              <div class="card-header">
+                <h3>Botellas</h3>
+              </div>
+              <div class="card-body">
+                <table class="table ">
               <thead>
               <th>Cerveza</th>
               <th>Cantidad</th>
@@ -43,6 +57,8 @@
               <th>alcohol</th>
               <th>brewery</th>
               <th>Precio</th>
+              <th>Eliminar</th>
+              <th>Editar</th>
               </thead>
               <tbody>
                 <tr v-for="bottle in bottles" >
@@ -58,6 +74,8 @@
                 </tr>
               </tbody>
             </table>
+              </div>
+            </div>            
       </div>
 
     </div>
@@ -107,7 +125,7 @@ export default {
     },
    methods:{
      getBottles(){
-    axios.get('http://localhost:3000/bottle')
+    axios.get('https://serverbeerra.herokuapp.com/bottle')
       .then(response =>{
         console.log(response)
         this.bottles = response.data.bottles
@@ -121,7 +139,7 @@ export default {
 
       if(this.edit === false ){
 
-      axios.post('http://localhost:3000/bottle',
+      axios.post('https://serverbeerra.herokuapp.com/bottle',
         this.newBottle,
       ).then(res =>{
 
@@ -145,7 +163,7 @@ export default {
       })
       })
       }else{
-        axios.put(`http://localhost:3000/bottle/${this.newBottle.id}`,
+        axios.put(`https://serverbeerra.herokuapp.com/bottle/${this.newBottle.id}`,
           this.newBottle
         ).then(res => {
            if(res.status === 200 ){
@@ -171,14 +189,14 @@ export default {
       }
     },
     getBreweries(){
-      axios.get('http://localhost:3000/brewery')
+      axios.get('https://serverbeerra.herokuapp.com/brewery')
       .then(response =>{
         this.breweries = response.data.Breweries
         console.log(response);
       })
     },
     deleteBottle(idBottle){
-      axios.delete(`http://localhost:3000/bottle/${idBottle}`)
+      axios.delete(`https://serverbeerra.herokuapp.com/bottle/${idBottle}`)
       .then(res =>
       {
          if(res.status === 200 ){
@@ -201,7 +219,7 @@ export default {
       })
     },
     updateBottle(idBottle){
-      axios.get(`http://localhost:3000/bottle/${idBottle}`)
+      axios.get(`https://serverbeerra.herokuapp.com/bottle/${idBottle}`)
       .then(res => {
         console.log(res)
         this.newBottle = new newBottle  (res.data.bottle._id,res.data.bottle.beer,

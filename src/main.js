@@ -4,8 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Notifications from 'vue-notification'
-
-
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css' 
+import VModal from 'vue-js-modal'
+ 
+Vue.use(VModal) 
+Vue.use(Vuetify)
 Vue.config.productionTip = false
 Vue.use(Notifications)
 /* eslint-disable no-new */
