@@ -207,7 +207,7 @@ methods:{
             text: 'Ingrese al menos un contacto'
       })
     }else{
-      axios.post('https://serverbeerra.herokuapp.com/brewery',
+      axios.post('http://localhost:3000/brewery',
       this.newBrewery
       ).then(res => {
         console.log(res)
@@ -241,7 +241,7 @@ methods:{
             text: 'Ingrese al menos un contacto'
       })
         }else{
-        axios.put(`https://serverbeerra.herokuapp.com/brewery/${this.newBrewery.id}`,
+        axios.put(`http://localhost:3000/brewery/${this.newBrewery.id}`,
           this.newBrewery
         ).then(res => {
           console.log(res)
@@ -272,7 +272,7 @@ methods:{
       }
   },
   getBreweries(){
-    axios.get('https://serverbeerra.herokuapp.com/brewery')
+    axios.get('http://localhost:3000/brewery')
     .then(res=>{
       console.log(res);
       this.breweries = res.data.Breweries;
@@ -282,14 +282,14 @@ methods:{
     })
   },
   getcontact(idBrewery){
-    axios.get(`https://serverbeerra.herokuapp.com/brewery/${idBrewery}`)
+    axios.get(`http://localhost:3000/brewery/${idBrewery}`)
     .then(res =>{
       console.log(res.data.brewery.contact)
       this.contactBrewery = res.data.brewery.contact
     })
   },
   deleteBrewery(idBrewery){
-    axios.delete(`https://serverbeerra.herokuapp.com/brewery/${idBrewery}`)
+    axios.delete(`http://localhost:3000/brewery/${idBrewery}`)
     .then(res => {
       console.log(res)
       this.getBreweries();
@@ -319,7 +319,7 @@ methods:{
     })
   },
   updateBrewery(idBrewery){
-      axios.get(`https://serverbeerra.herokuapp.com/brewery/${idBrewery}`)
+      axios.get(`http://localhost:3000/brewery/${idBrewery}`)
     .then(res =>{
       console.log('Soy la brewery'+res.data.brewery)
       this.newBrewery = new newBrewery(res.data.brewery._id,res.data.brewery.name,res.data.brewery.contact,res.data.brewery.address)

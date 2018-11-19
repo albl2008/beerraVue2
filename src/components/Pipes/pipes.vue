@@ -4,8 +4,10 @@
     <div class="container">
       <div class="row ">
         <div class=" offset-md-3 col-md-6 mb-5 ">
-          <input type="text" class="form-control mb-1" v-model="client" placeholder="Cliente" required>
-          <input type="date" class="form-control mb-1 " v-model="date" required>
+          <div class="form-group">
+            <input type="text" class="form-control mb-1" v-model="client" placeholder="Cliente" id="cliente" required>
+            <input type="date" class="form-control mb-1 " v-model="date" required>
+          </div>         
         </div>
       </div>
       <div class="row mb-5">
@@ -16,17 +18,22 @@
               <div class="card">
                 <div class="card-header">
                   <div class="row">                   
-                    <h3 class="col-md-10">{{keg.brewery.name}}</h3>
-                    <button class="btn btn-danger btn-sm text-center col-md-2" v-on:click="empty(keg._id)">T</button>
+                    <h3 class="text-center col-md-10">{{keg.brewery.name}}</h3>
+                    <button class="btn btn-danger btn-sm text-rigth " v-on:click="empty(keg._id)">T</button>
                   </div>
                   
                 </div>
                 <div class="card-body">
-                  <radial-progress-bar :diameter="230" :completed-steps="keg.quantitySaled" :total-steps="keg.quantity">
-                    <p class="">Cerveza: {{keg.beer}}</p>
-                    <p>Litros: {{ keg.quantity }}</p>
-                    <p>litros disponibles: {{keg.quantitySaled}}</p>
-                  </radial-progress-bar>
+           
+                    <radial-progress-bar :diameter="230" :completed-steps="keg.quantitySaled" :total-steps="keg.quantity" class="">
+                      <p class="">Cerveza: {{keg.beer}}</p>
+                      <p>Litros: {{ keg.quantity }}</p>
+                      <p>litros disponibles: {{keg.quantitySaled}}</p>
+                    </radial-progress-bar>
+                  
+                  
+                 
+                  
                   <div class="">
                     <button class="btn btn-primary btn-sm" v-on:click="createGrowler(keg,2,200)"><i class="material-icons">exposure_plus_1</i></button>
                     <button class="btn btn-primary btn-sm" v-on:click="createGrowler(keg,1,100)"><i class="material-icons">exposure_plus_1</i></button>
@@ -95,7 +102,7 @@
                 <tr v-for="bottle in bottles">
                   <td>{{bottle.beer}}</td>
                   <td>{{bottle.brewery}}</td>
-                  <td>{{bottle.quantity}}</td>
+                  <td>{{bottle.quantitySaled}}</td>
                   <td>{{bottle.price}}</td>
                   <td><button class="btn btn-danger btn-sm" v-on:click="deleteBottle(bottle.idDelete)"><i class="material-icons">delete</i></button></td>
                 </tr>
@@ -215,10 +222,10 @@
               <tbody>
                 <tr v-for="bottle in BottlesStock">
                   <td>{{bottle.beer}}</td>
-                  <td>{{bottle.quantity}}</td>
+                  <td>{{bottle.stock}}</td>
                   <td>{{bottle.brewery.name}}</td>
                   <td>{{bottle.price}}</td>
-                  <td><input type="number form-control" v-model="newBottle.quantity" placeholder="Cantidad"></td>
+                  <td><input type="number form-control" v-model="newBottle.quantitySaled" placeholder="Ingrese cantidad"></td>
                   <td><button class="btn btn-sm" v-on:click="createBottle(bottle)"><i class="material-icons">exposure_plus_1</i></button></td>
                 </tr>
               </tbody>
@@ -235,6 +242,7 @@
 <script>
 import Vue from 'vue'
 import RadialProgressBar from 'vue-radial-progress'
+const moment = require('moment')
 const axios = require('axios')
 class newGrowler {
   constructor(keg, quantity, price, idDelete) {
@@ -289,7 +297,7 @@ export default {
   },
   methods:{
      getKegs() {
-      axios.get('https://serverbeerra.herokuapp.com/keg')
+      axios.get('http://localhost:3000/keg')
         .then(response => {
           this.kegs = response.data.Kegs
         }).catch(e => {
@@ -298,7 +306,7 @@ export default {
         })
     },
     getBottles(){
-      axios.get('https://serverbeerra.herokuapp.com/bottle')
+      axios.get('http://localhost:3000/bottle')
       .then(response =>{
         console.log(response)
         this.BottlesStock = response.data.bottles
@@ -315,8 +323,9 @@ export default {
         this.growlers.push(growler)
         this.CalculateGrowlers()
         keg.quantitySaled -= litres 
+        this.notifySucces("Botellon","Botellon cargado correctamente")
       }else{
-        this.notifyWarning("No alcanza la cerveza disponible")
+        this.notifyWarning("Cerveza","No alcanza la cerveza disponible")
       }
     },
     deleteGrowler(id){ 
@@ -326,7 +335,8 @@ export default {
         if(growlers[i].idDelete === id){
           let keg = this.kegs.find(keg => keg._id === growlers[i].keg)
           keg.quantitySaled  +=  growlers[i].quantity 
-          growlers.splice(i,1)          
+          growlers.splice(i,1)   
+          this.notifySucces("Botellon","Botellon eliminado correctamente")       
         }
       
         this.CalculateGrowlers()
@@ -371,8 +381,9 @@ export default {
       this.pints.push(pint)
       this.CalculatePints()
       keg.quantitySaled -= litres
+      this.notifySucces("Pinta","Pinta cargada correctamente")
       }else{
-        this.notifyWarning("No alcanza la cerveza disponible")
+        this.notifyWarning("Cerveza","No alcanza la cerveza disponible")
       }
     },
     deletePint(id){ 
@@ -382,6 +393,7 @@ export default {
           let keg = this.kegs.find(keg => keg._id === pints[i].keg)
           keg.quantitySaled  +=  pints[i].quantity 
           pints.splice(i,1)
+          this.notifySucces("Pinta","Pinta eliminada correctamente")
         }
            
       }
@@ -393,27 +405,29 @@ export default {
     this.newOther.beer = keg.beer
     this.newOther.brewery = keg.brewery.name
     this.newOther.idDelete = this.others.length 
-    
+   
   },
   openModalBottles(){
     this.$modal.show('bottles');
   },
   createBottle(bottle){
-    if(bottle.quantity >= this.newBottle.quantity && this.newBottle.quantity > 0  ){
-    bottle.quantity -= Number(this.newBottle.quantity)
+    if(bottle.stock >= this.newBottle.quantitySaled && this.newBottle.quantitySaled > 0  ){
+    bottle.stock -= Number(this.newBottle.quantitySaled)
     this.newBottle._id = bottle._id
-    this.newBottle.price =  (bottle.price * this.newBottle.quantity)
+    this.newBottle.price =  (bottle.price * this.newBottle.quantitySaled)
+    this.newBottle.unitPrice = bottle.price
     this.newBottle.idDelete = this.bottles.length
     this.newBottle.beer = bottle.beer
     this.newBottle.brewery = bottle.brewery.name
     this.bottles.push(this.newBottle)
     this.CalculateBottle() 
     this.newBottle = {}
+    this.notifySucces("Botella","Botella cargada correctamente")
     }else{
-      if( this.newBottle.quantity <= 0)
-        this.notifyWarning("La cantidad no puede ser 0")
+      if( this.newBottle.quantitySaled <= 0)
+        this.notifyWarning("Botellas","La cantidad no puede ser 0")
       else
-        this.notifyWarning("No hay suficiente stock ")
+        this.notifyWarning("Botellas","No hay suficiente stock ")
     }
   },
   deleteBottle(id){ 
@@ -421,8 +435,9 @@ export default {
       for (let i = 0; i < bottles.length; i++) { 
         if(bottles[i].idDelete === id){            
             let bottle = this.BottlesStock.find(bottle => bottle._id === bottles[i]._id)
-            bottle.quantity += Number(bottles[i].quantity)
+            bottle.stock += Number(bottles[i].quantitySaled)
             bottles.splice(i,1)
+            this.notifySucces("Botella","Bottela eliminada correctamente")
         }
       }
       this.CalculateBottle()
@@ -434,6 +449,7 @@ export default {
             let keg = this.kegs.find(keg => keg._id === others[i].keg)
             keg.quantitySaled  +=  Number(others[i].quantity) 
             others.splice(i,1)
+            this.notifySucces("Otro","Otro eliminado correctamente")
         }
       }
       this.CalculateOther()
@@ -446,15 +462,16 @@ export default {
       this.others.push(this.newOther)
       this.CalculateOther()
       this.newOther = {}
+      this.notifySucces("Otro","Otro cargado correctamente")
     }else{
-       this.notifyWarning("No alcanza la cerveza disponible")
+       this.notifyWarning("Cerveza","No alcanza la cerveza disponible")
     }
   },
   calculateTotal(){
     this.totalSale = (this.totalPints + this.totalGrowlers + this.totalOthers + this.totalBottles)
   },
   sendSale(){
-    axios.post(`https://serverbeerra.herokuapp.com/sale`,{
+    axios.post(`http://localhost:3000/sale`,{
       date: this.date,
       client: this.client,
       totalSale: this.totalSale,
@@ -465,10 +482,13 @@ export default {
     }).then(res =>{
       console.log(res)
       this.reset()
-     
+      if(res.status === 200)
+        this.notifySucces("Venta","Venta procesada correctamente")
      
     }).catch(e => {
       console.log(e)
+      this.notifyError("Venta","Erorr al procesar la venta")
+
     })
     
   },
@@ -485,16 +505,32 @@ export default {
       this.client = ""
       this.date = ""
   },
-  notifyWarning(text){
+  notifyWarning(title,text){
+   Vue.notify({
+                group: 'foo',
+                type: 'warn',
+                title: title,
+                text: text
+              })
+},
+notifySucces(title,text){
+   Vue.notify({
+                group: 'foo',
+                type: 'success',
+                title: title,
+                text: text
+              })
+},
+notifyError(title,text){
    Vue.notify({
                 group: 'foo',
                 type: 'error',
-                title: 'Falta birra',
+                title: title,
                 text: text
               })
 },
  empty(idKeg){
-     axios.put(`https://serverbeerra.herokuapp.com/keg/empty/${idKeg}` )
+     axios.put(`http://localhost:3000/keg/empty/${idKeg}` )
      .then(res => {
        console.log(res)
        this.getKegs();

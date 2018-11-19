@@ -20,7 +20,7 @@
               <tbody>
                 <tr v-for="sale in sales" >
                   <td>{{sale.client}}</td>
-                  <td>{{sale.date}}</td>
+                  <td>{{format(sale.date)}}</td>
                   <td>{{sale.totalSale}}</td>             
                   <td><button class="btn btn-primary" v-on:click="getGrowler(sale._id)"><i class="material-icons">remove_red_eye</i></button></td>
                   <td><button class="btn btn-primary" v-on:click="getPints(sale._id)"><i class="material-icons">remove_red_eye</i></button></td>
@@ -92,16 +92,19 @@
                  <table class="table ">
                     <thead>
                         <th>Cerveza</th>                         
-                        <th>Cantidad (Litros)</th>
+                        <th>Cantidad</th>
+                        <th>tamaño botella</th>
                         <th>Precio</th>
-                        <th>tamaño</th>
+                        <th>Total</th>
+                        
                     </thead>
                     <tbody>
                         <tr v-for="bottle in bottles">
-                            <td>{{bottle.beer}}</td>
-                            <td>{{bottle.quantity}}</td>
-                            <td>{{bottle.price}}</td>
-                            <td>{{bottle.size}}</td>
+                            <td>{{bottle.bottle.beer}}</td>
+                            <td>{{bottle.quantitySaled}}</td>
+                            <td>{{bottle.bottle.size}}</td>
+                            <td>{{bottle.unitPrice}}</td>                           
+                            <td>{{bottle.totalPrice}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -115,6 +118,7 @@
     </div>
 </template>
 <script>
+const moment = require('moment');
 const axios = require('axios')
 export default {
     data(){
@@ -135,7 +139,7 @@ export default {
     },
     methods:{
         getSales(){
-            axios.get('https://serverbeerra.herokuapp.com/sale')
+            axios.get('http://localhost:3000/sale')
             .then(response =>{
                 console.log(response)
                 this.sales = response.data.sales
@@ -144,7 +148,7 @@ export default {
             })
         },
         getGrowler(idSale){
-             axios.get(`https://serverbeerra.herokuapp.com/sale/growlers/${idSale}`)
+             axios.get(`http://localhost:3000/sale/growlers/${idSale}`)
             .then(response =>{
                 console.log(response)
                 this.growlers = response.data.growlers
@@ -157,7 +161,7 @@ export default {
             })
         },
          getPints(idSale){
-             axios.get(`https://serverbeerra.herokuapp.com/sale/pints/${idSale}`)
+             axios.get(`http://localhost:3000/sale/pints/${idSale}`)
             .then(response =>{
                 console.log(response)
                 this.pints = response.data.pints
@@ -170,7 +174,7 @@ export default {
             })
         },
          getOther(idSale){
-             axios.get(`https://serverbeerra.herokuapp.com/sale/other/${idSale}`)
+             axios.get(`http://localhost:3000/sale/other/${idSale}`)
             .then(response =>{
                 console.log(response)
                 this.others = response.data.others
@@ -183,10 +187,10 @@ export default {
             })
         },
          getBottles(idSale){
-             axios.get(`https://serverbeerra.herokuapp.com/sale/bottles/${idSale}`)
+             axios.get(`http://localhost:3000/sale/bottles/${idSale}`)
             .then(response =>{
                 console.log(response)
-                this.bottles = response.data.bottles.bottles
+                this.bottles = response.data.bottles
                 this.isPints = false
                 this.isGrowlers = false
                 this.isBottles = true
@@ -194,6 +198,12 @@ export default {
             }).catch(e => {
                 console.log(e)
             })
+        },
+        format(date){
+            if(date)
+                return moment(date).format('DD/MM/YYYY');
+            else
+                return ""
         }
     }
 }

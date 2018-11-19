@@ -5,21 +5,15 @@
           <div class="card">
             <div class="card-header">
                <h3>Nueva Botella</h3> 
-            </div>
+            </div>  
             <div class="card-body">
                            <form v-on:submit.prevent="addBottle" >
 
           <div class="input-group-pretend mb-3">
             <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="Beer" required>
-              <select v-model="newBottle.quantity" class="custom-select mb-1" required >
-                 <option disabled value="" label="holaaa"></option>
-              <option v-for="q in quantities" v-bind:value="q.text">
-                {{q.text}}
-              </option>
-
-            </select>
-           <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="tamaño" required>
-           <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="precio" required>
+            <input type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="Stock" required>  
+            <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" required>
+            <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="Precio" required>
             <input type="text" class="form-control mb-1" v-model="newBottle.ibu" placeholder="IBU" required>
             <input type="text" class="form-control mb-1" v-model="newBottle.alcohol" placeholder="Alcohol" required>
             <select v-model="newBottle.brewery" class="custom-select mb-1" required>
@@ -28,14 +22,13 @@
                 {{ brewery.name }}
               </option>
             </select>
-
-        </div>
-             <template v-if="edit === false">
-                  <button class="btn btn-primary btn-block">SEND</button>
-              </template>
-                <template v-else>
-                  <button class="btn btn-primary btn-block" >UPDATE</button>
-              </template>
+          </div>
+            <template v-if="edit === false">
+                <button class="btn btn-primary btn-block">SEND</button>
+            </template>
+            <template v-else>
+                <button class="btn btn-primary btn-block" >UPDATE</button>
+            </template>
 
         </form>
             </div>
@@ -51,7 +44,7 @@
                 <table class="table ">
               <thead>
               <th>Cerveza</th>
-              <th>Cantidad</th>
+              <th>Stock</th>
               <th>Size</th>
               <th>IBU</th>
               <th>alcohol</th>
@@ -63,7 +56,7 @@
               <tbody>
                 <tr v-for="bottle in bottles" >
                   <td>{{bottle.beer}}</td>
-                  <td>{{bottle.quantity}}</td>
+                  <td>{{bottle.stock}}</td>
                   <td>{{bottle.size}}</td>
                   <td>{{bottle.ibu}}</td>
                   <td>{{bottle.alcohol}}</td>
@@ -87,10 +80,10 @@ import Vue from 'vue'
 const axios = require('axios')
 
 class newBottle{
-      constructor(id,beer,quantity,size,ibu,alcohol,brewery,price){
+      constructor(id,beer,stock,size,ibu,alcohol,brewery,price){
         this.id = id
         this.beer = beer
-        this.quantity = quantity
+        this.stock = stock
         this.size = size
         this.price = price
         this.ibu = ibu
@@ -125,7 +118,7 @@ export default {
     },
    methods:{
      getBottles(){
-    axios.get('https://serverbeerra.herokuapp.com/bottle')
+    axios.get('http://localhost:3000/bottle')
       .then(response =>{
         console.log(response)
         this.bottles = response.data.bottles
@@ -139,7 +132,7 @@ export default {
 
       if(this.edit === false ){
 
-      axios.post('https://serverbeerra.herokuapp.com/bottle',
+      axios.post('http://localhost:3000/bottle',
         this.newBottle,
       ).then(res =>{
 
@@ -163,7 +156,7 @@ export default {
       })
       })
       }else{
-        axios.put(`https://serverbeerra.herokuapp.com/bottle/${this.newBottle.id}`,
+        axios.put(`http://localhost:3000/bottle/${this.newBottle.id}`,
           this.newBottle
         ).then(res => {
            if(res.status === 200 ){
@@ -189,14 +182,14 @@ export default {
       }
     },
     getBreweries(){
-      axios.get('https://serverbeerra.herokuapp.com/brewery')
+      axios.get('http://localhost:3000/brewery')
       .then(response =>{
         this.breweries = response.data.Breweries
         console.log(response);
       })
     },
     deleteBottle(idBottle){
-      axios.delete(`https://serverbeerra.herokuapp.com/bottle/${idBottle}`)
+      axios.delete(`http://localhost:3000/bottle/${idBottle}`)
       .then(res =>
       {
          if(res.status === 200 ){
@@ -219,11 +212,11 @@ export default {
       })
     },
     updateBottle(idBottle){
-      axios.get(`https://serverbeerra.herokuapp.com/bottle/${idBottle}`)
+      axios.get(`http://localhost:3000/bottle/${idBottle}`)
       .then(res => {
         console.log(res)
         this.newBottle = new newBottle  (res.data.bottle._id,res.data.bottle.beer,
-        res.data.bottle.quantity,res.data.bottle.size,res.data.bottle.ibu,
+        res.data.bottle.stock,res.data.bottle.size,res.data.bottle.ibu,
         res.data.bottle.alcohol, res.data.bottle.brewery,res.data.bottle.price
         )
           this.edit = true;
