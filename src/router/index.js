@@ -6,9 +6,28 @@ import vueResource from 'vue-resource';
 import sale from '../components/sale/sale'
 import brewery from '../components/brewery/brewery'
 import pipes from '../components/Pipes/pipes'
+import index from '../components/index/index'
+import signup from '../components/user/signup'
+import signin from '../components/user/signin'
+import dashboard from '../components/user/dashboard'
 
 Vue.use(vueResource)
 Vue.use(Router);
+
+function redirectToDashboard(to, from, next)  {
+  if(localStorage.token){
+    next('/dashboard')
+  }else{
+    next()
+  }
+}
+function isLogin(to, from, next)  {
+  if(localStorage.token){
+    next()
+  }else{
+    next('/signin')
+  }
+}
 export default new Router({
   routes: [
     {
@@ -31,10 +50,32 @@ export default new Router({
 
     },
     {
-      path: '/',
+      path: '/pipes',
       component: pipes
 
-    }
+    },
+    {
+      path: '/',
+      component: index
 
+    },
+    {
+      path: '/signup',
+      name: signup,
+      component: signup,
+      beforeEnter: redirectToDashboard
+    },
+    {
+      path: '/signin',
+      name: signin,
+      component: signin,
+      beforeEnter: redirectToDashboard
+    },
+    {
+      path: '/dashboard',
+      name: dashboard,
+      component: dashboard,
+      beforeEnter: isLogin
+    }
   ]
 })
