@@ -4,8 +4,11 @@ import keg from '../components/keg/kegs';
 import bottle from '../components/bottle/bottle';
 import vueResource from 'vue-resource';
 import sale from '../components/sale/sale'
+import payment from '../components/buy/payment'
 import brewery from '../components/brewery/brewery'
 import pipes from '../components/Pipes/pipes'
+import pricize from '../components/pricize/pricize'
+import outflow from '../components/outflow/outflows'
 
 Vue.use(vueResource)
 Vue.use(Router);
@@ -14,6 +17,14 @@ export default new Router({
     {
       path: '/keg',
       component: keg
+    },
+    {
+      path: '/pricize',
+      component: pricize
+    },
+    {
+      path: '/buy',
+      component: payment
     },
     {
       path: '/brewery',
@@ -33,6 +44,11 @@ export default new Router({
     {
       path: '/',
       component: pipes
+
+    },
+    {
+      path: '/outflow',
+      component: outflow
 
     }
 
