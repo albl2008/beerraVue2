@@ -112,7 +112,7 @@ export default {
                     this.signingUP = false
                     if(response.status === 200){
                         localStorage.token = response.data.token  
-                        this.$router.push('/dashboard')
+                        this.$router.go('/dashboard')
                     }
                 }).catch(err =>{
                     this.signingUP = false

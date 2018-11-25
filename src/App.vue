@@ -10,7 +10,7 @@
         </li>
         <template v-if="isLogged ">
         <li class="nav-item active">
-          <a class="nav-link" href="http://localhost:8080/#/pipes">Pipes</a>
+          <a class="nav-link" href="http://localhost:8080/#/pipes">Canillas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="http://localhost:8080/#/keg">Barriles</a>

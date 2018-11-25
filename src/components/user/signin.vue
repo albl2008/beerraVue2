@@ -10,7 +10,7 @@
                         <h1 class="text-center">Login</h1>
                     </div>
                     <div class="card-body">
-                                       <form v-on:submit="login">
+                                       <form v-on:submit.prevent="login">
                             <div class="form-group">
                                 <label for="UserName">Nombre de usuario</label>
                                 <input 
