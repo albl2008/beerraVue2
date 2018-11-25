@@ -43,11 +43,13 @@ export default new Router({
     },
     {
       path: '/pricize',
-      component: pricize
+      component: pricize,
+      beforeEnter: isLogin
     },
     {
       path: '/buy',
-      component: payment
+      component: payment,
+      beforeEnter: isLogin
     },
     {
       path: '/brewery',
@@ -94,9 +96,11 @@ export default new Router({
       name: dashboard,
       component: dashboard,
       beforeEnter: isLogin
-
+    },
+    {
       path: '/outflow',
-      component: outflow
+      component: outflow,
+      beforeEnter: isLogin
 
 
     }
