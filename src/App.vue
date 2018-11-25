@@ -1,8 +1,8 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-   
-    
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
        
          <li class="nav-item active">
@@ -13,16 +13,25 @@
           <a class="nav-link" href="http://localhost:8080/#/pipes">Pipes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://localhost:8080/#/keg">Kegs</a>
+          <a class="nav-link" href="http://localhost:8080/#/keg">Barriles</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="http://localhost:8080/#/brewery">Brewery</a>
+          <a class="nav-link " href="http://localhost:8080/#/brewery">Cerveceria</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="http://localhost:8080/#/bottle">Bottles</a>
+          <a class="nav-link " href="http://localhost:8080/#/bottle">Botellas</a>
         </li>
            <li class="nav-item">
-          <a class="nav-link " href="http://localhost:8080/#/sale">Sales</a>
+          <a class="nav-link " href="http://localhost:8080/#/sale">Ventas</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link " href="http://localhost:8080/#/buy">Pago</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link " href="http://localhost:8080/#/pricize">Configuracion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="http://localhost:8080/#/outflow">Compras</a>
         </li>
         <div class="justify-content-end">
           <button class="btn btn-outline-success" v-on:click="logout">Logout</button>
@@ -82,4 +91,5 @@ created(){
   color: #2c3e50;
   margin-top: 60px;
 }
+
 </style>
