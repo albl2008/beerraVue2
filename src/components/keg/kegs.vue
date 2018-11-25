@@ -159,14 +159,17 @@ export default {
   },
   methods: {
     getKegs() {
-      axios.get('http://localhost:3000/keg')
+      axios({
+        url: 'http://localhost:3000/keg',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+      })
         .then(response => {
           console.log(response)
           this.kegs = response.data.Kegs
 
         }).catch(e => {
           console.log(e)
-
+        
         })
     },
     addKeg() {

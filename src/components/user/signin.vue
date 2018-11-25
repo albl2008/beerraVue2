@@ -10,7 +10,7 @@
                         <h1 class="text-center">Login</h1>
                     </div>
                     <div class="card-body">
-                                       <form v-on:submit.prevent="login">
+                                       <form v-on:submit="login">
                             <div class="form-group">
                                 <label for="UserName">Nombre de usuario</label>
                                 <input 
@@ -96,8 +96,9 @@ export default {
                     this.signingIN = false
                     console.log(response)
                     if(response.status === 200){
+                        localStorage.isLoggIn = true
                         localStorage.token = response.data.token
-                        this.$router.push('/dashboard')
+                        this.$router.go('/dashboard')
                     } 
                 }).catch(err =>{
                     this.signingIN = false

@@ -1,9 +1,16 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+   
+    
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+       
+         <li class="nav-item active">
+          <a class="nav-link" href="http://localhost:8080/#/">Beerra<span class="sr-only">(current)</span></a>
+        </li>
+        <template v-if="isLogged ">
         <li class="nav-item active">
-          <a class="nav-link" href="http://localhost:8080/#/pipes">Beerra<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="http://localhost:8080/#/pipes">Pipes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="http://localhost:8080/#/keg">Kegs</a>
@@ -17,18 +24,51 @@
            <li class="nav-item">
           <a class="nav-link " href="http://localhost:8080/#/sale">Sales</a>
         </li>
+        <div class="justify-content-end">
+          <button class="btn btn-outline-success" v-on:click="logout">Logout</button>
+        </div>
+        
+         </template>
+         <template v-else>       
+          <li class="nav-item">
+            <a class="nav-link " href="http://localhost:8080/#/signin">Login</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link " href="http://localhost:8080/#/signup">Sing up</a>
+          </li>
+         </template>
       </ul>
     </nav>
     <div id="app">
       <router-view />
       <notifications group="foo" position="bottom right" width="450px" />
-      
     </div>
   </div>
 </template>
 
 <script>
 export default {
+created(){
+   this.isLogged = localStorage.token
+},
+  data(){
+    return{
+      
+       isLogged: localStorage.token
+      
+    }
+  },
+  methods:{
+    checkIfIsLogged () {
+     return  localStorage.getItem('isLoggIn')
+      
+    },
+      logout(){
+            localStorage.isLoggIn =false
+            localStorage.removeItem('token')
+            this.$router.go('/signin')
+        }
+  },
   name: 'App'
 }
 </script>

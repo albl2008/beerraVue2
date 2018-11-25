@@ -32,27 +32,30 @@ export default new Router({
   routes: [
     {
       path: '/keg',
-      component: keg
+      component: keg,
+      beforeEnter: isLogin
     },
     {
       path: '/brewery',
-      component: brewery
+      component: brewery,
+      beforeEnter: isLogin
 
     },
     {
       path: '/bottle',
-      component: bottle
+      component: bottle,
+      beforeEnter: isLogin
 
     },
     {
       path: '/sale',
-      component: sale
-
+      component: sale,
+      beforeEnter: isLogin
     },
     {
       path: '/pipes',
-      component: pipes
-
+      component: pipes,
+      beforeEnter: isLogin
     },
     {
       path: '/',
