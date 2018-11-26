@@ -1,15 +1,34 @@
 <template>
+<div>
+      <div id="barriles">
+          <h1>BARRILES</h1>
+          <img :src="require('@/assets/kegs.png')" alt="">
+          <img class="left" :src="require('@/assets/kegs.png')" alt="">
+      </div>  
     <div class="container">
+      
       <div class="row">
-        <div class="col-12 col-sm-12  col-md-4">
-          <div class="card">
-            <div class="card-header"><h3>Nuevo Barril</h3></div>
+        <div class="col-12 col-sm-12  col-md-3">
+          <div class="card bg-dark">
+           
+              <template v-if="edit === false">
+                   <div class="card-header"><h3>AGREGAR BARRIL</h3></div>
+              </template>
+                <template v-else>
+                  <div class="card-header"><h3>ACTUALIZAR BARRIL</h3></div>
+              </template>
+
             <div class="card-body">
                       <form v-on:submit.prevent="addKeg" >
 
           <div class="input-group-pretend mb-3">
-            <label for="" class="text-left">Cerveza</label>
-            <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Beer" required>
+              <template v-if="edit===false">
+              <span class="badge badge-success">N°{{Object.keys(kegs).length+1}}</span><br><br>
+              </template>
+              <template v-else>
+               <span class="badge badge-success">N°{{Object.keys(kegs).length}}</span> 
+              </template>
+            <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Estilo" required>
            
             <template v-if="sale === false">
                  <select v-model="newKeg.quantity" class="custom-select mb-1" required >
@@ -19,8 +38,8 @@
               </option>
 
             </select>
-              <label >Estado: </label>
-              <div v-for="s in status" class="form-check form-check-inline">
+               
+              <div v-for="s in status" class="form-check form-check-inline courier">
               <input required type="radio"  name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"  v-model="newKeg.sta"  class="form-check-input mb-1" >
               <label for="one">{{s.text}}</label>
 
@@ -35,29 +54,30 @@
             <input type="text" class="form-control mb-1" v-model="newKeg.alcohol" placeholder="Alcohol" required>
            
           <select v-model="newKeg.brewery" class="custom-select mb-1" required >
-                 
+              <option value="" selected disabled>Please select</option>
               <option v-for="brewery in breweries" v-bind:value="brewery._id">
                 {{brewery.name}}
               </option>
 
             </select>
         </div>
+        <div class="card-footer">
              <template v-if="edit === false">
-                  <button class="btn btn-primary btn-block">SEND</button>
+                  <button class="btn btn-outline-success btn-block">Agregar</button>
               </template>
                 <template v-else>
-                  <button class="btn btn-primary btn-block" >UPDATE</button>
+                  <button class="btn btn-outline-primary btn-block" >Actualizar</button>
               </template>
-
+</div>
         </form>
             </div>
           </div>
       </div>
 
-          <div class="col-12 col-sm-12 col-md-8">
+          <div class="col-12 col-sm-12 col-md-9">
             <div class="card">
               <div class="card-header">
-                   <h3>Barriles</h3>
+                   <h3 class="list">LISTADO DE BARRILES</h3>
               </div>
               <div class="card-body">
                   <table class="table s">
@@ -80,16 +100,16 @@
                   <td>{{keg.ibu}}</td>
                   <td>{{keg.alcohol}}</td>
                   <td>{{keg.brewery.name}}</td>
-                  <td><button class="btn btn-danger btn-sm" v-on:click="deleteKeg(keg._id)"><i class="material-icons">delete</i></button></td>
-                  <td><button class="btn btn-primary btn-sm" v-on:click="updateKeg(keg._id)"><i class="material-icons">edit</i></button></td>
+                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteKeg(keg._id)"><i class="material-icons">delete</i></button></td>
+                  <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateKeg(keg._id)"><i class="material-icons">edit</i></button></td>
                   <template v-if="keg.sta === 1 || keg.sta === 2">
-                    <td><button class="btn btn-primary btn-sm" v-on:click="connect(keg._id)"><i class="material-icons">power</i></button></td>
+                    <td><button class="btn btn-outline-success btn-sm" v-on:click="connect(keg._id)"><i class="material-icons">power</i></button></td>
                   </template>
                   <template v-else-if="keg.sta === 4">
-                    <td><button class="btn btn-primary btn-sm" v-on:click="disconnect(keg._id)"><i class="material-icons">power_off</i></button></td>
+                    <td><button class="btn btn-outline-danger btn-sm" v-on:click="disconnect(keg._id)"><i class="material-icons">power_off</i></button></td>
                   </template>
                    <template v-else>
-                    <td><button class="btn btn-primary btn-sm disabled" ><i class="material-icons">power</i></button></td>
+                    <td><button class="btn btn-outline-primary btn-sm disabled" ><i class="material-icons">power</i></button></td>
                   </template>
                   
                 </tr>
@@ -101,7 +121,7 @@
 
     </div>
     </div>
-
+</div>
 </template>
 <script>
 import Vue from 'vue'
@@ -321,5 +341,64 @@ notifyError(title,text){
 }
 </script>
 <style>
+#barriles img{
+  position: relative;
+  float: right;
+}
+#barriles img .left{
+  position: relative;
+  float: left;
+}
+#barriles h1 {
+  font-size:40px;
+  font-family: 'Black Ops One', cursive;
+}
+
+h3 {
+  font-size:22px;
+  font-family: 'Varela Round', sans-serif;
+  color:white;
+}
+
+
+td{
+  font-family: 'Courier New', Courier;
+  color: black;
+  font-size:12px;
+}
+th{
+  font-family: 'Courier New', Courier;
+  color: black;
+  font-size:12px;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family:'Courier New', Courier;
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family:'Courier New', Courier;
+  color: black;
+}
+
+div select option .custom-select {
+    background-color: #beb9b9 !important; 
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+.courier{
+  font-family:'Courier New', Courier;
+  color: white;
+  font-size: 14px;
+}
+.list{
+  color:black;
+}
+
+input[type="text"], textarea {
+
+  background-color : #beb9b9; 
+
+}
 
 </style>

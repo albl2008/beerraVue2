@@ -9,6 +9,7 @@ import brewery from '../components/brewery/brewery'
 import pipes from '../components/Pipes/pipes'
 import pricize from '../components/pricize/pricize'
 import outflow from '../components/outflow/outflows'
+import container from '../components/container/container'
 
 Vue.use(vueResource)
 Vue.use(Router);
@@ -39,6 +40,11 @@ export default new Router({
     {
       path: '/sale',
       component: sale
+
+    },
+    {
+      path: '/container',
+      component: container
 
     },
     {

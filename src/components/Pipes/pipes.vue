@@ -1,12 +1,18 @@
 <template>
   <div>
-    <h1>Ventas</h1>
+      <div id="canillas">
+          <h1>BARRILES CONECTADOS</h1>
+          <img :src="require('@/assets/pipes.png')" alt="">
+          <img class="left" :src="require('@/assets/pipes.png')" alt="">
+      </div>  
     <div class="container">
       <div class="row ">
         <div class=" offset-md-3 col-md-6 mb-5 ">
-          <div class="form-group">
-            <input type="text" class="form-control mb-1" v-model="client" placeholder="Cliente" id="cliente" required>
-            <input type="date" class="form-control mb-1 " v-model="date" required>
+          <div class="form-inline venta">
+            <h3><span class="badge badge-pill badge-dark">Cliente:</span></h3>
+              <input type="text" class="form-control" v-model="client" id="cliente" requiered aria-label="Small" placeholder="Nombre" aria-describedby="inputGroup-sizing-sm">
+            <h3><span class="badge badge-pill badge-dark">Fecha:</span></h3>
+              <input type="date" class="form-control" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
           </div>         
         </div>
       </div>
@@ -18,34 +24,30 @@
               <div class="card">
                 <div class="card-header">
                   <div class="row">                   
-                    <h3 class="text-center col-md-10">{{keg.brewery.name}}</h3>
-                    <button class="btn btn-danger btn-sm text-rigth " v-on:click="empty(keg._id)"><i class="material-icons">power_off</i></button>
+                    <h3 class="text-center col-md-10 estilo">{{keg.beer}}</h3>
+                    <button v-on:click="openModalDisconect(keg)" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Desconectar Barril" ><i class="material-icons">power_off</i></button>
                   </div>
                   
                 </div>
-                <div class="card-body">
-           
-                    <radial-progress-bar :diameter="230" :completed-steps="keg.quantitySaled" :total-steps="keg.quantity" class="">
-                      <p class="">Cerveza: {{keg.beer}}</p>
-                      <p>Litros: {{ keg.quantity }}</p>
-                      <p>litros disponibles: {{keg.quantitySaled}}</p>
+                <div class="card-body text-center">
+                    <radial-progress-bar :diameter="225" :startColor="'#ffc107'" :stopColor="'#e2ba1f'" :completed-steps="keg.quantitySaled" :total-steps="keg.quantity" class="">
+                      <p><span class="badge badge-warning">{{ keg.brewery.name }}</span></p>
+                      <p><span class="badge badge-dark">{{ keg.quantity }}</span></p>
+                      <template v-if="keg.quantitySaled<=15"> <p><span class="badge badge-danger">{{ keg.quantitySaled }}</span></p></template>
+                      <template v-else> <p><span class="badge badge-success">{{ keg.quantitySaled }}</span></p></template>
                     </radial-progress-bar>
-                  
-                  
-                 
-                  
-                  <div class="">
+                </div>
+                <div class="card-footer">
                     <template v-for="size in sizes">
                     <template v-for="price in prices">
-                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled"  class="btn btn-light btn-sm" v-on:click="createGrowler(keg,size.growlersize,price.loadprice)" data-toggle="tooltip" data-placement="top" title="Carga Grande"><img :src="require('@/assets/growlerlleno.png')" alt="carga"></button>
-                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-light btn-sm" v-on:click="createGrowler(keg,size.growlersize2,price.loadprice2)" data-toggle="tooltip" data-placement="top" title="Carga Chica"><img :src="require('@/assets/growler1l.png')" alt=""></button>
-                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-light btn-sm" v-on:click="createPint(keg,size.pintsize,price.pintprice)"data-toggle="tooltip" data-placement="top" title="Pinta"><img :src="require('@/assets/pinta.png')" alt=""></button>
-                    <button  class="btn btn-light btn-sm" v-on:click="happyhour(keg,size.pintsize,price.hhourprice)"data-toggle="tooltip" data-placement="top" title="Happy Hour"><img :src="require('@/assets/hhour.png')" alt=""></button>
-                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-light btn-sm" v-on:click="createOther(keg)" data-toggle="tooltip" data-placement="top" title="Por cantidad"><img :src="require('@/assets/other.png')" alt=""></button>
+                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled"  class="btn btn-outline-dark btn-sm" v-on:click="createGrowler(keg,size.growlersize,price.loadprice)" data-toggle="tooltip" data-placement="top" title="Carga Grande"><img :src="require('@/assets/growlerlleno.png')" alt="carga"></button>
+                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm" v-on:click="createGrowler(keg,size.growlersize2,price.loadprice2)" data-toggle="tooltip" data-placement="top" title="Carga Chica"><img :src="require('@/assets/growler1l.png')" alt=""></button>
+                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm" v-on:click="createPint(keg,size.pintsize,price.pintprice)"data-toggle="tooltip" data-placement="top" title="Pinta"><img :src="require('@/assets/pinta.png')" alt=""></button>
+                    <button  class="btn btn-outline-dark btn-sm" v-on:click="happyhour(keg,size.pintsize,price.hhourprice)"data-toggle="tooltip" data-placement="top" title="Happy Hour"><img :src="require('@/assets/hhour.png')" alt=""></button>
+                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm" v-on:click="createOther(keg)" data-toggle="tooltip" data-placement="top" title="Por cantidad"><img :src="require('@/assets/other.png')" alt=""></button>
                     </template>
                     </template>
                   </div>
-                </div>
               </div>
 
 
@@ -54,11 +56,21 @@
           </template>
         </template>
       </div>
+  
       <div class="row mb-2">
         <div class="col-6 col-sm-12 col-md-6">
           <div class="card">
             <div class="card-header">
-              <h3>Botellones</h3>
+              <div class="row">
+                <div class="col-md-10 text-center "> <h3 class="estilo text-left">Botellones</h3></div>
+                  <template v-for="price in prices">
+                    <template v-for="size in sizes">
+                      <template v-for="container in containersStock">
+                        <div class="col-md-2" v-if="container.size==size.growlersize"><button class=" btn-outline-dark btn-sm btn" data-toggle="tooltip" data-placement="top" title="Envase Vacio" v-on:click="createContainer(container,1,container.size,price.growlerprice)" ><img :src="require('@/assets/carga2.png')" alt=""></button></div>
+                      </template>
+                     </template>
+                    </template>
+                </div>  
             </div>
             <div class="card-body">
               <table class="table s">
@@ -79,7 +91,25 @@
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-left">Total: {{totalGrowlers}}</h3>
+              <h3 class="text-center">Total: {{totalGrowlers}}</h3>
+                  <table class="table s">
+                <thead>
+                  <th>Tamaño</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th>Eliminar</th>
+                </thead>
+                <tbody>
+                  <tr v-for="container in containers">
+                    <td>{{container.size}}</td>
+                    <td>{{container.quantitySaled}}</td>
+                    <td>{{container.price}}</td>
+                    <td><button class="btn btn-danger btn-sm" v-on:click="deleteContainer(container.idDelete)"><i class="material-icons">delete</i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+               <h3 class="text-center">Envases: {{totalContainers}}</h3>
+                
             </div>
           </div>
         </div>
@@ -89,8 +119,8 @@
             <div class="card">
               <div class="card-header">
                 <div class="row">
-                  <div class="col-md-10 text-center"> <h3>Botellas</h3></div>
-                  <div class="col-md-2 "><button class="text-center btn-light btn-sm btn " v-on:click="openModalBottles()"><img :src="require('@/assets/bottle.png')" alt=""></button></div>
+                  <div class="col-md-10"> <h3 class="estilo text-left">Botellas</h3></div>
+                  <div class="col-md-2 "><button class="text-center btn-outline-dark btn-sm btn " data-toggle="tooltip" data-placement="top" title="Agregar Botella(s)" v-on:click="openModalBottles()"><img :src="require('@/assets/bottle.png')" alt=""></button></div>
                 </div>                 
               </div>      
               <div class="card-body">
@@ -115,7 +145,7 @@
 
             <div class="row">
               <div class="col-md-12">
-               <h3 class="text-left">Total: {{totalBottles}}</h3>
+               <h3 class="text-center">Total: {{totalBottles}}</h3>
               
               </div>
             </div>
@@ -128,7 +158,7 @@
         <div class="row mb-5">
           <div class="col-6 col-sm-12 col-md-6">
             <div class="card">
-              <div class="card-header"><h3>Pintas</h3></div>
+              <div class="card-header"><h3 class="estilo text-left">Pintas</h3></div>
               <div class="card-body">
                    <table class="table s">
               <thead>
@@ -149,7 +179,7 @@
                 </tr>
               </tbody>
             </table>
-            <h3 class="text-left">Total: {{totalPints}}</h3>
+            <h3 class="text-center">Total: {{totalPints}}</h3>
               </div>
              
             </div>                 
@@ -158,7 +188,7 @@
           <div class="col-6 col-sm-12 col-md-6">
             <div class="card">
               <div class="card-header">
-                <h3>Otros</h3>
+                <h3 class="estilo text-left">Por cantidad</h3>
               </div>
               <div class="card-body">
                    <table class="table s">
@@ -206,6 +236,18 @@
           </form>
         </div>
       </modal>
+   
+      <modal name="disconect">
+        <div class="container ">
+          <h3 class="mt-5">¿Desconectar Barril?</h3>
+          <div id="row">
+            <h3 class="">Cerveza: {{newDisconect.beer}}</h3>
+           <button v-on:click="empty(newDisconect.kegid)" class="btn btn-danger" >Vacio</button>
+           <button v-on:click="started(newDisconect.kegid)" class="btn btn-danger" >Desconectar</button>
+          </div>        
+        </div>
+      </modal>
+
       <modal name='bottles'>
         <div class="container">
           <div class="row">
@@ -279,6 +321,8 @@ export default {
       kegs:[],
       growlers:[],
       bottles:[],
+      containers:[],
+      containersStock:[],
       BottlesStock:[],
       pints:[],
       others:[],
@@ -287,14 +331,17 @@ export default {
       totalSale:0,
       totalOthers:0,
       totalBottles:0,
+      totalContainers:0,
       showModal: false,
       newOther:{},
       newBottle:{},
+      newContainer:{},
       date:Date.now,
       client:"",
       prices:[],
       sizes:[],
-      hhour: 0
+      hhour: 0,
+      newDisconect:{}
 
     
       
@@ -306,6 +353,7 @@ export default {
      this.getBottles();
      this.getPrices();
      this.getSizes();
+     this.getContainers();
   },
   methods:{
      getKegs() {
@@ -345,6 +393,17 @@ export default {
         }).catch(e => {
           console.log(e)
 
+        })
+    },
+    getContainers(){
+      axios.get('http://localhost:3000/container')
+      .then(response => {
+          console.log(response)
+          this.containersStock = response.data.Containers
+          return true
+        }).catch(e => {
+          return false
+          console.log(e)
         })
     },
     createGrowler(keg,litres,price){
@@ -406,6 +465,14 @@ export default {
         }
         this.calculateTotal()
     },
+    CalculateContainer(){ 
+        this.totalContainers = 0
+        this.totalSale = 0
+        for (let i = 0; i < this.containers.length; i++) { 
+        this.totalContainers += Number(this.containers[i].price) 
+        }
+        this.calculateTotal()
+    },
 
     createPint(keg,litres,price){
       if(keg.quantitySaled >= litres){
@@ -432,13 +499,17 @@ export default {
     },
     deletePint(id){ 
       let pints = this.pints
+
       for (let i = 0; i < pints.length; i++) { 
         
         if(pints[i].idDelete === id){
           let keg = this.kegs.find(keg => keg._id === pints[i].keg)
-          keg.quantitySaled  +=  pints[i].quantity 
+          keg.quantitySaled  +=  pints[i].quantity
+          let price = this.prices.find(price => price.hhourprice/2 === pints[i].price) 
+          if(price){
+            this.hhour--
+          }
           pints.splice(i,1)
-          this.hhour--
           this.notifySucces("Pinta","Pinta eliminada correctamente")
         }
         
@@ -456,6 +527,16 @@ export default {
   },
   openModalBottles(){
     this.$modal.show('bottles');
+  },
+  openModalDisconect(keg){
+    this.$modal.show('disconect');
+    this.newDisconect.kegid = keg._id
+    this.newDisconect.beer = keg.beer
+    this.newDisconect.brewery = keg.brewery.name
+    this.newDisconect.quantity = keg.quantity
+    this.newDisconect.quantitySaled = keg.quantitySaled
+    
+
   },
   createBottle(bottle){
     if(bottle.stock >= this.newBottle.quantitySaled && this.newBottle.quantitySaled > 0  ){
@@ -477,6 +558,26 @@ export default {
         this.notifyWarning("Botellas","No hay suficiente stock ")
     }
   },
+  createContainer(container,quantitySaled,size,price){
+    this.newContainer.quantitySaled=quantitySaled
+    if(container.stock >= this.newContainer.quantitySaled && this.newContainer.quantitySaled > 0  ){
+    container.stock -= Number(this.newContainer.quantitySaled)
+    this.newContainer._id = container._id
+    this.newContainer.price =  (price * this.newContainer.quantitySaled)
+    this.newContainer.idDelete = this.containers.length
+    this.newContainer.size = size
+    this.newContainer.unitPrice = container.cost
+    this.containers.push(this.newContainer)
+    this.CalculateContainer() 
+    this.newContainer = {}
+    this.notifySucces("Envase","Envase cargado correctamente")
+    }else{
+      if( this.newContainer.quantitySaled <= 0)
+        this.notifyWarning("Envases","La cantidad no puede ser 0")
+      else
+        this.notifyWarning("Envases","No hay suficiente stock ")
+    }
+  },
   deleteBottle(id){ 
       let bottles = this.bottles
       for (let i = 0; i < bottles.length; i++) { 
@@ -488,6 +589,18 @@ export default {
         }
       }
       this.CalculateBottle()
+    },
+    deleteContainer(id){ 
+      let containers = this.containers
+      for (let i = 0; i < containers.length; i++) { 
+        if(containers[i].idDelete === id){            
+            let container = this.containersStock.find(container => container._id === containers[i]._id)
+            container.stock += Number(containers[i].quantitySaled)
+            containers.splice(i,1)
+            this.notifySucces("Envases","Envase eliminado correctamente")
+        }
+      }
+      this.CalculateContainer()
     },
    deleteOther(id){ 
        let others = this.others
@@ -515,7 +628,7 @@ export default {
     }
   },
   calculateTotal(){
-    this.totalSale = (this.totalPints + this.totalGrowlers + this.totalOthers + this.totalBottles)
+    this.totalSale = (this.totalPints + this.totalGrowlers + this.totalOthers + this.totalBottles + this.totalContainers)
   },
   sendSale(){
     axios.post(`http://localhost:3000/sale`,{
@@ -525,6 +638,7 @@ export default {
       growlers: this.growlers,
       bottles : this.bottles,
       others: this.others,
+      containers: this.containers,
       pints: this.pints,
     }).then(res =>{
       console.log(res)
@@ -544,11 +658,13 @@ export default {
       this.growlers =[]
       this.bottles =[]
       this.pints =[]
+      this.containers=[]
       this.totalSale = 0
       this.totalOthers  = 0
       this.totalBottles = 0
       this.totalGrowlers = 0
       this.totalPints = 0
+      this.totalContainers = 0
       this.client = ""
       this.date = ""
   },
@@ -576,12 +692,25 @@ notifyError(title,text){
                 text: text
               })
 },
+started(idKeg){
+    this.newDisconect={}
+     axios.put(`http://localhost:3000/keg/started/${idKeg}` )
+     .then(res => {
+       console.log(res)
+       this.getKegs();
+     })
+     this.newDisconect={}
+     this.$modal.hide('disconect');
+  },
  empty(idKeg){
+    
      axios.put(`http://localhost:3000/keg/empty/${idKeg}` )
      .then(res => {
        console.log(res)
        this.getKegs();
      })
+     this.newDisconect={}
+     this.$modal.hide('disconect');
   }
 },
 
@@ -608,6 +737,37 @@ notifyError(title,text){
 radial-progress-bar{
   background-image: url('../../assets/frontView.jpg')
 }
-
+#canillas img{
+  position: relative;
+  float: right;
+}
+#canillas img .left{
+  position: relative;
+  float: left;
+}
+#canillas h1 {
+  font-size:40px;
+  font-family: 'Black Ops One', cursive;
+}
+span{
+  font-size:12px !important;
+  font-family: 'Black Ops One', cursive;
+}
+.estilo{
+  font-size:30px;
+  font-family: 'Squada One', cursive;
+}
+.venta h3 span{
+  font-size: 18px !important;
+  letter-spacing: 1px;
+  font-family: 'Squada One', cursive;
+}
+td th{
+  font-family: 'Varela Round', sans-serif;
+}
+h3{
+  font-size: 28px;
+  font-family: 'Squada One', cursive;
+}
 
 </style>

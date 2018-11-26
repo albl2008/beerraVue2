@@ -23,6 +23,9 @@
           <li class="nav-item">
           <a class="nav-link " href="http://localhost:8080/#/pricize">Configuracion</a>
         </li>
+         <li class="nav-item">
+          <a class="nav-link " href="http://localhost:8080/#/container">Envases</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link " href="http://localhost:8080/#/outflow">Compras</a>
         </li>
@@ -49,6 +52,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+a{
+  font-size: 15px;
+  font-family: 'Varela Round', sans-serif;
 }
 
 </style>

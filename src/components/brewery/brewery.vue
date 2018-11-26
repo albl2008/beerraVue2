@@ -1,11 +1,17 @@
 <template>
+<div> 
+<div id="brewery">
+          <h1>CERVECERIAS</h1>
+          <img :src="require('@/assets/brewery.png')" alt="">
+          <img class="left" :src="require('@/assets/brewery.png')" alt="">
+      </div>  
   <div class="container">
     <div class="row mb-3">
       <div class="col-12 col-sm-6">
          <form v-on:submit.prevent="addBrewery">
-         <div class="card mb-2  ">
+         <div class="card mb-2 bg-dark">
            <div class="card-header">
-             <h5>{{Cerveceria}}</h5>
+             <h3>{{Cerveceria}}</h3>
            </div>
            <div class="card-body">
              <input type="text" class="form-control mb-1" placeholder="Cerveceria" v-model="newBrewery.name" required>
@@ -18,9 +24,9 @@
             </template>
            </div>
          </div>
-          <div class="card">
+          <div class="card bg-dark">
            <div class="card-header">
-            <h5>{{ContactoForm}}</h5>
+            <h3>{{ContactoForm}}</h3>
            </div>
            <div class="card-body">
                <form v-on:submit.prevent="addcontact">
@@ -39,9 +45,9 @@
         </form>
       </div>
       <div class="col-12 col-sm-6 table-responsive">
-         <div class="card">
+         <div class="card bg-dark nuevacerveceria">
            <div class="card-header">
-             <h5>{{Contacto}}</h5>
+             <h3>{{Contacto}}</h3>
            </div>
            <div class="card-body">
              <table class="table ">
@@ -70,7 +76,7 @@
       <div class="col-12  col-md-6">
         <div class="card">
           <div class="card-header">
-            <h5>Cervecerias</h5>
+            <h3>Cervecerias</h3>
           </div>
           <div class="card-body">
             <table class="table  ">
@@ -97,7 +103,7 @@
        <div class="col-12 col-md-6 table-responsive">
          <div class="card">
            <div class="card-header">
-              <h5>Contactos cerveceria</h5>
+              <h3>Contactos cerveceria</h3>
            </div>
            <div class="card-body">
             <table class="table table-striped ">
@@ -120,7 +126,7 @@
       </div>
   </div>
     </div>
-
+</div>
 </template>
 <script>
 import Vue from 'vue'
@@ -342,4 +348,61 @@ a:hover{
   text-decoration: none;
 }
 
+td{
+  font-family: 'Courier New', Courier;
+  color: black;
+  font-size:12px;
+}
+th{
+  font-family: 'Courier New', Courier;
+  color: black;
+  font-size:12px;
+}
+
+
+#brewery img{
+  position: relative;
+  float: right;
+}
+#brewery img .left{
+  position: relative;
+  float: left;
+}
+#brewery h1 {
+  font-size:40px;
+  font-family: 'Black Ops One', cursive;
+}
+h3 {
+  font-size:22px;
+  font-family: 'Varela Round', sans-serif;
+  color:white;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family:'Courier New', Courier;
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family:'Courier New', Courier;
+  color: black;
+}
+
+input[type="text"], textarea {
+
+  background-color : #beb9b9; 
+
+}
+
+input[type="email"], textarea {
+
+  background-color : #beb9b9; 
+
+}
+
+.nuevacerveceria{
+  color:white;
+}
+.nuevacerveceria th{
+  color:white !important;
+}
 </style>
