@@ -76,7 +76,8 @@ export default new Router({
     },
     {
       path: '/container',
-      component: container
+      component: container,
+      beforeEnter: isLogin
 
     },
     {

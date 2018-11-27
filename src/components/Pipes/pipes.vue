@@ -1,19 +1,20 @@
 <template>
   <div>
-      <div id="canillas">
-          <h1>BARRILES CONECTADOS</h1>
-          <img :src="require('@/assets/pipes.png')" alt="">
-          <img class="left" :src="require('@/assets/pipes.png')" alt="">
-      </div>  
+    <div id="canillas">
+      <h1>BARRILES CONECTADOS</h1>
+      <img :src="require('@/assets/pipes.png')" alt="">
+      <img class="left" :src="require('@/assets/pipes.png')" alt="">
+    </div>
     <div class="container">
       <div class="row ">
         <div class=" offset-md-3 col-md-6 mb-5 ">
           <div class="form-inline venta">
             <h3><span class="badge badge-pill badge-dark">Cliente:</span></h3>
-              <input type="text" class="form-control" v-model="client" id="cliente" requiered aria-label="Small" placeholder="Nombre" aria-describedby="inputGroup-sizing-sm">
+            <input type="text" class="form-control" v-model="client" id="cliente" requiered aria-label="Small"
+              placeholder="Nombre" aria-describedby="inputGroup-sizing-sm">
             <h3><span class="badge badge-pill badge-dark">Fecha:</span></h3>
-              <input type="date" class="form-control" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-          </div>         
+            <input type="date" class="form-control" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          </div>
         </div>
       </div>
       <div class="row mb-5">
@@ -22,32 +23,45 @@
           <template v-if="keg.sta === 4">
             <div class="col-md-3 col-sm-12 mb-5">
               <div class="card">
-                <div class="card-header bg-dark">
-                  <div class="row">                   
+                <div class="card-header tituloCardHeader bg-dark">
+                  <div class="row">
                     <h3 class="text-center col-md-10 estilo">{{keg.beer}}</h3>
-                    <button v-on:click="openModalDisconect(keg)" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Desconectar Barril" ><i class="material-icons">power_off</i></button>
+                    <button v-on:click="openModalDisconect(keg)" class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
+                      data-placement="top" title="Desconectar Barril"><i class="material-icons">power_off</i></button>
                   </div>
-                  
+
                 </div>
                 <div class="card-body text-center">
-                    <radial-progress-bar :diameter="225" :startColor="'#ffc107'" :stopColor="'#e2ba1f'" :completed-steps="keg.quantitySaled" :total-steps="keg.quantity" class="">
-                      <p><span class="badge badge-warning">{{ keg.brewery.name }}</span></p>
-                      <p><span class="badge badge-dark">{{ keg.quantity }}</span></p>
-                      <template v-if="keg.quantitySaled<=15"> <p><span class="badge badge-danger">{{ keg.quantitySaled }}</span></p></template>
-                      <template v-else> <p><span class="badge badge-success">{{ keg.quantitySaled }}</span></p></template>
-                    </radial-progress-bar>
+                  <radial-progress-bar :diameter="225" :startColor="'#ffc107'" :stopColor="'#e2ba1f'" :completed-steps="keg.quantitySaled"
+                    :total-steps="keg.quantity" class="">
+                    <p><span class="badge badge-warning">{{ keg.brewery.name }}</span></p>
+                    <p><span class="badge badge-dark">{{ keg.quantity }}</span></p>
+                    <template v-if="keg.quantitySaled<=15">
+                      <p><span class="badge badge-danger">{{ keg.quantitySaled }}</span></p>
+                    </template>
+                    <template v-else>
+                      <p><span class="badge badge-success">{{ keg.quantitySaled }}</span></p>
+                    </template>
+                  </radial-progress-bar>
                 </div>
-                <div class="card-footer">
-                    <template v-for="size in sizes">
-                    <template v-for="price in prices">
-                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled"  class="btn btn-outline-dark btn-sm" v-on:click="createGrowler(keg,size.growlersize,price.loadprice)" data-toggle="tooltip" data-placement="top" title="Carga Grande"><img :src="require('@/assets/growlerlleno.png')" alt="carga"></button>
-                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm" v-on:click="createGrowler(keg,size.growlersize2,price.loadprice2)" data-toggle="tooltip" data-placement="top" title="Carga Chica"><img :src="require('@/assets/growler1l.png')" alt=""></button>
-                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm" v-on:click="createPint(keg,size.pintsize,price.pintprice)"data-toggle="tooltip" data-placement="top" title="Pinta"><img :src="require('@/assets/pinta.png')" alt=""></button>
-                    <button  class="btn btn-outline-dark btn-sm" v-on:click="happyhour(keg,size.pintsize,price.hhourprice)"data-toggle="tooltip" data-placement="top" title="Happy Hour"><img :src="require('@/assets/hhour.png')" alt=""></button>
-                    <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm" v-on:click="createOther(keg)" data-toggle="tooltip" data-placement="top" title="Por cantidad"><img :src="require('@/assets/other.png')" alt=""></button>
-                    </template>
-                    </template>
-                  </div>
+                <div class="mb-1 text-center">
+                 
+                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm"
+                        v-on:click="createGrowler(keg,sizes[0].growlersize,prices[0].loadprice)" data-toggle="tooltip"
+                        data-placement="top" title="Carga Grande"><img :src="require('@/assets/growlerlleno.png')" alt="carga"></button>
+                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm"
+                        v-on:click="createGrowler(keg,sizes[0].growlersize2,prices[0].loadprice2)" data-toggle="tooltip"
+                        data-placement="top" title="Carga Chica"><img :src="require('@/assets/growler1l.png')" alt=""></button>
+                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm"
+                        v-on:click="createPint(keg,sizes[0].pintsize,prices[0].pintprice)" data-toggle="tooltip" data-placement="top"
+                        title="Pinta"><img :src="require('@/assets/pinta.png')" alt=""></button>
+                      <button class="btn btn-outline-dark btn-sm" v-on:click="happyhour(keg,sizes[0].pintsize,prices[0].hhourprice)"
+                        data-toggle="tooltip" data-placement="top" title="Happy Hour"><img :src="require('@/assets/hhour.png')"
+                          alt=""></button>
+                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm"
+                        v-on:click="createOther(keg)" data-toggle="tooltip" data-placement="top" title="Por cantidad"><img
+                          :src="require('@/assets/other.png')" alt=""></button>
+                </div>
               </div>
 
 
@@ -56,20 +70,38 @@
           </template>
         </template>
       </div>
-  
+
       <div class="row mb-2">
         <div class="col-6 col-sm-12 col-md-6">
           <div class="card">
-            <div class="card-header bg-dark">
+            <div class="card-header tituloCardHeader bg-dark">
               <div class="row">
-                <div class="col-md-10 text-center "> <h3 class="estilo text-left">Botellones</h3></div>
-                  
-                    
-                      <template v-for="container in containersStock">
-                        <div class="col-md-1" v-if=""><button class=" btn-outline-dark btn-sm btn" data-toggle="tooltip" data-placement="top" title="Envase Vacio" v-on:click="createContainer(container,1,sizes[0].growlersize,prices[0].growlerprice)" ><img :src="require('@/assets/carga2.png')" alt=""></button></div>
-                      </template>
+                <div class="col-md-9 text-center ">
+                  <h3 class="estilo text-left">Botellones</h3>
+                </div>
+
+               
+
+                
+                  <template v-for="container in containersStock">
+                   <template v-if="container.size === sizes[0].growlersize" >          
+                        <button class="  btn-outline-light btn-sm btn" data-toggle="tooltip"
+                          data-placement="top" title="Envase Vacio" v-on:click="createContainer(container,1,sizes[0].growlersize,prices[0].growlerprice)"><img
+                            :src="require('@/assets/carga2.png')" alt=""></button>
+                    </template>
                      
-                </div>  
+                    <template  v-else >
+
+                      <button class=" btn-outline-light btn-sm btn mr-1 " data-toggle="tooltip"
+                        data-placement="top" title="Envase Vacio" v-on:click="createContainer(container,1,sizes[0].growlersize2,prices[0].growlerprice2)"><img
+                          :src="require('@/assets/carga.png')" alt=""></button>
+                    </template>
+                   
+                  </template>
+                
+                
+
+              </div>
             </div>
             <div class="card-body">
               <table class="table s">
@@ -91,7 +123,7 @@
                 </tbody>
               </table>
               <h3 class="text-center">Total: {{totalGrowlers}}</h3>
-                  <table class="table s">
+              <table class="table s">
                 <thead>
                   <th>Tamaño</th>
                   <th>Cantidad</th>
@@ -107,122 +139,128 @@
                   </tr>
                 </tbody>
               </table>
-               <h3 class="text-center">Envases: {{totalContainers}}</h3>
-                
+              <h3 class="text-center">Envases: {{totalContainers}}</h3>
+
             </div>
           </div>
         </div>
 
         <div class="col-6 col-sm-12 col-md-6 mb-5">
-          
-            <div class="card">
-              <div class="card-header bg-dark">
-                <div class="row">
-                  <div class="col-md-10"> <h3 class="estilo text-left">Botellas</h3></div>
-                  <div class="col-md-2 "><button class="text-center btn-outline-light btn-sm btn " data-toggle="tooltip" data-placement="top" title="Agregar Botella(s)" v-on:click="openModalBottles()"><img :src="require('@/assets/bottle.png')" alt=""></button></div>
-                </div>                 
-              </div>      
-              <div class="card-body">
-                  <table class="table s">
-              <thead>
-                <th>Cerveza</th>
-                <th>Cerveceria</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Eliminar</th>
-              </thead>
-              <tbody>
-                <tr v-for="bottle in bottles">
-                  <td>{{bottle.beer}}</td>
-                  <td>{{bottle.brewery}}</td>
-                  <td>{{bottle.quantitySaled}}</td>
-                  <td>{{bottle.price}}</td>
-                  <td><button class="btn btn-danger btn-sm" v-on:click="deleteBottle(bottle.idDelete)"><i class="material-icons">delete</i></button></td>
-                </tr>
-              </tbody>
-            </table>
 
-            <div class="row">
-              <div class="col-md-12">
-               <h3 class="text-center">Total: {{totalBottles}}</h3>
-              
+          <div class="card">
+            <div class="card-header tituloCardHeader bg-dark">
+              <div class="row">
+                <div class="col-md-10">
+                  <h3 class="estilo text-left">Botellas</h3>
+                </div>
+                <div class="col-md-2 "><button class="text-center btn-outline-light btn-sm btn " data-toggle="tooltip"
+                    data-placement="top" title="Agregar Botella(s)" v-on:click="openModalBottles()"><img :src="require('@/assets/bottle.png')"
+                      alt=""></button></div>
               </div>
             </div>
-              </div>          
-          
-            </div>
-          
-        </div>
-        </div>
-        <div class="row mb-5">
-          <div class="col-6 col-sm-12 col-md-6">
-            <div class="card">
-              <div class="card-header bg-dark"><h3 class="estilo text-left">Pintas</h3></div>
-              <div class="card-body">
-                   <table class="table s">
-              <thead>
-                <th>Cerveza</th>
-                <th>Cerveceria</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Eliminar</th>
+            <div class="card-body">
+              <table class="table s">
+                <thead>
+                  <th>Cerveza</th>
+                  <th>Cerveceria</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th>Eliminar</th>
+                </thead>
+                <tbody>
+                  <tr v-for="bottle in bottles">
+                    <td>{{bottle.beer}}</td>
+                    <td>{{bottle.brewery}}</td>
+                    <td>{{bottle.quantitySaled}}</td>
+                    <td>{{bottle.price}}</td>
+                    <td><button class="btn btn-danger btn-sm" v-on:click="deleteBottle(bottle.idDelete)"><i class="material-icons">delete</i></button></td>
+                  </tr>
+                </tbody>
+              </table>
 
-              </thead>
-              <tbody>
-                <tr v-for="pint in pints">
-                  <td>{{pint.beer}}</td>
-                  <td>{{pint.brewery}}</td>
-                  <td>{{pint.quantity}}</td>
-                  <td>{{pint.price}}</td>
-                  <td><button class="btn btn-danger btn-sm" v-on:click="deletePint(pint.idDelete)"><i class="material-icons">delete</i></button></td>
-                </tr>
-              </tbody>
-            </table>
-            <h3 class="text-center">Total: {{totalPints}}</h3>
-              </div>
-             
-            </div>                 
-          
-          </div>
-          <div class="col-6 col-sm-12 col-md-6">
-            <div class="card"> 
-              <div class="card-header bg-dark">
-                <h3 class="estilo text-left">Por cantidad</h3>
-              </div>
-              <div class="card-body">
-                   <table class="table s">
-              <thead>
-                <th>Cerveza</th>
-                <th>Cerveceria</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Eliminar</th>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3 class="text-center">Total: {{totalBottles}}</h3>
 
-              </thead>
-              <tbody>
-                <tr v-for="other in others">
-                  <td>{{other.beer}}</td>
-                  <td>{{other.brewery}}</td>
-                  <td>{{other.quantity}}</td>
-                  <td>{{other.price}}</td>
-                  <td><button class="btn btn-danger btn-sm" v-on:click="deleteOther(other.idDelete)"><i class="material-icons">delete</i></button></td>
-                </tr>
-              </tbody>
-            </table>
-            <h3 class="text-left">Total: {{totalOthers}}</h3>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      
-        <div class="row">
-          <div class="col-md-12">
-            <h3 class="text-center">Total venta: {{totalSale}}</h3>
-            <button class="btn btn-success" v-on:click="sendSale()">Procesar venta</button>
+
           </div>
 
         </div>
-     
+      </div>
+      <div class="row mb-5">
+        <div class="col-6 col-sm-12 col-md-6">
+          <div class="card">
+            <div class="card-header tituloCardHeader bg-dark">
+              <h3 class="estilo text-left">Pintas</h3>
+            </div>
+            <div class="card-body">
+              <table class="table s">
+                <thead>
+                  <th>Cerveza</th>
+                  <th>Cerveceria</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th>Eliminar</th>
+
+                </thead>
+                <tbody>
+                  <tr v-for="pint in pints">
+                    <td>{{pint.beer}}</td>
+                    <td>{{pint.brewery}}</td>
+                    <td>{{pint.quantity}}</td>
+                    <td>{{pint.price}}</td>
+                    <td><button class="btn btn-danger btn-sm" v-on:click="deletePint(pint.idDelete)"><i class="material-icons">delete</i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 class="text-center">Total: {{totalPints}}</h3>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="col-6 col-sm-12 col-md-6">
+          <div class="card">
+            <div class="card-header tituloCardHeader bg-dark">
+              <h3 class="estilo text-left">Por cantidad</h3>
+            </div>
+            <div class="card-body">
+              <table class="table s">
+                <thead>
+                  <th>Cerveza</th>
+                  <th>Cerveceria</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th>Eliminar</th>
+
+                </thead>
+                <tbody>
+                  <tr v-for="other in others">
+                    <td>{{other.beer}}</td>
+                    <td>{{other.brewery}}</td>
+                    <td>{{other.quantity}}</td>
+                    <td>{{other.price}}</td>
+                    <td><button class="btn btn-danger btn-sm" v-on:click="deleteOther(other.idDelete)"><i class="material-icons">delete</i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 class="text-left">Total: {{totalOthers}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="text-center">Total venta: {{totalSale}}</h3>
+          <button class="btn btn-success" v-on:click="sendSale()">Procesar venta</button>
+        </div>
+
+      </div>
+
       <modal name="hello-world">
         <div class="container ">
           <h3 class="mt-5">Ingrese datos</h3>
@@ -235,51 +273,51 @@
           </form>
         </div>
       </modal>
-   
+
       <modal name="disconect">
         <div class="container ">
           <h3 class="mt-5">¿Desconectar Barril?</h3>
           <div id="row">
             <h3 class="">Cerveza: {{newDisconect.beer}}</h3>
-           <button v-on:click="empty(newDisconect.kegid)" class="btn btn-danger" >Vacio</button>
-           <button v-on:click="started(newDisconect.kegid)" class="btn btn-danger" >Desconectar</button>
-          </div>        
+            <button v-on:click="empty(newDisconect.kegid)" class="btn btn-danger">Vacio</button>
+            <button v-on:click="started(newDisconect.kegid)" class="btn btn-danger">Desconectar</button>
+          </div>
         </div>
       </modal>
 
       <modal name='bottles'>
         <div class="container">
           <div class="row">
-          <div class="col-12  col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <h3>Cervezas</h3>
-            </div>
-            <div class="card-body">
-                 <table class="table ">
-              <thead>
-                <th>Cerveza</th>
-                <th>Stock</th>
-                <th>brewery</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-              </thead>
-              <tbody>
-                <tr v-for="bottle in BottlesStock">
-                  <td>{{bottle.beer}}</td>
-                  <td>{{bottle.stock}}</td>
-                  <td>{{bottle.brewery.name}}</td>
-                  <td>{{bottle.price}}</td>
-                  <td><input type="number form-control" v-model="newBottle.quantitySaled" placeholder="Ingrese cantidad"></td>
-                  <td><button class="btn btn-sm" v-on:click="createBottle(bottle)"><i class="material-icons">exposure_plus_1</i></button></td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="col-12  col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3>Cervezas</h3>
+                </div>
+                <div class="card-body">
+                  <table class="table ">
+                    <thead>
+                      <th>Cerveza</th>
+                      <th>Stock</th>
+                      <th>brewery</th>
+                      <th>Precio</th>
+                      <th>Cantidad</th>
+                    </thead>
+                    <tbody>
+                      <tr v-for="bottle in BottlesStock">
+                        <td>{{bottle.beer}}</td>
+                        <td>{{bottle.stock}}</td>
+                        <td>{{bottle.brewery.name}}</td>
+                        <td>{{bottle.price}}</td>
+                        <td><input type="number form-control" v-model="newBottle.quantitySaled" placeholder="Ingrese cantidad"></td>
+                        <td><button class="btn btn-sm" v-on:click="createBottle(bottle)"><i class="material-icons">exposure_plus_1</i></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
-          </div>
-        </div>       
-        </div>       
+        </div>
       </modal>
     </div>
   </div>
@@ -733,9 +771,7 @@ started(idKeg){
   </script>
 
 <style>
-radial-progress-bar{
-  background-image: url('../../assets/frontView.jpg')
-}
+
 #canillas img{
   position: relative;
   float: right;
@@ -762,10 +798,11 @@ span{
   font-family: 'Squada One', cursive;
 }
 
-h3{
+.tituloCardHeader{
   font-size: 28px;
   font-family: 'Squada One', cursive;
   color:white;
 }
+
 
 </style>

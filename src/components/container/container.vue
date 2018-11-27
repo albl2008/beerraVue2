@@ -33,7 +33,7 @@
                <h3>Compra</h3> 
             </div>  
             <div class="card-body">
-                           <form v-on:submit.prevent="addContainer" >
+  <form v-on:submit.prevent="addContainer" >
 
           <div class="input-group-pretend mb-3">
               
@@ -131,11 +131,12 @@ export default {
     addContainer(){
 
       if(this.edit === false ){
-
+        console.log(this.newContainer)
       axios.post('http://localhost:3000/container',
         this.newContainer,
       ).then(res =>{
-
+           this.getContainers(),
+            this.newContainer = {}
         if(res.status === 200 ){
          Vue.notify({
           group: 'foo',
@@ -144,8 +145,7 @@ export default {
           text: res.data.mensaje
         })
       }
-      this.getContainers(),
-      this.newContainer = {}
+     
      })
       .catch(e => {
         Vue.notify({

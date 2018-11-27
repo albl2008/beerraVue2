@@ -416,16 +416,8 @@ td{
   font-family:'Courier New', Courier;
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-family:'Courier New', Courier;
-  color: black;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  font-family:'Courier New', Courier;
-  color: black;
-}
 input[type="text"], textarea {
-
+  
   background-color : #beb9b9; 
 
 }

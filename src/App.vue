@@ -99,4 +99,13 @@ a{
   font-family: 'Varela Round', sans-serif;
 }
 
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family:'Courier New', Courier;
+  color: black;
+  padding-top: 1em;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family:'Courier New', Courier;
+  color: black;
+}
 </style>
