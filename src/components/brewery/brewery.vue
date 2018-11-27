@@ -1,26 +1,32 @@
 <template>
+<div> 
+<div id="brewery">
+          <h1>CERVECERIAS</h1>
+          <img :src="require('@/assets/brewery.png')" alt="">
+          <img class="left" :src="require('@/assets/brewery.png')" alt="">
+      </div>  
   <div class="container">
     <div class="row mb-3">
       <div class="col-12 col-sm-6">
          <form v-on:submit.prevent="addBrewery">
-         <div class="card mb-2  ">
+         <div class="card mb-2 bg-dark">
            <div class="card-header">
-             <h5>{{Cerveceria}}</h5>
+             <h3>{{Cerveceria}}</h3>
            </div>
            <div class="card-body">
              <input type="text" class="form-control mb-1" placeholder="Cerveceria" v-model="newBrewery.name" required>
           <input type="text" class="form-control mb-3" placeholder="Direccion" v-model="newBrewery.address" required>
             <template v-if="edit === false">
-              <dir class="col-12 mb-3"><button class="btn btn-success btn-block " >ADD BREWERY</button></dir>
+              <dir class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >AGREGAR</button></dir>
             </template>
             <template v-else>
-              <dir class="col-12 mb-3"><button class="btn btn-success btn-block " >UPDATE BREWERY</button></dir>
+              <dir class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >ACTUALIZAR</button></dir>
             </template>
            </div>
          </div>
-          <div class="card">
+          <div class="card bg-dark">
            <div class="card-header">
-            <h5>{{ContactoForm}}</h5>
+            <h3>{{ContactoForm}}</h3>
            </div>
            <div class="card-body">
                <form v-on:submit.prevent="addcontact">
@@ -28,10 +34,10 @@
             <input type="text" class="form-control mb-1" placeholder="Telefono" v-model="newcontact.tel" required>
             <input type="email" class="form-control mb-3" placeholder="Mail" v-model="newcontact.mail" required>
             <template v-if="editContact === false">
-              <dir class="col-12"><button class="btn btn-primary  " >ADD CONTACT</button></dir>
+              <dir class="col-12"><button class="btn btn-outline-primary  " >AÑADIR CONTACTO</button></dir>
             </template>
             <template v-else>
-              <dir class="col-12"><button class="btn btn-primary " >UPDATE CONTACT</button></dir>
+              <dir class="col-12"><button class="btn btn-outline-primary " >ACTUALIZAR CONTACTO</button></dir>
             </template>
           </form>
            </div>
@@ -39,9 +45,9 @@
         </form>
       </div>
       <div class="col-12 col-sm-6 table-responsive">
-         <div class="card">
-           <div class="card-header">
-             <h5>{{Contacto}}</h5>
+         <div class="card nuevacerveceria">
+           <div class="card-header bg-dark ">
+             <h3>{{Contacto}}</h3>
            </div>
            <div class="card-body">
              <table class="table ">
@@ -57,8 +63,8 @@
                 <td>{{cont.name}}</td>
                 <td>{{cont.tel}}</td>
                 <td>{{cont.mail}}</td>
-                <td><button class="btn btn-danger btn-sm" v-on:click="deleteContact(cont)"><i class="material-icons">delete</i></button></td>
-                <td><button class="btn btn-primary btn-sm" v-on:click="updateContact(cont)"><i class="material-icons">edit</i></button></td>
+                <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteContact(cont)"><i class="material-icons">delete</i></button></td>
+                <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateContact(cont)"><i class="material-icons">edit</i></button></td>
               </tr>
             </tbody>
           </table>
@@ -69,8 +75,8 @@
     <div class="row">
       <div class="col-12  col-md-6">
         <div class="card">
-          <div class="card-header">
-            <h5>Cervecerias</h5>
+          <div class="card-header bg-dark">
+            <h3>Cervecerias</h3>
           </div>
           <div class="card-body">
             <table class="table  ">
@@ -85,9 +91,9 @@
               <tr v-for="brewery in breweries">
                 <td>{{brewery.name}}</td>
                 <th>{{brewery.address}}</th>
-                <td><button class="btn btn-success btn-sm" v-on:click="getcontact(brewery._id)"><i v-on:click="getcontact(brewery._id)" class="material-icons">contact_phone</i></button></td>
-                <td><button class="btn btn-danger btn-sm" v-on:click="deleteBrewery(brewery._id)"><i class="material-icons">delete</i></button></td>
-                <td><button class="btn btn-primary btn-sm" v-on:click="updateBrewery(brewery._id)"><i class="material-icons">edit</i></button></td>
+                <td><button class="btn btn-outline-success btn-sm" v-on:click="getcontact(brewery._id)"><i v-on:click="getcontact(brewery._id)" class="material-icons">contact_phone</i></button></td>
+                <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteBrewery(brewery._id)"><i class="material-icons">delete</i></button></td>
+                <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateBrewery(brewery._id)"><i class="material-icons">edit</i></button></td>
               </tr>
             </tbody>
           </table>
@@ -96,8 +102,8 @@
       </div>
        <div class="col-12 col-md-6 table-responsive">
          <div class="card">
-           <div class="card-header">
-              <h5>Contactos cerveceria</h5>
+           <div class="card-header bg-dark">
+              <h3>Contactos cerveceria</h3>
            </div>
            <div class="card-body">
             <table class="table table-striped ">
@@ -120,7 +126,7 @@
       </div>
   </div>
     </div>
-
+</div>
 </template>
 <script>
 import Vue from 'vue'
@@ -340,6 +346,57 @@ a{
 a:hover{
   color:inherit;
   text-decoration: none;
+}
+
+td{
+  font-family: 'Courier New', Courier;
+  color: black;
+  font-size:12px;
+}
+th{
+  font-family: 'Courier New', Courier;
+  color: black;
+  font-size:12px;
+}
+
+
+#brewery img{
+  position: relative;
+  float: right;
+}
+#brewery img .left{
+  position: relative;
+  float: left;
+}
+#brewery h1 {
+  font-size:40px;
+  font-family: 'Black Ops One', cursive;
+}
+h3 {
+  font-size:22px;
+  font-family: 'Varela Round', sans-serif;
+  color:white;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family:'Courier New', Courier;
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family:'Courier New', Courier;
+  color: black;
+}
+
+input[type="text"], textarea {
+
+  background-color : #beb9b9; 
+
+}
+
+input[type="email"], textarea {
+
+  background-color : #beb9b9; 
+
 }
 
 </style>

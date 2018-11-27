@@ -1,10 +1,22 @@
 <template>
+<div>
+ <div id="botellas">
+          <h1>BOTELLAS</h1>
+          <img :src="require('@/assets/botellas.png')" alt="">
+          <img class="left" :src="require('@/assets/botellas.png')" alt="">
+ </div>   
     <div class="container">
       <div class="row">
-        <div class="col-12 col-sm-12  col-md-5">
-          <div class="card">
+        <div class="col-12 col-sm-12  col-md-3">
+          <div class="card bg-dark">
             <div class="card-header">
-               <h3>Nueva Botella</h3> 
+              <template v-if="edit === false">
+                   <div class="card-header"><h3>AGREGAR BOTELLA(S)</h3></div>
+              </template>
+                <template v-else>
+                  <div class="card-header"><h3>ACTUALIZAR BOTELLA(S)</h3></div>
+              </template>
+
             </div>  
             <div class="card-body">
                            <form v-on:submit.prevent="addBottle" >
@@ -24,10 +36,10 @@
             </select>
           </div>
             <template v-if="edit === false">
-                <button class="btn btn-primary btn-block">SEND</button>
+                <button class="btn btn-outline-success btn-block">AGREGAR</button>
             </template>
             <template v-else>
-                <button class="btn btn-primary btn-block" >UPDATE</button>
+                <button class="btn btn-outline-primary btn-block" >ACTUALIZAR</button>
             </template>
 
         </form>
@@ -35,10 +47,10 @@
           </div>
 
       </div>
-          <div class="col-12 col-sm-12 col-md-7">
-            <div class="card">
-              <div class="card-header">
-                <h3>Botellas</h3>
+          <div class="col-12 col-sm-12 col-md-9">
+            <div class="card ">
+              <div class="card-header bg-dark">
+                <h3 class="">LISTADO DE BOTELLAS</h3>
               </div>
               <div class="card-body">
                 <table class="table ">
@@ -62,8 +74,8 @@
                   <td>{{bottle.alcohol}}</td>
                   <td>{{bottle.brewery.name}}</td>
                   <td>{{bottle.price}}</td>
-                  <td><button class="btn btn-danger btn-sm" v-on:click="deleteBottle(bottle._id)"><i class="material-icons">delete</i></button></td>
-                  <td><button class="btn btn-primary btn-sm" v-on:click="updateBottle(bottle._id)"><i class="material-icons">edit</i></button></td>
+                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteBottle(bottle._id)"><i class="material-icons">delete</i></button></td>
+                  <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateBottle(bottle._id)"><i class="material-icons">edit</i></button></td>
                 </tr>
               </tbody>
             </table>
@@ -73,7 +85,7 @@
 
     </div>
     </div>
-
+</div>
 </template>
 <script>
 import Vue from 'vue'
@@ -227,5 +239,63 @@ export default {
 }
 </script>
 <style>
+#botellas img{
+  position: relative;
+  float: right;
+}
+#botellas img .left{
+  position: relative;
+  float: left;
+}
+#botellas h1 {
+  font-size:40px;
+  font-family: 'Black Ops One', cursive;
+}
 
+h3 {
+  font-size:22px;
+  font-family: 'Varela Round', sans-serif;
+  color:white;
+}
+
+
+td{
+  font-family: 'Courier New', Courier;
+  color: black;
+  font-size:12px;
+}
+th{
+  font-family: 'Courier New', Courier;
+  color: black;
+  font-size:12px;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family:'Courier New', Courier;
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family:'Courier New', Courier;
+  color: black;
+}
+
+div select option .custom-select {
+    background-color: #beb9b9 !important; 
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+.courier{
+  font-family:'Courier New', Courier;
+  color: white;
+  font-size: 14px;
+}
+.list{
+  color:black;
+}
+
+input[type="text"], textarea {
+
+  background-color : #beb9b9; 
+
+}
 </style>

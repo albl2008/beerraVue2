@@ -15,6 +15,7 @@ import dashboard from '../components/user/dashboard'
 
 import pricize from '../components/pricize/pricize'
 import outflow from '../components/outflow/outflows'
+import container from '../components/container/container'
 
 
 Vue.use(vueResource)
@@ -72,6 +73,11 @@ export default new Router({
       path: '/pipes',
       component: pipes,
       beforeEnter: isLogin
+    },
+    {
+      path: '/container',
+      component: container
+
     },
     {
       path: '/',

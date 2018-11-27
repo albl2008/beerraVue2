@@ -1,4 +1,10 @@
 <template>
+<div>
+     <div id="payment">
+          <h1>PAGO A PROVEEDORES</h1>
+          <img :src="require('@/assets/compras.png')" alt="">
+          <img class="left" :src="require('@/assets/compras.png')" alt="">
+      </div> 
     <div class="container">
      
       <div class="row">
@@ -6,7 +12,7 @@
 
           <div class="col-12 col-sm-12 col-md-8">
             <div class="card">
-              <div class="card-header">
+              <div class="card-header bg-dark">
                    <h3>Barriles Vacios</h3>
               </div>
               <div class="card-body">
@@ -29,7 +35,7 @@
                   <td>{{keg.ibu}}</td>
                   <td>{{keg.alcohol}}</td>
                   <td>{{keg.brewery.name}}</td>
-                  <td><button class="btn btn-primary btn-sm" v-on:click="getKeg(keg)"><i class="material-icons">attach_money</i></button></td>
+                  <td><button class="btn btn-outline-primary btn-sm" v-on:click="getKeg(keg)"><i class="material-icons">attach_money</i></button></td>
                   </template>
                 </tr>
               </tbody>
@@ -38,7 +44,7 @@
             </div>           
       </div>
       <div class="col-12 col-sm-12  col-md-4">
-          <div class="card">
+          <div class="card bg-dark">
             <div class="card-header"><h3>Pagar Barril</h3></div>
             <div class="card-body">
               <form v-on:submit.prevent="addPay()">
@@ -49,7 +55,7 @@
                     <input type="date" class="form-control mb-1 " v-model="newPay.date" required>
                   <input type="text" class="form-control mb-1" v-model="newPay.ammount" placeholder="Precio" required>
                 </div>
-                        <button class="btn btn-danger btn-block">Confirmar Pago</button>
+                        <button class="btn btn-outline-danger btn-block">Confirmar Pago</button>
               
         </form>
             </div>
@@ -62,7 +68,7 @@
 
           <div class="col-12 col-sm-12 col-md-12">
             <div class="card">
-              <div class="card-header">
+              <div class="card-header bg-dark">
                    <h3>Barriles Pagados</h3>
               </div>
               <div class="card-body">
@@ -83,7 +89,7 @@
                   <td>{{payment.keg.sta}}</td>
                   <td>{{payment.brewery}}</td>
                   <td>{{payment.ammount}}</td>
-                  <td><button class="btn btn-success btn-sm"><i class="material-icons">done</i></button></td>
+                  <td><button class="btn btn-outline-success btn-sm"><i class="material-icons">done</i></button></td>
                   </template>
                 </tr>
                 
@@ -96,7 +102,7 @@
 
       </div>
     </div>
-
+</div>
 </template>
 <script>
 import Vue from 'vue'
@@ -260,5 +266,47 @@ export default {
 }
 </script>
 <style>
+#payment img{
+  position: relative;
+  float: right;
+}
+#payment img .left{
+  position: relative;
+  float: left;
+}
+#payment h1 {
+  font-size:40px;
+  font-family: 'Black Ops One', cursive;
+}
+.card-header h3{
+  color:white;
+}
+input[type="text"], textarea {
 
+  background-color : #beb9b9; 
+
+}
+input[type="date"], textarea {
+
+  background-color : #beb9b9; 
+
+}
+td{
+  font-family: 'Courier New', Courier;
+  color: black;
+  font-size:13px;
+}
+th{
+  font-family: 'Courier New', Courier;
+  color: black;
+  font-size:13px;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family:'Courier New', Courier;
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family:'Courier New', Courier;
+  color: black;
+}
 </style>

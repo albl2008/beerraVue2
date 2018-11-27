@@ -1,10 +1,15 @@
 <template>
+<div>
+      <div id="pricize">
+          <h1>PRECIOS Y TAMAÑOS</h1>
+          <img :src="require('@/assets/pricize.png')" alt="">
+          <img class="left" :src="require('@/assets/pricize.png')" alt="">
+      </div> 
     <div class="container">
-      <h1>Precios y Tamaños</h1>
       <div class="row">
        <div class="col-12 col-sm-12 col-md-8">
             <div class="card">
-              <div class="card-header">
+              <div class="card-header bg-dark">
                    <h3>Precios Actuales</h3>
               </div>
               <div class="card-body">
@@ -28,7 +33,7 @@
                   <td>{{pricize.pintprice}}</td>
                   <td>{{pricize.pintprice2}}</td>
                   <td>{{pricize.hhourprice}}</td>
-                  <td><button class="btn btn-primary btn-block" v-on:click="updatePricize(pricize._id)">Editar</button></td>
+                  <td><button class="btn btn-outline-primary btn-block" v-on:click="updatePricize(pricize._id)"><i class="material-icons">edit</i></button></td>
                 </tr>
                 
 
@@ -41,8 +46,8 @@
       </div>
       
       <div class="col-12 col-sm-12  col-md-4 ">
-          <div class="card">
-            <div class="card-header"><h3>Precios</h3></div>
+          <div class="card bg-dark">
+            <div class="card-header "><h3>Precios</h3></div>
             <div class="card-body">
               <form v-on:submit.prevent="addPricize()">
 
@@ -62,7 +67,7 @@
                   <button class="btn btn-primary btn-block" >Actualizar precios y tamaños</button>
               </template>
                <template v-else>
-                  <p>Solo puede Editar la lista de precios existente</p>
+                  <p class="seleccione">Solo puede Editar la lista de precios existente</p>
               </template>
 
               
@@ -77,7 +82,7 @@
         <div class="row">
        <div class="col-12 col-sm-12 col-md-8">
             <div class="card">
-              <div class="card-header">
+              <div class="card-header bg-dark">
                    <h3>Tamaños Actuales</h3>
               </div>
               <div class="card-body">
@@ -95,7 +100,7 @@
                   <td>{{size.growlersize2}}</td>
                   <td>{{size.pintsize}}</td>
                   <td>{{size.pintsize2}}</td>
-                  <td><button class="btn btn-primary btn-block" v-on:click="updateSize(size._id)">Editar</button></td>
+                  <td><button class="btn btn-outline-primary " v-on:click="updateSize(size._id)"><i class="material-icons">edit</i></button></td>
                 </tr>
               </tbody>
              
@@ -106,7 +111,7 @@
       </div>
       
       <div class="col-12 col-sm-12  col-md-4 ">
-          <div class="card">
+          <div class="card bg-dark">
             <div class="card-header"><h3>Tamaños</h3></div>
             <div class="card-body">
               <form v-on:submit.prevent="addSize()">
@@ -118,13 +123,13 @@
                   <input type="text" class="form-control mb-1" v-model="newSize.pintsize2" placeholder="Tamaño Media Pinta (en L)" required>
                 </div>
                   <template v-if="existsize === false">
-                  <button class="btn btn-primary btn-block" >Agregar tamaños</button>
+                  <button class="btn btn-outline-primary btn-block" >Agregar tamaños</button>
               </template>
                 <template v-else-if="editsize===true">
-                  <button class="btn btn-primary btn-block" >Actualizar tamaños</button>
+                  <button class="btn btn-outline-primary btn-block" >Actualizar tamaños</button>
               </template>
                <template v-else>
-                  <p>Solo puede Editar la lista de tamaños existente</p>
+                  <p class="seleccione">Solo puede Editar la lista de tamaños existente</p>
               </template>
 
               
@@ -137,7 +142,7 @@
     </div>
       </div>
     </div>
-
+</div>
 </template>
 <script>
 import Vue from 'vue'
@@ -380,5 +385,48 @@ export default {
 }
 </script>
 <style>
+#pricize img{
+  position: relative;
+  float: right;
+}
+#pricize img .left{
+  position: relative;
+  float: left;
+}
+#pricize h1 {
+  font-size:40px;
+  font-family: 'Black Ops One', cursive;
+}
+h3{
+  font-size: 28px;
+  font-family: 'Squada One', cursive;
+  color:white;
+}
+p{
+  font-family: 'Squada One', cursive;
+  color: white;
+}
+.seleccione{
+    font-size:20px;
+}
+th{
+   font-family:'Courier New', Courier;
+}
+td{
+  font-family:'Courier New', Courier;
+}
 
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family:'Courier New', Courier;
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family:'Courier New', Courier;
+  color: black;
+}
+input[type="text"], textarea {
+
+  background-color : #beb9b9; 
+
+}
 </style>
