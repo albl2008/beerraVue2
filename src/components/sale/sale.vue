@@ -1,10 +1,19 @@
 <template>
+<div>
+     <div id="sales">
+          <h1>VENTAS</h1>
+          <img :src="require('@/assets/ventas.png')" alt="">
+          <img class="left" :src="require('@/assets/ventas.png')" alt="">
+          
+      </div>  
     <div class="container">
+        
         <div class="row"> 
+            
             <div class="col-md-7">  
             <div class="card">
-                <div class="card-header">
-                    <h3>Ventas</h3>
+                <div class="card-header bg-dark">
+                    <h3>LISTADO DE VENTAS</h3>
                 </div>
                 <div class="card-body">
             <table class="table">
@@ -19,13 +28,33 @@
               </thead>
               <tbody>
                 <tr v-for="sale in sales" >
-                  <td>{{sale.client}}</td>
-                  <td>{{format(sale.date)}}</td>
-                  <td>{{sale.totalSale}}</td>             
-                  <td><button class="btn btn-primary" v-on:click="getGrowler(sale._id)"><i class="material-icons">remove_red_eye</i></button></td>
-                  <td><button class="btn btn-primary" v-on:click="getPints(sale._id)"><i class="material-icons">remove_red_eye</i></button></td>
-                  <td><button class="btn btn-primary" v-on:click="getBottles(sale._id)"><i class="material-icons">remove_red_eye</i></button></td>
-                  <td><button class="btn btn-primary" v-on:click="getOther(sale._id)"><i class="material-icons">remove_red_eye</i></button></td>
+                  <td v-if="sale.client">{{sale.client}}</td>
+                  <td v-else>-</td>
+                  <td v-if="sale.date">{{format(sale.date)}}</td>
+                  <td v-else>-</td>
+                  
+                  <td>{{sale.totalSale}}</td>  
+                  <template v-if="Object.keys(sale.growlers).length === 0">
+                    <td><button class="btn btn-outline-dark disabled"><img :src="require('@/assets/growlerlleno.png')" alt="carga"></button></td>
+                  </template>
+                   <template v-else>
+                    <td><button class="btn btn-outline-dark" v-on:click="getGrowler(sale._id)"><img :src="require('@/assets/growlerlleno.png')" alt="carga"></button></td>
+                  </template>
+                   <template v-if="Object.keys(sale.pints).length === 0">
+                    <td><button class="btn btn-outline-dark disabled"><img :src="require('@/assets/pinta.png')" alt=""></button></td> </template>
+                   <template v-else>
+                    <td><button class="btn btn-outline-dark" v-on:click="getPints(sale._id)"><img :src="require('@/assets/pinta.png')" alt=""></button></td></template>
+                   <template v-if="Object.keys(sale.bottles).length === 0">
+                    <td><button class="btn btn-outline-dark disabled"><img :src="require('@/assets/bottle.png')" alt=""></button></td></template>
+                   <template v-else>
+                     <td><button class="btn btn-outline-dark" v-on:click="getBottles(sale._id)"><img :src="require('@/assets/bottle.png')" alt=""></button></td></template>
+                   <template v-if="Object.keys(sale.others).length === 0">
+                    <td><button class="btn btn-outline-dark disabled"><img :src="require('@/assets/other.png')" alt=""></button></td></template>
+                   <template v-else>
+                   <td><button class="btn btn-outline-dark" v-on:click="getOther(sale._id)"><img :src="require('@/assets/other.png')" alt=""></button></td></template>
+                  
+                 
+                  
                 </tr>
               </tbody>
             </table>
@@ -33,9 +62,10 @@
             </div>
             </div>
          <div class="col-md-5">
-          <div class="card">
+             
+          <div class="card bg-dark sticky-top">
                     <div class="card-header">
-                        <h3>Productos</h3>
+                        <h3>PRODUCTOS</h3>
                     </div>
               <div class="card-body">
                          <template v-if="isGrowlers === true">
@@ -88,7 +118,7 @@
                     </tbody>
                 </table>
             </template>
-            <template v-else>
+            <template v-else-if='isBottles===true'>
                  <table class="table ">
                     <thead>
                         <th>Cerveza</th>                         
@@ -109,13 +139,18 @@
                     </tbody>
                 </table>
             </template>
+            <template v-else>
+                <p class="seleccione">Seleccione articulos de la venta para ver su información</p>
+            </template>
               </div>
      
+            </div>
             </div>
           </div>
          
         </div>
     </div>
+    
 </template>
 <script>
 const moment = require('moment');
@@ -131,12 +166,14 @@ export default {
            isGrowlers:false,
            isBottles:false,
            isPints:false ,
-           isOther:false,    
+           isOther:false,  
+           search:''  
         }
     },
     created(){
         this.getSales()
     },
+    
     methods:{
         getSales(){
             axios.get('http://localhost:3000/sale')
@@ -209,5 +246,41 @@ export default {
 }
 </script>
 <style>
+#sales img{
+  position: relative;
+  float: right;
+}
+#sales img .left{
+  position: relative;
+  float: left;
+}
+#sales h1 {
+  font-size:40px;
+  font-family: 'Black Ops One', cursive;
+}
+.col-md-5 th{
+ color:white;
+}
+.col-md-5 td{
+ color:white;
+}
+.col-md-7 h3{
+ color:white;
+}
+.col-md-5 h3{
+ color:white;
+}
+
+
+.col-md-7 td{
+ color:black
+}
+.col-md-7 td{
+ position: relative;
+}
+.seleccione{
+    font-size:20px;
+    color:white;
+}
 
 </style>

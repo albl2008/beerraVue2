@@ -1,6 +1,6 @@
 <template>
 <div>
- <div id="barriles">
+ <div id="botellas">
           <h1>BOTELLAS</h1>
           <img :src="require('@/assets/botellas.png')" alt="">
           <img class="left" :src="require('@/assets/botellas.png')" alt="">
@@ -48,9 +48,9 @@
 
       </div>
           <div class="col-12 col-sm-12 col-md-9">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="list">BOTELLAS</h3>
+            <div class="card ">
+              <div class="card-header bg-dark">
+                <h3 class="">LISTADO DE BOTELLAS</h3>
               </div>
               <div class="card-body">
                 <table class="table ">

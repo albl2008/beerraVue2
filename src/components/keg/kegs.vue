@@ -60,6 +60,14 @@
               </option>
 
             </select>
+            <swatches
+               v-model="color"
+               :colors="colors"
+               row-length="5"
+               shapes="circles"
+               show-border
+               popover-to="left">
+            </swatches>
         </div>
         <div class="card-footer">
              <template v-if="edit === false">
@@ -76,8 +84,8 @@
 
           <div class="col-12 col-sm-12 col-md-9">
             <div class="card">
-              <div class="card-header">
-                   <h3 class="list">LISTADO DE BARRILES</h3>
+              <div class="card-header bg-dark">
+                   <h3>LISTADO DE BARRILES</h3>
               </div>
               <div class="card-body">
                   <table class="table s">
@@ -125,6 +133,8 @@
 </template>
 <script>
 import Vue from 'vue'
+import Swatches from 'vue-swatches'
+import "vue-swatches/dist/vue-swatches.min.css"
 const axios = require('axios')
 
 class newKeg {
@@ -141,6 +151,7 @@ class newKeg {
 }
 
 export default {
+  components: { Swatches },
   data() {
     return {
       newKeg: {},
@@ -168,9 +179,15 @@ export default {
       edit: false,
       kegToEdit: '',
       sale:false,
-
-
-
+      color:'#F3F993',
+      colors: [
+        ['#F3F993','#F5F75C','#F6F513','#EAE615','#E0D01B' ],
+        ['#D5BC26','#CDAA37','#C1963C','#BE8C3A','#BE823A' ],
+        ['#C17A37','#BF7138','#BC6733','#B26033','#A85839' ],
+        ['#985336','#8D4C32','#7C452D','#6B3A1E','#5D341A' ],
+        ['#4E2A0C','#4A2727','#361F1B','#261716','#231716' ],
+        ['#19100F','#16100F','#120D0C','#100B0A','#050B0A' ]
+      ],
     }
   },
   created() {

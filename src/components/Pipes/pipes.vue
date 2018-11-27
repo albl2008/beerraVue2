@@ -22,7 +22,7 @@
           <template v-if="keg.sta === 4">
             <div class="col-md-3 col-sm-12 mb-5">
               <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-dark">
                   <div class="row">                   
                     <h3 class="text-center col-md-10 estilo">{{keg.beer}}</h3>
                     <button v-on:click="openModalDisconect(keg)" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Desconectar Barril" ><i class="material-icons">power_off</i></button>
@@ -60,16 +60,15 @@
       <div class="row mb-2">
         <div class="col-6 col-sm-12 col-md-6">
           <div class="card">
-            <div class="card-header">
+            <div class="card-header bg-dark">
               <div class="row">
                 <div class="col-md-10 text-center "> <h3 class="estilo text-left">Botellones</h3></div>
-                  <template v-for="price in prices">
-                    <template v-for="size in sizes">
+                  
+                    
                       <template v-for="container in containersStock">
-                        <div class="col-md-2" v-if="container.size==size.growlersize"><button class=" btn-outline-dark btn-sm btn" data-toggle="tooltip" data-placement="top" title="Envase Vacio" v-on:click="createContainer(container,1,container.size,price.growlerprice)" ><img :src="require('@/assets/carga2.png')" alt=""></button></div>
+                        <div class="col-md-1" v-if=""><button class=" btn-outline-dark btn-sm btn" data-toggle="tooltip" data-placement="top" title="Envase Vacio" v-on:click="createContainer(container,1,sizes[0].growlersize,prices[0].growlerprice)" ><img :src="require('@/assets/carga2.png')" alt=""></button></div>
                       </template>
-                     </template>
-                    </template>
+                     
                 </div>  
             </div>
             <div class="card-body">
@@ -117,10 +116,10 @@
         <div class="col-6 col-sm-12 col-md-6 mb-5">
           
             <div class="card">
-              <div class="card-header">
+              <div class="card-header bg-dark">
                 <div class="row">
                   <div class="col-md-10"> <h3 class="estilo text-left">Botellas</h3></div>
-                  <div class="col-md-2 "><button class="text-center btn-outline-dark btn-sm btn " data-toggle="tooltip" data-placement="top" title="Agregar Botella(s)" v-on:click="openModalBottles()"><img :src="require('@/assets/bottle.png')" alt=""></button></div>
+                  <div class="col-md-2 "><button class="text-center btn-outline-light btn-sm btn " data-toggle="tooltip" data-placement="top" title="Agregar Botella(s)" v-on:click="openModalBottles()"><img :src="require('@/assets/bottle.png')" alt=""></button></div>
                 </div>                 
               </div>      
               <div class="card-body">
@@ -158,7 +157,7 @@
         <div class="row mb-5">
           <div class="col-6 col-sm-12 col-md-6">
             <div class="card">
-              <div class="card-header"><h3 class="estilo text-left">Pintas</h3></div>
+              <div class="card-header bg-dark"><h3 class="estilo text-left">Pintas</h3></div>
               <div class="card-body">
                    <table class="table s">
               <thead>
@@ -186,8 +185,8 @@
           
           </div>
           <div class="col-6 col-sm-12 col-md-6">
-            <div class="card">
-              <div class="card-header">
+            <div class="card"> 
+              <div class="card-header bg-dark">
                 <h3 class="estilo text-left">Por cantidad</h3>
               </div>
               <div class="card-body">
@@ -762,12 +761,11 @@ span{
   letter-spacing: 1px;
   font-family: 'Squada One', cursive;
 }
-td th{
-  font-family: 'Varela Round', sans-serif;
-}
+
 h3{
   font-size: 28px;
   font-family: 'Squada One', cursive;
+  color:white;
 }
 
 </style>

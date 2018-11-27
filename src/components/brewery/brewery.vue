@@ -17,10 +17,10 @@
              <input type="text" class="form-control mb-1" placeholder="Cerveceria" v-model="newBrewery.name" required>
           <input type="text" class="form-control mb-3" placeholder="Direccion" v-model="newBrewery.address" required>
             <template v-if="edit === false">
-              <dir class="col-12 mb-3"><button class="btn btn-success btn-block " >ADD BREWERY</button></dir>
+              <dir class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >AGREGAR</button></dir>
             </template>
             <template v-else>
-              <dir class="col-12 mb-3"><button class="btn btn-success btn-block " >UPDATE BREWERY</button></dir>
+              <dir class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >ACTUALIZAR</button></dir>
             </template>
            </div>
          </div>
@@ -34,10 +34,10 @@
             <input type="text" class="form-control mb-1" placeholder="Telefono" v-model="newcontact.tel" required>
             <input type="email" class="form-control mb-3" placeholder="Mail" v-model="newcontact.mail" required>
             <template v-if="editContact === false">
-              <dir class="col-12"><button class="btn btn-primary  " >ADD CONTACT</button></dir>
+              <dir class="col-12"><button class="btn btn-outline-primary  " >AÑADIR CONTACTO</button></dir>
             </template>
             <template v-else>
-              <dir class="col-12"><button class="btn btn-primary " >UPDATE CONTACT</button></dir>
+              <dir class="col-12"><button class="btn btn-outline-primary " >ACTUALIZAR CONTACTO</button></dir>
             </template>
           </form>
            </div>
@@ -45,8 +45,8 @@
         </form>
       </div>
       <div class="col-12 col-sm-6 table-responsive">
-         <div class="card bg-dark nuevacerveceria">
-           <div class="card-header">
+         <div class="card nuevacerveceria">
+           <div class="card-header bg-dark ">
              <h3>{{Contacto}}</h3>
            </div>
            <div class="card-body">
@@ -63,8 +63,8 @@
                 <td>{{cont.name}}</td>
                 <td>{{cont.tel}}</td>
                 <td>{{cont.mail}}</td>
-                <td><button class="btn btn-danger btn-sm" v-on:click="deleteContact(cont)"><i class="material-icons">delete</i></button></td>
-                <td><button class="btn btn-primary btn-sm" v-on:click="updateContact(cont)"><i class="material-icons">edit</i></button></td>
+                <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteContact(cont)"><i class="material-icons">delete</i></button></td>
+                <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateContact(cont)"><i class="material-icons">edit</i></button></td>
               </tr>
             </tbody>
           </table>
@@ -75,7 +75,7 @@
     <div class="row">
       <div class="col-12  col-md-6">
         <div class="card">
-          <div class="card-header">
+          <div class="card-header bg-dark">
             <h3>Cervecerias</h3>
           </div>
           <div class="card-body">
@@ -91,9 +91,9 @@
               <tr v-for="brewery in breweries">
                 <td>{{brewery.name}}</td>
                 <th>{{brewery.address}}</th>
-                <td><button class="btn btn-success btn-sm" v-on:click="getcontact(brewery._id)"><i v-on:click="getcontact(brewery._id)" class="material-icons">contact_phone</i></button></td>
-                <td><button class="btn btn-danger btn-sm" v-on:click="deleteBrewery(brewery._id)"><i class="material-icons">delete</i></button></td>
-                <td><button class="btn btn-primary btn-sm" v-on:click="updateBrewery(brewery._id)"><i class="material-icons">edit</i></button></td>
+                <td><button class="btn btn-outline-success btn-sm" v-on:click="getcontact(brewery._id)"><i v-on:click="getcontact(brewery._id)" class="material-icons">contact_phone</i></button></td>
+                <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteBrewery(brewery._id)"><i class="material-icons">delete</i></button></td>
+                <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateBrewery(brewery._id)"><i class="material-icons">edit</i></button></td>
               </tr>
             </tbody>
           </table>
@@ -102,7 +102,7 @@
       </div>
        <div class="col-12 col-md-6 table-responsive">
          <div class="card">
-           <div class="card-header">
+           <div class="card-header bg-dark">
               <h3>Contactos cerveceria</h3>
            </div>
            <div class="card-body">
@@ -399,10 +399,4 @@ input[type="email"], textarea {
 
 }
 
-.nuevacerveceria{
-  color:white;
-}
-.nuevacerveceria th{
-  color:white !important;
-}
 </style>
