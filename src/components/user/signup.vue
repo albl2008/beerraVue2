@@ -20,12 +20,27 @@
                                     class="form-control" 
                                     id="UserName" 
                                     aria-describedby="emailHelp" 
-                                    placeholder="Enter a username"
+                                    placeholder="Ingrese un nombre de usuario"
                                     required>
                                 <small 
                                 id="emailHelp" 
                                 class="form-text text-muted">El usuario debe ser mayor a tres caracteres. 
                                 Solo puede contener caracteres alfanumericos
+                                </small>
+                            </div>
+                                 <div class="form-group">
+                                <label for="email">Email</label>
+                                <input 
+                                    v-model="user.email"
+                                    type="text" 
+                                    class="form-control" 
+                                    id="email" 
+                                    aria-describedby="emailHelp" 
+                                    placeholder="Ingrese su email"
+                                    required>
+                                <small 
+                                id="emailHelp" 
+                                class="form-text text-muted">Ingrese un email valido
                                 </small>
                             </div>
                             <div class="form-row">
@@ -81,6 +96,7 @@ const axios = require('axios')
 import Joi from 'joi'
 import load from '../../assets/load.svg'
 const schema = Joi.object().keys({
+    email: Joi.string().email(),
     username: Joi.string().alphanum().min(3).max(30).required(),
     password: Joi.string().min(8).trim().required(),
     confirmPassword: Joi.string().min(8).trim().required(),
@@ -91,6 +107,7 @@ export default {
             signingUP: false,
             errorMessage:'',
             user: {
+                email:'',
                 username:'',
                 password:'',
                 confirmPassword:''
@@ -106,13 +123,14 @@ export default {
                 axios.post('http://localhost:3000/signup',
                 {
                     username: this.user.username,
-                    password: this.user.password
+                    password: this.user.password,
+                    email: this.user.email
                 }    
                 ).then(response => {
                     this.signingUP = false
                     if(response.status === 200){
-                        localStorage.token = response.data.token  
-                        this.$router.go('/dashboard')
+
+                       
                     }
                 }).catch(err =>{
                     this.signingUP = false
@@ -133,12 +151,15 @@ export default {
                 
                 return true
             }else{
-                console.log(result.error.message)
+               
                 if(result.error.message.includes('username')){
                     this.errorMessage = 'Usuario ingresado invalido 😛'
                 }
                 if(result.error.message.includes('password')){
                     this.errorMessage = 'Contraseña ingresada invalida 😓 '
+                }
+                if(result.error.message.includes('email')){
+                    this.errorMessage = 'Mail ingresado invalido 😛'
                 }
                 //this.errorMessage = 
             }

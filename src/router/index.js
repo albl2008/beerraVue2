@@ -11,6 +11,7 @@ import pipes from '../components/Pipes/pipes'
 import index from '../components/index/index'
 import signup from '../components/user/signup'
 import signin from '../components/user/signin'
+import verify from '../components/user/verify'
 import dashboard from '../components/user/dashboard'
 
 import pricize from '../components/pricize/pricize'
@@ -108,6 +109,13 @@ export default new Router({
       path: '/outflow',
       component: outflow,
       beforeEnter: isLogin
+
+
+    },
+    {
+      path: '/verify',
+      component: verify,
+      
 
 
     }
