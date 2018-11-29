@@ -80,10 +80,12 @@
                                     </small>
                                 </div>
                             </div>
-                            <div class="row">
-                                <button type="submit" class="btn btn-primary">Signup</button>
-                                <div v-if="signingUP">
-                                    <img height="30px" width="30px" src="../../assets/load.svg" class="ml-2">
+                            <div class="container">
+                                <div class="row">
+                                    <button type="submit" class="btn btn-primary">Signup</button>
+                                    <div v-if="signingUP">
+                                        <img height="30px" width="30px" src="../../assets/load.svg" class="ml-2">
+                                    </div>
                                 </div>
                             </div>
                         </form>
