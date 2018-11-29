@@ -1,9 +1,9 @@
 <template>
 <div>
       <div id="pricize">
-          <h1>PRECIOS Y TAMAÑOS</h1>
-          <img :src="require('@/assets/pricize.png')" alt="">
-          <img class="left" :src="require('@/assets/pricize.png')" alt="">
+          <center><h1>PRECIOS Y TAMAÑOS</h1></center>
+          <img :src="require('@/assets/sections/pricize.png')" alt="">
+          
       </div> 
     <div class="container">
       <div class="row">

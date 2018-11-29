@@ -1,9 +1,9 @@
 <template>
 <div>
      <div id="payment">
-          <h1>PAGO A PROVEEDORES</h1>
-          <img :src="require('@/assets/compras.png')" alt="">
-          <img class="left" :src="require('@/assets/compras.png')" alt="">
+          <center><h1>PAGO A PROVEEDORES</h1></center>
+          <img :src="require('@/assets/sections/compras.png')" alt="">
+         
       </div> 
     <div class="container">
      

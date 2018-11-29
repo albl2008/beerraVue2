@@ -1,9 +1,9 @@
 <template>
 <div>
      <div id="sales">
-          <h1>VENTAS</h1>
-          <img :src="require('@/assets/ventas.png')" alt="">
-          <img class="left" :src="require('@/assets/ventas.png')" alt="">
+          <center><h1>VENTAS</h1></center>
+          <center><img :src="require('@/assets/navbar/ventas.png')" alt="" class="position"></center>
+        
           
       </div>  
     <div class="container">

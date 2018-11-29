@@ -1,9 +1,9 @@
 <template>
 <div>
  <div id="botellas">
-          <h1>BOTELLAS</h1>
-          <img :src="require('@/assets/botellas.png')" alt="">
-          <img class="left" :src="require('@/assets/botellas.png')" alt="">
+          <center><h1>BOTELLAS</h1></center>
+          <center><img :src="require('@/assets/sections/botellas.png')" alt=""></center>
+         
  </div>   
     <div class="container">
       <div class="row">
@@ -239,18 +239,7 @@ export default {
 }
 </script>
 <style>
-#botellas img{
-  position: relative;
-  float: right;
-}
-#botellas img .left{
-  position: relative;
-  float: left;
-}
-#botellas h1 {
-  font-size:40px;
-  font-family: 'Black Ops One', cursive;
-}
+
 
 h3 {
   font-size:22px;

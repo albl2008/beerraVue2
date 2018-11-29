@@ -1,9 +1,8 @@
 <template>
 <div>
       <div id="barriles">
-          <h1>BARRILES</h1>
-          <img :src="require('@/assets/kegs.png')" alt="">
-          <img class="left" :src="require('@/assets/kegs.png')" alt="">
+          <center><h1>BARRILES</h1></center>
+          <center><img :src="require('@/assets/sections/kegs.png')" alt="" class="position"></center>
       </div>  
     <div class="container">
       
@@ -361,19 +360,6 @@ notifyError(title,text){
 }
 </script>
 <style>
-#barriles img{
-  position: relative;
-  float: right;
-}
-#barriles img .left{
-  position: relative;
-  float: left;
-}
-#barriles h1 {
-  font-size:40px;
-  font-family: 'Black Ops One', cursive;
-}
-
 h3 {
   font-size:22px;
   font-family: 'Varela Round', sans-serif;
