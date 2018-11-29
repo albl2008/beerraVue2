@@ -57,6 +57,7 @@
                     </div>
                 </div>
                 <router-link :to="{path:'/recover'}">¿Olvidaste tu contraseña?</router-link>
+                <router-link :to="{path:'/recoverUsername'}">¿Olvidaste tu nombre de usuario?</router-link>
             </div>
         </div>
     </div>

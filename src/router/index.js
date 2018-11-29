@@ -15,6 +15,7 @@ import verify from '../components/user/verify'
 import recover from '../components/user/recoverPassword'
 import dashboard from '../components/user/dashboard'
 import resetPassword from '../components/user/resetPassword'
+import resetUsername from '../components/user/recoverUsername'
 
 import pricize from '../components/pricize/pricize'
 import outflow from '../components/outflow/outflows'
@@ -131,6 +132,10 @@ export default new Router({
     {
       path: '/resetPassword/:token',
       component: resetPassword,
+    },
+    {
+      path: '/recoverUsername',
+      component: resetUsername,
     }
   ]
 })
