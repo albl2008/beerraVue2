@@ -107,7 +107,7 @@ created(){
   -moz-osx-font-smoothing: grayscale;
   margin-top: 10px;
   width: 100%;
-  margin-left: 150px;
+  margin-left: 104px;
   position:absolute;
 }
 a{
@@ -132,7 +132,7 @@ a{
 }
 
 #sidebar {
-    width: 250px;
+    width: 15%;
     position: fixed;
     top: 0;
     left: 0;
