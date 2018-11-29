@@ -5,6 +5,9 @@
                  <div v-if="errorMessage" class="alert alert-danger" role="alert">
                    {{ errorMessage }}
                 </div>
+                  <div v-if="resetPassword" class="alert alert-success" role="alert">
+                   {{ resetPassword }}
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <h1 class="text-center">Login</h1>
@@ -53,6 +56,7 @@
                         </form>
                     </div>
                 </div>
+                <router-link :to="{path:'/recover'}">¿Olvidaste tu contraseña?</router-link>
             </div>
         </div>
     </div>
@@ -75,7 +79,8 @@ export default {
                 user: {
                     username:'',
                     password:'',
-            }
+                },
+                resetPassword: this.$route.params.message
         }
     },
     watch:{

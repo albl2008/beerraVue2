@@ -6,6 +6,9 @@
                 <div v-if="errorMessage" class="alert alert-danger" role="alert">
                    {{ errorMessage }}
                 </div>
+                <div v-if="message" class="alert alert-success" role="alert">
+                   {{ message }}
+                </div>
                 <div class="card">
                     <div class="card-header text-center">
                         <h1 class="">Sign Up!</h1>
@@ -86,6 +89,7 @@
                         </form>
                     </div>
                 </div>
+               
             </div>      
         </div>
     </div>
@@ -111,7 +115,8 @@ export default {
                 username:'',
                 password:'',
                 confirmPassword:''
-            }
+            },
+            message:''
     }
        
     },
@@ -129,8 +134,7 @@ export default {
                 ).then(response => {
                     this.signingUP = false
                     if(response.status === 200){
-
-                       
+                            this.message = response.data.message
                     }
                 }).catch(err =>{
                     this.signingUP = false

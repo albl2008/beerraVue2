@@ -12,7 +12,9 @@ import index from '../components/index/index'
 import signup from '../components/user/signup'
 import signin from '../components/user/signin'
 import verify from '../components/user/verify'
+import recover from '../components/user/recoverPassword'
 import dashboard from '../components/user/dashboard'
+import resetPassword from '../components/user/resetPassword'
 
 import pricize from '../components/pricize/pricize'
 import outflow from '../components/outflow/outflows'
@@ -95,6 +97,12 @@ export default new Router({
     },
     {
       path: '/signin',
+     
+      component: signin,
+      beforeEnter: redirectToDashboard
+    },
+    {
+      path: '/signin/:message',
       name: signin,
       component: signin,
       beforeEnter: redirectToDashboard
@@ -113,11 +121,16 @@ export default new Router({
 
     },
     {
-      path: '/verify',
+      path: '/verify/',
       component: verify,
-      
-
-
+    },
+    {
+      path: '/recover',
+      component: recover,
+    },
+    {
+      path: '/resetPassword/:token',
+      component: resetPassword,
     }
   ]
 })
