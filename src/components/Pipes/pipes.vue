@@ -1,22 +1,12 @@
 <template>
   <div>
     <div id="canillas">
-      <h1>BARRILES CONECTADOS</h1>
-      <img :src="require('@/assets/pipes.png')" alt="">
-      <img class="left" :src="require('@/assets/pipes.png')" alt="">
+      <center><h1>BARRILES CONECTADOS</h1></center>
+      <img :src="require('@/assets/sections/pipes.png')" alt="">
+     
     </div>
     <div class="container">
-      <div class="row ">
-        <div class=" offset-md-3 col-md-6 mb-5 ">
-          <div class="form-inline venta">
-            <h3><span class="badge badge-pill badge-dark">Cliente:</span></h3>
-            <input type="text" class="form-control" v-model="client" id="cliente" requiered aria-label="Small"
-              placeholder="Nombre" aria-describedby="inputGroup-sizing-sm">
-            <h3><span class="badge badge-pill badge-dark">Fecha:</span></h3>
-            <input type="date" class="form-control" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-          </div>
-        </div>
-      </div>
+      
       <div class="row mb-5">
 
         <template v-for="keg in kegs">
@@ -32,7 +22,7 @@
 
                 </div>
                 <div class="card-body text-center">
-                  <radial-progress-bar :diameter="225" :startColor="'#ffc107'" :stopColor="'#e2ba1f'" :completed-steps="keg.quantitySaled"
+                  <radial-progress-bar :diameter="diametro" :startColor="'#ffc107'" :stopColor="'#e2ba1f'" :completed-steps="keg.quantitySaled"
                     :total-steps="keg.quantity" class="">
                     <p><span class="badge badge-warning">{{ keg.brewery.name }}</span></p>
                     <p><span class="badge badge-dark">{{ keg.quantity }}</span></p>
@@ -69,6 +59,17 @@
             </div>
           </template>
         </template>
+      </div>
+      <div class="row ">
+        <div class=" offset-md-3 col-md-6 mb-5 ">
+          <div class="form-inline venta">
+            <h3><span class="badge badge-pill badge-dark">Cliente:</span></h3>
+            <input type="text" class="form-control" v-model="client" id="cliente" requiered aria-label="Small"
+              placeholder="Nombre" aria-describedby="inputGroup-sizing-sm">
+            <h3><span class="badge badge-pill badge-dark">Fecha:</span></h3>
+            <input type="date" class="form-control" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          </div>
+        </div>
       </div>
 
       <div class="row mb-2">
@@ -122,7 +123,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center">Total: {{totalGrowlers}}</h3>
+              <h3 class="text-center precios">Total: {{totalGrowlers}}</h3>
               <table class="table s">
                 <thead>
                   <th>Tamaño</th>
@@ -139,7 +140,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center">Envases: {{totalContainers}}</h3>
+              <h3 class="text-center precios">Envases: {{totalContainers}}</h3>
 
             </div>
           </div>
@@ -180,7 +181,7 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="text-center">Total: {{totalBottles}}</h3>
+                  <h3 class="text-center precios">Total: {{totalBottles}}</h3>
 
                 </div>
               </div>
@@ -216,7 +217,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center">Total: {{totalPints}}</h3>
+              <h3 class="text-center precios">Total: {{totalPints}}</h3>
             </div>
 
           </div>
@@ -224,7 +225,7 @@
         </div>
         <div class="col-6 col-sm-12 col-md-6">
           <div class="card">
-            <div class="card-header tituloCardHeader bg-dark">
+            <div class="card-header bg-dark">
               <h3 class="estilo text-left">Por cantidad</h3>
             </div>
             <div class="card-body">
@@ -247,7 +248,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-left">Total: {{totalOthers}}</h3>
+              <h3 class="text-center precios">Total: {{totalOthers}}</h3>
             </div>
           </div>
         </div>
@@ -255,7 +256,7 @@
 
       <div class="row">
         <div class="col-md-12">
-          <h3 class="text-center">Total venta: {{totalSale}}</h3>
+          <h3 class="text-center precios">Total venta: {{totalSale}}</h3>
           <button class="btn btn-success" v-on:click="sendSale()">Procesar venta</button>
         </div>
 
@@ -378,7 +379,8 @@ export default {
       prices:[],
       sizes:[],
       hhour: 0,
-      newDisconect:{}
+      newDisconect:{},
+      diametro: 220
 
     
       
@@ -392,6 +394,7 @@ export default {
      this.getSizes();
      this.getContainers();
   },
+
   methods:{
      getKegs() {
       axios.get('http://localhost:3000/keg')
@@ -796,13 +799,18 @@ span{
   font-size: 18px !important;
   letter-spacing: 1px;
   font-family: 'Squada One', cursive;
+  background-image: linear-gradient(to left,#343a40,black);
 }
 
-.tituloCardHeader{
+.precios{
   font-size: 28px;
   font-family: 'Squada One', cursive;
-  color:white;
+  color:black;
 }
+input[type="text"], textarea {
 
+  background-color : #fff; 
+
+}
 
 </style>

@@ -1,9 +1,9 @@
 <template>
 <div> 
 <div id="brewery">
-          <h1>CERVECERIAS</h1>
-          <img :src="require('@/assets/brewery.png')" alt="">
-          <img class="left" :src="require('@/assets/brewery.png')" alt="">
+          <center><h1>CERVECERIAS</h1></center>
+          <center><img :src="require('@/assets/sections/brewery.png')" alt="" class="position"></center>
+          
       </div>  
   <div class="container">
     <div class="row mb-3">
@@ -359,19 +359,6 @@ th{
   font-size:12px;
 }
 
-
-#brewery img{
-  position: relative;
-  float: right;
-}
-#brewery img .left{
-  position: relative;
-  float: left;
-}
-#brewery h1 {
-  font-size:40px;
-  font-family: 'Black Ops One', cursive;
-}
 h3 {
   font-size:22px;
   font-family: 'Varela Round', sans-serif;
