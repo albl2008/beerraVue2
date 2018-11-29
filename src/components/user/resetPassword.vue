@@ -63,7 +63,14 @@
 </template>
 
 <script>
-const axios = require('axios') 
+import Joi from 'joi'
+import axios from 'axios'
+
+const schema = Joi.object().keys({
+    password: Joi.string().min(8).trim().required(),
+    confirmPassword: Joi.string().min(8).trim().required()
+    
+})
 export default {
     data(){
             return{
@@ -80,20 +87,47 @@ export default {
     },
     methods:{
         resetPassword(){
-            console.log(this.token)
-            axios.post('http://localhost:3000/newPassword',{
-                password: this.user.password,
-                token:this.token
-            }).then(response =>{
-                console.log(response)
-                this.message = response.data.message + " inicie sesion."
-                this.user ={}
-                this.$router.push({path:`/signin/${this.message}`})
+            if(this.validPassword()){
+                console.log(this.token)
+                axios.post('http://localhost:3000/newPassword',{
+                    password: this.user.password,
+                    token:this.token
+                }).then(response =>{
+                    console.log(response)
+                    this.message = response.data.message + " inicie sesion."
+                    this.user ={}
+                    this.$router.push({path:`/signin/${this.message}`})
 
-            }).catch(error =>{
-                console.log(error.response.data)
-                this.errorMessage = error.response.data
-            })
+                }).catch(error =>{
+                    console.log(error.response.data)
+                    this.errorMessage = error.response.data
+                })
+            }
+        },
+
+        validPassword(){
+            if(this.user.password != this.user.confirmPassword){
+                this.errorMessage = 'Las contraseñas deben coincidir'
+                return false
+            }
+            const result = Joi.validate(this.user,schema)
+            if(result.error === null){
+                
+                return true
+            }else{ 
+                if(result.error.message.includes('password')){
+                    this.errorMessage = 'Contraseña ingresada invalida 😓 '
+                }  
+            }
+           
+        }
+    },
+    watch:{
+        user:{
+            handler(){
+                this.errorMessage = ''
+            },
+            deep: true,
         }
     }
   

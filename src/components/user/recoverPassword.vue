@@ -18,7 +18,7 @@
                                 <label for="UserName">Mail</label>
                                 <input 
                                     v-model="email.email"
-                                    type="text" 
+                                    type="email" 
                                     class="form-control" 
                                     id="UserName" 
                                     aria-describedby="emailHelp" 
@@ -48,7 +48,11 @@
 </template>
 
 <script>
+import Joi from 'joi'
 import axios from 'axios'
+const schema =Joi.object().keys({
+    email: Joi.string().email().required()
+})
 export default {
    
     data(){
@@ -62,22 +66,33 @@ export default {
             URL:'http://localhost:3000/'
         }
     },
-    methods:{
+    methods:{  
         sendEmail(){
-            this.sending = true
-            axios.post(`${this.URL}resetPassword`,{
-                email: this.email.email
-            }).then(response => {
-                console.log(response)
-                this.message = response.data.message
-                this.sending = false
-            }).catch(error =>{
-                console.log(error.response.data)
-                this.errorMessage = error.response.data
-                this.sending = false
-            })
-        
+            if(this.validMail()){
+                this.sending = true
+                axios.post(`${this.URL}resetPassword`,{
+                    email: this.email.email
+                }).then(response => {
+                    console.log(response)
+                    this.message = response.data.message
+                    this.sending = false
+                }).catch(error =>{
+                    console.log(error.response.data)
+                    this.errorMessage = error.response.data
+                    this.sending = false
+                })
+            }
+        },
+        validMail(){
+            const result = Joi.validate(this.email,schema)
+            console.log(result)
+            if(result.error === null){
+                return true
+            }else{
+                this.errorMessage = 'El mail ingresado no tiene formato de mail'
+            }
         }
+        
     },
     watch:{
         email:{
@@ -88,6 +103,7 @@ export default {
         },
        
     },
+
 }
 </script>
 
