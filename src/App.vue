@@ -7,7 +7,7 @@
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           
          <li class="nav-item">
-        <center><a class="nav-link" href="http://localhost:8080/#/">Beerra<span class="sr-only">(current)</span></a></center>
+        <center><a id="animate1" class="nav-link" href="http://localhost:8080/#/"><span class="badge badge-warning badge-pill beerra">Beerra</span><span class="sr-only">(current)</span></a></center>
           
         </li>
         <template v-if="isLogged ">
@@ -47,10 +47,10 @@
          </template>
          <template v-else>       
           <li class="nav-item">
-            <a class="nav-link " href="http://localhost:8080/#/signin">Login</a>
+            <a class="nav-link " href="http://localhost:8080/#/signin">Login <i class="material-icons">account_circle</i></a>
           </li>
-           <li class="nav-item">
-            <a class="nav-link " href="http://localhost:8080/#/signup">Sing up</a>
+           <li class="nav-item ">
+            <a class="nav-link " href="http://localhost:8080/#/signup">Registrarse <i class="material-icons">person_add</i></a>
           </li>
          </template>
       </ul>
@@ -68,6 +68,32 @@
 </template>
 
 <script>
+
+$(function() {
+    $.fn.extend({
+        animateCss: function (animationName) {
+            var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+            this.addClass('animated ' + animationName).one(animationEnd, function() {
+                $(this).removeClass('animated ' + animationName);
+            });
+            return this;
+        }
+    });
+
+    $('#animate1').on('mouseover',function(){
+        $('#animate1').animateCss('tada');
+    });
+    $('#animate2').on('mouseover',function(){
+        $('#animate2').animateCss('flash');
+    });
+});
+
+
+
+
+
+
+
 export default {
 created(){
    this.isLogged = localStorage.token
@@ -76,7 +102,7 @@ created(){
     return{
        active: null,
        isLogged: localStorage.token,
-       bounce: null
+      
     }
   },
   methods:{
@@ -113,6 +139,10 @@ created(){
 a{
   font-size: 15px;
   font-family: 'Varela Round', sans-serif;
+}
+.beerra{
+  font-family: 'Black Ops One', cursive !important;
+  font-size: 20px !important;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -176,6 +206,11 @@ h1{
   font-family: 'Black Ops One', cursive;
 }
 li img {
+  position: relative;
+  margin-right: 30px;
+  float:right;
+}
+li i{
   position: relative;
   margin-right: 30px;
   float:right;
