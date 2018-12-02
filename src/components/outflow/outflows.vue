@@ -10,7 +10,7 @@
           <div class="input-group-pretend mb-3">
             <input type="text" class="form-control mb-1" v-model="newOutflow.name" placeholder="Nombre" required>
              <select v-model="newOutflow.type" class="custom-select mb-1" required >
-              <option v-for="t in types" v-bind:value="t.text">
+              <option v-for="t in types" v-bind:value="t.value">
                 {{t.text}}
               </option>
              </select>
@@ -51,11 +51,13 @@
               <tbody>
                 <tr v-for="outflow in outflows" >
                   <td>{{outflow.name}}</td>
-                  <td>{{outflow.type}}</td>
+                  <td>{{ types.find(function(element) {
+                   return element.value ===  outflow.type;
+                    }).text}}</td>
                   <td>{{outflow.unity}}</td>
                   <td>{{outflow.quantity}}</td>
                   <td>{{outflow.price}}</td>
-                  <td>{{outflow.date}}</td>
+                  <td>{{format(outflow.date)}}</td>
                   <td><button class="btn btn-danger btn-sm" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons">delete</i></button></td>
                   <td><button class="btn btn-primary btn-sm" v-on:click="updateOutflow(outflow._id)"><i class="material-icons">edit</i></button></td>
                 </tr>
@@ -71,7 +73,8 @@
 </template>
 <script>
 import Vue from 'vue'
-const axios = require('axios')
+import axios  from 'axios'
+import moment from 'moment'
 
 class newOutflow {
   constructor(id, name, type, quantity, unity, price, date) {
@@ -128,7 +131,10 @@ export default {
   },
   methods: {
     getOutflows() {
-      axios.get('http://localhost:3000/outflow')
+      axios({
+        url:'http://localhost:3000/outflow',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+        })
         .then(response => {
           console.log(response)
           this.outflows = response.data.Outflows
@@ -142,9 +148,12 @@ export default {
 
       if (this.edit === false) {
 
-        axios.post('http://localhost:3000/outflow',
-            this.newOutflow
-          ).then(res => {
+        axios({
+          method:'POST',  
+          url:'http://localhost:3000/outflow',
+          data: this.newOutflow,
+          headers: {authorization: `Bearer ${localStorage.token}`}
+          }).then(res => {
 
             if (res.status === 200) {
               Vue.notify({
@@ -158,6 +167,7 @@ export default {
             this.newOutflow = {}
           })
           .catch(e => {
+            console.log(e.response.data)
             Vue.notify({
               group: 'foo',
               type: 'error',
@@ -166,9 +176,12 @@ export default {
             })
           })
       } else {
-        axios.put(`http://localhost:3000/outflow/${this.newOutflow.id}`,
-          this.newOutflow
-        ).then(res => {
+        axios({
+          method:'PUT',
+          url:`http://localhost:3000/outflow/${this.newOutflow.id}`,
+          data:this.newOutflow,
+          headers: {authorization: `Bearer ${localStorage.token}`}
+        }).then(res => {
           if (res.status === 200) {
             Vue.notify({
               group: 'foo',
@@ -192,7 +205,11 @@ export default {
       }
     },
     deleteOutflow(idOutflow) {
-      axios.delete(`http://localhost:3000/outflow/${idOutflow}`)
+      axios({
+        method:'DELETE',
+        url:`http://localhost:3000/outflow/${idOutflow}`,
+        headers: {authorization: `Bearer ${localStorage.token}`}
+        })
         .then(res => {
           if (res.status === 200) {
             Vue.notify({
@@ -214,19 +231,27 @@ export default {
         })
     },
     updateOutflow(idOutflow) {
-      axios.get(`http://localhost:3000/outflow/${idOutflow}`)
+      axios({
+        url:`http://localhost:3000/outflow/${idOutflow}`,
+        headers: {authorization: `Bearer ${localStorage.token}`}
+        })
         .then(res => {
           
-          this.newOutflow = new newOutflow(res.data.outflow._id, res.data.outflow.name,
-            res.data.outflow.quantity, res.data.outflow.type, res.data.outflow.unity,
-            res.data.outflow.price
+          this.newOutflow = new newOutflow(res.data.outflow._id, res.data.outflow.name, res.data.outflow.type
+            ,res.data.outflow.quantity, res.data.outflow.unity,
+            res.data.outflow.price,moment(res.data.outflow.price).format('MM/DD/YYYY')
           )
          
           this.edit = true;
         })
-    }
-  },
-
+    },
+    format(date){
+      if(date)
+          return moment(date).format('DD/MM/YYYY');
+      else
+          return ""
+  }
+},
 }
 </script>
 <style>

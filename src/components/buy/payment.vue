@@ -179,7 +179,10 @@ export default {
   },
   methods: {
     getKegs() {
-      axios.get('http://localhost:3000/keg')
+      axios({
+        url:'http://localhost:3000/keg',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+        })
         .then(response => {
           console.log(response)
           this.kegs = response.data.Kegs
@@ -190,7 +193,10 @@ export default {
         })
     },
     getPayments() {
-      axios.get('http://localhost:3000/payment')
+      axios({
+        url:'http://localhost:3000/payment',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+        })
         .then(response => {
           console.log(response)
           this.Payments = response.data.pays
@@ -203,7 +209,10 @@ export default {
     getPayment(idPayment) {
         
        
-        axios.get(`http://localhost:3000/payment/${idPayment}`)
+        axios({
+          url:`http://localhost:3000/payment/${idPayment}`,
+          headers: {authorization: `Bearer ${localStorage.token}`}
+          })
         .then(res => {
           
           this.payment = new newPay(res.data.payment._id,brewery.name, res.data.payment.date,
@@ -221,22 +230,33 @@ export default {
 
     },
     getBreweries() {
-      axios.get('http://localhost:3000/brewery')
+      axios({
+        url:'http://localhost:3000/brewery',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+        })
         .then(response => {
           this.breweries = response.data.Breweries
           console.log(response);
         })
     },
     addPay(){
-      axios.put(`http://localhost:3000/keg/pay/${this.newPay.keg}`)
+      axios({
+        method:'put',
+        url:`http://localhost:3000/keg/pay/${this.newPay.keg}`,
+        headers: {authorization: `Bearer ${localStorage.token}`},
+        
+        })
           .then(res => {
           console.log(res)
           this.getKegs();
           
         })
-     axios.post('http://localhost:3000/payment',
-      this.newPay
-        ).then(res => {
+     axios({
+       method:'post',
+       url:'http://localhost:3000/payment',
+       data:this.newPay,
+       headers: {authorization: `Bearer ${localStorage.token}`},
+        }).then(res => {
         console.log(res)
         if(res.status == 200){
            Vue.notify({

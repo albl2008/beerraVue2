@@ -397,7 +397,10 @@ export default {
 
   methods:{
      getKegs() {
-      axios.get('http://localhost:3000/keg')
+      axios({
+        url:'http://localhost:3000/keg',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+        })
         .then(response => {
           this.kegs = response.data.Kegs
         }).catch(e => {
@@ -406,7 +409,10 @@ export default {
         })
     },
     getBottles(){
-      axios.get('http://localhost:3000/bottle')
+      axios({
+        url:'http://localhost:3000/bottle',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+      })
       .then(response =>{
         console.log(response)
         this.BottlesStock = response.data.bottles
@@ -416,7 +422,10 @@ export default {
       })
     },
      getPrices() {
-      axios.get('http://localhost:3000/pricize/price')
+      axios({
+        url:'http://localhost:3000/pricize/price',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+      })
         .then(response => {
           console.log(response)
           this.prices = response.data.Pricizes
@@ -426,7 +435,10 @@ export default {
         })
     },
      getSizes() {
-      axios.get('http://localhost:3000/pricize/size')
+      axios({
+        url:'http://localhost:3000/pricize/size',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+      })
         .then(response => {
           console.log(response)
           this.sizes = response.data.Sizes
@@ -436,7 +448,10 @@ export default {
         })
     },
     getContainers(){
-      axios.get('http://localhost:3000/container')
+      axios({url:
+      'http://localhost:3000/container',
+      headers: {authorization: `Bearer ${localStorage.token}`}
+      })
       .then(response => {
           console.log(response)
           this.containersStock = response.data.Containers
@@ -671,7 +686,10 @@ export default {
     this.totalSale = (this.totalPints + this.totalGrowlers + this.totalOthers + this.totalBottles + this.totalContainers)
   },
   sendSale(){
-    axios.post(`http://localhost:3000/sale`,{
+    axios({
+    method:'POST',
+    url:`http://localhost:3000/sale`,
+    data:{
       date: this.date,
       client: this.client,
       totalSale: this.totalSale,
@@ -680,6 +698,8 @@ export default {
       others: this.others,
       containers: this.containers,
       pints: this.pints,
+    },
+    headers: {authorization: `Bearer ${localStorage.token}`} 
     }).then(res =>{
       console.log(res)
       this.reset()
@@ -734,7 +754,11 @@ notifyError(title,text){
 },
 started(idKeg){
     this.newDisconect={}
-     axios.put(`http://localhost:3000/keg/started/${idKeg}` )
+     axios.put({
+       method:'PUT',
+       url:`http://localhost:3000/keg/started/${idKeg}` ,
+       headers: {authorization: `Bearer ${localStorage.token}`}
+     })
      .then(res => {
        console.log(res)
        this.getKegs();
@@ -744,7 +768,11 @@ started(idKeg){
   },
  empty(idKeg){
     
-     axios.put(`http://localhost:3000/keg/empty/${idKeg}` )
+     axios({
+      method: 'PUT',
+      url:`http://localhost:3000/keg/empty/${idKeg}`,
+      headers: {authorization: `Bearer ${localStorage.token}`}
+     })
      .then(res => {
        console.log(res)
        this.getKegs();
