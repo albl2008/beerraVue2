@@ -96,7 +96,10 @@ export default {
     },
    methods:{
      getContainers(){
-    axios.get('http://localhost:3000/container')
+    axios({
+      url:'http://localhost:3000/container',
+      headers: {authorization: `Bearer ${localStorage.token}`}
+      })
       .then(response =>{
         console.log(response)
         this.containers = response.data.Containers
@@ -107,7 +110,10 @@ export default {
       })
     },
     getSizes() {
-      axios.get('http://localhost:3000/pricize/size')
+      axios({
+        url:'http://localhost:3000/pricize/size',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+        })
         .then(response => {
           console.log(response)
           this.sizes = response.data.Sizes
@@ -117,7 +123,10 @@ export default {
         })
     },
      getContainerSizes() {
-      axios.get('http://localhost:3000/pricize/size/growler')
+      axios({
+        url:'http://localhost:3000/pricize/size/growler',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+        })
         .then(response => {
           console.log(response)
           this.growlersize = response.data.growlersize
@@ -132,9 +141,13 @@ export default {
 
       if(this.edit === false ){
         console.log(this.newContainer)
-      axios.post('http://localhost:3000/container',
-        this.newContainer,
-      ).then(res =>{
+      axios({
+        method:'POST',
+        url:'http://localhost:3000/container',
+        data:this.newContainer,
+        headers: {authorization: `Bearer ${localStorage.token}`}
+
+      }).then(res =>{
            this.getContainers(),
             this.newContainer = {}
         if(res.status === 200 ){
@@ -156,9 +169,12 @@ export default {
       })
       })
       }else{
-        axios.put(`http://localhost:3000/container/${this.newContainer.id}`,
-          this.newContainer
-        ).then(res => {
+        axios({
+          method:'PUT',
+          url:`http://localhost:3000/container/${this.newContainer.id}`,
+          data:this.newContainer,
+          headers: {authorization: `Bearer ${localStorage.token}`}
+        }).then(res => {
            if(res.status === 200 ){
             Vue.notify({
               group: 'foo',
@@ -182,7 +198,10 @@ export default {
       }
     },
     updateContainer(idContainer){
-      axios.get(`http://localhost:3000/container/${idContainer}`)
+      axios({
+        url:`http://localhost:3000/container/${idContainer}`,
+        headers: {authorization: `Bearer ${localStorage.token}`}
+        })
       .then(res => {
         console.log(res)
         this.newContainer = new newContainer  (res.data.container._id,res.data.container.size,

@@ -176,7 +176,10 @@ export default {
     
     methods:{
         getSales(){
-            axios.get('http://localhost:3000/sale')
+            axios({
+                url:'http://localhost:3000/sale',
+                headers: {authorization: `Bearer ${localStorage.token}`}
+                })
             .then(response =>{
                 console.log(response)
                 this.sales = response.data.sales
@@ -185,7 +188,10 @@ export default {
             })
         },
         getGrowler(idSale){
-             axios.get(`http://localhost:3000/sale/growlers/${idSale}`)
+             axios({
+                 url:`http://localhost:3000/sale/growlers/${idSale}`,
+                 headers: {authorization: `Bearer ${localStorage.token}`}
+                 })
             .then(response =>{
                 console.log(response)
                 this.growlers = response.data.growlers
@@ -198,7 +204,10 @@ export default {
             })
         },
          getPints(idSale){
-             axios.get(`http://localhost:3000/sale/pints/${idSale}`)
+             axios({
+                 url:`http://localhost:3000/sale/pints/${idSale}`,
+                 headers: {authorization: `Bearer ${localStorage.token}`}
+                 })
             .then(response =>{
                 console.log(response)
                 this.pints = response.data.pints
@@ -211,7 +220,10 @@ export default {
             })
         },
          getOther(idSale){
-             axios.get(`http://localhost:3000/sale/other/${idSale}`)
+             axios({
+                 url:`http://localhost:3000/sale/other/${idSale}`,
+                 headers: {authorization: `Bearer ${localStorage.token}`}
+             })
             .then(response =>{
                 console.log(response)
                 this.others = response.data.others
@@ -224,7 +236,11 @@ export default {
             })
         },
          getBottles(idSale){
-             axios.get(`http://localhost:3000/sale/bottles/${idSale}`)
+             axios({
+                 method:'POST',
+                 url:`http://localhost:3000/sale/bottles/${idSale}`,
+                 headers: {authorization: `Bearer ${localStorage.token}`}
+                 })
             .then(response =>{
                 console.log(response)
                 this.bottles = response.data.bottles

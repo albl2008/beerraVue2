@@ -63,7 +63,7 @@ export default {
                 email:''
             },
             sending : false,
-            URL:'http://localhost:3000/'
+            url:'http://localhost:3000/'
         }
     },
     methods:{  
