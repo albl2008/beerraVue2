@@ -194,10 +194,7 @@ export default {
   },
   methods: {
     getPricizes() {
-      axios({
-        url:'http://localhost:3000/pricize/price',
-        headers: {authorization: `Bearer ${localStorage.token}`}        
-        })
+      axios.get('http://localhost:3000/pricize/price')
         .then(response => {
           console.log(response)
           console.log(Object.keys(this.pricizes).length)
@@ -213,10 +210,7 @@ export default {
         })
     },
      getSizes() {
-      axios({
-        url:'http://localhost:3000/pricize/size',
-        headers: {authorization: `Bearer ${localStorage.token}`}
-        })
+      axios.get('http://localhost:3000/pricize/size')
         .then(response => {
           console.log(response)
           this.sizes = response.data.Sizes
@@ -231,10 +225,7 @@ export default {
         })
     },
     getPricize(idPricize) {
-        axios({
-          url:`http://localhost:3000/pricize/price/${idPricize}`,
-          headers: {authorization: `Bearer ${localStorage.token}`}
-          })
+        axios.get(`http://localhost:3000/pricize/price/${idPricize}`)
         .then(res => {
           
           this.pricize = new newPricize(res.data.pricize._id,res.data.pricize.growlersize, res.data.pricize.growlersize2,
@@ -246,10 +237,7 @@ export default {
         })
     },
       getSize(idSize) {
-        axios({
-          url:`http://localhost:3000/pricize/size/${idSize}`,
-          headers: {authorization: `Bearer ${localStorage.token}`}
-          })
+        axios.get(`http://localhost:3000/pricize/size/${idSize}`)
         .then(res => {
           
           this.pricize = new newPricize(res.data.pricize._id,res.data.pricize.growlersize, res.data.pricize.growlersize2,
@@ -262,12 +250,9 @@ export default {
      
       if(this.editprice === false){
 
-      axios({
-        method:'POST',
-        url:'http://localhost:3000/pricize/price',
-        data:this.newPricize,
-        headers: {authorization: `Bearer ${localStorage.token}`}
-      }).then(res =>{
+      axios.post('http://localhost:3000/pricize/price',
+        this.newPricize,
+      ).then(res =>{
 
         if(res.status === 200 ){
          Vue.notify({
@@ -289,12 +274,9 @@ export default {
       })
       })
       }else{
-        axios({
-          method:'PUT',
-          url:`http://localhost:3000/pricize/price/${this.newPricize.id}`,
-          data:this.newPricize,
-          headers: {authorization: `Bearer ${localStorage.token}`}
-        }).then(res => {
+        axios.put(`http://localhost:3000/pricize/price/${this.newPricize.id}`,
+          this.newPricize
+        ).then(res => {
            if(res.status === 200 ){
             Vue.notify({
               group: 'foo',
@@ -324,12 +306,9 @@ export default {
      
       if(this.editsize === false){
 
-      axios({
-        method:'POST',
-        url:'http://localhost:3000/pricize/size',
-        data:this.newSize,
-        headers: {authorization: `Bearer ${localStorage.token}`}
-      }).then(res =>{
+      axios.post('http://localhost:3000/pricize/size',
+        this.newSize,
+      ).then(res =>{
 
         if(res.status === 200 ){
          Vue.notify({
@@ -351,12 +330,9 @@ export default {
       })
       })
       }else{
-        axios({
-          method:'PUT',
-          url:`http://localhost:3000/pricize/size/${this.newSize.id}`,
-          headers: {authorization: `Bearer ${localStorage.token}`},
-          data:this.newSize
-        }).then(res => {
+        axios.put(`http://localhost:3000/pricize/size/${this.newSize.id}`,
+          this.newSize
+        ).then(res => {
            if(res.status === 200 ){
             Vue.notify({
               group: 'foo',
@@ -383,11 +359,7 @@ export default {
          
   },
    updatePricize(idPricize) {
-      axios({
-        
-        url:`http://localhost:3000/pricize/price/${idPricize}`,
-        headers: {authorization: `Bearer ${localStorage.token}`}
-        })
+      axios.get(`http://localhost:3000/pricize/price/${idPricize}`)
         .then(res => {
           
           this.newPricize = new newPricize(res.data.pricize._id,
@@ -399,10 +371,7 @@ export default {
         })
     },
     updateSize(idSize) {
-      axios({
-        url:`http://localhost:3000/pricize/size/${idSize}`,
-        headers: {authorization: `Bearer ${localStorage.token}`}
-        })
+      axios.get(`http://localhost:3000/pricize/size/${idSize}`)
         .then(res => {
   
           this.newSize = new newSize(res.data.size._id,res.data.size.growlersize, res.data.size.growlersize2,

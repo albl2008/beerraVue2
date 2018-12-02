@@ -63,7 +63,7 @@ export default {
                 email:''
             },
             sending : false,
-            url:'http://localhost:3000/'
+            URL:'http://localhost:3000/'
         }
     },
     methods:{
@@ -72,11 +72,8 @@ export default {
                 this.message =''
                 this.errorMessage = ''
                 this.sending = true
-                axios({
-                    method:'POST',
-                    url:`${this.url}recoverUsername`,
-                    data:{email: this.email.email}
-
+                axios.post(`${this.URL}recoverUsername`,{
+                    email: this.email.email
                 }).then(response => {
                     console.log(response)
                     this.message = response.data.message

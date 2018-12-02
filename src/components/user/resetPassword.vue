@@ -80,7 +80,7 @@ export default {
                     password:'',
                     confirmPassword:'',
                 },
-                url:'http://localhost:3000/',
+                URL:'http://localhost:3000/',
                 token: this.$route.params.token,
                 message:''
         }

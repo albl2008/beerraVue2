@@ -23,6 +23,7 @@ export default {
                  this.user = response.data.user
             }else{
                 localStorage.removeItem('token')
+            
                 this.$router.push('/signin')
             }
           

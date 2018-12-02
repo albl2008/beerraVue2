@@ -212,12 +212,9 @@ export default {
 
       if (this.edit === false) {
 
-        axios({
-            method:'POST',
-            url:'http://localhost:3000/keg',
-            data: this.newKeg,
-            headers: {authorization: `Bearer ${localStorage.token}`}
-          }).then(res => {
+        axios.post('http://localhost:3000/keg',
+            this.newKeg,
+          ).then(res => {
 
             if (res.status === 200) {
               this.notifySucces("Barril","Barril cargado correctamente")            
@@ -229,12 +226,9 @@ export default {
             this.notifyError("Barril","Error al guardar el barril")
           })
       } else {
-        axios({
-          method: 'PUT',
-          url:`http://localhost:3000/keg/${this.newKeg.id}`,
-          data:this.newKeg,
-          headers: {authorization: `Bearer ${localStorage.token}`}
-        }).then(res => {
+        axios.put(`http://localhost:3000/keg/${this.newKeg.id}`,
+          this.newKeg
+        ).then(res => {
           if (res.status === 200) {
               this.notifySucces("Barril",res.data.mensaje)
             this.getKegs()
@@ -249,10 +243,7 @@ export default {
       }
     },
     getBreweries() {
-      axios({
-        url:'http://localhost:3000/brewery',
-        headers: {authorization: `Bearer ${localStorage.token}`}
-        })
+      axios.get('http://localhost:3000/brewery')
         .then(response => {
           this.breweries = response.data.Breweries
           console.log(response);
@@ -260,12 +251,7 @@ export default {
     },
     deleteKeg(idKeg) {
       if(this.edit === false){
-      axios({
-        method:'DELETE',
-        url:`http://localhost:3000/keg/${idKeg}`,
-        headers: {authorization: `Bearer ${localStorage.token}`}
-
-        })
+      axios.delete(`http://localhost:3000/keg/${idKeg}`)
         .then(res => {
           if (res.status === 200) {
             this.notifySucces("Barril",res.data.mensaje)
@@ -279,10 +265,7 @@ export default {
       }
     },
     updateKeg(idKeg) {
-      axios({
-        url:`http://localhost:3000/keg/${idKeg}`,
-        headers: {authorization: `Bearer ${localStorage.token}`}
-        })
+      axios.get(`http://localhost:3000/keg/${idKeg}`)
         .then(res => {
           if(res.data.sale){
               this.newKeg = new newKeg(res.data.keg._id, res.data.keg.beer,
@@ -305,11 +288,7 @@ export default {
         })
     },
     connect(idKeg){
-     axios({
-       method:'PUT',
-       url:`http://localhost:3000/keg/connect/${idKeg}`,
-        headers: {authorization: `Bearer ${localStorage.token}`}
-     })
+     axios.put(`http://localhost:3000/keg/connect/${idKeg}` )
      .then(res => {
        console.log(res)
        this.getKegs();
@@ -320,11 +299,7 @@ export default {
      })
   },
   disconnect(idKeg){
-       axios({
-         method:'PUT',
-         url:`http://localhost:3000/keg/disconect/${idKeg}`,
-         headers: {authorization: `Bearer ${localStorage.token}`}
-       })
+       axios.put(`http://localhost:3000/keg/disconect/${idKeg}` )
      .then(res => {
        console.log(res)
        this.getKegs();

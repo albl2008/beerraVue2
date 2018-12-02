@@ -176,10 +176,7 @@ export default {
     
     methods:{
         getSales(){
-            axios({
-                url:'http://localhost:3000/sale',
-                headers: {authorization: `Bearer ${localStorage.token}`}
-                })
+            axios.get('http://localhost:3000/sale')
             .then(response =>{
                 console.log(response)
                 this.sales = response.data.sales
@@ -188,10 +185,7 @@ export default {
             })
         },
         getGrowler(idSale){
-             axios({
-                 url:`http://localhost:3000/sale/growlers/${idSale}`,
-                 headers: {authorization: `Bearer ${localStorage.token}`}
-                 })
+             axios.get(`http://localhost:3000/sale/growlers/${idSale}`)
             .then(response =>{
                 console.log(response)
                 this.growlers = response.data.growlers
@@ -204,10 +198,7 @@ export default {
             })
         },
          getPints(idSale){
-             axios({
-                 url:`http://localhost:3000/sale/pints/${idSale}`,
-                 headers: {authorization: `Bearer ${localStorage.token}`}
-                 })
+             axios.get(`http://localhost:3000/sale/pints/${idSale}`)
             .then(response =>{
                 console.log(response)
                 this.pints = response.data.pints
@@ -220,10 +211,7 @@ export default {
             })
         },
          getOther(idSale){
-             axios({
-                 url:`http://localhost:3000/sale/other/${idSale}`,
-                 headers: {authorization: `Bearer ${localStorage.token}`}
-             })
+             axios.get(`http://localhost:3000/sale/other/${idSale}`)
             .then(response =>{
                 console.log(response)
                 this.others = response.data.others
@@ -236,11 +224,7 @@ export default {
             })
         },
          getBottles(idSale){
-             axios({
-                 method:'POST',
-                 url:`http://localhost:3000/sale/bottles/${idSale}`,
-                 headers: {authorization: `Bearer ${localStorage.token}`}
-                 })
+             axios.get(`http://localhost:3000/sale/bottles/${idSale}`)
             .then(response =>{
                 console.log(response)
                 this.bottles = response.data.bottles

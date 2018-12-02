@@ -130,10 +130,7 @@ export default {
     },
    methods:{
      getBottles(){
-    axios({
-      url:'http://localhost:3000/bottle',
-      headers: {authorization: `Bearer ${localStorage.token}`}
-      })
+    axios.get('http://localhost:3000/bottle')
       .then(response =>{
         console.log(response)
         this.bottles = response.data.bottles
@@ -147,12 +144,9 @@ export default {
 
       if(this.edit === false ){
 
-      axios({
-        method:'POST',
-        url:'http://localhost:3000/bottle',
-        data: this.newBottle,
-        headers: {authorization: `Bearer ${localStorage.token}`}
-      }).then(res =>{
+      axios.post('http://localhost:3000/bottle',
+        this.newBottle,
+      ).then(res =>{
 
         if(res.status === 200 ){
          Vue.notify({
@@ -166,7 +160,6 @@ export default {
       this.newBottle = {}
      })
       .catch(e => {
-        console.log(e.response.data)
         Vue.notify({
         group: 'foo',
         type:'error',
@@ -175,12 +168,9 @@ export default {
       })
       })
       }else{
-        axios({
-          method: 'put',
-          url:`http://localhost:3000/bottle/${this.newBottle.id}`,
-          data:this.newBottle,
-          headers: {authorization: `Bearer ${localStorage.token}`}
-        }).then(res => {
+        axios.put(`http://localhost:3000/bottle/${this.newBottle.id}`,
+          this.newBottle
+        ).then(res => {
            if(res.status === 200 ){
             Vue.notify({
               group: 'foo',
@@ -204,21 +194,14 @@ export default {
       }
     },
     getBreweries(){
-      axios({
-        url:'http://localhost:3000/brewery',
-        headers: {authorization: `Bearer ${localStorage.token}`}
-      })
+      axios.get('http://localhost:3000/brewery')
       .then(response =>{
         this.breweries = response.data.Breweries
         console.log(response);
       })
     },
     deleteBottle(idBottle){
-      axios({
-        method: 'delete',
-        url:`http://localhost:3000/bottle/${idBottle}`,
-        headers: {authorization: `Bearer ${localStorage.token}`}
-      })
+      axios.delete(`http://localhost:3000/bottle/${idBottle}`)
       .then(res =>
       {
          if(res.status === 200 ){
@@ -241,10 +224,7 @@ export default {
       })
     },
     updateBottle(idBottle){
-      axios({
-        url:`http://localhost:3000/bottle/${idBottle}`,
-        headers: {authorization: `Bearer ${localStorage.token}`}
-      })
+      axios.get(`http://localhost:3000/bottle/${idBottle}`)
       .then(res => {
         console.log(res)
         this.newBottle = new newBottle  (res.data.bottle._id,res.data.bottle.beer,

@@ -213,12 +213,9 @@ methods:{
             text: 'Ingrese al menos un contacto'
       })
     }else{
-      axios({
-      method:'POST',
-      url:'http://localhost:3000/brewery',
-      data:this.newBrewery,
-      headers: {authorization: `Bearer ${localStorage.token}`}
-      }).then(res => {
+      axios.post('http://localhost:3000/brewery',
+      this.newBrewery
+      ).then(res => {
         console.log(res)
         if(res.status == 200){
           this.getBreweries()
@@ -250,12 +247,9 @@ methods:{
             text: 'Ingrese al menos un contacto'
       })
         }else{
-        axios({
-          method:'PUT',
-          url:`http://localhost:3000/brewery/${this.newBrewery.id}`,
-          data:this.newBrewery,
-          headers: {authorization: `Bearer ${localStorage.token}`}
-        }).then(res => {
+        axios.put(`http://localhost:3000/brewery/${this.newBrewery.id}`,
+          this.newBrewery
+        ).then(res => {
           console.log(res)
           this.getBreweries()
           this.newBrewery={}
@@ -284,10 +278,7 @@ methods:{
       }
   },
   getBreweries(){
-    axios({
-      url:'http://localhost:3000/brewery',
-      headers: {authorization: `Bearer ${localStorage.token}`}
-    })
+    axios.get('http://localhost:3000/brewery')
     .then(res=>{
       console.log(res);
       this.breweries = res.data.Breweries;
@@ -297,24 +288,17 @@ methods:{
     })
   },
   getcontact(idBrewery){
-    axios({
-      url:`http://localhost:3000/brewery/${idBrewery}`,
-      headers: {authorization: `Bearer ${localStorage.token}`}
-      })
+    axios.get(`http://localhost:3000/brewery/${idBrewery}`)
     .then(res =>{
       console.log(res.data.brewery.contact)
       this.contactBrewery = res.data.brewery.contact
     })
   },
   deleteBrewery(idBrewery){
-    axios({
-      method:'delete',
-      url:`http://localhost:3000/brewery/${idBrewery}`,
-      headers: {authorization: `Bearer ${localStorage.token}`}
-    })
+    axios.delete(`http://localhost:3000/brewery/${idBrewery}`)
     .then(res => {
       console.log(res)
-   
+      this.getBreweries();
       if(res.status == 200){
          Vue.notify({
             group: 'foo',
@@ -322,7 +306,6 @@ methods:{
             title: 'Cerveceria',
             text: res.data.mensaje
       })
-         this.getBreweries();
       }else if(res.status == 202){
          Vue.notify({
             group: 'foo',
@@ -342,10 +325,7 @@ methods:{
     })
   },
   updateBrewery(idBrewery){
-      axios({
-        url:`http://localhost:3000/brewery/${idBrewery}`,
-        headers: {authorization: `Bearer ${localStorage.token}`}
-    })
+      axios.get(`http://localhost:3000/brewery/${idBrewery}`)
     .then(res =>{
       console.log('Soy la brewery'+res.data.brewery)
       this.newBrewery = new newBrewery(res.data.brewery._id,res.data.brewery.name,res.data.brewery.contact,res.data.brewery.address)
