@@ -20,6 +20,7 @@
                 <h3>AGREGAR BARRIL</h3>
               </div>
             </template>
+
             <template v-else>
               <div class="card-header">
                 <h3>ACTUALIZAR BARRIL</h3>
@@ -28,65 +29,35 @@
 
             <div class="card-body">
 
-                     <form v-on:submit.prevent="addKeg" >
+            <form v-on:submit.prevent="addKeg" >
 
-          <div class="input-group-pretend mb-3">
-              <template v-if="edit===false">
-              <span class="badge badge-success">N°{{Object.keys(kegs).length+1}}</span><br><br>
-              </template>
-              <template v-else>
-               <span class="badge badge-success">N°{{Object.keys(kegs).length}}</span> 
-              </template>
-          </div>
+              <div class="input-group-pretend mb-3">
+                <template v-if="edit===false">
+                <span class="badge badge-success">N°{{Object.keys(kegs).length+1}}</span><br><br>
+                </template>
+                <template v-else>
+                <span class="badge badge-success">N°{{Object.keys(kegs).length}}</span> 
+                </template>
+              </div>
             <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Estilo" required>
         
             <template v-if="sale === false">
-                 <select v-model="newKeg.quantity" class="custom-select mb-1" required >
-                 <option class="courier" value="" disabled selected>Tamaño</option>
-              <option v-for="q in quantities" v-bind:value="q.text">
-                {{q.text}}
-              </option>
+              <select v-model="newKeg.quantity" class="custom-select mb-1" required >
+                  <option class="courier" value="" disabled selected>Tamaño</option>
+                  <option v-for="q in quantities" v-bind:value="q.text">
+                    {{q.text}}
+                  </option>
+              </select>
+            </template>
 
-            </select>
-               </template>
               <div v-for="s in status" class="form-check form-check-inline courier">
-              <input required type="radio"  name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"  v-model="newKeg.sta"  class="form-check-input mb-1" >
-              <label for="one">{{s.text}}</label>
+                <input required type="radio"  name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"  v-model="newKeg.sta"  class="form-check-input mb-1" >
+                <label for="one">{{s.text}}</label>
               </div>
 
-                <div class="input-group-pretend mb-3">
-                  <template v-if="edit===false">
-                    <span class="badge badge-success">N°{{Object.keys(kegs).length+1}}</span><br><br>
-                  </template>
-                  <template v-else>
-                    <span class="badge badge-success">N°{{Object.keys(kegs).length}}</span>
-                  </template>
-                  <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Estilo" required>
-                </div>
+              
                
-                  <template v-if="sale === false">
-                    <select v-model="newKeg.quantity" class="custom-select mb-1" required>
-
-                      <option v-for="q in quantities" v-bind:value="q.text">
-                        {{q.text}}
-                      </option>
-
-                    </select>
-                  </template>
-                  <template v-if="newKeg.sta !== 4">
-                    <div v-for="s in status" class="form-check form-check-inline courier">
-                      <input required type="radio" name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"
-                        v-model="newKeg.sta" class="form-check-input mb-1">
-                      <label for="one">{{s.text}}</label>
-                    </div>
-                  </template>
-                  <template v-else>
-                    <div v-for="s in status" class="form-check form-check-inline courier">
-                      <input type="radio" name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"
-                        v-model="newKeg.sta" class="form-check-input mb-1">
-                      <label for="one">{{s.text}}</label>
-                    </div>
-                  </template>
+              
 
 
                   <template v-if="newKeg.sta === 2">
