@@ -1,140 +1,168 @@
 <template>
-<div>
-      <div id="barriles">
-          <center><h1>BARRILES</h1></center>
-          <center><img :src="require('@/assets/sections/kegs.png')" alt="" class="position"></center>
-      </div>  
+  <div>
+    <div id="barriles">
+      <center>
+        <h1>BARRILES</h1>
+      </center>
+      <center><img :src="require('@/assets/sections/kegs.png')" alt="" class="position"></center>
+    </div>
     <div class="container">
-      
+
       <div class="row">
         <div class="col-12 col-sm-12  col-md-3">
+          <div v-if="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
           <div class="card bg-dark">
-           
-              <template v-if="edit === false">
-                   <div class="card-header"><h3>AGREGAR BARRIL</h3></div>
-              </template>
-                <template v-else>
-                  <div class="card-header"><h3>ACTUALIZAR BARRIL</h3></div>
-              </template>
+
+            <template v-if="edit === false">
+              <div class="card-header">
+                <h3>AGREGAR BARRIL</h3>
+              </div>
+            </template>
+            <template v-else>
+              <div class="card-header">
+                <h3>ACTUALIZAR BARRIL</h3>
+              </div>
+            </template>
 
             <div class="card-body">
-                      <form v-on:submit.prevent="addKeg" >
+              <form v-on:submit.prevent="addKeg">
 
-          <div class="input-group-pretend mb-3">
-              <template v-if="edit===false">
-              <span class="badge badge-success">N°{{Object.keys(kegs).length+1}}</span><br><br>
-              </template>
-              <template v-else>
-               <span class="badge badge-success">N°{{Object.keys(kegs).length}}</span> 
-              </template>
-            <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Estilo" required>
-           
-            <template v-if="sale === false">
-                 <select v-model="newKeg.quantity" class="custom-select mb-1" required >
-                 
-              <option v-for="q in quantities" v-bind:value="q.text">
-                {{q.text}}
-              </option>
+                <div class="input-group-pretend mb-3">
+                  <template v-if="edit===false">
+                    <span class="badge badge-success">N°{{Object.keys(kegs).length+1}}</span><br><br>
+                  </template>
+                  <template v-else>
+                    <span class="badge badge-success">N°{{Object.keys(kegs).length}}</span>
+                  </template>
+                  <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Estilo" required>
 
-            </select>
-               
-              <div v-for="s in status" class="form-check form-check-inline courier">
-              <input required type="radio"  name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"  v-model="newKeg.sta"  class="form-check-input mb-1" >
-              <label for="one">{{s.text}}</label>
+                  <template v-if="sale === false">
+                    <select v-model="newKeg.quantity" class="custom-select mb-1" required>
 
-            </div>
-            <template v-if="newKeg.sta === 2">
-            <input type="text" class="form-control mb-1" v-model="newKeg.quantitySaled" placeholder="Cantidad disponible" required>
-            </template>
-            </template> 
+                      <option v-for="q in quantities" v-bind:value="q.text">
+                        {{q.text}}
+                      </option>
 
-            
-            <input type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="IBU" required>
-            <input type="text" class="form-control mb-1" v-model="newKeg.alcohol" placeholder="Alcohol" required>
-           
-          <select v-model="newKeg.brewery" class="custom-select mb-1" required >
-              <option value="" selected disabled>Please select</option>
-              <option v-for="brewery in breweries" v-bind:value="brewery._id">
-                {{brewery.name}}
-              </option>
+                    </select>
+                  </template>
+                  <template v-if="newKeg.sta !== 4">
+                    <div v-for="s in status" class="form-check form-check-inline courier">
+                      <input required type="radio" name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"
+                        v-model="newKeg.sta" class="form-check-input mb-1">
+                      <label for="one">{{s.text}}</label>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <div v-for="s in status" class="form-check form-check-inline courier">
+                      <input type="radio" name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"
+                        v-model="newKeg.sta" class="form-check-input mb-1">
+                      <label for="one">{{s.text}}</label>
+                    </div>
+                  </template>
 
-            </select>
-            <swatches
-               v-model="color"
-               :colors="colors"
-               row-length="5"
-               shapes="circles"
-               show-border
-               popover-to="left">
-            </swatches>
-        </div>
-        <div class="card-footer">
-             <template v-if="edit === false">
-                  <button class="btn btn-outline-success btn-block">Agregar</button>
-              </template>
-                <template v-else>
-                  <button class="btn btn-outline-primary btn-block" >Actualizar</button>
-              </template>
-</div>
-        </form>
+
+                  <template v-if="newKeg.sta === 2">
+                    <input type="text" class="form-control mb-1" v-model="newKeg.quantitySaled" placeholder="Cantidad disponible"
+                      required>
+                  </template>
+
+
+
+                  <input type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="IBU" required>
+                  <input type="text" class="form-control mb-1" v-model="newKeg.alcohol" placeholder="Alcohol" required>
+
+                  <select v-model="newKeg.brewery" class="custom-select mb-1" required>
+                    <option value="" selected disabled>Please select</option>
+                    <option v-for="brewery in breweries" v-bind:value="brewery._id">
+                      {{brewery.name}}
+                    </option>
+
+                  </select>
+                  <swatches class="text-center" v-model="color" :colors="colors" row-length="5" shapes="circles"
+                    show-border popover-to="right">
+                  </swatches>
+                </div>
+                <div class="card-footer">
+                  <template v-if="edit === false">
+                    <button class="btn btn-outline-success btn-block">Agregar</button>
+                  </template>
+                  <template v-else>
+                    <button class="btn btn-outline-primary btn-block">Actualizar</button>
+                  </template>
+                </div>
+              </form>
             </div>
           </div>
-      </div>
+        </div>
 
-          <div class="col-12 col-sm-12 col-md-9">
-            <div class="card">
-              <div class="card-header bg-dark">
-                   <h3>LISTADO DE BARRILES</h3>
-              </div>
-              <div class="card-body">
-                  <table class="table s">
-              <thead>
-              <th>Cerveza</th>
-              <th>Cantidad Disponible</th>
-              <th>Estado</th>
-              <th>IBU</th>
-              <th>alcohol</th>
-              <th>brewery</th>
-              <th>Eliminar</th>
-              <th>Editar</th>
-              <th>Conectar</th>
-              </thead>
-              <tbody>
-                <tr v-for="keg in kegs" >
-                  <td>{{keg.beer}}</td>
-                  <td>{{keg.quantitySaled+"/"+keg.quantity}}</td>
-                  <td>{{selectStatus(keg.sta)}}</td>
-                  <td>{{keg.ibu}}</td>
-                  <td>{{keg.alcohol}}</td>
-                  <td>{{keg.brewery.name}}</td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteKeg(keg._id)"><i class="material-icons">delete</i></button></td>
-                  <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateKeg(keg._id)"><i class="material-icons">edit</i></button></td>
-                  <template v-if="keg.sta === 1 || keg.sta === 2">
-                    <td><button class="btn btn-outline-success btn-sm" v-on:click="connect(keg._id)"><i class="material-icons">power</i></button></td>
-                  </template>
-                  <template v-else-if="keg.sta === 4">
-                    <td><button class="btn btn-outline-danger btn-sm" v-on:click="disconnect(keg._id)"><i class="material-icons">power_off</i></button></td>
-                  </template>
-                   <template v-else>
-                    <td><button class="btn btn-outline-primary btn-sm disabled" ><i class="material-icons">power</i></button></td>
-                  </template>
-                  
-                </tr>
-              </tbody>
-            </table>
-              </div>
-            </div>           
-      </div>
+        <div class="col-12 col-sm-12 col-md-9">
+          <div class="card">
+            <div class="card-header bg-dark">
+              <h3>LISTADO DE BARRILES</h3>
+            </div>
+            <div class="card-body">
+              <table class="table s">
+                <thead>
+                  <th>Cerveza</th>
+                  <th>Cantidad Disponible</th>
+                  <th>Estado</th>
+                  <th>IBU</th>
+                  <th>alcohol</th>
+                  <th>brewery</th>
+                  <th>Eliminar</th>
+                  <th>Editar</th>
+                  <th>Conectar</th>
+                </thead>
+                <tbody>
+                  <tr v-for="keg in kegs">
+                    <td>{{keg.beer}}</td>
+                    <td>{{keg.quantitySaled+"/"+keg.quantity}}</td>
+                    <td>{{selectStatus(keg.sta)}}</td>
+                    <td>{{keg.ibu}}</td>
+                    <td>{{keg.alcohol}}</td>
+                    <td>{{keg.brewery.name}}</td>
+                    <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteKeg(keg._id)"><i class="material-icons">delete</i></button></td>
+                    <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateKeg(keg._id)"><i class="material-icons">edit</i></button></td>
+                    <template v-if="keg.sta === 1 || keg.sta === 2">
+                      <td><button class="btn btn-outline-success btn-sm" v-on:click="connect(keg._id)"><i class="material-icons">power</i></button></td>
+                    </template>
+                    <template v-else-if="keg.sta === 4">
+                      <td><button class="btn btn-outline-danger btn-sm" v-on:click="disconnect(keg._id)"><i class="material-icons">power_off</i></button></td>
+                    </template>
+                    <template v-else>
+                      <td><button class="btn btn-outline-primary btn-sm disabled"><i class="material-icons">power</i></button></td>
+                    </template>
 
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
-    </div>
-</div>
+  </div>
 </template>
 <script>
+import Joi from 'joi'
 import Vue from 'vue'
 import Swatches from 'vue-swatches'
 import "vue-swatches/dist/vue-swatches.min.css"
-const axios = require('axios')
+import axios from 'axios'
+
+const schema = Joi.object().keys({
+    id: Joi.string(),
+    beer : Joi.string().min(2).max(30).required(),
+    quantity : Joi.number().positive().min(20).max(50).required(),
+    sta : Joi.number().positive().required(),
+    ibu : Joi.number().positive().required(),
+    alcohol : Joi.number().positive().required(),
+    brewery : Joi.required(),
+    quantitySaled : Joi.number().positive().max(50)
+})
 
 class newKeg {
   constructor(id, beer, quantity, status, ibu, alcohol, brewery,quantitySaled) {
@@ -153,6 +181,7 @@ export default {
   components: { Swatches },
   data() {
     return {
+      errorMessage:'',
       newKeg: {},
       kegs: [],
       breweries: [],
@@ -189,6 +218,14 @@ export default {
       ],
     }
   },
+  watch:{
+    newKeg:{
+      handler(){
+        this.errorMessage = ''
+      },
+      deep : true
+    }
+  },
   created() {
     this.getKegs();
     this.getBreweries();
@@ -209,7 +246,7 @@ export default {
         })
     },
     addKeg() {
-
+      if(this.validKeg()){
       if (this.edit === false) {
 
         axios({
@@ -246,6 +283,7 @@ export default {
           console.log(e.data)
           this.notifyError("Barril","Error al modificar barril ")
         })
+      }
       }
     },
     getBreweries() {
@@ -380,6 +418,42 @@ notifyError(title,text){
                 text: text
               })
 },
+ validKeg(){
+            const result = Joi.validate(this.newKeg,schema)
+            if(this.newKeg.quantity < this.newKeg.quantitySaled){
+                  this.errorMessage = 'La cantidad disponible no puede ser mayor la cantidad del barril'
+            }
+            else if(result.error === null){
+                
+                return true
+            }else{
+                console.log(result.error.message)
+                
+                if(result.error.message.includes('beer')){
+                    this.errorMessage = 'Hay algo mal con el estilo ingresado.'
+                }
+                if(result.error.message.includes('quantity')){
+                    this.errorMessage = 'Es necesario seleccionar una cantidad.'
+                }
+                if(result.error.message.includes('status')){
+                    this.errorMessage = 'Es necesario seleccionar un estado.'
+                }
+                 if(result.error.message.includes('ibu')){
+                    this.errorMessage = 'Hay algo mal con el ibu ingresado.'
+                }
+                 if(result.error.message.includes('alcohol')){
+                    this.errorMessage = 'Hay algo mal con el alcohol ingresado.'
+                }
+                if(result.error.message.includes('brewery')){
+                    this.errorMessage = 'Es necesarios eleccionar una cerveceria.'
+                }
+                if(result.error.message.includes('quantitySaled')){
+                    this.errorMessage = 'Hay algo mal con la cantidad disponible.'
+                }
+                //this.errorMessage = 
+            }
+           
+        }
   },
 
 }
