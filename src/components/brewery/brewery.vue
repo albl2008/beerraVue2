@@ -8,6 +8,9 @@
   <div class="container">
     <div class="row mb-3">
       <div class="col-12 col-sm-6">
+        <div v-if="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
          <form v-on:submit.prevent="addBrewery">
          <div class="card mb-2 bg-dark">
            <div class="card-header">
@@ -130,7 +133,23 @@
 </template>
 <script>
 import Vue from 'vue'
+import Joi from 'joi'
+const schema = Joi.object().keys({
+  id: Joi.string(),
+  name: Joi.string().min(3).max(20).required(),
+  contact: Joi.array().items(Joi.object({
+    name: Joi.string().required(),
+    tel: Joi.number().required(),
+    mail: Joi.string().email().required(),
+  })).min(1).required(),
+  address : Joi.string().min(5).max(30).required()
+})
 
+const contactSchema = Joi.object().keys({
+    name: Joi.string().min(3).max(20).required(),
+    tel: Joi.number().min(5).max(20).required(),
+    mail: Joi.string().email().required(),
+})
 class newBrewery{
   constructor(id,name,contacts,address){
     this.id = id
@@ -144,6 +163,7 @@ const axios = require('axios')
 export default {
 data(){
   return{
+    errorMessage:'',
       newBrewery:{
          contact:[],
       },
@@ -162,11 +182,26 @@ data(){
 
 
 },
+watch:{
+  newBrewery:{
+    handler(){
+      this.errorMessage = ''
+    },
+    deep:true
+  },
+  newcontact:{
+    handler(){
+      this.errorMessage = ''
+    },
+    deep:true
+  }
+},
 created(){
   this.getBreweries();
 },
 methods:{
   addcontact(){
+    if(this.validContact()){
     if(this.editContact === false){
       this.contact.push(this.newcontact)
       this.newBrewery.contact = this.contact
@@ -187,6 +222,7 @@ methods:{
         text: 'Contacto editado correctamente'
       })
     }
+    }
   },
   deleteContact(contact){
     this.contact.splice(contact,1)
@@ -203,6 +239,7 @@ methods:{
 
   },
   addBrewery(){
+    if(this.validBrewery()){
     if(this.edit === false){
 
        if(this.contact.length === 0){
@@ -213,6 +250,7 @@ methods:{
             text: 'Ingrese al menos un contacto'
       })
     }else{
+      console.log("holaa")
       axios({
       method:'POST',
       url:'http://localhost:3000/brewery',
@@ -282,6 +320,7 @@ methods:{
         })
       }
       }
+    }
   },
   getBreweries(){
     axios({
@@ -354,6 +393,38 @@ methods:{
       this.Contacto = 'Editar contactos'
       this.edit = true
     })
+  },
+  validBrewery(){
+    this.id = id
+    this.name = name
+    this.contact = contacts
+    this.address = address
+    const result = Joi.validate(this.newBrewery,schema)
+    if(result.error === null){
+      return true
+    }else{
+      console.log(result.error)
+      if(result.error.message.includes('name'))
+        this.errorMessage = 'El nombre ingresado es incorrecto'
+      if(result.error.message.includes('contact'))
+        this.errorMessage = 'Ingrese al menos un contacto'
+      if(result.error.message.includes('address'))
+        this.errorMessage = 'La direccion ingresada es incorrecta'
+     
+    }
+  },
+    validContact(){
+    const result = Joi.validate(this.newcontact,contactSchema)
+    if(result.error === null){
+      return true
+    }else{
+      if(result.error.message.includes('name'))
+        this.errorMessage = 'El nombre ingresado es incorrecto'
+      if(result.error.message.includes('tel'))
+        this.errorMessage = 'El telefono ingresado es incorrecto'
+      if(result.error.message.includes('email'))
+        this.errorMessage = 'El mail ingresado es incorrecto'
+    }
   }
 },
 

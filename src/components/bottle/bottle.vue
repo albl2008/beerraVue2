@@ -8,6 +8,9 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-sm-12  col-md-3">
+          <div v-if="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
           <div class="card bg-dark">
             <div class="card-header">
               <template v-if="edit === false">
@@ -89,7 +92,19 @@
 </template>
 <script>
 import Vue from 'vue'
-const axios = require('axios')
+import axios from'axios'
+import Joi from 'joi'
+
+const schema = Joi.object().keys({
+  id: Joi.string(),
+  beer: Joi.string().min(2).max(20).required(),
+  stock: Joi.number().required(),
+  size: Joi.number().positive().required(),
+  price: Joi.number().positive().required(),
+  ibu: Joi.number().positive().required(),
+  alcohol: Joi.number().positive().required(),
+  brewery: Joi.string().required(),
+})
 
 class newBottle{
       constructor(id,beer,stock,size,ibu,alcohol,brewery,price){
@@ -108,6 +123,7 @@ class newBottle{
 export default {
   data(){
     return{
+      errorMessage:'',
       newBottle:{},
       bottles:[],
       breweries:[],
@@ -122,6 +138,14 @@ export default {
 
 
 
+    }
+  },
+  watch:{
+    newBottle:{
+      handler(){
+          this.errorMessage = ''
+      },
+      deep: true
     }
   },
   created(){
@@ -144,7 +168,7 @@ export default {
       })
     },
     addBottle(){
-
+      if(this.validBottle())
       if(this.edit === false ){
 
       axios({
@@ -253,7 +277,41 @@ export default {
         )
           this.edit = true;
       })
-    }
+    },
+     validBottle(){
+      
+            const result = Joi.validate(this.newBottle,schema)
+             if(result.error === null){
+                
+                return true
+            }else{
+                console.log(result.error.message)
+                
+                if(result.error.message.includes('beer')){
+                    this.errorMessage = 'El estilo ingresado es incorrecto.'
+                }
+                if(result.error.message.includes('stock')){
+                    this.errorMessage = 'El stock ingresado es incorrecto.'
+                }
+                if(result.error.message.includes('size')){
+                    this.errorMessage = 'El tamaño ingresado es incorrecto.'
+                }
+                 if(result.error.message.includes('ibu')){
+                    this.errorMessage = 'El ibu ingresado es incorrecto.'
+                }
+                 if(result.error.message.includes('alcohol')){
+                    this.errorMessage = 'El alcohol ingresado es incorrecto.'
+                }
+                if(result.error.message.includes('brewery')){
+                    this.errorMessage = 'Es necesarios eleccionar una cerveceria.'
+                }
+                if(result.error.message.includes('price')){
+                    this.errorMessage = 'El precio ingresa es incorrecto.'
+                }
+                //this.errorMessage = 
+            }
+           
+        }
    },
 
 }
