@@ -2,7 +2,7 @@
 <div>
       <div id="pricize">
           <center><h1>PRECIOS Y TAMAÑOS</h1></center>
-          <img :src="require('@/assets/sections/pricize.png')" alt="">
+          <center><img :src="require('@/assets/sections/pricize.png')" alt=""></center>
           
       </div> 
     <div class="container">
@@ -416,40 +416,5 @@ export default {
 }
 </script>
 <style>
-#pricize img{
-  position: relative;
-  float: right;
-}
-#pricize img .left{
-  position: relative;
-  float: left;
-}
-#pricize h1 {
-  font-size:40px;
-  font-family: 'Black Ops One', cursive;
-}
-h3{
-  font-size: 28px;
-  font-family: 'Squada One', cursive;
-  color:white;
-}
-p{
-  font-family: 'Squada One', cursive;
-  color: white;
-}
-.seleccione{
-    font-size:20px;
-}
-th{
-   font-family:'Courier New', Courier;
-}
-td{
-  font-family:'Courier New', Courier;
-}
 
-input[type="text"], textarea {
-  
-  background-color : #beb9b9; 
-
-}
 </style>

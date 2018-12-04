@@ -2,7 +2,7 @@
   <div>
     <div id="canillas">
       <center><h1>BARRILES CONECTADOS</h1></center>
-      <img :src="require('@/assets/sections/pipes.png')" alt="">
+      <center><img :src="require('@/assets/beerra/pipes.png')" alt=""></center>
      
     </div>
     <div class="container">
@@ -24,7 +24,7 @@
                 <div class="card-body text-center">
                   <radial-progress-bar :diameter="diametro" :startColor="'#ffc107'" :stopColor="'#e2ba1f'" :completed-steps="keg.quantitySaled"
                     :total-steps="keg.quantity" class="">
-                    <p><span class="badge badge-warning">{{ keg.brewery.name }}</span></p>
+                    <p><span class="badge badge-warning tamano">{{ keg.brewery.name }}</span></p>
                     <p><span class="badge badge-dark">{{ keg.quantity }}</span></p>
                     <template v-if="keg.quantitySaled<=15">
                       <p><span class="badge badge-danger">{{ keg.quantitySaled }}</span></p>
@@ -36,19 +36,19 @@
                 </div>
                 <div class="mb-1 text-center">
                  
-                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm"
+                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-light btn-sm add"
                         v-on:click="createGrowler(keg,sizes[0].growlersize,prices[0].loadprice)" data-toggle="tooltip"
                         data-placement="top" title="Carga Grande"><img :src="require('@/assets/growlerlleno.png')" alt="carga"></button>
-                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm"
+                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-light btn-sm add"
                         v-on:click="createGrowler(keg,sizes[0].growlersize2,prices[0].loadprice2)" data-toggle="tooltip"
                         data-placement="top" title="Carga Chica"><img :src="require('@/assets/growler1l.png')" alt=""></button>
-                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm"
+                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-light btn-sm add"
                         v-on:click="createPint(keg,sizes[0].pintsize,prices[0].pintprice)" data-toggle="tooltip" data-placement="top"
                         title="Pinta"><img :src="require('@/assets/pinta.png')" alt=""></button>
-                      <button class="btn btn-outline-dark btn-sm" v-on:click="happyhour(keg,sizes[0].pintsize,prices[0].hhourprice)"
+                      <button class="btn btn-light btn-sm add" v-on:click="happyhour(keg,sizes[0].pintsize,prices[0].hhourprice)"
                         data-toggle="tooltip" data-placement="top" title="Happy Hour"><img :src="require('@/assets/hhour.png')"
                           alt=""></button>
-                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-outline-dark btn-sm"
+                      <button :class="{ disabled: isDisabled }" :disabled="isDisabled" class="btn btn-light btn-sm add"
                         v-on:click="createOther(keg)" data-toggle="tooltip" data-placement="top" title="Por cantidad"><img
                           :src="require('@/assets/other.png')" alt=""></button>
                 </div>
@@ -60,17 +60,7 @@
           </template>
         </template>
       </div>
-      <div class="row ">
-        <div class=" offset-md-3 col-md-6 mb-5 ">
-          <div class="form-inline venta">
-            <h3><span class="badge badge-pill badge-dark">Cliente:</span></h3>
-            <input type="text" class="form-control" v-model="client" id="cliente" requiered aria-label="Small"
-              placeholder="Nombre" aria-describedby="inputGroup-sizing-sm">
-            <h3><span class="badge badge-pill badge-dark">Fecha:</span></h3>
-            <input type="date" class="form-control" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-          </div>
-        </div>
-      </div>
+      
 
       <div class="row mb-2">
         <div class="col-6 col-sm-12 col-md-6">
@@ -85,17 +75,19 @@
 
                 
                   <template v-for="container in containersStock">
-                   <template v-if="container.size === sizes[0].growlersize" >          
-                        <button class="  btn-outline-light btn-sm btn" data-toggle="tooltip"
-                          data-placement="top" title="Envase Vacio" v-on:click="createContainer(container,1,sizes[0].growlersize,prices[0].growlerprice)"><img
+                   <template v-if="container.size === sizes[0].growlersize" >  
+                            
+                        <button class="btn-light btn-sm btn add" data-toggle="tooltip"
+                          data-placement="top" title="Envase Vacio Pequeño" v-on:click="createContainer(container,1,sizes[0].growlersize,prices[0].growlerprice)"><img
                             :src="require('@/assets/carga2.png')" alt=""></button>
                     </template>
                      
                     <template  v-else >
 
-                      <button class=" btn-outline-light btn-sm btn mr-1 " data-toggle="tooltip"
-                        data-placement="top" title="Envase Vacio" v-on:click="createContainer(container,1,sizes[0].growlersize2,prices[0].growlerprice2)"><img
+                      <button class="btn-light btn-sm btn md-2 add" data-toggle="tooltip"
+                        data-placement="top" title="Envase Vacio Grande" v-on:click="createContainer(container,1,sizes[0].growlersize2,prices[0].growlerprice2)"><img
                           :src="require('@/assets/carga.png')" alt=""></button>
+                          
                     </template>
                    
                   </template>
@@ -123,7 +115,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center precios">Total: {{totalGrowlers}}</h3>
+              <h3 class="text-center badge-pill badge-dark precios">Total: {{totalGrowlers}}</h3>
               <table class="table s">
                 <thead>
                   <th>Tamaño</th>
@@ -140,7 +132,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center precios">Envases: {{totalContainers}}</h3>
+              <h3 class="text-center badge-pill badge-dark precios">Envases: {{totalContainers}}</h3>
 
             </div>
           </div>
@@ -154,7 +146,7 @@
                 <div class="col-md-10">
                   <h3 class="estilo text-left">Botellas</h3>
                 </div>
-                <div class="col-md-2 "><button class="text-center btn-outline-light btn-sm btn " data-toggle="tooltip"
+                <div class="col-md-2 "><button class="text-center btn-light btn-sm btn add " data-toggle="tooltip"
                     data-placement="top" title="Agregar Botella(s)" v-on:click="openModalBottles()"><img :src="require('@/assets/bottle.png')"
                       alt=""></button></div>
               </div>
@@ -181,7 +173,7 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="text-center precios">Total: {{totalBottles}}</h3>
+                  <h3 class="text-center badge-pill badge-dark precios">Total: {{totalBottles}}</h3>
 
                 </div>
               </div>
@@ -217,7 +209,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center precios">Total: {{totalPints}}</h3>
+              <h3 class="text-center badge-pill badge-dark precios">Total: {{totalPints}}</h3>
             </div>
 
           </div>
@@ -248,16 +240,34 @@
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center precios">Total: {{totalOthers}}</h3>
+              <h3 class="text-center badge-pill badge-dark precios">Total: {{totalOthers}}</h3>
             </div>
           </div>
         </div>
       </div>
-
+       <div class="container">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 card bg-warning centrar">
+          
+         <div class="text-center form-group col-md-6">
+            <div class="">
+            <h3><span class="cliente">Cliente:</span></h3>
+            <input type="text" class="form-control" v-model="client" id="cliente" requiered aria-label="Small"
+              placeholder="Nombre" aria-describedby="inputGroup-sizing-sm"><br>
+            <h3><span class="cliente" >Fecha:</span></h3>
+            <input type="date" class="form-control" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          </div>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+      </div>
       <div class="row">
         <div class="col-md-12">
-          <h3 class="text-center precios">Total venta: {{totalSale}}</h3>
-          <button class="btn btn-success" v-on:click="sendSale()">Procesar venta</button>
+          <h3 class="text-center badge-pill badge-dark precios">Total venta: {{totalSale}} </h3>
+           <center><button class="btn btn-warning" v-on:click="sendSale()">Procesar venta</button></center>
+         
         </div>
 
       </div>
@@ -803,42 +813,30 @@ started(idKeg){
 
 <style>
 
-#canillas img{
-  position: relative;
-  float: right;
-}
-#canillas img .left{
-  position: relative;
-  float: left;
-}
-#canillas h1 {
-  font-size:40px;
-  font-family: 'Black Ops One', cursive;
-}
-span{
-  font-size:12px !important;
-  font-family: 'Black Ops One', cursive;
-}
 .estilo{
   font-size:30px;
   font-family: 'Squada One', cursive;
-}
-.venta h3 span{
-  font-size: 18px !important;
-  letter-spacing: 1px;
-  font-family: 'Squada One', cursive;
-  background-image: linear-gradient(to left,#343a40,black);
 }
 
 .precios{
   font-size: 28px;
   font-family: 'Squada One', cursive;
-  color:black;
-}
-input[type="text"], textarea {
-
-  background-color : #fff; 
-
+  color:#ffc107;
 }
 
+.add{
+  border-color:#ffc107;
+}
+.add:hover{
+  border-color:#ffc107;
+  background-color: #ffc107;
+}
+.cliente{
+  font-size: 25px !important;
+ 
+}
+
+.container .centrar{
+  align-items: center;
+}
 </style>

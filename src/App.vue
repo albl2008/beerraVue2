@@ -7,7 +7,7 @@
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           
          <li class="nav-item">
-        <center><a class="nav-link" href="http://localhost:8080/#/">Beerra<span class="sr-only">(current)</span></a></center>
+        <center><a id="animate1" class="nav-link" href="http://localhost:8080/#/"><span class="badge badge-warning badge-pill beerra">Beerra</span><span class="sr-only">(current)</span></a></center>
           
         </li>
         <template v-if="isLogged ">
@@ -47,10 +47,10 @@
          </template>
          <template v-else>       
           <li class="nav-item">
-            <a class="nav-link " href="http://localhost:8080/#/signin">Login</a>
+            <a class="nav-link " href="http://localhost:8080/#/signin">Login <i class="material-icons">account_circle</i></a>
           </li>
-           <li class="nav-item">
-            <a class="nav-link " href="http://localhost:8080/#/signup">Sing up</a>
+           <li class="nav-item ">
+            <a class="nav-link " href="http://localhost:8080/#/signup">Registrarse <i class="material-icons">person_add</i></a>
           </li>
          </template>
       </ul>
@@ -68,6 +68,32 @@
 </template>
 
 <script>
+
+$(function() {
+    $.fn.extend({
+        animateCss: function (animationName) {
+            var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+            this.addClass('animated ' + animationName).one(animationEnd, function() {
+                $(this).removeClass('animated ' + animationName);
+            });
+            return this;
+        }
+    });
+
+    $('#animate1').on('mouseover',function(){
+        $('#animate1').animateCss('tada');
+    });
+    $('#animate2').on('mouseover',function(){
+        $('#animate2').animateCss('flash');
+    });
+});
+
+
+
+
+
+
+
 export default {
 created(){
    this.isLogged = localStorage.token
@@ -76,7 +102,7 @@ created(){
     return{
        active: null,
        isLogged: localStorage.token,
-       bounce: null
+      
     }
   },
   methods:{
@@ -105,24 +131,37 @@ created(){
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-top: 10px;
   width: 100%;
   margin-left: 104px;
   position:absolute;
+  background-color: #343a40;
 }
 a{
   font-size: 15px;
   font-family: 'Varela Round', sans-serif;
 }
+.beerra{
+  font-family: 'Black Ops One', cursive !important;
+  font-size: 20px !important;
+}
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-family:'Courier New', Courier;
-  color: black;
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  font-family: "Courier New", Courier;
+  color: #ffc107 !important;
   padding-top: 1em;
 }
-::-moz-placeholder { /* Firefox 19+ */
-  font-family:'Courier New', Courier;
-  color: black;
+::-moz-placeholder {
+  /* Firefox 19+ */
+  font-family: "Courier New", Courier;
+  color: #ffc107 !important;
+}
+.card{
+  border-radius: 10px !important;
+  border-color:#ffc107;
+}
+.card-header{
+  border-radius: 10px !important;
 }
 
 .wrapper {
@@ -166,12 +205,56 @@ a{
 .active{
   color:grey;
 }
-
+textarea {
+  font-family: "Courier New", Courier;
+  color: #ffc107 !important;
+}
+input[type="text"], textarea {
+  
+  background-image: linear-gradient(to left,#343a40,black) !important;
+}
+input[type="email"], textarea {
+  background-image: linear-gradient(to left,#343a40,black) !important;
+}
+input[type="password"], textarea {
+  background-image: linear-gradient(to left,#343a40,black) !important;
+}
+input[type="tel"], textarea {
+  background-image: linear-gradient(to left,#343a40,black) !important;
+}
+input[type="date"], textarea {
+  background-image: linear-gradient(to left,#343a40,black) !important;
+}
 .bg-dark{
   background-image: linear-gradient(to left,#343a40,black) !important;
 }
+.card{
+  background-image: linear-gradient(to left,#343a40,black);
+}
+.custom-select textarea{
+  color:#ffc107;
+}
+.custom-select {
+    color:#ffc107;
+    background: linear-gradient(to left,#343a40,black) !important; 
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+input{
+  font-family: "Courier New", Courier;
+  color: #ffc107 !important;
+}
+p{
+  font-size: 20px;
+  font-family: "Squada One", cursive;
+  color:white;
+}
+label {
+  font-size: 20px;
+  font-family: "Squada One", cursive;
+  color: #fff;
+}
 h1{
-  color:black;
+  color:white;
   font-size:40px;
   font-family: 'Black Ops One', cursive;
 }
@@ -180,30 +263,45 @@ li img {
   margin-right: 30px;
   float:right;
 }
+li i{
+  position: relative;
+  margin-right: 30px;
+  float:right;
+}
 
 h3 {
-  font-size:22px;
-  font-family: 'Varela Round', sans-serif;
+  font-size:22px !important;
+  font-family: 'Black Ops One', cursive !important;
+  color:white;
+}
+h1 {
+  font-size:30px !important;
+  font-family: 'Black Ops One', cursive !important;
   color:white;
 }
 
-
 td{
   font-family: 'Courier New', Courier;
-  color: black;
-  font-size:12px;
+  color: white;
+  font-size:13px;
 }
 th{
   font-family: 'Courier New', Courier;
-  color: black;
-  font-size:12px;
+  color: white;
+  font-size:14px;
 }
-
 #dashboard{
   display:inline-block;
 }
 #logout{
   display:inline-block;
 }
-
+textarea:focus,
+input:focus,
+input[text]:focus,
+.uneditable-input:focus {
+  border-color: white !important;
+  box-shadow: 0 1px 1px white inset, 0 0 8px white !important;
+  outline: 0 none;
+}
 </style>

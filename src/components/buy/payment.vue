@@ -2,7 +2,7 @@
 <div>
      <div id="payment">
           <center><h1>PAGO A PROVEEDORES</h1></center>
-          <img :src="require('@/assets/sections/compras.png')" alt="">
+          <center><img :src="require('@/assets/sections/compras.png')" alt=""></center>
          
       </div> 
     <div class="container">
@@ -286,47 +286,5 @@ export default {
 }
 </script>
 <style>
-#payment img{
-  position: relative;
-  float: right;
-}
-#payment img .left{
-  position: relative;
-  float: left;
-}
-#payment h1 {
-  font-size:40px;
-  font-family: 'Black Ops One', cursive;
-}
-.card-header h3{
-  color:white;
-}
-input[type="text"], textarea {
 
-  background-color : #beb9b9; 
-
-}
-input[type="date"], textarea {
-
-  background-color : #beb9b9; 
-
-}
-td{
-  font-family: 'Courier New', Courier;
-  color: black;
-  font-size:13px;
-}
-th{
-  font-family: 'Courier New', Courier;
-  color: black;
-  font-size:13px;
-}
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-family:'Courier New', Courier;
-  color: black;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  font-family:'Courier New', Courier;
-  color: black;
-}
 </style>

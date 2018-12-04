@@ -27,7 +27,32 @@
             </template>
 
             <div class="card-body">
-              <form v-on:submit.prevent="addKeg">
+
+                     <form v-on:submit.prevent="addKeg" >
+
+          <div class="input-group-pretend mb-3">
+              <template v-if="edit===false">
+              <span class="badge badge-success">N°{{Object.keys(kegs).length+1}}</span><br><br>
+              </template>
+              <template v-else>
+               <span class="badge badge-success">N°{{Object.keys(kegs).length}}</span> 
+              </template>
+          </div>
+            <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Estilo" required>
+        
+            <template v-if="sale === false">
+                 <select v-model="newKeg.quantity" class="custom-select mb-1" required >
+                 <option class="courier" value="" disabled selected>Tamaño</option>
+              <option v-for="q in quantities" v-bind:value="q.text">
+                {{q.text}}
+              </option>
+
+            </select>
+               </template>
+              <div v-for="s in status" class="form-check form-check-inline courier">
+              <input required type="radio"  name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"  v-model="newKeg.sta"  class="form-check-input mb-1" >
+              <label for="one">{{s.text}}</label>
+              </div>
 
                 <div class="input-group-pretend mb-3">
                   <template v-if="edit===false">
@@ -37,7 +62,8 @@
                     <span class="badge badge-success">N°{{Object.keys(kegs).length}}</span>
                   </template>
                   <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Estilo" required>
-
+                </div>
+               
                   <template v-if="sale === false">
                     <select v-model="newKeg.quantity" class="custom-select mb-1" required>
 
@@ -81,7 +107,8 @@
                   <swatches class="text-center" v-model="color" :colors="colors" row-length="5" shapes="circles"
                     show-border popover-to="right">
                   </swatches>
-                </div>
+                
+
                 <div class="card-footer">
                   <template v-if="edit === false">
                     <button class="btn btn-outline-success btn-block">Agregar</button>
@@ -457,51 +484,5 @@ notifyError(title,text){
 }
 </script>
 <style>
-h3 {
-  font-size:22px;
-  font-family: 'Varela Round', sans-serif;
-  color:white;
-}
-
-
-td{
-  font-family: 'Courier New', Courier;
-  color: black;
-  font-size:12px;
-}
-th{
-  font-family: 'Courier New', Courier;
-  color: black;
-  font-size:12px;
-}
-
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-family:'Courier New', Courier;
-  color: black;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  font-family:'Courier New', Courier;
-  color: black;
-}
-
-div select option .custom-select {
-    background-color: #beb9b9 !important; 
-    color: #fff;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-}
-.courier{
-  font-family:'Courier New', Courier;
-  color: white;
-  font-size: 14px;
-}
-.list{
-  color:black;
-}
-
-input[type="text"], textarea {
-
-  background-color : #beb9b9; 
-
-}
 
 </style>
