@@ -42,7 +42,7 @@
 
     <div class="container">
       <nav id="funcionalidades" aria-label="breadcrumb">
-        <ol class="breadcrumb bg-dark">
+        <ol class="breadcrumb bg-warning">
           <li class="breadcrumb-item active divider" aria-current="page">Funcionalidades</li>
         </ol>
       </nav>
@@ -51,7 +51,7 @@
           <div class="card-body text-center">
             <p class="card-text">Control sobre Barriles</p>
             <button v-on:click="keg = !keg">
-              <img :src="require('@/assets/sections/kegs.png')" alt class>
+              <img :src="require('@/assets/beerra/keg.png')" alt class>
             </button>
             <p
               v-if="keg"
@@ -182,7 +182,7 @@
         <h1>
           <span id="animate3" class="badge badge-dark badge-pill beerra">Beerra</span>
         </h1>
-        <p class="badge-dark badge-pill">Nuestro sistema esta en constante evolucion, tomamos requirimientos de nuestros clientes y lo mejoramos dia a dia <br>Envianos tu sugerencia con nuestro formulario de contacto  o directamente a nuestra casilla <br><span class="badge-light badge-pill">info@beerra.com.ar</span></p>
+        <p class="bg-dark badge-pill redondeo">Nuestro sistema esta en constante evolucion, tomamos requirimientos de nuestros clientes y lo mejoramos dia a dia <br>Envianos tu sugerencia con nuestro formulario de contacto  o directamente a nuestra casilla <br><span class="badge-light badge-pill">info@beerra.com.ar</span></p>
       
         
       </div></center>
@@ -207,7 +207,7 @@
                       id="form_name"
                       type="text"
                       name="name"
-                      class="form-control badge-pill badge-warning"
+                      class="form-control badge-warning"
                       placeholder="Ingrese su nombre"
                       required="required"
                       data-error="Firstname is required."
@@ -222,7 +222,7 @@
                       id="form_lastname"
                       type="text"
                       name="surname"
-                      class="form-control badge-pill badge-warning"
+                      class="form-control badge-warning"
                       placeholder="Ingrese su apellido"
                       required="required"
                       data-error="Lastname is required."
@@ -239,7 +239,7 @@
                       id="form_email"
                       type="email"
                       name="email"
-                      class="form-control badge-pill badge-warning"
+                      class="form-control badge-warning"
                       placeholder="Ingrese su email "
                       required="required"
                       data-error="Valid email is required."
@@ -254,7 +254,7 @@
                       id="form_phone"
                       type="tel"
                       name="phone"
-                      class="form-control badge-pill badge-warning"
+                      class="form-control badge-warning"
                       placeholder="Ingrese su telefono"
                     >
                     <div class="help-block with-errors"></div>
@@ -296,7 +296,7 @@
             <div class="card-body text-center">
               <p class="card-text">Contacto</p>
               <button v-on:click="contact = !contact">
-                <img :src="require('@/assets/beerra/contact.png')" alt class>
+                <img data-aos="zoom-out-left" :src="require('@/assets/beerra/contact.png')" alt class>
               </button>
               <p v-if="contact">
                 <i class="material-icons">mail_outline</i> info@beerra.com.ar
@@ -316,6 +316,10 @@
 </template>
 
 <script>
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 $(function() {
   $.fn.extend({
     animateCss: function(animationName) {
@@ -339,6 +343,8 @@ $(function() {
   });
 });
 
+AOS.init();
+
 export default {
   data() {
     return {
@@ -358,34 +364,7 @@ export default {
 </script>
 
 <style>
-h1 {
-  font-size: 25px !important;
-  font-family: "Squada One", cursive;
-  color: white;
-}
-p {
-  font-size: 20px;
-  font-family: "Squada One", cursive;
-  color: white;
-}
-input {
-  font-family: "Courier New", Courier;
-  background-color: #ffc107 !important;
-  color: #000000 !important;
-}
 
-textarea:focus,
-input:focus,
-input[text]:focus,
-.uneditable-input:focus {
-  border-color: white !important;
-  box-shadow: 0 1px 1px white inset, 0 0 8px white !important;
-  outline: 0 none;
-}
-textarea {
-  font-family: "Courier New", Courier;
-  color: #000000 !important;
-}
 .beerra {
   font-size: 1.2em;
   font-family: "Black Ops One", cursive;
@@ -402,24 +381,23 @@ textarea {
 .form-group {
   margin: 10px;
 }
-label {
-  font-size: 20px;
-  font-family: "Squada One", cursive;
-  color: #fff;
-}
+
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   font-family: "Courier New", Courier;
-  color: #000000 !important;
+  color: #ffc107 !important;
   padding-top: 1em;
 }
 ::-moz-placeholder {
   /* Firefox 19+ */
   font-family: "Courier New", Courier;
-  color: #000000 !important;
+  color: #ffc107 !important;
 }
 form {
-  border-radius: 10px;
+  border-radius: 5px;
+}
+.redondeo{
+  border-radius:10px;
 }
 .breadcrumb-item a {
   font-size: 1.2em;
@@ -428,5 +406,8 @@ form {
 }
 .breadcrumb-item a:hover {
   color: #ffc107 !important;
+}
+.bg-warning{
+  background-color: #ffc107 !important;
 }
 </style>

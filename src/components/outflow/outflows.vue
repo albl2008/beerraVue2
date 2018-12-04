@@ -1,9 +1,13 @@
 <template>
     <div class="container">
+      <div id="barriles">
+          <center><h1>Compras</h1></center>
+          <center><img :src="require('@/assets/sections/compras.png')" alt=""></center>
+      </div>  
       <div class="row">
         <div class="col-12 col-sm-12  col-md-4">
           <div class="card">
-            <div class="card-header"><h3>Nuevo Gasto</h3></div>
+            <div class="card-header"><h3>Nuevo Compra</h3></div>
             <div class="card-body">
                       <form v-on:submit.prevent="addOutflow" >
 
@@ -34,7 +38,7 @@
           <div class="col-12 col-sm-12 col-md-8">
             <div class="card">
               <div class="card-header">
-                   <h3>Gastos</h3>
+                   <h3>Compras</h3>
               </div>
               <div class="card-body">
                   <table class="table s">

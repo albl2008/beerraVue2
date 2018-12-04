@@ -131,10 +131,10 @@ created(){
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-top: 10px;
   width: 100%;
   margin-left: 150px;
   position:absolute;
+  background-color: #343a40;
 }
 a{
   font-size: 15px;
@@ -145,14 +145,23 @@ a{
   font-size: 20px !important;
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-family:'Courier New', Courier;
-  color: black;
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  font-family: "Courier New", Courier;
+  color: #ffc107 !important;
   padding-top: 1em;
 }
-::-moz-placeholder { /* Firefox 19+ */
-  font-family:'Courier New', Courier;
-  color: black;
+::-moz-placeholder {
+  /* Firefox 19+ */
+  font-family: "Courier New", Courier;
+  color: #ffc107 !important;
+}
+.card{
+  border-radius: 10px !important;
+  border-color:#ffc107;
+}
+.card-header{
+  border-radius: 10px !important;
 }
 
 .wrapper {
@@ -196,12 +205,56 @@ a{
 .active{
   color:grey;
 }
-
+textarea {
+  font-family: "Courier New", Courier;
+  color: #ffc107 !important;
+}
+input[type="text"], textarea {
+  
+  background-image: linear-gradient(to left,#343a40,black) !important;
+}
+input[type="email"], textarea {
+  background-image: linear-gradient(to left,#343a40,black) !important;
+}
+input[type="password"], textarea {
+  background-image: linear-gradient(to left,#343a40,black) !important;
+}
+input[type="tel"], textarea {
+  background-image: linear-gradient(to left,#343a40,black) !important;
+}
+input[type="date"], textarea {
+  background-image: linear-gradient(to left,#343a40,black) !important;
+}
 .bg-dark{
   background-image: linear-gradient(to left,#343a40,black) !important;
 }
+.card{
+  background-image: linear-gradient(to left,#343a40,black);
+}
+.custom-select textarea{
+  color:#ffc107;
+}
+.custom-select {
+    color:#ffc107;
+    background: linear-gradient(to left,#343a40,black) !important; 
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+input{
+  font-family: "Courier New", Courier;
+  color: #ffc107 !important;
+}
+p{
+  font-size: 20px;
+  font-family: "Squada One", cursive;
+  color:white;
+}
+label {
+  font-size: 20px;
+  font-family: "Squada One", cursive;
+  color: #fff;
+}
 h1{
-  color:black;
+  color:white;
   font-size:40px;
   font-family: 'Black Ops One', cursive;
 }
@@ -217,28 +270,38 @@ li i{
 }
 
 h3 {
-  font-size:22px;
-  font-family: 'Varela Round', sans-serif;
+  font-size:22px !important;
+  font-family: 'Black Ops One', cursive !important;
+  color:white;
+}
+h1 {
+  font-size:30px !important;
+  font-family: 'Black Ops One', cursive !important;
   color:white;
 }
 
-
 td{
   font-family: 'Courier New', Courier;
-  color: black;
-  font-size:12px;
+  color: white;
+  font-size:13px;
 }
 th{
   font-family: 'Courier New', Courier;
-  color: black;
-  font-size:12px;
+  color: white;
+  font-size:14px;
 }
-
 #dashboard{
   display:inline-block;
 }
 #logout{
   display:inline-block;
 }
-
+textarea:focus,
+input:focus,
+input[text]:focus,
+.uneditable-input:focus {
+  border-color: white !important;
+  box-shadow: 0 1px 1px white inset, 0 0 8px white !important;
+  outline: 0 none;
+}
 </style>
