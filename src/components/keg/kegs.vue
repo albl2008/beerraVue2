@@ -37,8 +37,9 @@
               <template v-else>
                <span class="badge badge-success">N°{{Object.keys(kegs).length}}</span> 
               </template>
+          </div>
             <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Estilo" required>
-           
+        
             <template v-if="sale === false">
                  <select v-model="newKeg.quantity" class="custom-select mb-1" required >
                  <option class="courier" value="" disabled selected>Tamaño</option>
@@ -47,11 +48,11 @@
               </option>
 
             </select>
-               
+               </template>
               <div v-for="s in status" class="form-check form-check-inline courier">
               <input required type="radio"  name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"  v-model="newKeg.sta"  class="form-check-input mb-1" >
               <label for="one">{{s.text}}</label>
-
+              </div>
 
                 <div class="input-group-pretend mb-3">
                   <template v-if="edit===false">
@@ -61,7 +62,8 @@
                     <span class="badge badge-success">N°{{Object.keys(kegs).length}}</span>
                   </template>
                   <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Estilo" required>
-
+                </div>
+               
                   <template v-if="sale === false">
                     <select v-model="newKeg.quantity" class="custom-select mb-1" required>
 
@@ -107,7 +109,8 @@
                   <swatches class="text-center" v-model="color" :colors="colors" row-length="5" shapes="circles"
                     show-border popover-to="right">
                   </swatches>
-                </div>
+                
+
                 <div class="card-footer">
                   <template v-if="edit === false">
                     <button class="btn btn-outline-success btn-block">Agregar</button>
