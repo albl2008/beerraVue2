@@ -1,5 +1,10 @@
 <template>
     <div class="container">
+      <div id="canillas">
+      <center><h1>ENVASES</h1></center>
+      <center><img :src="require('@/assets/sections/envases.png')" alt=""></center>
+     
+    </div>
       <div class="row">
         
           <div class="col-12 col-sm-12 col-md-7">

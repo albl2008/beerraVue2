@@ -17,10 +17,10 @@
              <input type="text" class="form-control mb-1" placeholder="Cerveceria" v-model="newBrewery.name" required>
           <input type="text" class="form-control mb-3" placeholder="Direccion" v-model="newBrewery.address" required>
             <template v-if="edit === false">
-              <dir class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >AGREGAR</button></dir>
+              <div class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >AGREGAR</button></div>
             </template>
             <template v-else>
-              <dir class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >ACTUALIZAR</button></dir>
+              <div class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >ACTUALIZAR</button></div>
             </template>
            </div>
          </div>
@@ -34,10 +34,10 @@
             <input type="text" class="form-control mb-1" placeholder="Telefono" v-model="newcontact.tel" required>
             <input type="email" class="form-control mb-3" placeholder="Mail" v-model="newcontact.mail" required>
             <template v-if="editContact === false">
-              <dir class="col-12"><button class="btn btn-outline-primary  " >AÑADIR CONTACTO</button></dir>
+              <div class="col-12"><button class="btn btn-outline-primary btn-block" >AÑADIR CONTACTO</button></div>
             </template>
             <template v-else>
-              <dir class="col-12"><button class="btn btn-outline-primary " >ACTUALIZAR CONTACTO</button></dir>
+              <div class="col-12"><button class="btn btn-outline-primary btn-block" >ACTUALIZAR CONTACTO</button></div>
             </template>
           </form>
            </div>
@@ -360,50 +360,5 @@ methods:{
 }
 </script>
 <style>
-a{
-   color: rgb(99, 250, 99);;
-}
-a:hover{
-  color:inherit;
-  text-decoration: none;
-}
-
-td{
-  font-family: 'Courier New', Courier;
-  color: black;
-  font-size:12px;
-}
-th{
-  font-family: 'Courier New', Courier;
-  color: black;
-  font-size:12px;
-}
-
-h3 {
-  font-size:22px;
-  font-family: 'Varela Round', sans-serif;
-  color:white;
-}
-
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-family:'Courier New', Courier;
-  color: black;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  font-family:'Courier New', Courier;
-  color: black;
-}
-
-input[type="text"], textarea {
-
-  background-color : #beb9b9; 
-
-}
-
-input[type="email"], textarea {
-
-  background-color : #beb9b9; 
-
-}
 
 </style>

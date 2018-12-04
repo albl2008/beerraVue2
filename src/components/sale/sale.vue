@@ -2,7 +2,7 @@
 <div>
      <div id="sales">
           <center><h1>VENTAS</h1></center>
-          <center><img :src="require('@/assets/navbar/ventas.png')" alt="" class="position"></center>
+          <center><img :src="require('@/assets/sections/sell.png')" alt="" class="position"></center>
         
           
       </div>  
@@ -38,20 +38,20 @@
                     <td><button class="btn btn-outline-dark disabled"><img :src="require('@/assets/growlerlleno.png')" alt="carga"></button></td>
                   </template>
                    <template v-else>
-                    <td><button class="btn btn-outline-dark" v-on:click="getGrowler(sale._id)"><img :src="require('@/assets/growlerlleno.png')" alt="carga"></button></td>
+                    <td><button class="btn btn-light" v-on:click="getGrowler(sale._id)"><img :src="require('@/assets/growlerlleno.png')" alt="carga"></button></td>
                   </template>
                    <template v-if="Object.keys(sale.pints).length === 0">
                     <td><button class="btn btn-outline-dark disabled"><img :src="require('@/assets/pinta.png')" alt=""></button></td> </template>
                    <template v-else>
-                    <td><button class="btn btn-outline-dark" v-on:click="getPints(sale._id)"><img :src="require('@/assets/pinta.png')" alt=""></button></td></template>
+                    <td><button class="btn btn-light" v-on:click="getPints(sale._id)"><img :src="require('@/assets/pinta.png')" alt=""></button></td></template>
                    <template v-if="Object.keys(sale.bottles).length === 0">
                     <td><button class="btn btn-outline-dark disabled"><img :src="require('@/assets/bottle.png')" alt=""></button></td></template>
                    <template v-else>
-                     <td><button class="btn btn-outline-dark" v-on:click="getBottles(sale._id)"><img :src="require('@/assets/bottle.png')" alt=""></button></td></template>
+                     <td><button class="btn btn-light" v-on:click="getBottles(sale._id)"><img :src="require('@/assets/bottle.png')" alt=""></button></td></template>
                    <template v-if="Object.keys(sale.others).length === 0">
                     <td><button class="btn btn-outline-dark disabled"><img :src="require('@/assets/other.png')" alt=""></button></td></template>
                    <template v-else>
-                   <td><button class="btn btn-outline-dark" v-on:click="getOther(sale._id)"><img :src="require('@/assets/other.png')" alt=""></button></td></template>
+                   <td><button class="btn btn-light" v-on:click="getOther(sale._id)"><img :src="require('@/assets/other.png')" alt=""></button></td></template>
                   
                  
                   
@@ -262,41 +262,5 @@ export default {
 }
 </script>
 <style>
-#sales img{
-  position: relative;
-  float: right;
-}
-#sales img .left{
-  position: relative;
-  float: left;
-}
-#sales h1 {
-  font-size:40px;
-  font-family: 'Black Ops One', cursive;
-}
-.col-md-5 th{
- color:white;
-}
-.col-md-5 td{
- color:white;
-}
-.col-md-7 h3{
- color:white;
-}
-.col-md-5 h3{
- color:white;
-}
-
-
-.col-md-7 td{
- color:black
-}
-.col-md-7 td{
- position: relative;
-}
-.seleccione{
-    font-size:20px;
-    color:white;
-}
 
 </style>
