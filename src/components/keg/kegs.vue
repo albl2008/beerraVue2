@@ -68,8 +68,6 @@
                       required>
                   </template>
 
-
-
                   <input type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="IBU" required>
                   <input type="text" class="form-control mb-1" v-model="newKeg.alcohol" placeholder="Alcohol" required>
 
