@@ -11,6 +11,9 @@ import persistentState from 'vue-persistent-state'
 const initialState = {
   isLoggIn: false
 };
+
+
+
 Vue.use(persistentState,initialState)
 Vue.use(VModal) 
 Vue.use(Vuetify)

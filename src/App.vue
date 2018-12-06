@@ -68,7 +68,7 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 $(function() {
     $.fn.extend({
         animateCss: function (animationName) {
@@ -96,16 +96,30 @@ $(function() {
 
 export default {
 created(){
+  console.log('hola')
+    this.checkIfAuthorized()
    this.isLogged = localStorage.token
 },
   data(){
     return{
        active: null,
        isLogged: localStorage.token,
-      
+ 
     }
   },
   methods:{
+    checkIfAuthorized(){
+      axios.interceptors.response.use(response => {
+        return response;
+      }, error => {
+  
+      if (error.response.status == 401) {
+              let   message = 'El token expiro inicie sesion'
+          localStorage.removeItem('token')
+      this.$router.push({path:`/signin/${message}`})      }
+     return error
+  });
+    },
     checkIfIsLogged () {
      return  localStorage.getItem('isLoggIn')
       
