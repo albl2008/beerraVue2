@@ -11,9 +11,11 @@ import persistentState from 'vue-persistent-state'
 const initialState = {
   isLoggIn: false
 };
+import Chart from 'vue2-frappe'
 
+Vue.use(Chart)
 
-
+Vue.use(Chart)
 Vue.use(persistentState,initialState)
 Vue.use(VModal) 
 Vue.use(Vuetify)
