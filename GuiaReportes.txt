@@ -1,0 +1,2 @@
+[ ] Cantidad de ventas por mes
+    [ ] Traer ventas ordenadas por fechas.
