@@ -13,6 +13,9 @@ import 'vue-glide-js/dist/vue-glide.css'
 const initialState = {
   isLoggIn: false
 };
+
+
+
 Vue.use(persistentState,initialState)
 Vue.use(VModal, { dynamic: true }) 
 Vue.use(VueGlide)
