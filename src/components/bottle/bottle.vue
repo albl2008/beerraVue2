@@ -7,50 +7,150 @@
  </div>   
     <div class="container">
       <div class="row">
-        <div class="col-12 col-sm-12  col-md-3">
+        <div class="col-12 col-sm-12  col-md-4">
           <div v-if="errorMessage" class="alert alert-danger" role="alert">
             {{ errorMessage }}
           </div>
           <div class="card bg-dark">
             <div class="card-header">
-              <template v-if="edit === false">
-                   <div class="card-header"><h3>AGREGAR BOTELLA(S)</h3></div>
+              <template v-if="edit === false && buy===false">
+                   <div class="card-header"><h3>AGREGAR BOTELLA</h3></div>
+                  
               </template>
-                <template v-else>
-                  <div class="card-header"><h3>ACTUALIZAR BOTELLA(S)</h3></div>
+                <template v-else-if="edit === true && buy===false">
+                  <div class="card-header"><h3>ACTUALIZAR BOTELLA</h3>
+                  <center><button class="btn btn-outline-warning btn-sm" v-on:click="agregar()"><i class="material-icons">add_circle_outline</i></button></center></div>
+                   
+              </template>
+              <template v-else-if="edit === false && buy===true">
+                  <div class="card-header"><h3>COMPRAR BOTELLAS</h3>
+                  <center><button class="btn btn-outline-warning btn-sm" v-on:click="agregar()"><i class="material-icons">add_circle_outline</i></button></center></div>
+                  
               </template>
 
-            </div>  
-            <div class="card-body">
+            </div>
+           
+          
+               <template v-if="edit === false && buy === false">  
+                  <div class="card-body">
                            <form v-on:submit.prevent="addBottle" >
-
-          <div class="input-group-pretend mb-3">
-            <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="Beer" required>
-            <input type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="Stock" required>  
-            <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" required>
-            <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="Precio" required>
-            <input type="text" class="form-control mb-1" v-model="newBottle.ibu" placeholder="IBU" required>
-            <input type="text" class="form-control mb-1" v-model="newBottle.alcohol" placeholder="Alcohol" required>
+          
+          <div class="input-group-pretend mb-4">
+              <label>Estilo</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="Estilo" required>
+              <label>Fabrica</label>
             <select v-model="newBottle.brewery" class="custom-select mb-1" required>
               <option value="" disabled hidden>Brewery</option>
               <option v-for="brewery in breweries" v-bind:value="brewery._id">
                 {{ brewery.name }}
               </option>
             </select>
+              <label>Tamaño (en L)</label> 
+            <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" required>
+              <label>IBU</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.ibu" placeholder="IBU" required>
+              <label>Alcohol</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.alcohol" placeholder="Alcohol" required>
+            
+
           </div>
-            <template v-if="edit === false">
-                <button class="btn btn-outline-success btn-block">AGREGAR</button>
-            </template>
-            <template v-else>
-                <button class="btn btn-outline-primary btn-block" >ACTUALIZAR</button>
-            </template>
+            
+                <button class="btn btn-outline-warning btn-block">AGREGAR</button>
+            
 
         </form>
-            </div>
-          </div>
 
-      </div>
-          <div class="col-12 col-sm-12 col-md-9">
+          </div>
+        </template>
+         
+        <template v-if="edit=== true && buy === false">
+           <div class="card-body">
+            <form v-on:submit.prevent="addBottle" >
+
+          <div class="input-group-pretend mb-4">
+              <label>Estilo</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="Estilo" required>
+              <label>Fabrica</label>
+            <select v-model="newBottle.brewery" class="custom-select mb-1" required>
+              <option value="" disabled hidden>Brewery</option>
+              <option v-for="brewery in breweries" v-bind:value="brewery._id">
+                {{ brewery.name }}
+              </option>
+            </select>
+              <label>Stock Actual</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="Stock" disabled> 
+            <label>Precio de Venta</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="Precio" required>
+              <label>Tamaño (en L)</label> 
+            <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" required>
+              <label>IBU</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.ibu" placeholder="IBU" required>
+              <label>Alcohol</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.alcohol" placeholder="Alcohol" required>
+            
+
+          </div>
+             <button class="btn btn-outline-primary btn-block" >ACTUALIZAR</button>
+
+        </form>
+
+
+               
+          </div>
+            </template>
+       
+       <template v-if="edit === false && buy===true">  
+          <div class="card-body">
+
+                        <form v-on:submit.prevent="addBottle" >
+
+          <div class="input-group-pretend mb-4">
+              <label>Estilo</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="Beer" disabled>
+              <label>Stock Actual</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="Stock" disabled> 
+              <label>Tamaño (en L)</label> 
+            <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" disabled>
+              <label>Fabrica</label>
+            <select v-model="newBottle.brewery" class="custom-select mb-1" disabled>
+              <option value="" disabled hidden>Brewery</option>
+              <option v-for="brewery in breweries" v-bind:value="brewery._id">
+                {{ brewery.name }}
+              </option>
+            </select>
+              <label>Cantidad</label>
+            <input type="text" class="form-control mb-1" v-model="newBottleBuy.quantity" placeholder="Cantidad" required>
+              <label>Costo Unitario</label>
+            <input type="text" class="form-control mb-1" v-model="newBottleBuy.unityPrice" placeholder="Costo" required> 
+            <template v-if="newBottleBuy.quantity && newBottleBuy.unityPrice">
+               <label>Total</label>
+             <template v-show="edit">
+               {{newBottleBuy.totalPrice = newBottleBuy.unityPrice * newBottleBuy.quantity}}
+              
+             </template>
+            <input type="text" class="form-control mb-1" v-model="newBottleBuy.totalPrice" placeholder="Total" required>
+            </template>
+            <label>Precio de Venta</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="Precio" required>
+              <br>
+            <code>Fecha: {{format(newBottleBuy.date)}}</code>                
+              <input-date v-model="newBottleBuy.date"></input-date>
+          </div>
+          
+                <button class="btn btn-outline-primary btn-block" >COMPRAR</button>
+            
+
+        </form>
+
+
+          
+          </div>
+        </template>
+            
+          </div>
+ </div>
+      
+          <div class="col-12 col-sm-12 col-md-8">
             <div class="card ">
               <div class="card-header bg-dark">
                 <h3 class="">LISTADO DE BOTELLAS</h3>
@@ -58,65 +158,179 @@
               <div class="card-body">
                 <table class="table ">
               <thead>
+              <th>Fabrica</th>
               <th>Cerveza</th>
               <th>Stock</th>
-              <th>Size</th>
-              <th>IBU</th>
-              <th>alcohol</th>
-              <th>brewery</th>
+              <th>Tamaño</th>
               <th>Precio</th>
-              <th>Eliminar</th>
+              <th>Comprar</th>
               <th>Editar</th>
+              <th>Eliminar</th>
               </thead>
               <tbody>
                 <tr v-for="bottle in bottles" >
+                  <td>{{bottle.brewery.name}}</td>
                   <td>{{bottle.beer}}</td>
                   <td>{{bottle.stock}}</td>
                   <td>{{bottle.size}}</td>
-                  <td>{{bottle.ibu}}</td>
-                  <td>{{bottle.alcohol}}</td>
-                  <td>{{bottle.brewery.name}}</td>
                   <td>{{bottle.price}}</td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteBottle(bottle._id)"><i class="material-icons">delete</i></button></td>
+                  <td><button class="btn btn-outline-primary btn-sm" v-on:click="buyBottle(bottle._id)"><i class="material-icons">attach_money</i></button></td>
                   <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateBottle(bottle._id)"><i class="material-icons">edit</i></button></td>
+                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteBottle(bottle._id)"><i class="material-icons">delete</i></button></td>
+                 
                 </tr>
               </tbody>
             </table>
               </div>
             </div>            
       </div>
+ </div><br>   
+ <div class="row">
+<div class="col-12 col-sm-12 col-md-8">
+  
+            <div class="card ">
+              <div class="card-header bg-dark">
+                <h3 class="">COMPRAS DE BOTELLAS</h3>
+              </div>
+              <div class="card-body">
+                <table class="table ">
+              <thead>
+              <th>Fabrica</th>
+              <th>Cerveza</th>
+              <th>Tamaño</th>
+              <th>Cantidad</th>
+              <th>Costo Unitario</th>
+              <th>Fecha</th>
+              
+              </thead>
+              <tbody>
+                <tr v-for="bottleBuy in bottleBuys" >
+                  <td>{{bottleBuy.bottle.brewery.name}}</td>
+                  <td>{{bottleBuy.bottle.beer}}</td>
+                  <td>{{bottleBuy.bottle.size}}</td>
+                  <td>{{bottleBuy.quantity}}</td>
+                  <td>{{bottleBuy.unityPrice}}</td>
+                  <td>{{format(bottleBuy.date)}}</td>
+                 
+                </tr>
+              </tbody>
+            </table>
+              </div>
+            </div>            
+     
 
-    </div>
-    </div>
 </div>
+<div class="col-md-4">
+  
+            <div class="card ">
+              <div class="card-header bg-dark">
+                <h3 class="">INFORMACION ADICIONAL</h3>
+              </div>
+              <div class="card-body">
+                <table class="table ">
+              <thead>
+              <th>Fabrica</th>
+              <th>Cerveza</th>
+              <th>IBU</th>
+              <th>Alcohol</th>
+              </thead>
+              <tbody>
+                <tr v-for="bottle in bottles" >
+                  <td>{{bottle.brewery.name}}</td>
+                  <td>{{bottle.beer}}</td>
+                  <td>{{bottle.ibu}}</td>
+                  <td>{{bottle.alcohol}}</td>
+                  
+                 
+                </tr>
+              </tbody>
+            </table>
+              </div>
+            </div>            
+      
+
+</div>
+ </div>
+      </div>
+
+ 
+ 
+    </div>
+
 </template>
 <script>
 import Vue from 'vue'
 import axios from'axios'
+import moment from 'moment'
 import Joi from 'joi'
+
+
+Vue.component('input-date', {
+  template: '\
+      <input\
+        type="date"\
+        ref="input"\
+        v-bind:value="dateToYYYYDDMM(value)"\
+        v-on:input="updateValue($event.target)"\
+        v-on:focus="selectAll"\
+      >\
+  ',
+  props: {
+    value: {
+      type: Date,
+      default: new Date()
+     
+    }
+  },
+  methods: {
+    dateToYYYYDDMM(date) {
+      // may have timezone caveats https://stackoverflow.com/a/29774197/1850609
+      return date || date.toISOString() 
+    },
+    updateValue: function (target) {
+      this.$emit('input', target.valueAsDate)
+    },
+    selectAll: function (event) {
+      // Workaround for Safari bug
+      // http://stackoverflow.com/questions/1269722/selecting-text-on-focus-using-jquery-not-working-in-safari-and-chrome
+      setTimeout(function () {
+      	event.target.select()
+      }, 0)
+    }
+  }
+});
+
+
 
 const schema = Joi.object().keys({
   id: Joi.string(),
   beer: Joi.string().min(2).max(20).required(),
-  stock: Joi.number().required(),
+  
   size: Joi.number().positive().required(),
-  price: Joi.number().positive().required(),
+  price: Joi.number().positive(),
+  stock: Joi.number().positive(),
+
+  
   ibu: Joi.number().positive().required(),
   alcohol: Joi.number().positive().required(),
   brewery: Joi.string().required(),
 })
 
 class newBottle{
-      constructor(id,beer,stock,size,ibu,alcohol,brewery,price){
+      constructor(id,beer,size,ibu,alcohol,brewery,price,stock){
         this.id = id
         this.beer = beer
-        this.stock = stock
         this.size = size
-        this.price = price
         this.ibu = ibu
         this.alcohol = alcohol
         this.brewery = brewery
-
+        this.price= price
+        this.stock= stock
+      }
+}
+class newBottleBuy{
+      constructor(bottle){
+        this.bottle = bottle
       }
 }
 
@@ -132,8 +346,13 @@ export default {
         {text: '30'},
         {text: '50'}
       ],
-     
+      newBottleBuy: {
+        date: new Date()
+      },
+      bottleBuys:[],
+      breweryName:[],
       edit: false,
+      buy:false,
       bottleToEdit:'',
 
 
@@ -151,6 +370,7 @@ export default {
   created(){
         this.getBottles();
         this.getBreweries();
+        this.getBottleBuys();
     },
    methods:{
      getBottles(){
@@ -169,7 +389,7 @@ export default {
     },
     addBottle(){
       if(this.validBottle())
-      if(this.edit === false ){
+      if(this.edit === false && this.buy===false){
 
       axios({
         method:'POST',
@@ -198,7 +418,7 @@ export default {
         text: `Error al guardar barril ${e}`
       })
       })
-      }else{
+      }else if(this.edit === true && this.buy===false){
         axios({
           method: 'put',
           url:`http://localhost:3000/bottle/${this.newBottle.id}`,
@@ -214,6 +434,7 @@ export default {
             })
           this.getBottles()
           this.newBottle = {}
+          this.buy = false
           this.edit = false
            }
         }).catch(e =>{
@@ -225,8 +446,53 @@ export default {
           text: `Error al actualizar el barril ${e}`
       })
         })
+      }else if (this.buy === true && this.edit===false){
+        axios({
+          method: 'POST',
+          url:`http://localhost:3000/outflow/bottle`,
+          data:{newBottleBuy:this.newBottleBuy,newPrice:this.newBottle.price},
+          headers: {authorization: `Bearer ${localStorage.token}`}
+        }).then(res => {
+           if(res.status === 200 ){
+            Vue.notify({
+              group: 'foo',
+              type:'success',
+              title: 'Barril',
+              text: res.data.mensaje
+            })
+            
+          this.getBottles()
+          this.getBottleBuys()
+          this.newBottle= {}
+          this.newBottleBuy={}
+          this.buy = false
+          this.edit = false
+           }
+        }).catch(e =>{
+          
+         
+           Vue.notify({
+          group: 'foo',
+          type:'error',
+          title: 'Barril',
+          text: `Error al actualizar el barril ${e}`
+      })
+        })
+      
       }
     },
+   // getBreweryName(idBrewery){
+   //   axios({
+   //    url:`http://localhost:3000/brewery/${idBrewery}`,
+   //     headers: {authorization: `Bearer ${localStorage.token}`}
+   //   })
+   //   .then(response =>{
+   //     this.brewery = response.data.brewery
+   //     this.breweryName = response.data.brewery.name
+   //   })
+//
+   //   return this.breweryName
+   // },
     getBreweries(){
       axios({
         url:'http://localhost:3000/brewery',
@@ -234,6 +500,16 @@ export default {
       })
       .then(response =>{
         this.breweries = response.data.Breweries
+        console.log(response);
+      })
+    },
+    getBottleBuys(){
+      axios({
+        url:'http://localhost:3000/bottle/buy',
+        headers: {authorization: `Bearer ${localStorage.token}`}
+      })
+      .then(response =>{
+        this.bottleBuys = response.data.BottleBuys
         console.log(response);
       })
     },
@@ -264,7 +540,14 @@ export default {
         })
       })
     },
+    agregar(){
+      this.buy=false;
+      this.newBottle={};
+      this.newBottleBuy={};
+      this.edit=false;
+    },
     updateBottle(idBottle){
+     
       axios({
         url:`http://localhost:3000/bottle/${idBottle}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
@@ -272,10 +555,29 @@ export default {
       .then(res => {
         console.log(res)
         this.newBottle = new newBottle  (res.data.bottle._id,res.data.bottle.beer,
-        res.data.bottle.stock,res.data.bottle.size,res.data.bottle.ibu,
-        res.data.bottle.alcohol, res.data.bottle.brewery,res.data.bottle.price
+        res.data.bottle.size,res.data.bottle.ibu,
+        res.data.bottle.alcohol, res.data.bottle.brewery,res.data.bottle.price,res.data.bottle.stock
         )
+      
           this.edit = true;
+          this.buy=false;
+      })
+    },
+    buyBottle(idBottle){
+      
+      axios({
+        url:`http://localhost:3000/bottle/${idBottle}`,
+        headers: {authorization: `Bearer ${localStorage.token}`}
+      })
+       .then(res => {
+        console.log(res)
+        this.newBottle = new newBottle  (res.data.bottle._id,res.data.bottle.beer,res.data.bottle.size,res.data.bottle.ibu,
+        res.data.bottle.alcohol, res.data.bottle.brewery,res.data.bottle.price,res.data.bottle.stock
+        )
+        this.newBottleBuy = new newBottleBuy (res.data.bottle._id)
+        
+          this.buy=true;
+          this.edit=false;
       })
     },
      validBottle(){
@@ -290,9 +592,10 @@ export default {
                 if(result.error.message.includes('beer')){
                     this.errorMessage = 'El estilo ingresado es incorrecto.'
                 }
-                if(result.error.message.includes('stock')){
-                    this.errorMessage = 'El stock ingresado es incorrecto.'
+                if(result.error.message.includes('price')){
+                    this.errorMessage = 'El precio ingresado es incorrecto.'
                 }
+                
                 if(result.error.message.includes('size')){
                     this.errorMessage = 'El tamaño ingresado es incorrecto.'
                 }
@@ -305,13 +608,17 @@ export default {
                 if(result.error.message.includes('brewery')){
                     this.errorMessage = 'Es necesarios eleccionar una cerveceria.'
                 }
-                if(result.error.message.includes('price')){
-                    this.errorMessage = 'El precio ingresa es incorrecto.'
-                }
+               
                 //this.errorMessage = 
             }
            
-        }
+        },
+         format(date){
+      if(date)
+          return moment(date).format('DD/MM/YYYY');
+      else
+          return ""
+  }
    },
 
 }

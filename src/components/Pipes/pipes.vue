@@ -1,12 +1,23 @@
 <template>
+
   <div>
     <div id="canillas">
       <center><h1>BARRILES CONECTADOS</h1></center>
       <center><img :src="require('@/assets/beerra/pipes.png')" alt=""></center>
      
     </div>
+    
+    
+
     <div class="container">
-      
+   <vue-glide :bullet="true">
+  <vue-glide-slide v-for="keg in kegs" :key="keg"> Slide {{ keg }} </vue-glide-slide>
+  <template slot="control">
+    <button data-glide-dir="<">prev</button>
+    <button data-glide-dir=">">next</button>
+  </template>
+</vue-glide>
+
       <div class="row mb-5">
 
         <template v-for="keg in kegs">
@@ -78,15 +89,15 @@
                    <template v-if="container.size === sizes[0].growlersize" >  
                             
                         <button class="btn-light btn-sm btn add" data-toggle="tooltip"
-                          data-placement="top" title="Envase Vacio Pequeño" v-on:click="createContainer(container,1,sizes[0].growlersize,prices[0].growlerprice)"><img
-                            :src="require('@/assets/carga2.png')" alt=""></button>
+                          data-placement="top" title="Envase Vacio Grade" v-on:click="createContainer(container,1,sizes[0].growlersize,prices[0].growlerprice)"><img
+                            :src="require('@/assets/carga.png')" alt=""></button>
                     </template>
                      
                     <template  v-else >
 
                       <button class="btn-light btn-sm btn md-2 add" data-toggle="tooltip"
-                        data-placement="top" title="Envase Vacio Grande" v-on:click="createContainer(container,1,sizes[0].growlersize2,prices[0].growlerprice2)"><img
-                          :src="require('@/assets/carga.png')" alt=""></button>
+                        data-placement="top" title="Envase Vacio Pequeño" v-on:click="createContainer(container,1,sizes[0].growlersize2,prices[0].growlerprice2)"><img
+                          :src="require('@/assets/carga2.png')" alt=""></button>
                           
                     </template>
                    
@@ -249,55 +260,77 @@
       <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6 card bg-warning centrar">
-          
-         <div class="text-center form-group col-md-6">
+          <form v-on:submit.prevent="sendSale" >
+         <div class="text-center form-group col-md-12">
             <div class="">
-            <h3><span class="cliente">Cliente:</span></h3>
-            <input type="text" class="form-control" v-model="client" id="cliente" requiered aria-label="Small"
-              placeholder="Nombre" aria-describedby="inputGroup-sizing-sm"><br>
-            <h3><span class="cliente" >Fecha:</span></h3>
+              <h3><span class="cliente" >Fecha:</span></h3>
             <input type="date" class="form-control" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            <h3><span class="cliente">Cliente:</span></h3>
+            <select v-model="client" class="custom-select mb-1" required >
+                  
+                  <option v-for="client in clients" v-bind:value="client._id">
+                    {{client.name}}
+                  </option>
+              </select>
+            
           </div>
           </div>
+             <h3 class="text-center badge-pill badge-dark precios">Total venta: {{totalSale}} </h3>
+           <center><button class="btn btn-warning">Procesar venta</button></center>
+        </form>
         </div>
         <div class="col-md-3"></div>
       </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="text-center badge-pill badge-dark precios">Total venta: {{totalSale}} </h3>
-           <center><button class="btn btn-warning" v-on:click="sendSale()">Procesar venta</button></center>
+     
+        
          
-        </div>
-
-      </div>
-
-      <modal name="hello-world">
-        <div class="container ">
-          <h3 class="mt-5">Ingrese datos</h3>
+      
+      <modal name="hello-world" height="auto">
+        <div class="container bg-dark ">
+          <div class="breadcrumb bg-warning">
+              <h5 class="">Ingrese el precio y la cantidad de litros a vender</h5>
+          </div>
+          
           <form v-on:submit.prevent="hide()">
             <div class="input-group-pretend mb-3">
               <input type="number" class="form-control mb-1" v-model="newOther.price" placeholder="Precio" required>
               <input type="text" class="form-control mb-1" v-model="newOther.quantity" placeholder="Cantidad" required>
             </div>
-            <button class="btn btn-primary btn-block">Agregar</button>
+            <button class="btn btn-outline-warning btn-block">Agregar</button>
           </form>
         </div>
       </modal>
 
-      <modal name="disconect">
-        <div class="container ">
-          <h3 class="mt-5">¿Desconectar Barril?</h3>
+      <modal name="disconect" 
+             height="auto"> 
+            
+        <button class="btn btn-danger posicion" v-on:click="cerrar()">X</button>
+        <div class="container bg-dark">
+        
+          <h3 class="">¿Desconectar Barril?</h3>
           <div id="row">
-            <h3 class="">Cerveza: {{newDisconect.beer}}</h3>
-            <button v-on:click="empty(newDisconect.kegid)" class="btn btn-danger">Vacio</button>
-            <button v-on:click="started(newDisconect.kegid)" class="btn btn-danger">Desconectar</button>
+            <h3 class="bg-dark">Cerveceria <span class="badge-pill badge-warning">{{this.newDisconect.brewery}}</span></h3>
+            <h3 class="bg-dark">Cerveza: <span class="badge-pill badge-warning">{{this.newDisconect.beer}}</span></h3>
+            <h3 class="bg-dark">Cantidad restante: <span class="badge-pill badge-danger">{{this.newDisconect.quantitySaled}}</span></h3>
+            <h2 class="hide">{{keg = this.newDisconect.keg}}</h2>
+            <div class="breadcrumb bg-danger">
+            <h5>Recuerde: El barril pasara a vacio y solo se podra pagar al proveedor el mismo. <center><button v-on:click="empty(keg)" class="btn btn-danger"><h5 class="onh">Vacio</h5></button></center></h5>
+            
+            </div>
+             <div class="breadcrumb bg-success">
+         
+            <h5>Recuerde: El barril pasara a empezado y se podra volver a conectar desde BARRILES    <center><button v-on:click="started(keg)" class="btn btn-success"><h5 class="onh">Desconectar</h5></button></center></h5>
+          </div>
           </div>
         </div>
+        
       </modal>
 
-      <modal name='bottles'>
-        <div class="container">
+      <modal name='bottles'
+      height='auto'
+      >
+        <div class="container bg-dark">
           <div class="row">
             <div class="col-12  col-md-12">
               <div class="card">
@@ -319,8 +352,8 @@
                         <td>{{bottle.stock}}</td>
                         <td>{{bottle.brewery.name}}</td>
                         <td>{{bottle.price}}</td>
-                        <td><input type="number form-control" v-model="newBottle.quantitySaled" placeholder="Ingrese cantidad"></td>
-                        <td><button class="btn btn-sm" v-on:click="createBottle(bottle)"><i class="material-icons">exposure_plus_1</i></button></td>
+                        <td><input type="number form-control" v-model="newBottle.quantitySaled" placeholder="Cantidad"><button class="btn btn-sm btn-outline-warning" v-on:click="createBottle(bottle)">Agregar</button></td>
+                       
                       </tr>
                     </tbody>
                   </table>
@@ -335,6 +368,7 @@
 </template>
 <script>
 import Vue from 'vue'
+
 import RadialProgressBar from 'vue-radial-progress'
 const moment = require('moment')
 const axios = require('axios')
@@ -389,8 +423,13 @@ export default {
       prices:[],
       sizes:[],
       hhour: 0,
-      newDisconect:{},
-      diametro: 220
+      newDisconect:{
+          keg:'',
+          beer:''
+      },
+      diametro: 220,
+      clients:[],
+      keg:''
 
     
       
@@ -403,9 +442,23 @@ export default {
      this.getPrices();
      this.getSizes();
      this.getContainers();
+     this.getClients();
   },
 
   methods:{
+    getClients(){
+    axios({
+      url:'http://localhost:3000/clients',
+      headers: {authorization: `Bearer ${localStorage.token}`}
+    })
+    .then(res=>{
+      console.log(res);
+      this.clients = res.data.Clients;
+    })
+    .catch(e =>{
+      console.log(e)
+    })
+    },
      getKegs() {
       axios({
         url:'http://localhost:3000/keg',
@@ -470,6 +523,13 @@ export default {
           return false
           console.log(e)
         })
+    },
+    cerrar(){
+     this.newDisconect={
+      keg:'',
+      beer:''
+     }
+     this.$modal.hide('disconect');
     },
     createGrowler(keg,litres,price){
 
@@ -593,15 +653,17 @@ export default {
   openModalBottles(){
     this.$modal.show('bottles');
   },
+   beforeOpen (event) {
+    console.log(event.params.keg)
+  },
   openModalDisconect(keg){
-    this.$modal.show('disconect');
-    this.newDisconect.kegid = keg._id
+      
+    this.newDisconect.keg = keg._id
     this.newDisconect.beer = keg.beer
     this.newDisconect.brewery = keg.brewery.name
-    this.newDisconect.quantity = keg.quantity
     this.newDisconect.quantitySaled = keg.quantitySaled
-    
-
+    console.log(this.newDisconect);
+    this.$modal.show('disconect');
   },
   createBottle(bottle){
     if(bottle.stock >= this.newBottle.quantitySaled && this.newBottle.quantitySaled > 0  ){
@@ -763,8 +825,11 @@ notifyError(title,text){
               })
 },
 started(idKeg){
-    this.newDisconect={}
-     axios.put({
+    this.newDisconect={
+      keg:'',
+      beer:''
+    }
+     axios({
        method:'PUT',
        url:`http://localhost:3000/keg/started/${idKeg}` ,
        headers: {authorization: `Bearer ${localStorage.token}`}
@@ -773,11 +838,14 @@ started(idKeg){
        console.log(res)
        this.getKegs();
      })
-     this.newDisconect={}
+     
      this.$modal.hide('disconect');
   },
  empty(idKeg){
-    
+    this.newDisconect={
+      keg:'',
+      beer:''
+    }
      axios({
       method: 'PUT',
       url:`http://localhost:3000/keg/empty/${idKeg}`,
@@ -787,7 +855,7 @@ started(idKeg){
        console.log(res)
        this.getKegs();
      })
-     this.newDisconect={}
+     
      this.$modal.hide('disconect');
   }
 },
@@ -804,6 +872,7 @@ started(idKeg){
 
   components: {
     RadialProgressBar,
+   
 
   }
 
@@ -812,7 +881,9 @@ started(idKeg){
   </script>
 
 <style>
-
+.posicion{
+  float:right;
+}
 .estilo{
   font-size:30px;
   font-family: 'Squada One', cursive;
@@ -836,7 +907,27 @@ started(idKeg){
  
 }
 
+h5{
+  color:white;
+  font-size: 20px;
+  font-family: 'Squada One', cursive;
+ 
+}
+.btn-success{
+  border-color:white !important;
+}
+.btn-danger{
+  border-color:white !important;
+}
+button .onh{
+  
+  color: white;
+}
+
 .container .centrar{
   align-items: center;
+}
+.hide{
+  display:none;
 }
 </style>

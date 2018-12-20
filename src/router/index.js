@@ -7,6 +7,7 @@ import sale from '../components/sale/sale'
 import payment from '../components/buy/payment'
 import brewery from '../components/brewery/brewery'
 import pipes from '../components/Pipes/pipes'
+import clients from '../components/clients/clients'
 
 import index from '../components/index/index'
 import signup from '../components/user/signup'
@@ -136,6 +137,11 @@ export default new Router({
     {
       path: '/recoverUsername',
       component: resetUsername,
+    },
+    {
+      path: '/clients',
+      component: clients,
+      beforeEnter:isLogin
     }
   ]
 })

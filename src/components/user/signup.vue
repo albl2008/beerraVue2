@@ -82,9 +82,9 @@
                             </div>
                             <div class="container">
                                 <div class="row">
-                                    <button type="submit" class="btn btn-primary">Signup</button>
-                                    <div v-if="signingUP">
-                                        <img height="30px" width="30px" src="../../assets/load.svg" class="ml-2">
+                                    <button type="submit" class="btn btn-warning">Registrarse</button>
+                                    <div v-if="signingUP" class="ml-2">
+                                        <img height="30px" width="30px" src="../../assets/load.svg" class="ml-2 badge badge-pill bg-warning">
                                     </div>
                                 </div>
                             </div>
