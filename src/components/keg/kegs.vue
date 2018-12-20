@@ -70,8 +70,8 @@
                   <input type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="IBU" required>
                   <input type="text" class="form-control mb-1" v-model="newKeg.alcohol" placeholder="Alcohol" required>
 
-                  <select v-model="newKeg.brewery" class="custom-select mb-1" required>
-                    <option value="" selected disabled>Please select</option>
+                  <select v-model="newKeg.brewery" class="custom-select mb-1" required >
+                    <option class="courier" value="" disabled selected>Cerveceria</option>
                     <option v-for="brewery in breweries" v-bind:value="brewery._id">
                       {{brewery.name}}
                     </option>

@@ -7,7 +7,7 @@
     </div>
       <div class="row">
         
-          <div class="col-12 col-sm-12 col-md-7">
+          <div class="col-12 col-sm-12 col-md-4">
             <div class="card">
               <div class="card-header">
                 <h3>Botellones</h3>
@@ -17,48 +17,54 @@
               <thead>
               <th>Tamaño</th>
               <th>Stock</th>
-              <th>Costo</th>
-              <th>Comprar</th>
+              <th>Ver Ventas</th>
               </thead>
               <tbody>
                 <tr v-for="container in containers" >
                   <td>{{container.size}}</td>
                   <td>{{container.stock}}</td>
-                  <td>{{container.cost}}</td>
-                  <td><button class="btn btn-primary btn-sm" v-on:click="updateContainer(container._id)"><i class="material-icons">attach_money</i></button></td>
+                  <td><button v-on:click="showSales(container._id)" class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
+                      data-placement="top" title="Desconectar Barril"><i class="material-icons">attach_money</i></button></td>
                 </tr>
               </tbody>
             </table>
               </div>
             </div>            
       </div>
-      <div class="col-12 col-sm-12  col-md-5">
+      <div class="col-12 col-sm-12  col-md-3">
           <div class="card">
             <div class="card-header">
-               <h3>Compra</h3> 
-            </div>  
-            <div class="card-body">
-  <form v-on:submit.prevent="addContainer" >
+               <h3>Ver ventas</h3> 
+            </div> 
+            <template v-if="show"> 
 
-          <div class="input-group-pretend mb-3">
               
-           <label>Tamaño: </label>
-           <select v-model="newContainer.size">
-             <option v-for="size in sizes">{{size.growlersize}}</option>
-             <option v-for="size in sizes">{{size.growlersize2}}</option>
-           </select>
-            <input type="text" class="form-control mb-1" v-model="newContainer.stock" placeholder="Cantidad" required>  
-            <input type="text" class="form-control mb-1" v-model="newContainer.cost" placeholder="Costo por Unidad" required>
-          </div>
-            <template v-if="edit === false">
-                <button class="btn btn-primary btn-block">AGREGAR</button>
-            </template>
-            <template v-else>
-                <button class="btn btn-primary btn-block" >COMPRAR</button>
-            </template>
-
-        </form>
+              
+            
+            <div class="card-body">
+                 <table class="table">
+              <thead>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              
+              
+             
+              </thead>
+              <tbody>
+                
+                <tr v-for="sale in sales" v-bind:key="sale._id">
+                  
+                  <td>{{sale.quantitySaled}}</td>
+                  <td>{{sale.totalPrice}}</td>
+                  
+                  
+                 
+                 
+                </tr>
+              </tbody>
+            </table>
             </div>
+            </template> 
           </div>
 
       </div>
@@ -87,7 +93,9 @@ export default {
       containers:[],
       edit: false,
       containerToEdit:'',
-      sizes:{}
+      sizes:{},
+      sales:{},
+      show:false
 
 
 
@@ -97,7 +105,6 @@ export default {
         this.getContainers();
         this.getSizes();
         this.getContainerSizes();
-
     },
    methods:{
      getContainers(){
@@ -114,6 +121,19 @@ export default {
 
       })
     },
+    showSales(idContainer){
+            axios({
+                url:`http://localhost:3000/sale/containersaled/${idContainer}`,
+                headers: {authorization: `Bearer ${localStorage.token}`}
+                })
+            .then(response =>{
+                console.log(response)
+                this.sales = response.data.sales
+            }).catch(e => {
+                console.log(e)
+            })
+            this.show=true;
+        },
     getSizes() {
       axios({
         url:'http://localhost:3000/pricize/size',

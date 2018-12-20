@@ -24,6 +24,9 @@
         <li class="nav-item">
           <a class="nav-link " href="http://localhost:8080/#/brewery">Cerveceria <img :src="require('@/assets/navbar/cerveceria.png')" alt="" class=""></a>
         </li>
+         <li class="nav-item">
+          <a class="nav-link " href="http://localhost:8080/#/clients">Clientes <img :src="require('@/assets/navbar/clients.png')" alt="" class=""></a>
+        </li>
         <li class="nav-item">
           <a class="nav-link " href="http://localhost:8080/#/bottle">Botellas <img :src="require('@/assets/navbar/bottles.png')" alt="" class=""></a>
         </li>
@@ -58,7 +61,9 @@
 
     <!-- Page Content -->
     <div id="app">
+    
       <router-view />
+       <vue-glide> <vue-glide-slide></vue-glide-slide> </vue-glide>
       <notifications group="foo" position="bottom right" width="450px" />
     </div>
   </div>
@@ -68,6 +73,10 @@
 </template>
 
 <script>
+
+
+
+
 
 $(function() {
     $.fn.extend({
@@ -157,7 +166,7 @@ a{
   color: #ffc107 !important;
 }
 .card{
-  border-radius: 10px !important;
+  border-radius: 0px !important;
   border-color:#ffc107;
 }
 .card-header{
@@ -180,6 +189,7 @@ a{
     transition: all 0.3s;
     height: 100%;
 }
+
 
 
 #sidebar a{
@@ -213,6 +223,15 @@ input[type="text"], textarea {
   
   background-image: linear-gradient(to left,#343a40,black) !important;
 }
+input[type="number"], textarea {
+  -moz-appearance:textfield;
+  background-image: linear-gradient(to left,#343a40,black) !important;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 input[type="email"], textarea {
   background-image: linear-gradient(to left,#343a40,black) !important;
 }
@@ -231,14 +250,14 @@ input[type="date"], textarea {
 .card{
   background-image: linear-gradient(to left,#343a40,black);
 }
-.custom-select textarea{
-  color:#ffc107;
-}
+
 .custom-select {
+    
     color:#ffc107;
-    background: linear-gradient(to left,#343a40,black) !important; 
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    font-family: 'Courier New', Courier, monospace;
+    background: #343a40 !important; 
 }
+
 input{
   font-family: "Courier New", Courier;
   color: #ffc107 !important;
@@ -296,6 +315,7 @@ th{
 #logout{
   display:inline-block;
 }
+.custom-select:focus,
 textarea:focus,
 input:focus,
 input[text]:focus,

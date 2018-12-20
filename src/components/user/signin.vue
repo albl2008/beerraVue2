@@ -46,9 +46,9 @@
                                     </small>
                                 </div>        
                                 <div class="container">
-                                    <div class="row">
-                                        <button type="submit" class="btn btn-primary">Login </button>
-                                        <div v-if="signingIN">
+                                    <div class="row bg-warning breadcrumb">
+                                        <button type="submit" class="btn btn-outline-dark">Ingresar </button>
+                                        <div v-if="signingIN" class="">
                                             <img height="30px" width="30px" src="../../assets/load.svg" class="ml-2">
                                         </div>
                                     </div>
@@ -133,6 +133,9 @@ export default {
         }
     }
 }
+
+
+
 </script>
 
 <style>
