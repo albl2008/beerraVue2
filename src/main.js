@@ -8,6 +8,8 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' 
 import VModal from 'vue-js-modal'
 import persistentState from 'vue-persistent-state'
+import VueGlide from 'vue-glide-js'
+import 'vue-glide-js/dist/vue-glide.css'
 const initialState = {
   isLoggIn: false
 };
@@ -17,7 +19,8 @@ Vue.use(Chart)
 
 Vue.use(Chart)
 Vue.use(persistentState,initialState)
-Vue.use(VModal) 
+Vue.use(VModal, { dynamic: true }) 
+Vue.use(VueGlide)
 Vue.use(Vuetify)
 Vue.config.productionTip = false
 Vue.use(Notifications)

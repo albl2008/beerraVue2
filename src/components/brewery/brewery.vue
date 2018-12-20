@@ -201,7 +201,7 @@ created(){
 },
 methods:{
   addcontact(){
-    if(this.validContact()){
+    
     if(this.editContact === false){
       this.contact.push(this.newcontact)
       this.newBrewery.contact = this.contact
@@ -222,7 +222,7 @@ methods:{
         text: 'Contacto editado correctamente'
       })
     }
-    }
+    
   },
   deleteContact(contact){
     this.contact.splice(contact,1)
@@ -239,7 +239,7 @@ methods:{
 
   },
   addBrewery(){
-    if(this.validBrewery()){
+    
     if(this.edit === false){
 
        if(this.contact.length === 0){
@@ -320,7 +320,7 @@ methods:{
         })
       }
       }
-    }
+    
   },
   getBreweries(){
     axios({

@@ -10,7 +10,7 @@
         
         <div class="row"> 
             
-            <div class="col-md-7">  
+            <div class="col-md-8">  
             <div class="card">
                 <div class="card-header bg-dark">
                     <h3>LISTADO DE VENTAS</h3>
@@ -24,14 +24,15 @@
               <th>Growlers</th>
               <th>Pintas</th>
               <th>Botellas</th>
-              <th>Otros</th>
+              <th>Por cantidad</th>
+              <th>Envases</th>
               </thead>
               <tbody>
-                <tr v-for="sale in sales" >
-                  <td v-if="sale.client">{{sale.client}}</td>
-                  <td v-else>-</td>
-                  <td v-if="sale.date">{{format(sale.date)}}</td>
-                  <td v-else>-</td>
+                <tr v-for="sale in sales">
+                  <td>{{sale.client.name}}</td>
+
+                  <td>{{format(sale.date)}}</td>
+              
                   
                   <td>{{sale.totalSale}}</td>  
                   <template v-if="Object.keys(sale.growlers).length === 0">
@@ -52,6 +53,10 @@
                     <td><button class="btn btn-outline-dark disabled"><img :src="require('@/assets/other.png')" alt=""></button></td></template>
                    <template v-else>
                    <td><button class="btn btn-light" v-on:click="getOther(sale._id)"><img :src="require('@/assets/other.png')" alt=""></button></td></template>
+                   <template v-if="Object.keys(sale.containers).length === 0">
+                    <td><button class="btn btn-outline-dark disabled"><img :src="require('@/assets/carga2.png')" alt=""></button></td></template>
+                   <template v-else>
+                   <td><button class="btn btn-light" v-on:click="getContainers(sale._id)"><img :src="require('@/assets/carga2.png')" alt=""></button></td></template>
                   
                  
                   
@@ -61,7 +66,7 @@
             </div>
             </div>
             </div>
-         <div class="col-md-5">
+         <div class="col-md-4">
              
           <div class="card bg-dark sticky-top">
                     <div class="card-header">
@@ -139,6 +144,25 @@
                     </tbody>
                 </table>
             </template>
+             <template v-else-if='isContainers===true'>
+                 <table class="table ">
+                    <thead>
+                        <th>Tamaño</th>                         
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        
+                        
+                    </thead>
+                    <tbody>
+                        
+                        <tr v-for="containerSaled in containers">
+                            <td>{{containerSaled.container.size}}</td>
+                            <td>{{containerSaled.quantitySaled}}</td>                          
+                            <td>{{containerSaled.totalPrice}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </template>
             <template v-else>
                 <p class="seleccione">Seleccione articulos de la venta para ver su información</p>
             </template>
@@ -163,10 +187,12 @@ export default {
            bottles:[],
            pints:[],
            others:[],
+           containers:[],
            isGrowlers:false,
            isBottles:false,
            isPints:false ,
            isOther:false,  
+           isContainers:false,
            search:''  
         }
     },
@@ -197,6 +223,7 @@ export default {
                 this.growlers = response.data.growlers
                 this.isPints = false
                 this.isGrowlers = true
+                this.isContainers = false
                  this.isBottles = false
                  this.isOther=false
             }).catch(e => {
@@ -213,6 +240,7 @@ export default {
                 this.pints = response.data.pints
                 this.isPints = true
                 this.isGrowlers = false
+                this.isContainers = false
                 this.isBottles = false
                 this.isOther=false
             }).catch(e => {
@@ -230,6 +258,7 @@ export default {
                 this.isPints = false
                 this.isGrowlers = false
                 this.isBottles = false
+                this.isContainers = false
                 this.isOther=true
             }).catch(e => {
                 console.log(e)
@@ -237,7 +266,6 @@ export default {
         },
          getBottles(idSale){
              axios({
-                 method:'POST',
                  url:`http://localhost:3000/sale/bottles/${idSale}`,
                  headers: {authorization: `Bearer ${localStorage.token}`}
                  })
@@ -247,6 +275,24 @@ export default {
                 this.isPints = false
                 this.isGrowlers = false
                 this.isBottles = true
+                this.isContainers = false
+                this.isOther=false
+            }).catch(e => {
+                console.log(e)
+            })
+        },
+         getContainers(idSale){
+             axios({
+                 url:`http://localhost:3000/sale/containers/${idSale}`,
+                 headers: {authorization: `Bearer ${localStorage.token}`}
+                 })
+            .then(response =>{
+                console.log(response)
+                this.containers = response.data.containers
+                this.isPints = false
+                this.isGrowlers = false
+                this.isBottles = false
+                this.isContainers = true
                 this.isOther=false
             }).catch(e => {
                 console.log(e)
