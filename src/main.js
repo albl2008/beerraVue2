@@ -13,9 +13,11 @@ import 'vue-glide-js/dist/vue-glide.css'
 const initialState = {
   isLoggIn: false
 };
+import Chart from 'vue2-frappe'
 
+Vue.use(Chart)
 
-
+Vue.use(Chart)
 Vue.use(persistentState,initialState)
 Vue.use(VModal, { dynamic: true }) 
 Vue.use(VueGlide)
