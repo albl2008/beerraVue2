@@ -176,7 +176,7 @@
                   <td>{{bottle.price}}</td>
                   <td><button class="btn btn-outline-primary btn-sm" v-on:click="buyBottle(bottle._id)"><i class="material-icons">attach_money</i></button></td>
                   <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateBottle(bottle._id)"><i class="material-icons">edit</i></button></td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteBottle(bottle._id)"><i class="material-icons">delete</i></button></td>
+                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="showModal(bottle._id)"><i class="material-icons">delete</i></button></td>
                  
                 </tr>
               </tbody>
@@ -218,7 +218,19 @@
               </div>
             </div>            
      
-
+    <modal name="delete" height="auto">
+        <div class="container bg-dark ">
+          <div class="breadcrumb bg-warning">
+              <h5 class="">¿Esta seguro que desea eliminar el Barril?</h5>
+          </div>
+          
+            <div class="input-group-pretend mb-3">
+                  <button class="btn btn-success"  v-on:click="deleteBottle(idKeg)" >Aceptar</button>
+                  <button class="btn btn-danger" v-on:click="hideModal()">Cancelar</button>
+            </div>
+            
+        </div>
+      </modal>
 </div>
 <div class="col-md-4">
   
@@ -253,7 +265,19 @@
  </div>
       </div>
 
- 
+     <modal name="delete" height="auto">
+        <div class="container bg-dark ">
+          <div class="breadcrumb bg-warning">
+              <h5 class="">¿Esta seguro que desea eliminar la botella?</h5>
+          </div>
+          
+            <div class="input-group-pretend mb-3">
+                  <button class="btn btn-success"  v-on:click="deleteBottle(idBottle)" >Aceptar</button>
+                  <button class="btn btn-danger" v-on:click="hideModal()">Cancelar</button>
+            </div>
+            
+        </div>
+      </modal>
  
     </div>
 
@@ -337,6 +361,7 @@ class newBottleBuy{
 export default {
   data(){
     return{
+      idBottle:'',
       errorMessage:'',
       newBottle:{},
       bottles:[],
@@ -388,7 +413,7 @@ export default {
       })
     },
     addBottle(){
-      if(this.validBottle())
+      if(this.validBottle()){
       if(this.edit === false && this.buy===false){
 
       axios({
@@ -480,6 +505,7 @@ export default {
         })
       
       }
+      }
     },
    // getBreweryName(idBrewery){
    //   axios({
@@ -513,7 +539,16 @@ export default {
         console.log(response);
       })
     },
+        showModal(idBottle){
+      this.idBottle = idBottle
+        this.$modal.show('delete');
+         
+    },
+    hideModal(){
+      this.$modal.hide('delete');
+    },
     deleteBottle(idBottle){
+       this.$modal.hide('delete');
       axios({
         method: 'delete',
         url:`http://localhost:3000/bottle/${idBottle}`,
@@ -521,7 +556,8 @@ export default {
       })
       .then(res =>
       {
-         if(res.status === 200 ){
+        console.log("Holaaaaa")
+        
             Vue.notify({
               group: 'foo',
               type:'success',
@@ -530,13 +566,14 @@ export default {
             })
         console.log(res)
         this.getBottles()
-         }
+         
         }).catch(e =>{
+          
           Vue.notify({
           group: 'foo',
           type:'error',
           title: 'Barril',
-          text: `Error al eliminar el barril ${e}`
+          text: `No es posible eliminar la botella se han realizado ventas o compras.`
         })
       })
     },

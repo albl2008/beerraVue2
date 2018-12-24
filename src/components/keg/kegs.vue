@@ -121,7 +121,7 @@
                     <td>{{keg.ibu}}</td>
                     <td>{{keg.alcohol}}</td>
                     <td>{{keg.brewery.name}}</td>
-                    <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteKeg(keg._id)"><i class="material-icons">delete</i></button></td>
+                    <td><button class="btn btn-outline-danger btn-sm" v-on:click="showModal(keg._id)"><i class="material-icons">delete</i></button></td>
                     <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateKeg(keg._id)"><i class="material-icons">edit</i></button></td>
                     <template v-if="keg.sta === 1 || keg.sta === 2">
                       <td><button class="btn btn-outline-success btn-sm" v-on:click="connect(keg._id)"><i class="material-icons">power</i></button></td>
@@ -142,6 +142,19 @@
 
       </div>
     </div>
+         <modal name="delete" height="auto">
+        <div class="container bg-dark ">
+          <div class="breadcrumb bg-warning">
+              <h5 class="">¿Esta seguro que desea eliminar el Barril?</h5>
+          </div>
+          
+            <div class="input-group-pretend mb-3">
+                  <button class="btn btn-success"  v-on:click="deleteKeg(idKeg)" >Aceptar</button>
+                  <button class="btn btn-danger" v-on:click="hideModal()">Cancelar</button>
+            </div>
+            
+        </div>
+      </modal>
   </div>
 </template>
 <script>
@@ -179,6 +192,7 @@ export default {
   components: { Swatches },
   data() {
     return {
+     idKeg: '',
       errorMessage:'',
       newKeg: {},
       kegs: [],
@@ -294,8 +308,17 @@ export default {
           console.log(response);
         })
     },
+    showModal(idKeg){
+      this.idKeg = idKeg
+        this.$modal.show('delete');
+         
+    },
+    hideModal(){
+      this.$modal.hide('delete');
+    },
     deleteKeg(idKeg) {
-      if(this.edit === false){
+     this.hideModal()
+      if(this.edit === false ){
       axios({
         method:'DELETE',
         url:`http://localhost:3000/keg/${idKeg}`,
@@ -308,11 +331,13 @@ export default {
             this.getKegs()
           }
         }).catch(e => {
+           
          this.notifyError("Barril","Error al eliminar barril")
         })
       }else{
         this.notifyWarning("Barril","Precione actualizar para poder eliminar el barril")
       }
+      
     },
     updateKeg(idKeg) {
       axios({

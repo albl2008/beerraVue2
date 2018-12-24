@@ -1,0 +1,16 @@
+[X] Dialogo eliminacion de keg
+[X] Verificacion de eliminacion de barriles 
+
+[X] Dialogo de eliminacion  de Cerveceria
+[X] Verificacion de eliminacion de Cerveceria
+
+[X] Dialogo de eliminacion de Clientes
+[X] Verificacion de eliminacion de Clientes
+
+[X] Dialogo de eliminacion de Botellas
+[X] Verificacion de eliminacion de Botellas
+
+[ ] Dialogo de eliminaciond e ventas 
+
+[ ] Dialogo de eliminacion de pagos
+
