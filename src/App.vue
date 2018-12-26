@@ -117,12 +117,14 @@ created(){
       axios.interceptors.response.use(response => {
         return response;
       }, error => {
-  
+        console.log(error)
       if (error.response.status == 401) {
               let   message = 'El token expiro inicie sesion'
           localStorage.removeItem('token')
-      this.$router.push({path:`/signin/${message}`})      }
-     return error
+      this.$router.push({path:`/signin/${message}`})      
+      }
+
+     return Promise.reject(error)
   });
     },
     checkIfIsLogged () {

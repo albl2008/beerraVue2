@@ -95,7 +95,7 @@
                 <td>{{brewery.name}}</td>
                 <th>{{brewery.address}}</th>
                 <td><button class="btn btn-outline-success btn-sm" v-on:click="getcontact(brewery._id)"><i v-on:click="getcontact(brewery._id)" class="material-icons">contact_phone</i></button></td>
-                <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteBrewery(brewery._id)"><i class="material-icons">delete</i></button></td>
+                <td><button class="btn btn-outline-danger btn-sm" v-on:click="showModal(brewery._id)"><i class="material-icons">delete</i></button></td>
                 <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateBrewery(brewery._id)"><i class="material-icons">edit</i></button></td>
               </tr>
             </tbody>
@@ -129,6 +129,18 @@
       </div>
   </div>
     </div>
+        <modal name="delete" height="auto">
+        <div class="container bg-dark">
+          <div class="breadcrumb bg-warning">
+            <h5 class>¿Esta seguro que desea eliminar la cerveceria?</h5>
+          </div>
+
+          <div class="input-group-pretend mb-3">
+            <button class="btn btn-success" v-on:click="deleteBrewery(idBrewery)">Aceptar</button>
+            <button class="btn btn-danger" v-on:click="hideModal()">Cancelar</button>
+          </div>
+        </div>
+      </modal>
 </div>
 </template>
 <script>
@@ -147,7 +159,7 @@ const schema = Joi.object().keys({
 
 const contactSchema = Joi.object().keys({
     name: Joi.string().min(3).max(20).required(),
-    tel: Joi.number().min(5).max(20).required(),
+    tel: Joi.number().required(),
     mail: Joi.string().email().required(),
 })
 class newBrewery{
@@ -163,6 +175,7 @@ const axios = require('axios')
 export default {
 data(){
   return{
+    idBrewery:'',
     errorMessage:'',
       newBrewery:{
          contact:[],
@@ -201,7 +214,7 @@ created(){
 },
 methods:{
   addcontact(){
-    
+    if(this.validContact()){
     if(this.editContact === false){
       this.contact.push(this.newcontact)
       this.newBrewery.contact = this.contact
@@ -223,6 +236,7 @@ methods:{
       })
     }
     
+  }
   },
   deleteContact(contact){
     this.contact.splice(contact,1)
@@ -275,7 +289,7 @@ methods:{
             group: 'foo',
             type:'error',
             title: 'Cerveceria',
-            text: `Error al guardar la cerveceria ${e}`
+            text: e.response.data
       })
       })
     }
@@ -345,7 +359,15 @@ methods:{
       this.contactBrewery = res.data.brewery.contact
     })
   },
+   showModal(idBrewery) {
+      this.idBrewery = idBrewery;
+      this.$modal.show("delete");
+    },
+    hideModal() {
+      this.$modal.hide("delete");
+    },
   deleteBrewery(idBrewery){
+    this.hideModal()
     axios({
       method:'delete',
       url:`http://localhost:3000/brewery/${idBrewery}`,
@@ -372,11 +394,12 @@ methods:{
       }
 
     }).catch(e => {
+
       Vue.notify({
             group: 'foo',
             type:'error',
             title: 'Cerveceria',
-            text: `Error al eliminar la cerveceria ${e}`
+            text: e.response.data
       })
     })
   },
