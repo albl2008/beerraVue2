@@ -10,19 +10,12 @@
     
 
     <div class="container">
-   <vue-glide :bullet="true">
-  <vue-glide-slide v-for="keg in kegs" :key="keg"> Slide {{ keg }} </vue-glide-slide>
-  <template slot="control">
-    <button data-glide-dir="<">prev</button>
-    <button data-glide-dir=">">next</button>
-  </template>
-</vue-glide>
-
       <div class="row mb-5">
-
-        <template v-for="keg in kegs">
-          <template v-if="keg.sta === 4">
-            <div class="col-md-3 col-sm-12 mb-5">
+        <template v-if="timeout">
+               <carousel-3d ref="mycarousel" :display="7" :controls-prev-html="'&#10092;'" :controls-next-html="'&#10093;'" :controlsVisible="true" :height="354" :width="260" :count="kegs.lenght">
+                 
+              <slide v-for="(keg, i) in  kegs" :index="i" :key="keg._id">
+                
               <div class="card">
                 <div class="card-header tituloCardHeader bg-dark">
                   <div class="row">
@@ -64,15 +57,18 @@
                           :src="require('@/assets/other.png')" alt=""></button>
                 </div>
               </div>
+             
+            </slide>
+             
+ </carousel-3d>
 
-
-
-            </div>
-          </template>
         </template>
+      </div>   
+          
+        
       </div>
       
-
+<div class="container">
       <div class="row mb-2">
         <div class="col-6 col-sm-12 col-md-6">
           <div class="card">
@@ -194,6 +190,8 @@
 
         </div>
       </div>
+      </div>
+      <div class="container">
       <div class="row mb-5">
         <div class="col-6 col-sm-12 col-md-6">
           <div class="card">
@@ -255,6 +253,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
        <div class="container">
       <div class="row">
@@ -368,7 +367,7 @@
 </template>
 <script>
 import Vue from 'vue'
-
+import { Carousel3d, Slide } from 'vue-carousel-3d';
 import RadialProgressBar from 'vue-radial-progress'
 const moment = require('moment')
 const axios = require('axios')
@@ -429,20 +428,31 @@ export default {
       },
       diametro: 220,
       clients:[],
-      keg:''
+      keg:'',
+      timeout:false
 
     
       
 
     }
   },
+
   created(){
+
      this.getKegs();
      this.getBottles();
      this.getPrices();
      this.getSizes();
      this.getContainers();
      this.getClients();
+     
+     
+  },
+  mounted(){
+     setTimeout(
+    _ => this.timeout = true, // enable the input
+    1500 // after 1 second
+  )
   },
 
   methods:{
@@ -459,17 +469,21 @@ export default {
       console.log(e)
     })
     },
+   
      getKegs() {
+       
       axios({
-        url:'http://localhost:3000/keg',
+        url:'http://localhost:3000/keg/kegConnected',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
           this.kegs = response.data.Kegs
+         
         }).catch(e => {
           console.log(e)
 
         })
+        
     },
     getBottles(){
       axios({
@@ -531,6 +545,7 @@ export default {
      }
      this.$modal.hide('disconect');
     },
+    
     createGrowler(keg,litres,price){
 
       if(keg.quantitySaled >= litres){
@@ -872,7 +887,9 @@ started(idKeg){
 
   components: {
     RadialProgressBar,
-   
+    'carousel-3d': Carousel3d,
+    'slide': Slide,
+    
 
   }
 
@@ -929,5 +946,11 @@ button .onh{
 }
 .hide{
   display:none;
+}
+.inline button{
+  display:inline-block;
+}
+.inline{
+  text-align: center;
 }
 </style>
