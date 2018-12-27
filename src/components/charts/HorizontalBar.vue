@@ -12,7 +12,7 @@ export default {
        type: Array | Object,
       default: null
     },
-   onpnptions: {
+   options: {
           scales: {
             yAxes: [{
               ticks: {

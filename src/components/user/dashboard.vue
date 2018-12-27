@@ -17,10 +17,22 @@
                    <Barchart v-if="loadedTypes" :growlerData="growlerData" :pintsData="pintsData" :bottlesData="bottlesData" :othersData="othersData"  :labels="labelsTypes"  height="150" />
                 </div>
             </div>
-                 <div class="row"  >
-                <h1 class="ml-2 mb-2">Cantida de Litros por mes.</h1> 
+              <div class="row">
+                 <h1 class=" ml-2 mb-2">Litros vendidos en formato de botellon</h1>
                 <div class="col-md-12 ">
-                   <horizontal-bar v-if="loadedLitres" :chartdata="chartdatalitres" :labels="labels" height="150"/>
+                   <horizontal-bar v-if="loadedLitres" :chartdata="growlerData" :labels="labels" height="150" />
+                </div>
+            </div>
+            <div class="row">
+                 <h1 class=" ml-2 mb-2">Litros vendidos en formato de pintas</h1>
+                <div class="col-md-12 ">
+                   <horizontal-bar v-if="loadedLitres" :chartdata="pintsData" :labels="labelsPints" height="150" />
+                </div>
+            </div>
+            <div class="row">
+                 <h1 class=" ml-2 mb-2">Litros vendidos en formato de venta otros</h1>
+                <div class="col-md-12 ">
+                   <horizontal-bar v-if="loadedLitres" :chartdata="othersData" :labels="labelsOther" height="150" />
                 </div>
             </div>
         </div>
@@ -71,12 +83,17 @@ export default {
             growlerData:[],
             pintsData:[],
             othersData:[],
-            bottlesData:[],
+             growlerlitres:[],
+            pintsLitres:[],
+            othersLitres:[],
             loadedTypes: false,
             labelsTypes:[],
             heigh: 150,
             chartdatalitres:[],
-            loadedLitres: false
+            loadedLitres: false,
+            labelsPints:[],
+            labelsOther:[],
+
          
         }
     },
@@ -128,16 +145,32 @@ export default {
                 })
             .then(response =>{
                 console.log("litros",response)
-                this.chartdatalitres = this.salesYear(response.data.sales)
-                this.labels = response.data.sales.map(sales => sales._id.month)
-                this.labels.sort((a, b) => a - b)
-                this.labels = uniq(this.labels)
-                this.labels = this.getMonth(this.labels)
+                this.growlerData = this.salesYear(response.data.growlers)
+                this.pintsData = this.salesYear(response.data.pints)
+                this.othersData = this.salesYear(response.data.others)
+                this.labelsLitres(response)
                 this.loadedLitres = true
                 
             }).catch(e => {
                 console.log(e)
             })
+        },
+        labelsLitres(response){
+            //growlers
+                this.labels = response.data.growlers.map(sales => sales._id.month)
+                this.labels.sort((a, b) => a - b)
+                this.labels = uniq(this.labels)
+                this.labels = this.getMonth(this.labels)
+            //pints
+                this.labelsPints = response.data.pints.map(sales => sales._id.month)
+                this.labelsPints.sort((a, b) => a - b)
+                this.labelsPints = uniq(this.labelsPints)
+                this.labelsPints = this.getMonth(this.labelsPints)
+            //others
+                this.labelsOther = response.data.others.map(sales => sales._id.month)
+                this.labelsOther.sort((a, b) => a - b)
+                this.labelsOther = uniq(this.labelsOther)
+                this.labelsOther = this.getMonth(this.labelsOther)
         },
         getMonth(array){
             let newArray = []
