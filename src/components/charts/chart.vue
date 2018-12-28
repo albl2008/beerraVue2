@@ -12,7 +12,7 @@ export default {
        type: Array | Object,
       default: null
     },
-   onpnptions: {
+   options: {
           scales: {
             yAxes: [{
               ticks: {
@@ -46,7 +46,7 @@ export default {
             pointBackgroundColor: 'white',
             borderWidth: 1,
             pointBorderColor: '#249EBF',
-            backgroundColor: 'transparent',
+            backgroundColor:'rgba(37, 159, 193, 0.42)' ,
             data: this.chartdata,
             
           }

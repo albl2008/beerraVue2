@@ -11,8 +11,11 @@
 
     <div class="container">
       <div class="row mb-5">
-        <template v-if="timeout">
-               <carousel-3d ref="mycarousel" :display="7" :controls-prev-html="'&#10092;'" :controls-next-html="'&#10093;'" :controlsVisible="true" :height="354" :width="260" :count="kegs.lenght">
+         
+        <template >
+          <div class="text-center col-md-12"> <img v-if="!timeout" height="90px" width="90px" src="../../assets/load.svg" ></div>
+         
+               <carousel-3d v-if="timeout" ref="mycarousel" :display="7" :controls-prev-html="'&#10092;'" :controls-next-html="'&#10093;'" :controlsVisible="true" :height="354" :width="260" :count="kegs.lenght">
                  
               <slide v-for="(keg, i) in  kegs" :index="i" :key="keg._id">
                 
@@ -451,7 +454,7 @@ export default {
   mounted(){
      setTimeout(
     _ => this.timeout = true, // enable the input
-    1500 // after 1 second
+    400 // after 1 second
   )
   },
 

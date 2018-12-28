@@ -15,6 +15,7 @@
     "axios": "^0.18.0",
     "chart.js": "^2.7.3",
     "moment": "^2.22.2",
+    "random-hex-color": "^1.0.1",
     "uniq-array": "^1.0.1",
     "vue": "^2.5.2",
     "vue-carousel-3d": "^0.1.23",

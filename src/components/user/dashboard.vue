@@ -1,38 +1,53 @@
 <template>
     <section>
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-5">
                   <h1 v-if="user">Bienvendido, {{user.username}}!! 😎</h1>
                   <h1 v-if="!user">Trayendo informacion del usuario</h1>                 
             </div>
-            <div class="row"  >
-                <h1 class="ml-2 mb-2">Cantida de ventas por mes.</h1> 
+            <div class="text-center mb-5"><h1>Cantida de ventas por mes.</h1></div>
+            <div class="row mb-5">
                 <div class="col-md-12 ">
                    <Linechart v-if="loaded" :chartdata="chartdata" :labels="labels" height="150"/>
                 </div>
             </div>
-             <div class="row">
-                 <h1 class=" ml-2 mb-2">Cantidad de ventas por formato</h1>
+            <div class="text-center mb-5"><h1>Cantidad de ventas por formato</h1></div>
+             <div class="row mb-5">
                 <div class="col-md-12 ">
                    <Barchart v-if="loadedTypes" :growlerData="growlerData" :pintsData="pintsData" :bottlesData="bottlesData" :othersData="othersData"  :labels="labelsTypes"  height="150" />
                 </div>
             </div>
-              <div class="row">
-                 <h1 class=" ml-2 mb-2">Litros vendidos en formato de botellon</h1>
+            <div class="text-center mb-5"><h1>Litros vendidos en formato de botellon</h1></div>
+              <div class="row mb-5">
                 <div class="col-md-12 ">
-                   <horizontal-bar v-if="loadedLitres" :chartdata="growlerData" :labels="labels" height="150" />
+                   <horizontal-bar v-if="loadedLitres" :chartdata="growlerData" :labels="labels" :colors="coloresBotellon" height="150" />
                 </div>
             </div>
-            <div class="row">
-                 <h1 class=" ml-2 mb-2">Litros vendidos en formato de pintas</h1>
+            <div class="text-center mb-5"><h1>Litros vendidos en formato de pintas</h1></div>
+            <div class="row mb-5">
                 <div class="col-md-12 ">
-                   <horizontal-bar v-if="loadedLitres" :chartdata="pintsData" :labels="labelsPints" height="150" />
+                   <horizontal-bar v-if="loadedLitres" :chartdata="pintsData" :labels="labelsPints" :colors="coloresPintas" height="150" />
                 </div>
             </div>
-            <div class="row">
-                 <h1 class=" ml-2 mb-2">Litros vendidos en formato de venta otros</h1>
+            <div class="text-center mb-5"><h1>Litros vendidos en formato de venta otros</h1></div>
+            <div class="row mb-5">
                 <div class="col-md-12 ">
-                   <horizontal-bar v-if="loadedLitres" :chartdata="othersData" :labels="labelsOther" height="150" />
+                   <horizontal-bar v-if="loadedLitres" :chartdata="othersData" :labels="labelsOther" :colors="coloresOtros" height="150" />
+                </div>
+            </div>
+            <div class="text-center mb-5"><h1>Litros vendidos por cerveceria</h1></div>
+            <div class="row">
+                <div class="col-md-4 ">
+                    <h1 class=" ml-2 mb-2 text-center">Pintas</h1>
+                   <polar-area v-if="loadedBrewery" :chartdata="litresBrewery" />
+                </div>
+                <div class="col-md-4 ">
+                    <h1 class=" ml-2 mb-2 text-center">Botellones</h1>
+                   <polar-area v-if="loadedBrewery" :chartdata="litresGrowlers"  />
+                </div>
+                <div class="col-md-4 ">
+                    <h1 class=" ml-2 mb-2 text-center">Otros</h1>
+                   <polar-area v-if="loadedBrewery" :chartdata="litresOthers"  />
                 </div>
             </div>
         </div>
@@ -44,17 +59,20 @@ import axios from 'axios'
 import Linechart from '../charts/chart'
 import Barchart from '../charts/Bar'
 import HorizontalBar from '../charts/HorizontalBar'
+import polarArea from '../charts/polarArea'
 import uniq from 'uniq-array'
 export default {
     components:{
         Linechart,
         Barchart,
-        HorizontalBar
+        HorizontalBar,
+        polarArea
     },
     mounted(){
         this.getSales()
         this.typesForMonth()
         this.litresForMonth()
+        this.litresForBrewery()
         axios({
             method: 'get',
             url: 'http://localhost:3000/',
@@ -93,8 +111,15 @@ export default {
             loadedLitres: false,
             labelsPints:[],
             labelsOther:[],
+            loadedBrewery: false,
+            litresBrewery:[],
+            litresGrowlers:[],
+            litresOthers:[],
 
-         
+            //colors
+            coloresBotellon: ['rgba(0, 235, 141, 0.93)','rgba(0, 235, 141, 0.42)'],
+            coloresPintas:['rgba(0, 235, 227, 0.99)','rgba(0, 235, 227, 0.42)'],
+            coloresOtros:['rgba(235, 0, 0, 0.94)','rgba(235, 0, 0, 0.43)']
         }
     },
     methods:{
@@ -171,6 +196,18 @@ export default {
                 this.labelsOther.sort((a, b) => a - b)
                 this.labelsOther = uniq(this.labelsOther)
                 this.labelsOther = this.getMonth(this.labelsOther)
+        },
+        litresForBrewery(){
+                axios({
+                    url: 'http://localhost:3000/sale/litresforbrewery',
+                    headers: {authorization: `Bearer ${localStorage.token}`}
+                }).then(response => {
+                    console.log("brewery", response)
+                    this.litresBrewery = response.data.pints
+                    this.litresGrowlers = response.data.growlers
+                     this.litresOthers = response.data.others
+                    this.loadedBrewery = true
+                })
         },
         getMonth(array){
             let newArray = []
