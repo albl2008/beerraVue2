@@ -158,6 +158,7 @@ const schema = Joi.object().keys({
 })
 
 const contactSchema = Joi.object().keys({
+    _id: Joi.string(),
     name: Joi.string().min(3).max(20).required(),
     tel: Joi.number().required(),
     mail: Joi.string().email().required(),
@@ -189,7 +190,8 @@ data(){
       Cerveceria :'Nueva cerveceria',
       Contacto : 'Contactos nueva cerveceria',
       ContactoForm: 'Nuevo contacto',
-      whatsapp: 'https://wa.me/54'
+      whatsapp: 'https://wa.me/54',
+      
   }
 
 
@@ -215,7 +217,8 @@ created(){
 methods:{
   addcontact(){
     if(this.validContact()){
-    if(this.editContact === false){
+       console.log("Entre")
+    if(!this.editContact){
       this.contact.push(this.newcontact)
       this.newBrewery.contact = this.contact
        Vue.notify({
@@ -226,6 +229,7 @@ methods:{
       })
       this.newcontact = {}
     }else{
+      console.log("Editooo")
       this.newcontact = { }
       this.editContact = false;
       Vue.notify({
@@ -239,6 +243,7 @@ methods:{
   }
   },
   deleteContact(contact){
+    if(!this.editContact){
     this.contact.splice(contact,1)
     Vue.notify({
         group: 'foo',
@@ -246,11 +251,20 @@ methods:{
         title: 'Contacto',
         text: 'Contacto eliminado correctamente'
       })
+    }else{
+      Vue.notify({
+        group: 'foo',
+        type:'warn',
+        title: 'Contacto',
+        text: 'Termine de editar contacto para poder eliminar'
+      })
+    }
   },
   updateContact(contact){
+    console.log("Hola")
     this.editContact = true
     this.newcontact = contact;
-
+  
   },
   addBrewery(){
     
@@ -264,7 +278,6 @@ methods:{
             text: 'Ingrese al menos un contacto'
       })
     }else{
-      console.log("holaa")
       axios({
       method:'POST',
       url:'http://localhost:3000/brewery',
@@ -280,7 +293,7 @@ methods:{
             group: 'foo',
             type:'success',
             title: 'Cerveceria',
-            text: res.data.mensaje
+            text: res.data.message
       })
     }
       }).catch(e =>{
@@ -320,7 +333,7 @@ methods:{
             group: 'foo',
             type:'success',
             title: 'Cerveceria',
-            text: res.data.mensaje
+            text: res.data.message
           })
           }
 
@@ -360,13 +373,23 @@ methods:{
     })
   },
    showModal(idBrewery) {
+     if(!this.edit){
       this.idBrewery = idBrewery;
       this.$modal.show("delete");
+     }else{
+      Vue.notify({
+            group: 'foo',
+            type:'warn',
+            title: 'Cerveceria',
+            text: 'Termine de editar la cerveceria para poder eliminar.'
+      })
+    }
     },
     hideModal() {
       this.$modal.hide("delete");
     },
   deleteBrewery(idBrewery){
+
     this.hideModal()
     axios({
       method:'delete',
@@ -402,6 +425,7 @@ methods:{
             text: e.response.data
       })
     })
+    
   },
   updateBrewery(idBrewery){
       axios({
@@ -438,6 +462,7 @@ methods:{
   },
     validContact(){
     const result = Joi.validate(this.newcontact,contactSchema)
+    console.log(result.error)
     if(result.error === null){
       return true
     }else{
