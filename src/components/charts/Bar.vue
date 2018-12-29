@@ -58,7 +58,7 @@ export default {
             pointBackgroundColor: 'white',
             borderWidth: 1,
             pointBorderColor: '#249EBF',
-            backgroundColor: 'transparent',
+            backgroundColor: 'rgba(255, 0, 21, 0.42)',
             data: this.growlerData
            
           },{
@@ -67,24 +67,24 @@ export default {
             pointBackgroundColor: 'white',
             borderWidth: 1,
             pointBorderColor: '#249EBF',
-            backgroundColor: 'transparent',
+            backgroundColor: 'rgba(246, 255, 0, 0.42)',
             data: this.pintsData
           }
           ,{
             label: 'Otros',
-            borderColor: '#008080',
+            borderColor: 'rgba(0, 161, 255, 0.94)',
             pointBackgroundColor: 'white',
             borderWidth: 1,
             pointBorderColor: '#249EBF',
-            backgroundColor: 'transparent',
+            backgroundColor: 'rgba(0, 161, 255, 0.42)',
             data: this.othersData
           },{
             label: 'Botellas',
-            borderColor: '#008000',
+            borderColor: '#790080',
             pointBackgroundColor: 'white',
             borderWidth: 1,
             pointBorderColor: '#249EBF',
-            backgroundColor: 'transparent',
+            backgroundColor: 'rgba(121, 0, 128, 0.42)',
             data: this.bottlesData
           },
 

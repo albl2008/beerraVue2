@@ -12,6 +12,9 @@ export default {
        type: Array | Object,
       default: null
     },
+    colors:{
+      type: Array 
+    },
    options: {
           scales: {
             yAxes: [{
@@ -42,11 +45,11 @@ export default {
         datasets: [
           {
             label: 'Litros',
-            borderColor: '#249EBF',
+            borderColor: this.colors[0],
             pointBackgroundColor: 'white',
             borderWidth: 1,
             pointBorderColor: '#249EBF',
-            backgroundColor: 'transparent',
+            backgroundColor: this.colors[1],
             data: this.chartdata,
             
           }
