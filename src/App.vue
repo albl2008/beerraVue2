@@ -1,6 +1,6 @@
 <template>
 <div class="wrapper">
-
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- Sidebar -->
     <nav id="sidebar" class="bg-dark sticky-footer">
      
@@ -60,13 +60,20 @@
     </nav>
 
     <!-- Page Content -->
+    
     <div id="app">
     
       <router-view />
        <vue-glide> <vue-glide-slide></vue-glide-slide> </vue-glide>
       <notifications group="foo" position="bottom right" width="450px" />
+      
+    
     </div>
+
+    
+
   </div>
+
 
  
  
@@ -117,12 +124,14 @@ created(){
       axios.interceptors.response.use(response => {
         return response;
       }, error => {
-  
+        console.log(error)
       if (error.response.status == 401) {
               let   message = 'El token expiro inicie sesion'
           localStorage.removeItem('token')
-      this.$router.push({path:`/signin/${message}`})      }
-     return error
+      this.$router.push({path:`/signin/${message}`})      
+      }
+
+     return Promise.reject(error)
   });
     },
     checkIfIsLogged () {
@@ -146,6 +155,12 @@ created(){
 </script>
 
 <style>
+
+html, body{
+  height: 100% !important;
+  margin: 0 auto;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -153,7 +168,8 @@ created(){
   width: 100%;
   margin-left: 104px;
   position:absolute;
-  background-color: #343a40;
+  height: 100%;
+  background-color: #242424;
 }
 a{
   font-size: 15px;
@@ -176,11 +192,65 @@ a{
   color: #ffc107 !important;
 }
 .card{
-  border-radius: 0px !important;
-  border-color:#ffc107;
+  border-radius: 0.6em;
+  border: 1px solid rgb(88, 88, 88) !important;
+
+}
+/*
+.container{
+  height: 95%;
+  margin-bottom: 0;
+  margin-top: 0;
+}*/
+.container.backlime{
+  background: url('./components/user/backlime.png');
+  background-size: cover;
+}
+
+.signinG{
+  background: rgb(255,193,7);
+background: -moz-linear-gradient(45deg, rgba(255,193,7,1) 0%, rgba(252,178,7,1) 40%, rgba(252,150,7,1) 100%);
+background: -webkit-linear-gradient(45deg, rgba(255,193,7,1) 0%,rgba(252,178,7,1) 40%,rgba(252,150,7,1) 100%);
+background: linear-gradient(45deg, rgba(255,193,7,1) 0%,rgba(252,178,7,1) 40%,rgba(252,150,7,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc107', endColorstr='#fc9607',GradientType=1 );
+border-radius: 0.4em;
+
+}
+
+.sLink{
+  color:rgb(161, 161, 161);
+}
+
+.sLink:hover{
+  color:white;
+  text-decoration: none;
+}
+
+.cardlogin{
+    height: 500px;
+    width: 70%;
+margin: 0 auto;
+margin-top: 4em;
+}
+
+.card{
+  background: rgb(71,71,71);
+background: -moz-linear-gradient(45deg, rgba(71,71,71,1) 0%, rgba(56,56,56,1) 100%);
+background: -webkit-linear-gradient(45deg, rgba(71,71,71,1) 0%,rgba(56,56,56,1) 100%);
+background: linear-gradient(45deg, rgba(71,71,71,1) 0%,rgba(56,56,56,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#474747', endColorstr='#383838',GradientType=1 );
+
+
 }
 .card-header{
-  border-radius: 10px !important;
+  height: 50px;
+  border-radius: 0.6em !important;
+ background: rgba(56,56,56,1);
+}
+
+.center > router-link{
+  margin: 0 auto !important;
+  text-align: center !important;
 }
 
 .wrapper {
@@ -231,11 +301,13 @@ textarea {
 }
 input[type="text"], textarea {
   
-  background-image: linear-gradient(to left,#343a40,black) !important;
+  background: #2b2b2b !important;
+  border: 1px rgb(114, 114, 114);
 }
 input[type="number"], textarea {
   -moz-appearance:textfield;
-  background-image: linear-gradient(to left,#343a40,black) !important;
+  background:#2b2b2b !important;
+  border: 1px rgb(114, 114, 114);
 }
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
@@ -243,34 +315,41 @@ input[type=number]::-webkit-inner-spin-button {
     margin: 0;
 }
 input[type="email"], textarea {
-  background-image: linear-gradient(to left,#343a40,black) !important;
+  background:#2b2b2b !important;
+  border: 1px rgb(114, 114, 114);
 }
 input[type="password"], textarea {
-  background-image: linear-gradient(to left,#343a40,black) !important;
+  background:#2b2b2b !important;
+  border: 1px rgb(114, 114, 114);
 }
 input[type="tel"], textarea {
-  background-image: linear-gradient(to left,#343a40,black) !important;
+  background:#2b2b2b !important;
+  border: 1px rgb(114, 114, 114);
 }
 input[type="date"], textarea {
-  background-image: linear-gradient(to left,#343a40,black) !important;
+  background:#2b2b2b !important;
+  border: 1px rgb(114, 114, 114);
 }
 .bg-dark{
-  background-image: linear-gradient(to left,#343a40,black) !important;
-}
-.card{
-  background-image: linear-gradient(to left,#343a40,black);
+  background:#2b2b2b !important;
+  border: 1px rgb(114, 114, 114);
 }
 
 .custom-select {
     
-    color:#ffc107;
+    color: white;
     font-family: 'Courier New', Courier, monospace;
     background: #343a40 !important; 
 }
 
 input{
   font-family: "Courier New", Courier;
-  color: #ffc107 !important;
+  color: white !important;
+}
+
+input:focus{
+  border: 1px solid #ffc107 !important;
+outline: rgb(114, 114, 114) !important;
 }
 p{
   font-size: 20px;
@@ -285,7 +364,7 @@ label {
 h1{
   color:white;
   font-size:40px;
-  font-family: 'Black Ops One', cursive;
+  /*font-family: 'Black Ops One', cursive;*/
 }
 li img {
   position: relative;
@@ -303,9 +382,9 @@ h3 {
   font-family: 'Black Ops One', cursive !important;
   color:white;
 }
+
 h1 {
   font-size:30px !important;
-  font-family: 'Black Ops One', cursive !important;
   color:white;
 }
 
@@ -330,8 +409,51 @@ textarea:focus,
 input:focus,
 input[text]:focus,
 .uneditable-input:focus {
-  border-color: white !important;
-  box-shadow: 0 1px 1px white inset, 0 0 8px white !important;
+  border-color: rgb(94, 94, 94) !important;
+  box-shadow: 0 1px 1px rgb(56, 56, 56) inset, 0 0 8px rgb(56, 56, 56) !important;
   outline: 0 none;
 }
+
+.mid{
+position: absolute;
+display: block;
+margin: 0 auto !important;
+width: 96%;
+text-align: center;
+}
+
+.alert-danger{
+  background: #1f1f1f !important;
+  border: solid 1px #ff0050;
+  color: #ff0050;
+  border-radius: 0.5em;
+}
+
+/*
+.footer{
+  background: #1f1f1f !important;
+  height: 5%;
+  bottom: 0 !important;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+}
+
+.footP{
+  text-align: center !important;
+  margin: 0 !important;
+ margin-top: .5em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.footerImg{
+  width: 9%;
+  margin: 0 auto;
+}
+
+  <!--<div class="sticky-footer footer"><p class="footP">-->
+      <!--<img class="footerImg" src="./beerrazeiv0.png">--><!--<strong style="color:#FAAE2C; letter-spacing: 0.2em;">beerra</strong> <small>2019</small>--></p>
+   <!-- </div>-->
+
+*/
 </style>

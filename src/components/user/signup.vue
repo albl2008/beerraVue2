@@ -183,6 +183,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.card{
+    margin-top: 4em !important;
+}
 
 </style>
