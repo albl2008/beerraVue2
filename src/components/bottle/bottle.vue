@@ -79,8 +79,10 @@
             </select>
               <label>Stock Actual</label>
             <input type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="Stock" disabled> 
+            <template  v-if="newBottle.price !== undefined ">
             <label>Precio de Venta</label>
             <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="Precio" required>
+            </template>  
               <label>Tamaño (en L)</label> 
             <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" required>
               <label>IBU</label>
@@ -540,9 +542,12 @@ export default {
       })
     },
         showModal(idBottle){
+          if(!this.edit){
       this.idBottle = idBottle
         this.$modal.show('delete');
-         
+          }else{
+            this.notifyWarning("Botella","Termine de editar la botella")
+          }
     },
     hideModal(){
       this.$modal.hide('delete');
@@ -595,13 +600,13 @@ export default {
         res.data.bottle.size,res.data.bottle.ibu,
         res.data.bottle.alcohol, res.data.bottle.brewery,res.data.bottle.price,res.data.bottle.stock
         )
-      
+         
           this.edit = true;
           this.buy=false;
       })
     },
     buyBottle(idBottle){
-      
+      if(!this.edit){
       axios({
         url:`http://localhost:3000/bottle/${idBottle}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
@@ -612,10 +617,13 @@ export default {
         res.data.bottle.alcohol, res.data.bottle.brewery,res.data.bottle.price,res.data.bottle.stock
         )
         this.newBottleBuy = new newBottleBuy (res.data.bottle._id)
-        
+      
           this.buy=true;
           this.edit=false;
       })
+      }else{
+          this.notifyWarning("Botella","Termine de editar la botella")
+      }
     },
      validBottle(){
       
@@ -650,6 +658,30 @@ export default {
             }
            
         },
+          notifyWarning(title,text){
+   Vue.notify({
+                group: 'foo',
+                type: 'warn',
+                title: title,
+                text: text
+              })
+},
+notifySucces(title,text){
+   Vue.notify({
+                group: 'foo',
+                type: 'success',
+                title: title,
+                text: text
+              })
+},
+notifyError(title,text){
+   Vue.notify({
+                group: 'foo',
+                type: 'error',
+                title: title,
+                text: text
+              })
+},
          format(date){
       if(date)
           return moment(date).format('DD/MM/YYYY');
