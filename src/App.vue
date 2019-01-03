@@ -1,13 +1,15 @@
 <template>
 <div class="wrapper">
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <!-- Sidebar -->
     <nav id="sidebar" class="bg-dark sticky-footer">
      
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           
          <li class="nav-item">
-        <center><a id="animate1" class="nav-link" href="http://localhost:8080/#/"><span class="badge badge-warning badge-pill beerra">Beerra</span><span class="sr-only">(current)</span></a></center>
+        <center class="centerC"><a id="" class="nav-link" href="http://localhost:8080/#/"><img class="isonav animated pulse" src="./beerrazeiv0.png"><span class="sr-only">(current)</span></a></center>
+         <!-- <center><a id="animate1" class="nav-link" href="http://localhost:8080/#/"><img class="isonav" src="./beerrazeiv0.png"><span class="sr-only">(current)</span></a></center> -->
           
         </li>
         <template v-if="isLogged ">
@@ -67,7 +69,9 @@
        <vue-glide> <vue-glide-slide></vue-glide-slide> </vue-glide>
       <notifications group="foo" position="bottom right" width="450px" />
       
-    
+<div class="sticky-footer footer"><p class="footP">
+   <!--<img class="footerImg" src="./beerrazeiv0.png">--><strong style="color:#FAAE2C; letter-spacing: 0.05em;">beerra</strong><small style="color: #6b6b6b;"> 2019 </small><small> info@beerra.com.ar</small></p>
+    </div>
     </div>
 
     
@@ -429,7 +433,17 @@ text-align: center;
   border-radius: 0.5em;
 }
 
+.isonav{
+  width: 75%;
+  margin-bottom: 1em;
+}
 /*
+.isonav:hover{
+  background: rgba(255, 255, 255, 0.238);
+  border-radius: 0.3em;
+  border: 1px solid #fdfdfd1c;
+}*/
+
 .footer{
   background: #1f1f1f !important;
   height: 5%;
@@ -437,15 +451,17 @@ text-align: center;
   left: 0;
   width: 100%;
   z-index: 3;
+  position: fixed;
+  margin-left: 94px;
 }
 
 .footP{
+  font-size: 16px;
   text-align: center !important;
-  margin: 0 !important;
- margin-top: .5em;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin-top: 0.5em;
+  font-family: 'Poppins', sans-serif;
 }
-
+/*
 .footerImg{
   width: 9%;
   margin: 0 auto;
@@ -456,4 +472,15 @@ text-align: center;
    <!-- </div>-->
 
 */
+
+.footerImg{
+  width: 9%;
+  margin: 0 auto;
+  padding-top: 0.1em;
+}
+
+.centerC{
+  width: 100%;
+  height: 100% !important;
+}
 </style>
