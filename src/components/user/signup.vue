@@ -187,7 +187,7 @@ export default {
 
 .card{
     margin-top: 4em !important;
-    width: 80%;
+    width: 440px !important;
     margin: 0 auto;
 }
 

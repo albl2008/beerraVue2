@@ -58,7 +58,7 @@
             >Podras controlar los barriles por estado, desde que llegan hasta son vaciados y pagados al proveedor.</p>
           </div>
         </div>
-        <div class="card bg-warning">
+        <div class="card bg-dark">
           <div class="card-body text-center">
             <p class="card-text">Venta en distintos formatos</p>
             <button v-on:click="config = !config">
@@ -363,7 +363,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 .beerra {
   font-size: 1.2em;
