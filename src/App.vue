@@ -276,8 +276,13 @@ a {
   margin-top: 4em;
 }
 
+textarea, input{
+  border: 1px solid #414141 !important;
+  background-color: #222222 !important;
+}
+
 .card {
-  background: rgb(71, 71, 71);
+  background: rgb(83, 83, 83);
   background: -moz-linear-gradient(
     45deg,
     rgba(71, 71, 71, 1) 0%,
@@ -311,6 +316,8 @@ a {
   width: 100%;
   align-items: stretch;
 }
+
+
 
 #sidebar {
   width: 15%;
@@ -381,10 +388,6 @@ textarea {
 }
 input[type="date"],
 textarea {
-  background: #2b2b2b !important;
-  border: 1px rgb(114, 114, 114);
-}
-.bg-dark {
   background: #2b2b2b !important;
   border: 1px rgb(114, 114, 114);
 }
@@ -523,6 +526,17 @@ input[text]:focus,
 
 */
 
+.bg-dark {
+  background: #2b2b2b !important;
+  
+  margin-bottom: 0;
+  
+}
+
+
+.imgicon{
+  width: 50% !important;
+}
 .footerImg {
   width: 9%;
   margin: 0 auto;
@@ -555,9 +569,16 @@ input[text]:focus,
  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.404) !important;
  background: rgba(255, 255, 255, 0.051);
 }
-
+.canilla{
+  width: 70%;
+}
 .nav-link:active{
   background: #262626 !important;
   transition: 0.1s;
+}
+
+.yellowB:hover{
+  border: 1px solid white !important;
+  transition: 0.4s;
 }
 </style>
