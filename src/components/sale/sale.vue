@@ -24,8 +24,9 @@
               <th>Growlers</th>
               <th>Pintas</th>
               <th>Botellas</th>
-              <th>Por cantidad</th>
+              <th>Cantidad</th>
               <th>Envases</th>
+              <th>Elim.</th>
               </thead>
               <tbody>
                 <tr v-for="sale in sales">
@@ -57,7 +58,7 @@
                     <td><button class="btn btn-outline-dark disabled"><img :src="require('@/assets/carga2.png')" alt=""></button></td></template>
                    <template v-else>
                    <td><button class="btn btn-light" v-on:click="getContainers(sale._id)"><img :src="require('@/assets/carga2.png')" alt=""></button></td></template>
-                  
+                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteSale(sale._id)"><i class="material-icons">delete</i></button></td>
                  
                   
                 </tr>
@@ -177,6 +178,7 @@
     
 </template>
 <script>
+import Vue from 'vue'
 const moment = require('moment');
 const axios = require('axios')
 export default {
@@ -298,12 +300,52 @@ export default {
                 console.log(e)
             })
         },
+        deleteSale(idSale){
+             axios({
+                 method:'DELETE',
+                 url:`http://localhost:3000/sale/${idSale}`,
+                 headers: {authorization: `Bearer ${localStorage.token}`}
+                 })
+                 .then(response => {
+                     console.log(response)
+                     this.getSales()
+                     this.notifySucces("Venta",response.data.message)
+                 })
+                 .catch(err => {
+                     console.log(err.response)
+                     this.notifyError("Venta", err.response.data)
+                 })
+        },
         format(date){
             if(date)
                 return moment(date).format('DD/MM/YYYY');
             else
                 return ""
-        }
+        },
+          notifyWarning(title,text){
+   Vue.notify({
+                group: 'foo',
+                type: 'warn',
+                title: title,
+                text: text
+              })
+},
+notifySucces(title,text){
+   Vue.notify({
+                group: 'foo',
+                type: 'success',
+                title: title,
+                text: text
+              })
+},
+notifyError(title,text){
+   Vue.notify({
+                group: 'foo',
+                type: 'error',
+                title: title,
+                text: text
+              })
+}
     }
 }
 </script>
