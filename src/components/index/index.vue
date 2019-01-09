@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <nav aria-label="breadcrumb" class="sticky-top">
-      <ol class="breadcrumb bg-dark">
+      <ol class="breadcrumb bg-dark card">
         <li class="breadcrumb-item">
           <a href="#funcionalidades">Funcionalidades</a>
         </li>
@@ -19,24 +19,33 @@
         </li>
       </ol>
     </nav>
-    <div class="container">
-      <div class="jumbotron bg-dark">
-        <h1>¿Qué es
-          <span id="animate2" class="badge badge-warning badge-pill beerra">Beerra</span>?
-        </h1>
-        <p>Es un sistema web pensado para
-          <span class="badge badge-light badge-pill centros">centros de recarga</span> de Cerveza Artesanal
-        </p>
-        <p
-          class="badge-warning badge-pill"
-        >Proba todas las funcionalidades del sistema gratis por 30 días</p>
-        <p class="lead">
-          <a
-            class="btn btn-outline-light btn-lg"
-            href="http://localhost:8080/#/signup"
-            role="button"
-          >Registrarse</a>
-        </p>
+    <div class="container" style="padding-bottom: 0;">
+      <div class=" card bg-dark">
+        <div class="subcontainer ">
+          <h1>
+            ¿Qué es
+            <span id class="beerra">Beerra</span>?
+            <!-- <span id="animate2" class="badge badge-warning badge-pill beerra">Beerra</span>? -->
+          </h1>
+          <p style="margin-bottom: 0.8em;">
+            <span class="sistema">Es un sistema web pensado para</span>
+            <span class="centros">centros de recarga</span> <span class="sistema">de Cerveza Artesanal</span>
+          </p>
+          <p class="proba">Proba todas las funcionalidades del sistema
+            <span
+              style="letter-spacing: 0.1em; text-transform: capitalize; color: #FB9336; 
+              font-weight: bold; font-size: 29px; border: 1px solid white; padding: 3px 10px 6px 10px; 
+              border-radius: 0.2em; background:  rgba(0, 0, 0, 0.042);"
+            >gratis</span> por 30 días
+          </p>
+          <p class="lead">
+            <a
+              class="btn btn-outline-light btn-lg"
+              href="http://localhost:8080/#/signup"
+              role="button"
+            >Registrarse</a>
+          </p>
+        </div>
       </div>
     </div>
 
@@ -49,153 +58,145 @@
       <div class="card-columns">
         <div class="card bg-dark">
           <div class="card-body text-center">
-            <p class="card-text">Control sobre Barriles</p>
-            <button v-on:click="keg = !keg">
-              <img :src="require('@/assets/beerra/keg.png')" alt class>
-            </button>
-            <p
-              v-if="keg"
-            >Podras controlar los barriles por estado, desde que llegan hasta son vaciados y pagados al proveedor.</p>
+            <h1 class="card-text">Control sobre Barriles</h1>
+            <!-- <button v-on:click="keg = !keg"> -->
+              <img :src="require('@/assets/beerra/kegg2.png')" alt class="imgicon">
+            <!-- </button> -->
+            <!-- <p
+              v-if="keg"> -->
+              <p>
+              Podras controlar los barriles por estado, desde que llegan hasta son vaciados y pagados al proveedor.</p>
           </div>
         </div>
-        <div class="card bg-warning">
+        <div class="card bg-dark">
           <div class="card-body text-center">
-            <p class="card-text">Venta en distintos formatos</p>
-            <button v-on:click="config = !config">
-              <img :src="require('@/assets/beerra/config.png')" alt class>
-            </button>
-            <p
+            <h1 class="card-text">Venta en otros formatos</h1>
+            <!-- <button v-on:click="config = !config"> -->
+              <img :src="require('@/assets/beerra/different2.png')" alt class="imgicon">
+            <!-- </button> -->
+            <!-- <p
               v-if="config"
-            >Podes recargar botellones y pintas, ademas de contar con la opcion 2x1 (happy hour) en pintas.</p>
+            > --><p>Podes recargar botellones y pintas, ademas de contar con la opcion 2x1 (happy hour) en pintas.</p>
           </div>
         </div>
         <div class="card bg-dark">
           <div class="card-body text-center">
-            <p class="card-text">Manejo de gastos</p>
-            <button v-on:click="pay = !pay">
-              <img :src="require('@/assets/beerra/pagoss.png')" alt class>
-            </button>
-            <p
+            <h1 class="card-text">Manejo de gastos</h1>
+            <!-- <button v-on:click="pay = !pay"> -->
+              <img :src="require('@/assets/beerra/moneyy2.png')" alt class="imgicon">
+            <!-- </button> -->
+            <!-- <p
               v-if="pay"
-            >Administra los gastos: alquiler, luz, gas(CO2), compras de botellones y pintas, limpieza, etc</p>
-          </div>
-        </div>
-        <div class="card bg-warning">
-          <div class="card-body text-center">
-            <p class="card-text">Manejo de ventas</p>
-           <button v-on:click="sell = !sell">
-            <img :src="require('@/assets/beerra/sell.png')" alt class>
-            </button>
-            <p v-if="sell">Podras administrar las ventas de cerveza en los distintos formatos</p>
+            >--><p>Administra los gastos: alquiler, luz, gas(CO2), compras de botellones y pintas, limpieza, etc</p> 
           </div>
         </div>
         <div class="card bg-dark">
           <div class="card-body text-center">
-            <p class="card-text">Venta de botellas</p>
-            <button v-on:click="bottle = !bottle">
-              <img :src="require('@/assets/beerra/bottles.png')" alt class>
-            </button>
-            <p v-if="bottle">Podras cargar y administrar la venta de cerveza en botellas</p>
+            <h1 class="card-text">Manejo de ventas</h1>
+            <!-- <button v-on:click="sell = !sell"> -->
+              <img :src="require('@/assets/beerra/ventass2.png')" alt class="imgicon">
+            <!-- </button> -->
+         <!--    <p v-if="sell"> --><p>Podras administrar las ventas de cerveza en los distintos formatos</p>
           </div>
         </div>
-        <div class="card bg-warning">
+        <div class="card bg-dark">
           <div class="card-body text-center">
-            <p class="card-text">Manejo de clientes</p>
-            <button v-on:click="client = !client">
-            <img :src="require('@/assets/beerra/clients.png')" alt class>
-            </button>
-            <p v-if="client">Llevaras un control sobre los clientes de tu centro de recarga, con contador de litros para cada uno</p>
+            <h1 class="card-text">Venta de botellas</h1>
+            <!-- <button v-on:click="bottle = !bottle"> -->
+              <img :src="require('@/assets/beerra/bottlee2.png')" alt class="imgicon">
+            <!-- </button> -->
+            <!-- <p v-if="bottle"> --><p>Podras cargar y administrar la venta de cerveza en botellas</p>
+          </div>
+        </div>
+        <div class="card bg-dark">
+          <div class="card-body text-center">
+            <h1 class="card-text">Manejo de clientes</h1>
+            <!-- <button v-on:click="client = !client"> -->
+              <img :src="require('@/assets/beerra/people2.png')" alt class="imgicon">
+            <!-- </button> -->
+           <!--  <p
+              v-if="client"
+            > --><p>Llevaras un control sobre los clientes de tu centro de recarga, con contador de litros para cada uno</p>
           </div>
         </div>
       </div>
     </div>
     <div class="container">
-       <nav id="precios" aria-label="breadcrumb">
-        <ol class="breadcrumb bg-dark">
+      <nav id="precios" aria-label="breadcrumb">
+        <ol class="breadcrumb bg-warning">
           <li class="breadcrumb-item active divider" aria-current="page">Planes</li>
         </ol>
       </nav>
       <div class="card-columns">
-        <div class="card bg-dark">
+        <div class="card bg-dark yellowB">
           <div class="card-body text-center">
-            <p class="card-text">Hasta 3 Canillas</p>
-            <button v-on:click="tres = !tres">
-              <img :src="require('@/assets/beerra/pipes.png')" alt class>
-              <p> 3- </p>
-            </button>
-            <p
-              v-if="tres"
-            >Para centros de recarga de hasta 3 canillas de expendio. Plan basico</p>
-            <p v-if="tres" class="lead">
-          <a
-            class="btn btn-outline-light btn-lg"
-            href="#"
-            role="button"
-          >Consultar!</a>
-        </p>
+            <h1 class="card-text">Hasta 3 Canillas</h1>
+            <!-- <button v-on:click="tres = !tres"> -->
+              <img :src="require('@/assets/beerra/3cani.png')" alt class="canilla">
+              
+            <!-- </button> -->
+            <!-- <p v-if="tres"> --><p>Plan básico.</p>
+            <!-- <p v-if="tres" class="lead"> --><p>
+              <a class="btn btn-outline-light btn-lg" href="#" role="button">Consultar</a>
+            </p>  
           </div>
         </div>
-        <div class="card bg-warning">
+        <div class="card bg-dark yellowB">
           <div class="card-body text-center">
-            <p class="card-text">Hasta 7 Canillas</p>
-            <button v-on:click="siete = !siete">
-              <img :src="require('@/assets/beerra/pipes.png')" alt class>
-              <p> 4 - 7 </p>
-            </button>
-            <p
-              v-if="siete"
-            >Para centros de recarga de hasta 7 canillas de expendio. Plan intermedio</p>
-            <p v-if="siete" class="lead">
-          <a
-            class="btn btn-outline-light btn-lg"
-            href="#"
-            role="button"
-          >Consultar!</a>
-        </p>
+            <h1 class="card-text">Hasta 7 Canillas</h1>
+            <!-- <button v-on:click="siete = !siete"> -->
+              <img :src="require('@/assets/beerra/7cani.png')" alt class="canilla">
+              <!-- <p>4 - 7</p> -->
+            <!-- </button> -->
+           <!--  <p v-if="siete"> --><p>Plan intermedio.</p>
+           <!--  <p v-if="siete" class="lead"> -->
+              <a class="btn btn-outline-light btn-lg" href="#" role="button">Consultar</a>
+          <!--   </p> -->
           </div>
         </div>
-        <div class="card bg-dark">
+        <div class="card bg-dark yellowB">
           <div class="card-body text-center">
-            <p class="card-text">Más de 7 Canillas</p>
-            <button v-on:click=" ocho= !ocho">
-              <img :src="require('@/assets/beerra/pipes.png')" alt class>
-              <p> +7 </p>
-            </button>
-            <p
-              v-if="ocho"
-            >Para centros de recarga de mas de 7 canillas de expendio. Plan avanzado</p>
-            <p v-if="ocho" class="lead">
-          <a
-            class="btn btn-outline-light btn-lg"
-            href="#"
-            role="button"
-          >Consultar!</a>
-        </p>
+            <h1 class="card-text">Más de 7 Canillas</h1>
+            <!-- <button v-on:click=" ocho= !ocho"> -->
+              <img :src="require('@/assets/beerra/nosecani.png')" alt class="canilla">
+              <!-- <p>+7</p> -->
+            <!-- </button> -->
+            <!-- <p v-if="ocho"> --><p>Plan avanzado.</p>
+           <!--  <p v-if="ocho" class="lead"> -->
+              <a class="btn btn-outline-light btn-lg" href="#" role="button">Consultar</a>
+          <!--   </p> -->
           </div>
         </div>
       </div>
-
-
     </div>
     <div class="container">
-      <center><div class="jumbotron bg-warning">
-        <h1>
-          <span id="animate3" class="badge badge-dark badge-pill beerra">Beerra</span>
-        </h1>
-        <p class="bg-dark badge-pill redondeo">Nuestro sistema esta en constante evolucion, tomamos requirimientos de nuestros clientes y lo mejoramos dia a dia <br>Envianos tu sugerencia con nuestro formulario de contacto  o directamente a nuestra casilla <br><span class="badge-light badge-pill">info@beerra.com.ar</span></p>
-      
-        
-      </div></center>
+      <center>
+        <div class="jumbotron bg-dark card">
+          <h1>
+            <img src="/static/img/beerraisol.185a2ab.png" class="banner">
+            <!-- <span id="animate3" class="badge badge-dark badge-pill beerra">beerra</span> -->
+          </h1>
+          <p
+            class="bg-dark badge-pill redondeo"
+          >Nuestro sistema esta en constante evolución, tomamos requirimientos de nuestros clientes y lo mejoramos día a día
+            <br>Envianos tu sugerencia con nuestro formulario de contacto o directamente a nuestra casilla.
+            <br>
+            <span class="badge-light badge-pill" style="font-family: 'Lobster', serif; font-size: 22px;">info@beerra.com.ar</span>
+          </p>
+        </div>
+      </center>
     </div>
     <div class="container">
-      <nav id="contacto" aria-label="breadcrumb">
-        <ol class="breadcrumb bg-dark">
+      <nav id="contacto" class="" aria-label="breadcrumb">
+        <ol class="breadcrumb bg-warning">
           <li class="breadcrumb-item active divider" aria-current="page">Contacto</li>
         </ol>
       </nav>
-      <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-          <form id="contact-form" method="post" action role="form" class="bg-dark">
+      <div class=" card contactBack bg-dark" >
+        <div class="col-lg-8 col-lg-offset-2 ">
+          <!-- <div class="col-lg-8 col-lg-offset-2" style="padding-left: 0px !important;"> -->
+          <form id="contact-form" method="post" action role="form" class="notsolidblack">
+            <div class="imgBack">
             <div class="messages"></div>
 
             <div class="controls">
@@ -268,7 +269,7 @@
                     <textarea
                       id="form_message"
                       name="message"
-                      class="form-control bg-warning"
+                      class="form-control"
                       placeholder="Mensaje o sugerencia"
                       rows="4"
                       required
@@ -288,23 +289,32 @@
                   <br>
                 </div>
               </div>
+              </div>
             </div>
           </form>
         </div>
-        <div class="col-lg-4">
-          <div class="card bg-warning">
+        <div class="contact col-lg-8">
+          <div class="card notsolidblack" style="height: 94%; margin-bottom: 10px;">
             <div class="card-body text-center">
-              <p class="card-text">Contacto</p>
-              <button v-on:click="contact = !contact">
-                <img data-aos="zoom-out-left" :src="require('@/assets/beerra/contact.png')" alt class>
-              </button>
-              <p v-if="contact">
+              <h1 class="card-text">Contacto directo</h1>
+              <!-- <button v-on:click="contact = !contact"> -->
+                <img
+                  data-aos="zoom-out-left"
+                  :src="require('@/assets/beerra/agenda2.png')"
+                  alt
+                  class="agenda"
+                >
+             <!--  </button> -->
+             <p style="font-family: 'Roboto', sans-serif;">
+              <!-- <p v-if="contact"> -->
                 <i class="material-icons">mail_outline</i> info@beerra.com.ar
               </p>
-              <p v-if="contact">
+              <p style="font-family: 'Roboto', sans-serif;">
+             <!--  <p v-if="contact"> -->
                 <i class="material-icons">phone</i> 2616563848
               </p>
-              <p v-if="contact">
+              <p style="font-family: 'Roboto', sans-serif;">
+             <!--  <p v-if="contact"> -->
                 <i class="material-icons">phone</i> 2616585487
               </p>
             </div>
@@ -316,9 +326,8 @@
 </template>
 
 <script>
-
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 $(function() {
   $.fn.extend({
@@ -363,23 +372,81 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
+.contact{
+  width: 30%;
+  position: absolute;
+  float: right !important;
+  border-radius: 0.4em;
+  right: 0;
+  height: 100%;
+}
 .beerra {
-  font-size: 1.2em;
-  font-family: "Black Ops One", cursive;
+  font-size: 32px !important;
+  font-family: "Poppins", sans-serif !important;
+  text-transform: lowercase;
+  color: rgb(253, 147, 38);
+}
+
+.agenda{
+  width: 50%;
+}
+.subcontainer {
+  border-radius: 0.5em !important;
+  padding: 1em;
+  background: url('quees.png');
+  background-size: cover;
+  
+}
+
+.contact{
+  background: rgb(118,50,255) !important;
+background: -moz-linear-gradient(45deg, rgba(118,50,255,0.7) 0%, rgba(255,0,144,0.7) 100%) !important;
+background: -webkit-linear-gradient(45deg, rgba(118,50,255,0.7) 0%,rgba(255,00.7144,0.7) 100%) !important;
+background: linear-gradient(45deg, rgba(118,50,255,0.7) 0%,rgba(255,0,144,0.7) 100%) !important;
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7632ff', endColorstr='#ff0090',GradientType=1 ) !important;
+}
+
+.breadcrumb-item::before{
+  display: none;
+}
+
+.notsolidblack{
+  background: rgba(0, 0, 0, 0.304);
+  margin-top: 13px;
+  border: 1px solid #2b2b2b !important;
+  margin-bottom: 13px;
+}
+
+.subcontainer{
+  font-size: -10px;
 }
 .divider {
-  font-size: 1.2em;
-  font-family: "Black Ops One", cursive;
-  color: white !important;
+  font-size: 22px;
+  font-weight: bold;
+  color: #2b2b2b !important;
+  padding: 0;
 }
 .centros {
   font-family: "Courier New", Courier;
-  font-size: 17px;
+  font-weight: bold;
+  padding: 3px;
+  word-spacing: -10px;
+  font-size: 22px;
+  border-radius: 0.2em;
+  background: rgba(0, 0, 0, 0.042);
+  border: 1px solid rgb(252, 150, 7);
 }
 .form-group {
   margin: 10px;
+}
+
+.imgBack{
+  background: url('quees.png');
+  border-radius: 0.4em;
+  padding: 10px;
+  background-size: contain;
 }
 
 ::-webkit-input-placeholder {
@@ -396,18 +463,106 @@ export default {
 form {
   border-radius: 5px;
 }
-.redondeo{
-  border-radius:10px;
+.redondeo {
+  border-radius: 10px;
 }
 .breadcrumb-item a {
   font-size: 1.2em;
-  font-family: "Black Ops One", cursive;
+  font-family: "Impact";
+  letter-spacing: 0.05em;
   color: white !important;
+  padding: 0.8em;
+  border-radius: 0.3em;
 }
-.breadcrumb-item a:hover {
-  color: #ffc107 !important;
+
+
+.breadcrumb-item:hover a{
+    text-decoration: #ff7f07 !important;
+  color: white !important;
+ text-shadow: 0 5px 15px rgba(0, 0, 0, 0.404) !important;
+ background: rgba(255, 255, 255, 0.051);
 }
-.bg-warning{
-  background-color: #ffc107 !important;
+.bg-warning {
+  background: rgb(252, 150, 7);
+  background: -moz-linear-gradient(
+    left,
+    rgba(252, 150, 7, 1) 0%,
+    rgba(252, 178, 7, 1) 60%,
+    rgba(255, 193, 7, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    left,
+    rgba(252, 150, 7, 1) 0%,
+    rgba(252, 178, 7, 1) 60%,
+    rgba(255, 193, 7, 1) 100%
+  );
+  background: linear-gradient(
+    to right,
+    rgba(252, 150, 7, 1) 0%,
+    rgba(252, 178, 7, 1) 60%,
+    rgba(255, 193, 7, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fc9607', endColorstr='#ffc107',GradientType=1 );
+}
+
+.breadcrumb-item.active.divider li {
+  color: #2b2b2b !important;
+  font-family: "Roboto", sans-serif !important;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  font-size: 24px;
+  padding: 0.04em;
+  height: 0.8em;
+  margin: 0;
+  top: 0;
+}
+.breadcrumb.bg-dark {
+  width: 96%;
+  margin: 0 auto;
+  ;
+}
+
+li .breadcrumb-item{
+  
+}
+ol.breadcrumb.bg-dark.card{
+  height: 48px !important; 
+  text-align: left !important;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+}
+.container {
+  padding-top: 1em;
+}
+.proba {
+  font-family: "Lobster", cursive;
+
+  font-size: 25px;
+}
+
+.addradius .bg-dark {
+  border-radius: 0.4em;
+}
+
+.sistema{
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.05em;
+}
+
+.breadcrumb.bg-warning{
+  padding-top: 0 ;
+  padding-bottom: 0;
+}
+
+.card-body.text-center{
+  height: 380px;
+}
+
+h1.card-text{
+  font-size: 27px !important;
+}
+
+.banner{
+  width: 50%;
 }
 </style>

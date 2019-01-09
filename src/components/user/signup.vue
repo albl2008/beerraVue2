@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container backlime">
         
         <div class="row justify-content-center">
             <div class="col-md-6 ">
@@ -81,8 +81,8 @@
                                 </div>
                             </div>
                             <div class="container">
-                                <div class="row">
-                                    <button type="submit" class="btn btn-warning">Registrarse</button>
+                                <div class="row signinG breadcrumb">
+                                    <button type="submit" class="btn btn-outline-dark">Registrarse</button>
                                     <div v-if="signingUP" class="ml-2">
                                         <img height="30px" width="30px" src="../../assets/load.svg" class="ml-2 badge badge-pill bg-warning">
                                     </div>
@@ -183,6 +183,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.card{
+    margin-top: 4em !important;
+    width: 440px !important;
+    margin: 0 auto;
+}
 
 </style>

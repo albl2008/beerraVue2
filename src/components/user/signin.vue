@@ -1,14 +1,15 @@
 <template>
-    <div class="container">
+    <div class="container backlime">
         <div class="row justify-content-center">
             <div class="col-md-6 ">
-                 <div v-if="errorMessage" class="alert alert-danger" role="alert">
+                <div class="midcontainer">
+                 <div v-if="errorMessage" class="alert alert-danger animated fadeInDown mid" role="alert">
                    {{ errorMessage }}
                 </div>
-                  <div v-if="resetPassword" class="alert alert-success" role="alert">
+                  <div v-if="resetPassword" class="alert alert-success animated fadeInDown mid" role="alert">
                    {{ resetPassword }}
-                </div>
-                <div class="card">
+                </div></div>
+                <div class="card cardlogin">
                     <div class="card-header">
                         <h1 class="text-center">Login</h1>
                     </div>
@@ -46,7 +47,7 @@
                                     </small>
                                 </div>        
                                 <div class="container">
-                                    <div class="row bg-warning breadcrumb">
+                                    <div class="row signinG breadcrumb">
                                         <button type="submit" class="btn btn-outline-dark">Ingresar </button>
                                         <div v-if="signingIN" class="">
                                             <img height="30px" width="30px" src="../../assets/load.svg" class="ml-2">
@@ -55,9 +56,11 @@
                                 </div>                           
                         </form>
                     </div>
+                    <router-link class="sLink" style="text-align: center;" :to="{path:'/recover'}">¿Olvidaste tu contraseña?</router-link>
+                <router-link class="sLink" style="text-align: center; padding-bottom: 1em;" :to="{path:'/recoverUsername'}">¿Olvidaste tu nombre de usuario?</router-link></div>
                 </div>
-                <router-link :to="{path:'/recover'}">¿Olvidaste tu contraseña?</router-link>
-                <router-link :to="{path:'/recoverUsername'}">¿Olvidaste tu nombre de usuario?</router-link>
+                <div class="center">
+                
             </div>
         </div>
     </div>
