@@ -320,6 +320,7 @@
 <script>
 import Vue from 'vue'
 import axios  from 'axios'
+import Joi from "joi";
 import moment from 'moment'
 
 
@@ -364,27 +365,27 @@ class newOutflow {
     
     if (type===1) {
       this.id = id
-    this.type = type
+      this.type = type
       this.quantity = quantity
       this.price = price
       this.size=size
       this.date= date
     }if(type===2){
       this.id = id
-    this.type = type
+      this.type = type
       this.quantity = quantity
       this.price = price
       this.size=size
       this.date = date
     }if (type===3){
       this.id = id
-    this.type = type
+      this.type = type
       this.description = description
       this.price = price
       this.date = date
     }if (type===4) {
       this.id = id
-    this.type = type
+      this.type = type
       this.quantity = quantity
       this.price = price
       this.date = date
@@ -409,6 +410,16 @@ class newOutflow {
     }
     }
 }
+const schema = Joi.object().keys({
+    id: Joi.string(),
+    type : Joi.number().positive().min(1).max(7).required(),
+    description : Joi.string(),
+    date : Joi.date().required(),
+    size : Joi.number().positive(),
+    quantity: Joi.number().positive(),
+    month: Joi.number().min(1).max(12),
+    price: Joi.number().positive().required()
+})
 
 export default {
   data() {
@@ -416,6 +427,7 @@ export default {
       newOutflow: {
         date: new Date()
       },
+      errorMessage: "",
       outflows: [],
       sizes:[],
       types: [{
@@ -454,6 +466,14 @@ export default {
 
     }
   },
+  watch:{
+    newKeg:{
+      handler(){
+        this.errorMessage = ''
+      },
+      deep : true
+    }
+  },
   created() {
     this.getOutflows();
     this.getSizes();
@@ -489,7 +509,7 @@ axios({
         })
     },
     addOutflow() {
-
+      if(this.validOutflow()){
       if (this.edit === false) {
 
         axios({
@@ -546,6 +566,7 @@ axios({
             text: `Error al actualizar el gasto ${e}`
           })
         })
+      }
       }
     },
     deleteOutflow(idOutflow) {
@@ -625,6 +646,26 @@ axios({
           return moment(date).format('DD/MM/YYYY');
       else
           return ""
+  },
+    validOutflow(){
+    const result = Joi.validate(this.newOutflow,schema)
+    console.log(result.error)
+    if(result.error === null){
+      return true
+    }else{
+      if(result.error.message.includes('type'))
+        this.errorMessage = 'El tipo es incorrecto, seleccione nuevamente'
+      if(result.error.message.includes('date'))
+        this.errorMessage = 'Seleccione una fecha correcta'
+      if(result.error.message.includes('price'))
+        this.errorMessage = 'Ingrese un monto correcto'
+      if(result.error.message.includes('month'))
+        this.errorMessage = 'Ingrese el numero correspondiente al mes'
+      if(result.error.message.includes('description'))
+        this.errorMessage = 'Ingrese una descripcion del gasto'
+      if(result.error.message.includes('quantity'))
+        this.errorMessage = 'Ingrese correctamente la cantidad'
+    }
   }
 },
 }

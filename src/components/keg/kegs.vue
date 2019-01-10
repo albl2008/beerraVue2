@@ -103,6 +103,7 @@
             <div class="card-body">
               <table class="table s">
                 <thead>
+                  <th>N°</th>
                   <th>Cerveza</th>
                   <th>Cantidad Disponible</th>
                   <th>Estado</th>
@@ -114,7 +115,8 @@
                   <th>Conectar</th>
                 </thead>
                 <tbody>
-                  <tr v-for="keg in kegs">
+                  <tr v-for="(keg,i) in kegs">
+                    <td> <span class="badge badge-success">{{i+1}}</span></td>
                     <td>{{keg.beer}}</td>
                     <td>{{keg.quantitySaled+"/"+keg.quantity}}</td>
                     <td>{{selectStatus(keg.sta)}}</td>
