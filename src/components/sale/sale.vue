@@ -108,7 +108,7 @@
                     <td>
                       <button
                         class="btn btn-outline-danger btn-sm"
-                        v-on:click="deleteSale(sale._id)"
+                        v-on:click="showModal(sale._id)"
                       >
                         <i class="material-icons">delete</i>
                       </button>
@@ -217,6 +217,19 @@
         </div>
       </div>
     </div>
+          <modal name="delete" height="auto">
+        <div class="container bg-dark ">
+          <div class="breadcrumb bg-warning">
+              <h5 class="">¿Esta seguro que desea eliminar la venta?</h5>
+          </div>
+          
+            <div class="input-group-pretend mb-3">
+                  <button class="btn btn-success"  v-on:click="deleteSale()" >Aceptar</button>
+                  <button class="btn btn-danger" v-on:click="hideModal()">Cancelar</button>
+            </div>
+            
+        </div>
+      </modal>
   </div>
 </template>
 <script>
@@ -226,6 +239,7 @@ const axios = require("axios");
 export default {
   data() {
     return {
+      idSale:'',
       sales: [],
       growlers: [],
       bottles: [],
@@ -348,21 +362,31 @@ export default {
           console.log(e);
         });
     },
-    deleteSale(idSale) {
+    deleteSale() {
       axios({
         method: "DELETE",
-        url: `http://localhost:3000/sale/${idSale}`,
+        url: `http://localhost:3000/sale/${this.idSale}`,
         headers: { authorization: `Bearer ${localStorage.token}` }
       })
         .then(response => {
           console.log(response);
           this.getSales();
           this.notifySucces("Venta", response.data.message);
+          this.hideModal()
         })
         .catch(err => {
           console.log(err.response);
           this.notifyError("Venta", err.response.data);
         });
+    },
+    showModal(idSale){
+      
+      this.idSale = idSale
+        this.$modal.show('delete');
+     
+    },
+    hideModal(){
+      this.$modal.hide('delete');
     },
     format(date) {
       if (date) return moment(date).format("DD/MM/YYYY");
