@@ -48,13 +48,13 @@
                     {{q.text}}
                   </option>
               </select>
-            </template>
+            
 
               <div v-for="s in status" class="form-check form-check-inline courier">
                 <input required type="radio"  name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"  v-model="newKeg.sta"  class="form-check-input mb-1" >
                 <label for="one">{{s.text}}</label>
               </div>
-
+    </template>
               
                
               
@@ -311,9 +311,12 @@ export default {
         })
     },
     showModal(idKeg){
+      if(!this.edit){
       this.idKeg = idKeg
         this.$modal.show('delete');
-         
+      }else{
+        this.notifyWarning("Barril","Termine de editar barril")
+      }
     },
     hideModal(){
       this.$modal.hide('delete');
@@ -368,6 +371,7 @@ export default {
         })
     },
     connect(idKeg){
+      if(!this.edit){
      axios({
        method:'PUT',
        url:`http://localhost:3000/keg/connect/${idKeg}`,
@@ -381,8 +385,12 @@ export default {
      }).catch(e =>{
         this.notifyError("Barril","Error al conectar barril")
      })
+      }else{
+        this.notifyWarning("Barril","Termine de editar barril")
+      }
   },
   disconnect(idKeg){
+    if(!this.edit){
        axios({
          method:'PUT',
          url:`http://localhost:3000/keg/disconect/${idKeg}`,
@@ -395,6 +403,9 @@ export default {
      }).catch(e => {
         this.notifyError("Barril","Error al desconectar barril")
      })
+    }else{
+      this.notifyWarning("Barril","Termine de editar barril")
+    }
   },
   selectStatus(status){
      switch (status) {

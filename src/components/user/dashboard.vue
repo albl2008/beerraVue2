@@ -134,7 +134,7 @@ export default {
                 headers: {authorization: `Bearer ${localStorage.token}`}
                 })
             .then(response =>{
-                console.log(response)
+                console.log("ventas",response)
                 this.chartdata = this.salesYear(response.data.sales)
                 this.labels = response.data.sales.map(sales => sales._id.month)
                 this.labels.sort((a, b) => a - b)
@@ -169,7 +169,7 @@ export default {
                 headers: {authorization: `Bearer ${localStorage.token}`}
                 })
             .then(response =>{
-                console.log("litros",response)
+               
                 this.growlerData = this.salesYear(response.data.growlers)
                 this.pintsData = this.salesYear(response.data.pints)
                 this.othersData = this.salesYear(response.data.others)
@@ -202,7 +202,7 @@ export default {
                     url: 'http://localhost:3000/sale/litresforbrewery',
                     headers: {authorization: `Bearer ${localStorage.token}`}
                 }).then(response => {
-                    console.log("brewery", response)
+                   
                     this.litresBrewery = response.data.pints
                     this.litresGrowlers = response.data.growlers
                      this.litresOthers = response.data.others

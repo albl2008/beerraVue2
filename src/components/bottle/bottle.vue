@@ -79,8 +79,10 @@
             </select>
               <label>Stock Actual</label>
             <input type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="Stock" disabled> 
+            <template  v-if="newBottle.price !== undefined ">
             <label>Precio de Venta</label>
             <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="Precio" required>
+            </template>  
               <label>Tamaño (en L)</label> 
             <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" required>
               <label>IBU</label>
@@ -128,7 +130,7 @@
                {{newBottleBuy.totalPrice = newBottleBuy.unityPrice * newBottleBuy.quantity}}
               
              </template>
-            <input type="text" class="form-control mb-1" v-model="newBottleBuy.totalPrice" placeholder="Total" required>
+            <input type="text" class="form-control mb-1" v-model="newBottleBuy.totalPrice" placeholder="Total" disabled required>
             </template>
             <label>Precio de Venta</label>
             <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="Precio" required>
@@ -328,16 +330,19 @@ Vue.component('input-date', {
 
 const schema = Joi.object().keys({
   id: Joi.string(),
-  beer: Joi.string().min(2).max(20).required(),
-  
-  size: Joi.number().positive().required(),
+  bottle: Joi.string(),
+
+  beer: Joi.string().min(2).max(20),
+  size: Joi.number().positive(),
   price: Joi.number().positive(),
   stock: Joi.number().positive(),
-
-  
-  ibu: Joi.number().positive().required(),
-  alcohol: Joi.number().positive().required(),
-  brewery: Joi.string().required(),
+  quantity:Joi.number().positive(),
+  unityPrice: Joi.number().positive(),
+  ibu: Joi.number().positive(),
+  alcohol: Joi.number().positive(),
+  brewery: Joi.string(),
+   totalPrice: Joi.number().positive(),
+   date: Joi.date(),
 })
 
 class newBottle{
@@ -427,8 +432,8 @@ export default {
          Vue.notify({
           group: 'foo',
           type:'success',
-          title: 'Contacto',
-          text: res.data.mensaje
+          title: 'Botella',
+          text: res.data.message
         })
       }
       this.getBottles(),
@@ -471,7 +476,7 @@ export default {
           text: `Error al actualizar el barril ${e}`
       })
         })
-      }else if (this.buy === true && this.edit===false){
+      }else if (this.buy === true && this.edit===false && this.validBottleBuy()){
         axios({
           method: 'POST',
           url:`http://localhost:3000/outflow/bottle`,
@@ -482,8 +487,8 @@ export default {
             Vue.notify({
               group: 'foo',
               type:'success',
-              title: 'Barril',
-              text: res.data.mensaje
+              title: 'Botella',
+              text: res.data.message
             })
             
           this.getBottles()
@@ -540,9 +545,12 @@ export default {
       })
     },
         showModal(idBottle){
+          if(!this.edit){
       this.idBottle = idBottle
         this.$modal.show('delete');
-         
+          }else{
+            this.notifyWarning("Botella","Termine de editar la botella")
+          }
     },
     hideModal(){
       this.$modal.hide('delete');
@@ -595,13 +603,14 @@ export default {
         res.data.bottle.size,res.data.bottle.ibu,
         res.data.bottle.alcohol, res.data.bottle.brewery,res.data.bottle.price,res.data.bottle.stock
         )
-      
+         
           this.edit = true;
           this.buy=false;
       })
     },
     buyBottle(idBottle){
-      
+   
+      if(!this.edit){
       axios({
         url:`http://localhost:3000/bottle/${idBottle}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
@@ -612,12 +621,53 @@ export default {
         res.data.bottle.alcohol, res.data.bottle.brewery,res.data.bottle.price,res.data.bottle.stock
         )
         this.newBottleBuy = new newBottleBuy (res.data.bottle._id)
-        
+      
           this.buy=true;
           this.edit=false;
       })
+      }else{
+          this.notifyWarning("Botella","Termine de editar la botella")
+      }
     },
-     validBottle(){
+     validBottleBuy(){
+      
+            const result = Joi.validate(this.newBottleBuy,schema)
+             if(result.error === null){
+                
+                return true
+            }else{
+                console.log(result.error.message)
+                
+                if(result.error.message.includes('beer')){
+                    this.errorMessage = 'El estilo ingresado es incorrecto.'
+                }
+                if(result.error.message.includes('price')){
+                    this.errorMessage = 'El precio ingresado es incorrecto.'
+                }
+                
+                if(result.error.message.includes('size')){
+                    this.errorMessage = 'El tamaño ingresado es incorrecto.'
+                }
+                 if(result.error.message.includes('ibu')){
+                    this.errorMessage = 'El ibu ingresado es incorrecto.'
+                }
+                 if(result.error.message.includes('alcohol')){
+                    this.errorMessage = 'El alcohol ingresado es incorrecto.'
+                }
+                if(result.error.message.includes('brewery')){
+                    this.errorMessage = 'Es necesarios eleccionar una cerveceria.'
+                }
+               if(result.error.message.includes('unityPrice')){
+                 this.errorMessage = 'El costo unitario es incorrecto.'
+               }
+                if(result.error.message.includes('quantity')){
+                 this.errorMessage = 'La cantidad ingresada es incorrecta.'
+               }
+                //this.errorMessage = 
+            }
+           
+        },
+         validBottle(){
       
             const result = Joi.validate(this.newBottle,schema)
              if(result.error === null){
@@ -645,11 +695,34 @@ export default {
                 if(result.error.message.includes('brewery')){
                     this.errorMessage = 'Es necesarios eleccionar una cerveceria.'
                 }
-               
                 //this.errorMessage = 
             }
            
         },
+          notifyWarning(title,text){
+   Vue.notify({
+                group: 'foo',
+                type: 'warn',
+                title: title,
+                text: text
+              })
+},
+notifySucces(title,text){
+   Vue.notify({
+                group: 'foo',
+                type: 'success',
+                title: title,
+                text: text
+              })
+},
+notifyError(title,text){
+   Vue.notify({
+                group: 'foo',
+                type: 'error',
+                title: title,
+                text: text
+              })
+},
          format(date){
       if(date)
           return moment(date).format('DD/MM/YYYY');

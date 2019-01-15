@@ -49,14 +49,14 @@ let labels = []
           for(let cerveceria of chartData){
      
                 let label = cerveceria._id[0]
-                console.log(label)
+                
 
                 if(label){
                     labels.push(label)
 
                 }
           }
-          console.log("labels",labels)
+     
           return labels
       },
       objectsOfDataset(chartData){
@@ -68,7 +68,7 @@ let labels = []
                   let value = cerveceria.count
                 
                 if(value !== 0){
-                  console.log(randomHexColor())
+                 
                     values.data.push(value)
                     values.backgroundColor.push(randomHexColor())
                 }
