@@ -165,6 +165,14 @@ window.jdenticon_config = {
 import Vue from "vue";
 import Joi from "joi";
 
+const schema = Joi.object().keys({
+    id: Joi.string(),
+    name : Joi.string().required(),
+    dni : Joi.number().positive().required(),
+    tel : Joi.number().positive().required()
+})
+
+
 class newClient {
   constructor(id, name, dni, tel) {
     this.id = id;
@@ -189,11 +197,20 @@ export default {
     };
   },
   computed: {},
+   watch:{
+    newKeg:{
+      handler(){
+        this.errorMessage = ''
+      },
+      deep : true
+    }
+  },
   created() {
     this.getClients();
   },
   methods: {
     addClient() {
+      if(this.validClient()){
       if (this.edit === false) {
         axios({
           method: "POST",
@@ -252,6 +269,7 @@ export default {
               text: `Error al actualizar el Cliente ${e}`
             });
           });
+      }
       }
     },
     getClients() {
@@ -345,7 +363,21 @@ export default {
         );
         this.edit = true;
       });
+    },
+      validClient(){
+    const result = Joi.validate(this.newClient,schema)
+    console.log(result.error)
+    if(result.error === null){
+      return true
+    }else{
+      if(result.error.message.includes('name'))
+        this.errorMessage = 'El nombre ingresado es incorrecto'
+      if(result.error.message.includes('dni'))
+        this.errorMessage = 'El dni ingresado es incorrecto'
+      if(result.error.message.includes('tel'))
+        this.errorMessage = 'El telefono ingresado es incorrecto'
     }
+  }
   }
 };
 </script>
