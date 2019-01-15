@@ -2,8 +2,14 @@
 
   <div>
     <div id="canillas">
-      <center><h1>BARRILES CONECTADOS</h1></center>
-      <center><img :src="require('@/assets/beerra/pipes.png')" alt=""></center>
+     <div class="row" style="width: 50%; margin: 0 auto;"><div class="centerhead">
+        <h1 class="h1head">Canillas</h1>
+        </div>
+        <img :src="require('@/assets/beerra/canillas.png')" alt class="underh1">
+        
+      </div>
+     
+     <h3 class="text-center badge badge-dark precios total">$ <span style="font-size: 34px;">{{totalSale}}</span> </h3>
      
     </div>
     
@@ -11,7 +17,7 @@
 
     <div class="container">
       <div class="row mb-5">
-         
+         <h1 class="barrilesConnected badge badge-dark">Barriles conectados</h1>
         <template >
           <div class="text-center col-md-12"> <img v-if="!timeout" height="90px" width="90px" src="../../assets/load.svg" ></div>
          
@@ -19,25 +25,25 @@
                  
               <slide v-for="(keg, i) in  kegs" :index="i" :key="keg._id">
                 
-              <div class="card">
-                <div class="card-header tituloCardHeader bg-dark">
+              <div class="card sliderCard">
+                <div class="card-header tituloCardHeader bg-dark" style="height:">
                   <div class="row">
-                    <h3 class="text-center col-md-10 estilo">{{keg.beer}}</h3>
+                    <h3 class="text-center col-md-10 estilo nowrap">{{keg.beer}}</h3>
                     <button v-on:click="openModalDisconect(keg)" class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
-                      data-placement="top" title="Desconectar Barril"><i class="material-icons">power_off</i></button>
+                      data-placement="top" title="Desconectar Barril" style=""><i class="material-icons power">power_off</i></button>
                   </div>
 
                 </div>
                 <div class="card-body text-center">
-                  <radial-progress-bar :diameter="diametro" :startColor="'#ffc107'" :stopColor="'#e2ba1f'" :completed-steps="keg.quantitySaled"
+                  <radial-progress-bar :diameter="diametro" :startColor="'#FDC02F'" :stopColor="'#FA9628'" :completed-steps="keg.quantitySaled"
                     :total-steps="keg.quantity" class="">
-                    <p><span class="badge badge-warning tamano">{{ keg.brewery.name }}</span></p>
-                    <p><span class="badge badge-dark">{{ keg.quantity }}</span></p>
+                    <p><span class="badge badge-warning tamano nowrap" style="max-width: 150px;">{{ keg.brewery.name }}</span></p>
+                    <p><span class="badge badge-dark">{{ keg.quantity }} <span class="litros">l</span></span></p>
                     <template v-if="keg.quantitySaled<=15">
-                      <p><span class="badge badge-danger">{{ keg.quantitySaled }}</span></p>
+                      <p><span class="badge badge-danger">{{ keg.quantitySaled }} <span class="litros">l</span></span></p>
                     </template>
                     <template v-else>
-                      <p><span class="badge badge-success">{{ keg.quantitySaled }}</span></p>
+                      <p><span class="badge badge-success">{{ keg.quantitySaled }} <span class="litros">l</span></span></p>
                     </template>
                   </radial-progress-bar>
                 </div>
@@ -74,11 +80,11 @@
 <div class="container">
       <div class="row mb-2">
         <div class="col-6 col-sm-12 col-md-6">
-          <div class="card">
+          <div class="card tabla">
             <div class="card-header tituloCardHeader bg-dark">
               <div class="row">
                 <div class="col-md-9 text-center ">
-                  <h3 class="estilo text-left">Botellones</h3>
+                  <h3 class="estilo text-left tablaHead">Botellones</h3>
                 </div>
 
                
@@ -87,9 +93,9 @@
                   <template v-for="container in containersStock">
                    <template v-if="container.size === sizes[0].growlersize" >  
                             
-                        <button class="btn-light btn-sm btn add" data-toggle="tooltip"
+                        <button style="margin-left: 2.8em;"class="btn-light btn-sm btn add" data-toggle="tooltip"
                           data-placement="top" title="Envase Vacio Grade" v-on:click="createContainer(container,1,sizes[0].growlersize,prices[0].growlerprice)"><img
-                            :src="require('@/assets/carga.png')" alt=""></button>
+                            :src="require('@/assets/carga2.png')" alt=""></button>
                     </template>
                      
                     <template  v-else >
@@ -117,15 +123,15 @@
                 </thead>
                 <tbody>
                   <tr v-for="growler in growlers">
-                    <td>{{growler.beer}}</td>
-                    <td>{{growler.brewery}}</td>
-                    <td>{{growler.quantity}}</td>
-                    <td>{{growler.price}}</td>
-                    <td><button class="btn btn-danger btn-sm" v-on:click="deleteGrowler(growler.idDelete)"><i class="material-icons">delete</i></button></td>
+                    <td class="nowrap" style="max-width: 65px;">{{growler.beer}}</td>
+                    <td class="nowrap" style="max-width: 65px;">{{growler.brewery}}</td>
+                    <td>{{growler.quantity}} <span class="litros">l</span></td>
+                    <td>$ {{growler.price}}</td>
+                    <td><button class="btn btn-outline-danger btn-sm fix" v-on:click="deleteGrowler(growler.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center badge-pill badge-dark precios">Total: {{totalGrowlers}}</h3>
+              <h3 class="text-center badge badge-dark precios">Total: $ {{totalGrowlers}}</h3>
               <table class="table s">
                 <thead>
                   <th>Tamaño</th>
@@ -135,14 +141,14 @@
                 </thead>
                 <tbody>
                   <tr v-for="container in containers">
-                    <td>{{container.size}}</td>
+                    <td>{{container.size}} <span class="litros">l</span></td>
                     <td>{{container.quantitySaled}}</td>
-                    <td>{{container.price}}</td>
-                    <td><button class="btn btn-danger btn-sm" v-on:click="deleteContainer(container.idDelete)"><i class="material-icons">delete</i></button></td>
+                    <td>$ {{container.price}}</td>
+                    <td style="width: 20%;"><button class="btn btn-outline-danger btn-sm  fix" style="margin: 0 auto; margin-left:10px;" v-on:click="deleteContainer(container.idDelete)"><i style="" class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center badge-pill badge-dark precios">Envases: {{totalContainers}}</h3>
+              <h3 class="text-center badge badge-dark precios">Envases: {{totalContainers}}</h3>
 
             </div>
           </div>
@@ -150,11 +156,11 @@
 
         <div class="col-6 col-sm-12 col-md-6 mb-5">
 
-          <div class="card">
+          <div class="card tabla ">
             <div class="card-header tituloCardHeader bg-dark">
               <div class="row">
                 <div class="col-md-10">
-                  <h3 class="estilo text-left">Botellas</h3>
+                  <h3 class="estilo text-left tablaHead">Botellas</h3>
                 </div>
                 <div class="col-md-2 "><button class="text-center btn-light btn-sm btn add " data-toggle="tooltip"
                     data-placement="top" title="Agregar Botella(s)" v-on:click="openModalBottles()"><img :src="require('@/assets/bottle.png')"
@@ -183,7 +189,7 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="text-center badge-pill badge-dark precios">Total: {{totalBottles}}</h3>
+                  <h3 class="text-center badge badge-dark precios">Total: {{totalBottles}}</h3>
 
                 </div>
               </div>
@@ -197,9 +203,9 @@
       <div class="container">
       <div class="row mb-5">
         <div class="col-6 col-sm-12 col-md-6">
-          <div class="card">
+          <div class="card tabla">
             <div class="card-header tituloCardHeader bg-dark">
-              <h3 class="estilo text-left">Pintas</h3>
+              <h3 class="estilo text-left tablaHead">Pintas</h3>
             </div>
             <div class="card-body">
               <table class="table s">
@@ -213,24 +219,24 @@
                 </thead>
                 <tbody>
                   <tr v-for="pint in pints">
-                    <td>{{pint.beer}}</td>
-                    <td>{{pint.brewery}}</td>
-                    <td>{{pint.quantity}}</td>
-                    <td>{{pint.price}}</td>
-                    <td><button class="btn btn-danger btn-sm" v-on:click="deletePint(pint.idDelete)"><i class="material-icons">delete</i></button></td>
+                    <td class="nowrap" style="max-width: 65px;">{{pint.beer}}</td>
+                    <td class="nowrap" style="max-width: 65px;">{{pint.brewery}}</td>
+                    <td>{{pint.quantity}} <span class="litros">l</span></td>
+                    <td>$ {{pint.price}}</td>
+                    <td><button class="btn btn-outline-danger btn-sm fix" v-on:click="deletePint(pint.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center badge-pill badge-dark precios">Total: {{totalPints}}</h3>
+              <h3 class="text-center badge badge-dark precios">Total: $ {{totalPints}}</h3>
             </div>
 
           </div>
 
         </div>
         <div class="col-6 col-sm-12 col-md-6">
-          <div class="card">
+          <div class="card tabla">
             <div class="card-header bg-dark">
-              <h3 class="estilo text-left">Por cantidad</h3>
+              <h3 class="estilo text-left tablaHead">Por cantidad</h3>
             </div>
             <div class="card-body">
               <table class="table s">
@@ -252,23 +258,23 @@
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center badge-pill badge-dark precios">Total: {{totalOthers}}</h3>
+              <h3 class="text-center badge badge-dark precios">Total: {{totalOthers}}</h3>
             </div>
           </div>
         </div>
       </div>
       </div>
        <div class="container">
-      <div class="row">
+      <div class="row" style="margin-bottom: 3em; ">
         <div class="col-md-3"></div>
-        <div class="col-md-6 card bg-warning centrar">
+        <div class="col-md-6 card tabla bg-warning flex">
           <form v-on:submit.prevent="sendSale" >
-         <div class="text-center form-group col-md-12">
-            <div class="">
-              <h3><span class="cliente" >Fecha:</span></h3>
-            <input type="date" class="form-control" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-            <h3><span class="cliente">Cliente:</span></h3>
-            <select v-model="client" class="custom-select mb-1" required >
+         <div class="text-center form-group">
+            <div class="fechacliente">
+              <h3 class="tablaHead izqh3 ">Fecha</h3><h3 class="tablaHead derh3">Cliente</h3>
+            <input type="date" class="form-control fecha" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            
+            <select v-model="client" class="custom-select cliente" required >
                   
                   <option v-for="client in clients" v-bind:value="client._id">
                     {{client.name}}
@@ -277,8 +283,8 @@
             
           </div>
           </div>
-             <h3 class="text-center badge-pill badge-dark precios">Total venta: {{totalSale}} </h3>
-           <center><button class="btn btn-warning">Procesar venta</button></center>
+             <h3 class="text-center badge badge-dark precios marginprecio">Total venta: $ {{totalSale}} </h3>
+           <button class="btn btn-outline-warning procesar">Procesar venta</button>
         </form>
         </div>
         <div class="col-md-3"></div>
@@ -307,14 +313,14 @@
       <modal name="disconect" 
              height="auto"> 
             
-        <button class="btn btn-danger posicion" v-on:click="cerrar()">X</button>
-        <div class="container bg-dark">
+        <button class="btn btn-outline-danger posicion" style="width: 32px; z-index: 999; position: absolute;" v-on:click="cerrar()">X</button>
+        <div class="container tabla card bg-dark">
         
-          <h3 class="">¿Desconectar Barril?</h3>
+          <h3 class="tablaHead text-center" style="font-size: 32px !important;">¿Desconectar Barril?</h3>
           <div id="row">
-            <h3 class="bg-dark">Cerveceria <span class="badge-pill badge-warning">{{this.newDisconect.brewery}}</span></h3>
-            <h3 class="bg-dark">Cerveza: <span class="badge-pill badge-warning">{{this.newDisconect.beer}}</span></h3>
-            <h3 class="bg-dark">Cantidad restante: <span class="badge-pill badge-danger">{{this.newDisconect.quantitySaled}}</span></h3>
+            <h3 class="tablaHead text-center">Cerveceria: <span class="badge badgeGradient badge-warning">{{this.newDisconect.brewery}}</span></h3>
+            <h3 style="margin-bottom: 1em;" class="tablaHead text-center">Cerveza: <span class="badge badgeGradient  badge-warning">{{this.newDisconect.beer}}</span></h3>
+            <h3 class="tablaHead text-center" style="margin-bottom: 1em;">Cantidad restante: <span class="badge badge-danger">{{this.newDisconect.quantitySaled}} <span class="litros">l</span></span></h3>
             <h2 class="hide">{{keg = this.newDisconect.keg}}</h2>
             <div class="breadcrumb bg-danger">
             <h5>Recuerde: El barril pasara a vacio y solo se podra pagar al proveedor el mismo. <center><button v-on:click="empty(keg)" class="btn btn-danger"><h5 class="onh">Vacio</h5></button></center></h5>
@@ -900,7 +906,7 @@ started(idKeg){
 
   </script>
 
-<style>
+<style scoped>
 .posicion{
   float:right;
 }
@@ -912,7 +918,7 @@ started(idKeg){
 .precios{
   font-size: 28px;
   font-family: 'Squada One', cursive;
-  color:#ffc107;
+  color:#FD9326;
 }
 
 .add{
@@ -923,8 +929,11 @@ started(idKeg){
   background-color: #ffc107;
 }
 .cliente{
-  font-size: 25px !important;
- 
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px !important;
+  margin: 0 0 0 auto !important ;
+  width: 48%;
+  float: right;
 }
 
 h5{
@@ -944,9 +953,6 @@ button .onh{
   color: white;
 }
 
-.container .centrar{
-  align-items: center;
-}
 .hide{
   display:none;
 }
@@ -955,5 +961,183 @@ button .onh{
 }
 .inline{
   text-align: center;
+}
+
+.card-body.text-center{
+  background: #242424;
+}
+
+.card.sliderCard{
+  background: #242424 !important;
+  height: 354px !important;
+}
+
+.mb-1.text-center{
+  margin-bottom: 1em !important;
+}
+
+.text-center.col-md-10.estilo{ /* TITULO CARD SLIDER*/
+  margin-top: 0.15em;
+  margin-left: 1em;
+  font-family: 'Impact', sans-serif !important;
+    text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-header.tituloCardHeader.bg-dark{
+  padding-bottom: 1em;
+}
+
+.btn-outline-danger{
+  z-index: 999;
+  margin-left: 81.6%;
+  right: 0.9em;
+  margin-top: 0.9em;
+}
+
+.badge-dark{
+
+  font-size: 22px;
+  border: 1px solid #616161;
+  background: #2b2b2b;
+}
+
+.badge-warning{
+  
+  font-size: 20px;
+}
+
+.badge-success{
+  font-size: 36px;
+   font-family: 'Roboto', sans-serif !important;
+}
+
+.badge-danger{
+  font-size: 36px;
+   font-family: 'Roboto', sans-serif !important;
+}
+
+.lowBar{
+  color: #ffffff;
+  padding: 0.05em;
+ 
+}
+.lowBar:hover{
+  color: #242424;
+}
+
+.btn.btn-light.btn-sm.add{
+ background: #4b4b4b;
+ border: 1px solid #616161;
+}
+
+.btn.btn-light.btn-sm.add:hover{
+  background: #fff;
+  color: #242424;
+}
+
+.carousel-3d-container{
+  height: 430px !important;
+  background: #222222 !important;
+  border-radius: 0.4em;
+  padding-top: 2em;
+  border: 1px solid #4b4b4b;
+  margin-top: 0;
+  width: 97%;
+}
+
+.barrilesConnected{
+  background: #222222 !important;
+  font-weight: 300;
+  font-size: 24px !important;
+  position: absolute;
+  z-index: 999;
+  margin-left: 3%;
+}
+
+.card.tabla{
+  background: #272727 !important;
+}
+
+.tablaHead{
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 23px !important;
+  font-weight: 800;
+}
+
+tbody tr td{
+  border: none;
+  font-family: 'Roboto', sans-serif;
+      text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+tr{
+  background: #2b2b2b;
+}
+tr:nth-child(even) {
+    background-color: #272727;
+}
+
+.fix{
+  margin: 0 10px 0 10px;
+}
+
+.row.mb-5{
+  margin-bottom: 0 !important;
+}
+.fechacliente{
+  margin-top: 1em;
+
+}
+.fecha{
+  float: left !important;
+  width: 48%;
+  font-family: 'Roboto', sans-serif;
+}
+.flex{
+  width: 50%;
+}
+
+.izqh3{
+  float: left;
+}
+
+.derh3{ width: 105%;}
+
+.total{
+  position: fixed;
+  z-index: 999;
+  margin-left: 50em;
+  width: 10%;
+  text-align: left;
+  border: #FD9326 solid 1px;
+  background: #222222;
+}
+
+.marginprecio{
+  margin-top: 1em;
+  width: 264px;
+}
+.procesar{
+  margin-top: 0.85em;
+  margin-bottom: 1.3em;
+  margin-left: 1.4em;
+  color: #FD9326;
+  border: 1px solid #FD9326;
+  font-weight: 500;
+}
+
+.procesar:hover{
+  background: #FD9326;
+  color: #2b2b2b;
+}
+
+.container.tabla.card.bg-dark{
+  background: none;
+}
+
+.v--modal-box.v--modal{
+  background: transparent !important;
 }
 </style>
