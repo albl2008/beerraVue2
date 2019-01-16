@@ -95,7 +95,7 @@
                             
                         <button style="margin-left: 2.8em;"class="btn-light btn-sm btn add" data-toggle="tooltip"
                           data-placement="top" title="Envase Vacio Grande" v-on:click="createContainer(container,1,sizes[0].growlersize,prices[0].growlerprice)"><img
-                            :src="require('@/assets/cargag.png')" alt=""></button>
+                            :src="require('@/assets/cargaG.png')" alt=""></button>
                     </template>
                      
                     <template  v-else >
