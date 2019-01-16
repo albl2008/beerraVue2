@@ -24,7 +24,7 @@
                         <td>{{user.email}}</td>
                         <td>{{user.verify}}</td>
                         <td>{{isPayed(user)}}</td>
-                        <td><button class="btn btn-outline-success btn-sm" ><i class="material-icons">attach_money</i></button></td>
+                        <td><button class="btn btn-outline-success btn-sm" v-on:click="showModal(user._id)" ><i class="material-icons">attach_money</i></button></td>
                         <td><button class="btn btn-outline-danger btn-sm" ><i class="material-icons">highlight_off</i></button></td>
                     </tr>
                 </tbody>
@@ -33,6 +33,20 @@
           </div>
     </div>
     </div>
+    <modal name="time" height="auto">
+        <div class="container bg-dark ">
+          <div class="breadcrumb bg-warning">
+              <h5 class="">Ingrese la cantidad de meses pagados por el usuario</h5>
+          </div>
+          
+          <form v-on:submit.prevent="newToken()">
+            <div class="input-group-pretend mb-3">
+              <input type="number" class="form-control mb-1" v-model="time" required>
+            </div>
+            <button class="btn btn-outline-warning btn-block">nuevo token</button>
+          </form>
+        </div>
+    </modal>
 </div>
 </template>
 
@@ -42,7 +56,9 @@ import jwt from 'jsonwebtoken'
 export default {
     data(){
         return{
-                users: []
+                users: [],
+                time:'',
+                idUser:''
         }
     },
     mounted(){
@@ -60,7 +76,29 @@ export default {
                 console.log(err.response.data)
             })
         },
-        
+        showModal(idUser){
+            this.idUser = idUser
+            this.$modal.show('time');
+        },
+        newToken(){
+          
+            axios({
+                method:'POST',
+                url: `http://localhost:3000/payToken/${this.idUser}`,
+                data: {time:this.time},
+                headers: {authorization: `Bearer ${localStorage.token}`},
+                
+            }).then(res => {
+                console.log(res)
+                this.getUsers()
+            }).catch(err => {
+                console.log(err.response.data)
+            })
+            this.hide()
+        },
+        hide(){
+            this.$modal.hide('time');
+        },
         isPayed(user){
             const token ='SDFSDFSDFSD,.,.,Fsfsdfsdffsdfsdfllokokkhhhdhcxzc'
            return jwt.verify(user.payToken,token, function(err, decoded) {
