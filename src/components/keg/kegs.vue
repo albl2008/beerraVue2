@@ -1,10 +1,12 @@
 <template>
   <div>
     <div id="barriles">
-      <center>
-        <h1>BARRILES</h1>
-      </center>
-      <center><img :src="require('@/assets/sections/kegs.png')" alt="" class="position"></center>
+  
+      <div class="row" style="width: 50%; margin: 0 auto;"><div class="centerhead">
+        <h1 class="h1head">Barriles</h1></div>
+        <img :src="require('@/assets/beerra/kegg2.png')" alt class="underh1">
+      </div>
+      <center></center>
     </div>
     <div class="container">
 
