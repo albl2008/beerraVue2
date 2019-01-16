@@ -37,7 +37,7 @@
                 <div class="card-body text-center">
                   <radial-progress-bar :diameter="diametro" :startColor="'#FDC02F'" :stopColor="'#FA9628'" :completed-steps="keg.quantitySaled"
                     :total-steps="keg.quantity" class="">
-                    <p><span class="badge badge-warning tamano nowrap" style="max-width: 150px;">{{ keg.brewery.name }}</span></p>
+                    <p><span class="badge badge-warning badgeGradient tamano nowrap" style="max-width: 150px;">{{ keg.brewery.name }}</span></p>
                     <p><span class="badge badge-dark">{{ keg.quantity }} <span class="litros">l</span></span></p>
                     <template v-if="keg.quantitySaled<=15">
                       <p><span class="badge badge-danger">{{ keg.quantitySaled }} <span class="litros">l</span></span></p>
@@ -94,15 +94,15 @@
                    <template v-if="container.size === sizes[0].growlersize" >  
                             
                         <button style="margin-left: 2.8em;"class="btn-light btn-sm btn add" data-toggle="tooltip"
-                          data-placement="top" title="Envase Vacio Grade" v-on:click="createContainer(container,1,sizes[0].growlersize,prices[0].growlerprice)"><img
-                            :src="require('@/assets/carga2.png')" alt=""></button>
+                          data-placement="top" title="Envase Vacio Grande" v-on:click="createContainer(container,1,sizes[0].growlersize,prices[0].growlerprice)"><img
+                            :src="require('@/assets/cargag.png')" alt=""></button>
                     </template>
                      
                     <template  v-else >
 
-                      <button class="btn-light btn-sm btn md-2 add" data-toggle="tooltip"
+                      <button style="margin-left: 4px;" class="btn-light btn-sm btn md-2 add" data-toggle="tooltip"
                         data-placement="top" title="Envase Vacio Pequeño" v-on:click="createContainer(container,1,sizes[0].growlersize2,prices[0].growlerprice2)"><img
-                          :src="require('@/assets/carga2.png')" alt=""></button>
+                          :src="require('@/assets/cargas.png')" alt=""></button>
                           
                     </template>
                    
@@ -314,21 +314,29 @@
              height="auto"> 
             
         <button class="btn btn-outline-danger posicion" style="width: 32px; z-index: 999; position: absolute;" v-on:click="cerrar()">X</button>
-        <div class="container tabla card bg-dark">
+        <div class="container tabla card bg-dark" style="background: #222 !important;">
         
           <h3 class="tablaHead text-center" style="font-size: 32px !important;">¿Desconectar Barril?</h3>
           <div id="row">
-            <h3 class="tablaHead text-center">Cerveceria: <span class="badge badgeGradient badge-warning">{{this.newDisconect.brewery}}</span></h3>
-            <h3 style="margin-bottom: 1em;" class="tablaHead text-center">Cerveza: <span class="badge badgeGradient  badge-warning">{{this.newDisconect.beer}}</span></h3>
-            <h3 class="tablaHead text-center" style="margin-bottom: 1em;">Cantidad restante: <span class="badge badge-danger">{{this.newDisconect.quantitySaled}} <span class="litros">l</span></span></h3>
+             <div class="middlebar">
+            <div class="brewandbeer">
+            <h3 style="margin-top: 1em; margin-bottom: 0;" class="tablaHead text-center"> <span style="width: 100%;" class="badge badgeGradient badge-warning nowrap">{{this.newDisconect.beer}}</span></h3>
+                     <center><span class="de">de</span></center>
+            <h3 class="tablaHead text-center"><span style="width: 100%;" class="badge badgeGradient nowrap badge-warning">{{this.newDisconect.brewery}}</span></h3>
+  </div>
+  <h3 class=" text-center toright" style="margin-bottom: 1em;"><span style="font-size: 48px;" class="badge badge-danger modifyDanger">{{this.newDisconect.quantitySaled}} <span class="litros">l</span></span></h3>
+ 
+           </div>
+           
             <h2 class="hide">{{keg = this.newDisconect.keg}}</h2>
-            <div class="breadcrumb bg-danger">
-            <h5>Recuerde: El barril pasara a vacio y solo se podra pagar al proveedor el mismo. <center><button v-on:click="empty(keg)" class="btn btn-danger"><h5 class="onh">Vacio</h5></button></center></h5>
+            
+            <div class="breadcrumb bg-danger modalRedcrumb">
+            <h5 class="redh5" >Recuerde: El barril pasará a vacío y solo se podra pagar al proveedor del mismo. <button v-on:click="empty(keg)" class="btn btn-outline-danger fixmodalb">Vacío</button></h5>
             
             </div>
-             <div class="breadcrumb bg-success">
+             <div class="breadcrumb bg-success modalGreencrumb">
          
-            <h5>Recuerde: El barril pasara a empezado y se podra volver a conectar desde BARRILES    <center><button v-on:click="started(keg)" class="btn btn-success"><h5 class="onh">Desconectar</h5></button></center></h5>
+            <h5 class="greenh5">Recuerde: El barril pasará a "empezado" y se podra volver a conectar desde "Barriles" .   <button v-on:click="started(keg)" class="btn btn-outline-success">Desconectar</button></h5>
           </div>
           </div>
         </div>
@@ -1137,7 +1145,32 @@ tr:nth-child(even) {
   background: none;
 }
 
-.v--modal-box.v--modal{
-  background: transparent !important;
+.btn-outline-success{
+right: 0 !important;
+margin-top: 0.7em;
+}
+.fixmodalb{
+  margin: 0.7em 14px 0 0;
+  width: 101px;
+}
+
+.de{
+  color: white;
+}
+
+.toright{
+  float: right;
+  margin-top: 1em;
+  margin-bottom: 2.1em !important;
+}
+
+.middlebar{
+  margin-bottom: 2em;
+  height: 50%;
+}
+
+.modifyDanger{
+  border: 1px solid #616161;
+  color: white;
 }
 </style>

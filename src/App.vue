@@ -99,8 +99,9 @@
         <vue-glide>
           <vue-glide-slide></vue-glide-slide>
         </vue-glide>
-        <notifications  position="bottom right" width="450px"/>
       </transition>
+        <notifications group="foo" position="bottom right" width="450px"/>
+     
       <div class="sticky-footer footer">
         <p class="footP">
           <!--<img class="footerImg" src="./beerrazeiv0.png">-->
@@ -678,28 +679,94 @@ i.material-icons{
 }
 
 .badgeGradient{
-  background: rgb(255, 193, 7);
-  background: -moz-linear-gradient(
-    45deg,
-    rgba(255, 193, 7, 1) 0%,
-    rgba(252, 178, 7, 1) 40%,
-    rgba(252, 150, 7, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    45deg,
-    rgba(255, 193, 7, 1) 0%,
-    rgba(252, 178, 7, 1) 40%,
-    rgba(252, 150, 7, 1) 100%
-  );
-  background: linear-gradient(
-    45deg,
-    rgba(255, 193, 7, 1) 0%,
-    rgba(252, 178, 7, 1) 40%,
-    rgba(252, 150, 7, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc107', endColorstr='#fc9607',GradientType=1 );
+ color: rgba(252, 150, 7, 1);
+ border: 1px rgba(252, 150, 7, 1) solid;
+ background: #222;
 }
 .v--modal-box.v--modal{
   background: transparent !important;
 }
+
+.v--modal-overlay{
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+.btn-outline-success{
+  color: #00ff95;
+  background: #1f1f1f;
+  border: 1px solid #00ff95;
+}
+
+.btn-outline-success:hover{
+  background: #00ff95;
+  color: #2b2b2b;
+}
+
+.modalRedcrumb{
+  border: #ff3776 1px solid;
+  background: #222222 !important;
+  width: 48%;
+  margin: 0 !important;
+  float: left;
+  height: 130px;
+}
+
+.redh5{
+  color: #ff0050 !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 16px !important;
+}
+
+.greenh5{
+  color: #00ff95 !important;
+    font-family: 'Roboto', sans-serif !important;
+  font-size: 16px !important;
+}
+
+.modalGreencrumb{
+  border: 1px solid #56ffb9;
+  background: #222 !important;
+  width: 48%;
+  float: right;
+  height: 130px;  
+}
+
+.brewandbeer{
+  width: 48%;
+  float: left;
+  margin-bottom: 1.2em;
+}
+
+.vue-notification {
+  font-size: 12px;
+  padding: 10px;
+  margin: 0 5px 5px;
+
+  color: white;
+  background: #44A4FC;
+  border-left: 5px solid #187FE7;
+  margin-bottom: 1em !important;
+}
+
+.vue-notification.warn {
+  background: #222;
+  border-radius: 0.3em;
+  border: 1px solid rgba(252, 150, 7, 1);
+  /* border-left: 4px solid  rgba(252, 150, 7, 1); */
+}
+
+.vue-notification.error {
+   background: #222;
+  border-radius: 0.3em;
+  border: 1px solid #ff0050;
+  /* border-left: 4px solid #ff0050; */
+}
+
+.vue-notification.success {
+  background: #222;
+  border-radius: 0.3em;
+  border: 1px solid #56ffb9;
+  /* border-left: 4px solid #56ffb9; */
+}
+
 </style>
