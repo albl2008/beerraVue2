@@ -44,14 +44,17 @@
             </div>           
       </div>
       <div class="col-12 col-sm-12  col-md-4">
+        <div v-if="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
           <div class="card bg-dark">
             <div class="card-header"><h3>Pagar Barril</h3></div>
             <div class="card-body">
-              <form v-on:submit.prevent="addPay()">
+              <form v-on:submit.prevent="addPay">
 
                 <div class="input-group-pretend mb-3">
-                  <input type="text" class="form-control mb-1" v-model="newPay.brewery"  placeholder="Cerveceria">
-                  <input type="text" class="form-control mb-1" v-model="newPay.beer" placeholder="Estilo" required>
+                  <input type="text" class="form-control mb-1" v-model="displayPay.brewery"  placeholder="Cerveceria" disabled>
+                  <input type="text" class="form-control mb-1" v-model="displayPay.beer" placeholder="Estilo" disabled>
                     <input type="date" class="form-control mb-1 " v-model="newPay.date" required>
                   <input type="text" class="form-control mb-1" v-model="newPay.ammount" placeholder="Precio" required>
                 </div>
@@ -87,7 +90,7 @@
                   <td>{{payment.keg.beer}}</td>
                   <td>{{payment.keg.quantity}}</td>
                   <td>{{payment.keg.sta}}</td>
-                  <td>{{payment.brewery}}</td>
+                  <td>{{payment.keg.brewery.name}}</td>
                   <td>{{payment.ammount}}</td>
                   <td><button class="btn btn-outline-success btn-sm"><i class="material-icons">done</i></button></td>
                   </template>
@@ -106,7 +109,16 @@
 </template>
 <script>
 import Vue from 'vue'
+import Joi from 'joi'
 const axios = require('axios')
+
+const schema = Joi.object().keys({
+    id: Joi.string(),
+    date : Joi.date().required(),
+    keg : Joi.required(),
+    ammount : Joi.number().positive().required()
+})
+
 
 class Keg {
   constructor(id, beer, quantity, status, brewery) {
@@ -138,6 +150,8 @@ export default {
     return {
       Keg:{},
       newPay:{},
+      displayPay:{},
+      errorMessage:'',
       selectedKeg:{},
       kegs: [],
       keg:[],
@@ -176,6 +190,14 @@ export default {
     this.getKegs();
     this.getBreweries();
     this.getPayments();
+  },
+   watch:{
+    newPay:{
+      handler(){
+        this.errorMessage = ''
+      },
+      deep : true
+    }
   },
   methods: {
     getKegs() {
@@ -223,11 +245,10 @@ export default {
         })
     },
     getKeg(keg) {
-      this.newPay = {}
+      this.newPay={}
       this.newPay.keg = keg._id
-      this.newPay.brewery = keg.brewery.name
-      this.newPay.beer = keg.beer
-
+      this.displayPay.brewery = keg.brewery.name
+      this.displayPay.beer = keg.beer
     },
     getBreweries() {
       axios({
@@ -240,6 +261,7 @@ export default {
         })
     },
     addPay(){
+      if(this.validPay()){
       axios({
         method:'put',
         url:`http://localhost:3000/keg/pay/${this.newPay.keg}`,
@@ -278,9 +300,32 @@ export default {
       })
       })
       
-          
+      }    
          
-  }
+  },
+  validPay(){
+            const result = Joi.validate(this.newPay,schema)
+                 if(result.error === null){
+                return true
+                }else{
+                  console.log(result.error.message)
+                if(result.error.message.includes('ammount')){
+                    this.errorMessage = 'Ingrese un monto correcto'
+                    return false
+                }
+                if(result.error.message.includes('date')){
+                    this.errorMessage = 'Ingrese una fecha correcta'
+                    return false
+                }
+                if(result.error.message.includes('keg')){
+                    this.errorMessage = 'Es necesario seleccionar un barril.'
+                    return false
+                }
+                
+               
+                }
+           
+        }
   },
 
 }

@@ -94,11 +94,14 @@
 
     <!-- Page Content -->
     <div id="app">
+
       <transition name="fade" mode="out-in">
         <router-view/>
+
         <vue-glide>
           <vue-glide-slide></vue-glide-slide>
         </vue-glide>
+
       </transition>
         <notifications group="foo" position="bottom right" width="450px"/>
      

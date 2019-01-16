@@ -46,6 +46,9 @@
       </div>
       
       <div class="col-12 col-sm-12  col-md-4 ">
+         <div v-if="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
           <div class="card bg-dark">
             <div class="card-header "><h3>Precios</h3></div>
             <div class="card-body">
@@ -111,6 +114,9 @@
       </div>
       
       <div class="col-12 col-sm-12  col-md-4 ">
+         <div v-if="errorMessage2" class="alert alert-danger" role="alert">
+            {{ errorMessage2 }}
+          </div>
           <div class="card bg-dark">
             <div class="card-header"><h3>Tamaños</h3></div>
             <div class="card-body">
@@ -146,8 +152,26 @@
 </template>
 <script>
 import Vue from 'vue'
+import Joi from 'joi'
 const axios = require('axios')
 
+const schema = Joi.object().keys({
+    id: Joi.string(),
+    loadprice : Joi.number().positive().required(),
+    loadprice2 : Joi.number().positive().required(),
+    pintprice : Joi.number().positive().required(),
+    pintprice2 : Joi.number().positive().required(),
+    growlerprice : Joi.number().positive().required(),
+    growlerprice2 : Joi.number().positive().required(),
+    hhourprice : Joi.number().positive().required()
+})
+const schema2 = Joi.object().keys({
+    id: Joi.string(),
+    growlersize : Joi.number().positive().required(),
+    growlersize2 : Joi.number().positive().required(),
+    pintsize : Joi.number().positive().required(),
+    pintsize2 : Joi.number().positive().required(),
+})
 
 class newPricize {
   constructor(id, loadprice, loadprice2, pintprice, pintprice2, growlerprice, growlerprice2, hhourprice) {
@@ -174,7 +198,8 @@ class newSize {
 export default {
   data() {
     return {
-     
+      errorMessage:'',
+      errorMessage2:'',
       newPricize:{},
       newSize:{},
       size:[],
@@ -191,6 +216,15 @@ export default {
   created() {
     this.getPricizes();
     this.getSizes();
+  },
+   watch:{
+    newPay:{
+      handler(){
+        this.errorMessage = '',
+        this.errorMessage2 = ''
+      },
+      deep : true
+    }
   },
   methods: {
     getPricizes() {
@@ -259,7 +293,7 @@ export default {
         })
     },
     addPricize(){
-     
+     if(this.validPrice()){
       if(this.editprice === false){
 
       axios({
@@ -317,11 +351,11 @@ export default {
         })
       }
       
-          
+      }    
          
   },
   addSize(){
-     
+     if(this.validSize()){
       if(this.editsize === false){
 
       axios({
@@ -380,7 +414,7 @@ export default {
       }
       
           
-         
+     }    
   },
    updatePricize(idPricize) {
       axios({
@@ -411,6 +445,65 @@ export default {
           this.editsize = true;
         })
     },
+    validPrice(){
+            const result = Joi.validate(this.newPricize,schema)
+
+
+           if(result.error === null){
+                return true
+            }else{
+                console.log(result.error.message)
+                
+                if(result.error.message.includes('loadprice')){
+                    this.errorMessage = 'Ingrese un numero correctamente'
+                }
+                if(result.error.message.includes('loadprice2')){
+                    this.errorMessage = 'Ingrese un numero correctamente'
+                }
+                if(result.error.message.includes('pintprice')){
+                    this.errorMessage = 'Ingrese un numero correctamente'
+                }
+                 if(result.error.message.includes('pintprice2')){
+                    this.errorMessage = 'Ingrese un numero correctamente'
+                }
+                 if(result.error.message.includes('hhourprice')){
+                    this.errorMessage = 'Ingrese un numero correctamente'
+                }
+                if(result.error.message.includes('growlerprice')){
+                    this.errorMessage = 'Ingrese un numero correctamente'
+                }
+                if(result.error.message.includes('growlerprice2')){
+                    this.errorMessage = 'Ingrese un numero correctamente'
+                }
+                //this.errorMessage = 
+            }
+           
+        },
+         validSize(){
+            const result = Joi.validate(this.newSize,schema2)
+
+
+           if(result.error === null){
+                return true
+            }else{
+                console.log(result.error.message)
+                
+                if(result.error.message.includes('pintsize')){
+                    this.errorMessage2 = 'Ingrese un numero correctamente'
+                }
+                if(result.error.message.includes('pintsize2')){
+                    this.errorMessage2 = 'Ingrese un numero correctamente'
+                }
+                if(result.error.message.includes('growlersize')){
+                    this.errorMessage2 = 'Ingrese un numero correctamente'
+                }
+                 if(result.error.message.includes('growlersize2')){
+                    this.errorMessage2 = 'Ingrese un numero correctamente'
+                }
+                //this.errorMessage = 
+            }
+           
+        }
   },
 
 }
