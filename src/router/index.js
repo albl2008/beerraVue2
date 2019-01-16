@@ -21,7 +21,7 @@ import resetUsername from '../components/user/recoverUsername'
 import pricize from '../components/pricize/pricize'
 import outflow from '../components/outflow/outflows'
 import container from '../components/container/container'
-
+import admin from '../components/user/admin'
 
 Vue.use(vueResource)
 Vue.use(Router);
@@ -86,6 +86,12 @@ export default new Router({
 
     },
     {
+      path: '/admin',
+      component: admin,
+      beforeEnter: isLogin
+
+    },
+    {
       path: '/',
       component: index
 
@@ -111,6 +117,12 @@ export default new Router({
     },
     {
       path: '/dashboard',
+      name: dashboard,
+      component: dashboard,
+      beforeEnter: isLogin
+    },
+    {
+      path: '/dashboard/:message',
       name: dashboard,
       component: dashboard,
       beforeEnter: isLogin

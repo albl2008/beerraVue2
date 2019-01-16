@@ -1,6 +1,9 @@
 <template>
     <section>
         <div class="container">
+               <div v-if="message" class="alert alert-success animated fadeInDown mid" role="alert">
+                   {{ message }}
+                </div>
             <div class="row justify-content-center mb-5">
                   <h1 v-if="user">Bienvendido, {{user.username}}!! 😎</h1>
                   <h1 v-if="!user">Trayendo informacion del usuario</h1>                 
@@ -115,6 +118,7 @@ export default {
             litresBrewery:[],
             litresGrowlers:[],
             litresOthers:[],
+            message: this.$route.params.message,
 
             //colors
             coloresBotellon: ['rgba(0, 235, 141, 0.93)','rgba(0, 235, 141, 0.42)'],
