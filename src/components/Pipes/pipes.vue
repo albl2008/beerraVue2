@@ -295,17 +295,24 @@
          
       
       <modal name="hello-world" height="auto">
-        <div class="container bg-dark ">
-          <div class="breadcrumb bg-warning">
-              <h5 class="">Ingrese el precio y la cantidad de litros a vender</h5>
-          </div>
+        <div class="container bg-dark card tabla" style="background: #222 !important;" >
+       
+            <center>
+              <h5 class="badge   tablaHead text-center" style="
+              font-size: 32px !important;
+              
+              margin-bottom: 1em;">Venta por cantidad específica</h5>
+              
+         </center>
           
           <form v-on:submit.prevent="hide()">
             <div class="input-group-pretend mb-3">
-              <input type="number" class="form-control mb-1" v-model="newOther.price" placeholder="Precio" required>
-              <input type="text" class="form-control mb-1" v-model="newOther.quantity" placeholder="Cantidad" required>
+              <input style="float: left; width: 48%; 
+              margin-bottom: 1em !important;" type="number" class="form-control mb-1" v-model="newOther.price" placeholder="Precio" required>
+              <input type="text" style="width: 48%; float: right;" class="form-control mb-1" v-model="newOther.quantity" placeholder="Cantidad" required>
             </div>
-            <button class="btn btn-outline-warning btn-block">Agregar</button>
+            
+            <button style="width: 275px; margin-left: 25%;" class="btn btn-outline-success ">Agregar</button>
           </form>
         </div>
       </modal>
