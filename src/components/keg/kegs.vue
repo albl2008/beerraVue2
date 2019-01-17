@@ -15,32 +15,38 @@
           <div v-if="errorMessage" class="alert alert-danger" role="alert">
             {{ errorMessage }}
           </div>
-          <div class="card bg-dark">
+          <div class="card bg-dark limitHeight">
 
             <template v-if="edit === false">
-              <div class="card-header">
-                <h3>AGREGAR BARRIL</h3>
+              <div class="card-header bg-dark">
+                <h3 class="tablaHead">Agregar barril</h3>
               </div>
             </template>
 
             <template v-else>
               <div class="card-header">
-                <h3>ACTUALIZAR BARRIL</h3>
+                <h3 class="tablaHead">Actualizar barril</h3>
               </div>
             </template>
 
-            <div class="card-body">
+            <div class="card-body tabla">
 
             <form v-on:submit.prevent="addKeg" >
 
-              <div class="input-group-pretend mb-3">
+              <!-- <div class="input-group-pretend mb-3">
                 <template v-if="edit===false">
-                <span class="badge badge-success">N°{{Object.keys(kegs).length+1}}</span><br><br>
+                  <center>
+                <span style="background: #2b2b2b; font-size: 30px; font-family: 'Roboto', sans-serif;
+                border: 1px solid #646464;" class="badge badge-dark"><span class="litros">n°</span> <span class="number"
+                >{{Object.keys(kegs).length+1}}</span></span></center>
                 </template>
                 <template v-else>
-                <span class="badge badge-success">N°{{Object.keys(kegs).length}}</span> 
+                  <center>
+                <span style="background: #2b2b2b; font-size: 30px; font-family: 'Roboto', sans-serif;
+                border: 1px solid #646464;" class="badge badge-dark"><span class="litros">n°</span> <span class=
+                "number">{{Object.keys(kegs).length}}</span></span> </center>
                 </template>
-              </div>
+              </div> -->
             <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Estilo" required>
         
             <template v-if="sale === false">
@@ -51,11 +57,11 @@
                   </option>
               </select>
             
-
+  <center>
               <div v-for="s in status" class="form-check form-check-inline courier">
                 <input required type="radio"  name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"  v-model="newKeg.sta"  class="form-check-input mb-1" >
-                <label for="one">{{s.text}}</label>
-              </div>
+                <label class="roboto" style="font-size: 16px;" for="one">{{s.text}}</label>
+              </div></center>
     </template>
               
                
@@ -72,71 +78,70 @@
                   <input type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="IBU" required>
                   <input type="text" class="form-control mb-1" v-model="newKeg.alcohol" placeholder="Alcohol" required>
 
-                  <select v-model="newKeg.brewery" class="custom-select mb-1" required >
+                  <select  style="margin-bottom: 1em !important;" v-model="newKeg.brewery" class="custom-select mb-1" required >
                     <option class="courier" value="" disabled selected>Cerveceria</option>
                     <option v-for="brewery in breweries" v-bind:value="brewery._id">
                       {{brewery.name}}
                     </option>
 
                   </select>
-                  <swatches class="text-center" v-model="color" :colors="colors" row-length="5" shapes="circles"
+                  <swatches style="" class="text-center" v-model="color" :colors="colors" row-length="5" shapes="circles"
                     show-border popover-to="right">
                   </swatches>
                 
 
-                <div class="card-footer">
+                
                   <template v-if="edit === false">
                     <button class="btn btn-outline-success btn-block">Agregar</button>
                   </template>
                   <template v-else>
-                    <button class="btn btn-outline-primary btn-block">Actualizar</button>
+                    <button style="margin-top:1em" class="btn btn-outline-primary btn-block">Actualizar</button>
                   </template>
-                </div>
+       
               </form>
             </div>
           </div>
         </div>
 
-        <div class="col-12 col-sm-12 col-md-9">
-          <div class="card">
-            <div class="card-header bg-dark">
-              <h3>LISTADO DE BARRILES</h3>
+        <div style="margin-bottom: 3em;" class="col-12 col-sm-12 col-md-9">
+          <div class="card tabla bg-dark">
+            <div class="card-header tituloCardHeader bg-dark">
+              <h3 class="tablaHead">Barriles</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body tabla">
               <table class="table s">
                 <thead>
-                  <th>N°</th>
                   <th>Cerveza</th>
-                  <th>Cantidad Disponible</th>
+                  <th>Disponible</th>
                   <th>Estado</th>
                   <th>IBU</th>
-                  <th>alcohol</th>
-                  <th>brewery</th>
-                  <th>Eliminar</th>
-                  <th>Editar</th>
-                  <th>Conectar</th>
+                  <th>Alcohol</th>
+                  <th>Cerveceria</th>
+                  <th>Opciones</th>
+              
                 </thead>
                 <tbody>
-                  <tr v-for="(keg,i) in kegs">
-                    <td> <span class="badge badge-success">{{i+1}}</span></td>
-                    <td>{{keg.beer}}</td>
-                    <td>{{keg.quantitySaled+"/"+keg.quantity}}</td>
+                  <tr v-for="keg in kegs" class="trHigh">
+                    <td style="max-width: 120px;" class="nowrap">{{keg.beer}}</td>
+                    <td><strong style="font-size: 16px;">{{keg.quantitySaled}}<span class="litros"> l</span></strong> /{{keg.quantity}}<span class="litros"> l</span></td>
                     <td>{{selectStatus(keg.sta)}}</td>
                     <td>{{keg.ibu}}</td>
-                    <td>{{keg.alcohol}}</td>
-                    <td>{{keg.brewery.name}}</td>
-                    <td><button class="btn btn-outline-danger btn-sm" v-on:click="showModal(keg._id)"><i class="material-icons">delete</i></button></td>
-                    <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateKeg(keg._id)"><i class="material-icons">edit</i></button></td>
+                    <td>{{keg.alcohol}} %</td>
+                    <td style="max-width: 120px;" class="nowrap">{{keg.brewery.name}}</td>
+                
+                    <div id="options" class="opacityOut">
+                    <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="showModal(keg._id)"><i class="material-icons resize">clear</i></button></td>
+                    <td><button class="btn btn-outline-primary btn-sm fix disableBorder" v-on:click="updateKeg(keg._id)"><i class="material-icons resize">edit</i></button></td>
                     <template v-if="keg.sta === 1 || keg.sta === 2">
-                      <td><button class="btn btn-outline-success btn-sm" v-on:click="connect(keg._id)"><i class="material-icons">power</i></button></td>
+                      <td><button class="btn btn-outline-success btn-sm fix disableBorder" v-on:click="connect(keg._id)"><i class="material-icons resize">power</i></button></td>
                     </template>
                     <template v-else-if="keg.sta === 4">
-                      <td><button class="btn btn-outline-danger btn-sm" v-on:click="disconnect(keg._id)"><i class="material-icons">power_off</i></button></td>
+                      <td><button class="btn btn-outline-danger btn-sm fix disableBorder " v-on:click="disconnect(keg._id)"><i class="material-icons resize">power_off</i></button></td>
                     </template>
                     <template v-else>
-                      <td><button class="btn btn-outline-primary btn-sm disabled"><i class="material-icons">power</i></button></td>
+                      <td><button class="btn btn-outline-primary btn-sm disabled disableBorder"><i class="material-icons">power</i></button></td>
                     </template>
-
+</div>
                   </tr>
                 </tbody>
               </table>
@@ -147,15 +152,15 @@
       </div>
     </div>
          <modal name="delete" height="auto">
-        <div class="container bg-dark ">
-          <div class="breadcrumb bg-warning">
-              <h5 class="">¿Esta seguro que desea eliminar el Barril?</h5>
+        <div class="container bg-dark card tabla " style="background: rgb(34, 34, 34) !important;">
+          <div class=""><center>
+              <h5 class="tablaHead">¿Esta seguro que desea eliminar el Barril?</h5></center>
           </div>
-          
-            <div class="input-group-pretend mb-3">
-                  <button class="btn btn-success"  v-on:click="deleteKeg(idKeg)" >Aceptar</button>
-                  <button class="btn btn-danger" v-on:click="hideModal()">Cancelar</button>
-            </div>
+          <center>
+            <div class="input-group-pretend mb-3" style="margin-bottom: 0 !important;">
+                  <button class="btn btn-outline-success"  v-on:click="deleteKeg(idKeg)" >Aceptar</button>
+                  <button class="btn btn-outline-danger" v-on:click="hideModal()">Cancelar</button>
+            </div></center>
             
         </div>
       </modal>
@@ -412,7 +417,7 @@ export default {
   selectStatus(status){
      switch (status) {
        case 1:
-         return "lleno"
+         return "Lleno"
          break;
         case 2:
           return "Empezado"
@@ -424,7 +429,7 @@ export default {
           return "Conectado"
           break
         case 5:
-          return "terminado"
+          return "Terminado"
           break
      }
   },
@@ -496,6 +501,64 @@ notifyError(title,text){
 
 }
 </script>
-<style>
+<style scoped>
 
+.tabla{
+  background: #272727 !important;
+  border-radius: 0.6em;
+}
+
+.card-header.tituloCardHeader.bg-dark{
+  padding-bottom: 1em;
+}
+.card-body{
+  background: none;
+}
+.card{
+  background: #272727;
+}
+.fix{
+  margin-left: 0.4em;
+}
+/* 
+.opacityOut{
+  opacity: 0.3;
+}
+
+.opacityOut:hover{
+  opacity: 1;
+} */
+
+.trHigh{
+
+}
+
+.trHigh:hover{
+background: rgba(255, 255, 255, 0.063);
+}
+
+.card-body.tabla{
+
+}
+
+.input-group-pretend.mb-3{
+  font-size: 30px;
+  height: 52px !important;
+}
+
+.number{
+  font-size: 32px;
+  font-family: 'Lobster', cursive;
+}
+
+.btn.btn-outline-success.btn-block{
+  width: 100% !important;
+  margin-top: 1em;
+}
+
+.limitHeight{
+  height: 423px;
+  /* position: static !important; */
+  width: 257px !important;
+}
 </style>

@@ -127,7 +127,7 @@
                     <td class="nowrap" style="max-width: 65px;">{{growler.brewery}}</td>
                     <td>{{growler.quantity}} <span class="litros">l</span></td>
                     <td>$ {{growler.price}}</td>
-                    <td><button class="btn btn-outline-danger btn-sm fix" v-on:click="deleteGrowler(growler.idDelete)"><i class="material-icons resize">clear</i></button></td>
+                    <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteGrowler(growler.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
               </table>
@@ -144,11 +144,11 @@
                     <td>{{container.size}} <span class="litros">l</span></td>
                     <td>{{container.quantitySaled}}</td>
                     <td>$ {{container.price}}</td>
-                    <td style="width: 20%;"><button class="btn btn-outline-danger btn-sm  fix" style="margin: 0 auto; margin-left:10px;" v-on:click="deleteContainer(container.idDelete)"><i style="" class="material-icons resize">clear</i></button></td>
+                    <td style="width: 20%;"><button class="btn btn-outline-danger btn-sm  fix disableBorder" style="margin: 0 auto; margin-left:10px;" v-on:click="deleteContainer(container.idDelete)"><i style="" class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center badge badge-dark precios">Envases: {{totalContainers}}</h3>
+              <h3 class="text-center badge badge-dark precios">Envases: $ {{totalContainers}}</h3>
 
             </div>
           </div>
@@ -182,14 +182,14 @@
                     <td>{{bottle.brewery}}</td>
                     <td>{{bottle.quantitySaled}}</td>
                     <td>{{bottle.price}}</td>
-                    <td><button class="btn btn-danger btn-sm" v-on:click="deleteBottle(bottle.idDelete)"><i class="material-icons">delete</i></button></td>
+                    <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteBottle(bottle.idDelete)"><i class="material-icons">delete</i></button></td>
                   </tr>
                 </tbody>
               </table>
 
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="text-center badge badge-dark precios">Total: {{totalBottles}}</h3>
+                  <h3 class="text-center badge badge-dark precios">Total: $ {{totalBottles}}</h3>
 
                 </div>
               </div>
@@ -223,7 +223,7 @@
                     <td class="nowrap" style="max-width: 65px;">{{pint.brewery}}</td>
                     <td>{{pint.quantity}} <span class="litros">l</span></td>
                     <td>$ {{pint.price}}</td>
-                    <td><button class="btn btn-outline-danger btn-sm fix" v-on:click="deletePint(pint.idDelete)"><i class="material-icons resize">clear</i></button></td>
+                    <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deletePint(pint.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
               </table>
@@ -254,11 +254,11 @@
                     <td>{{other.brewery}}</td>
                     <td>{{other.quantity}}</td>
                     <td>{{other.price}}</td>
-                    <td><button class="btn btn-danger btn-sm" v-on:click="deleteOther(other.idDelete)"><i class="material-icons">delete</i></button></td>
+                    <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteOther(other.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
               </table>
-              <h3 class="text-center badge badge-dark precios">Total: {{totalOthers}}</h3>
+              <h3 class="text-center badge badge-dark precios">Total: $ {{totalOthers}}</h3>
             </div>
           </div>
         </div>
@@ -299,7 +299,7 @@
        
             <center>
               <h5 class="badge   tablaHead text-center" style="
-              font-size: 32px !important;
+              
               
               margin-bottom: 1em;">Venta por cantidad específica</h5>
               
@@ -323,7 +323,7 @@
         <button class="btn btn-outline-danger posicion" style="width: 32px; z-index: 999; position: absolute;" v-on:click="cerrar()">X</button>
         <div class="container tabla card bg-dark" style="background: #222 !important;">
         
-          <h3 class="tablaHead text-center" style="font-size: 32px !important;">¿Desconectar Barril?</h3>
+          <h3 class="tablaHead text-center" style="">¿Desconectar Barril?</h3>
           <div id="row">
              <div class="middlebar">
             <div class="brewandbeer">
@@ -1139,7 +1139,9 @@ tr:nth-child(even) {
   margin-bottom: 1.3em;
   margin-left: 1.4em;
   color: #FD9326;
+  background: #1f1f1f;
   border: 1px solid #FD9326;
+  /* border: none; */
   font-weight: 500;
 }
 
