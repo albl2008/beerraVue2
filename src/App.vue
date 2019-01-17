@@ -94,14 +94,11 @@
 
     <!-- Page Content -->
     <div id="app">
-
       <transition name="fade" mode="out-in">
         <router-view/>
-
         <vue-glide>
           <vue-glide-slide></vue-glide-slide>
         </vue-glide>
-
       </transition>
         <notifications group="foo" position="bottom right" width="450px"/>
      
@@ -400,7 +397,8 @@ textarea {
 .custom-select {
   color: white;
   font-family: "Courier New", Courier, monospace;
-  background: #343a40 !important;
+  border: 1px solid #414141 !important;
+  background: #2B2B2B !important;
 }
 
 input, textarea {
@@ -497,6 +495,16 @@ input[text]:focus,
   border-radius: 0.5em;
 }
 
+.btn-outline-primary{
+  color: rgb(0, 195, 255);
+  background: #1f1f1f;
+  border: rgb(0, 195, 255) 1px solid;
+}
+
+.btn-outline-primary:hover{
+  background: rgb(0, 195, 255);
+  color: #1f1f1f;
+}
 .isonav {
   width: 75%;
   margin-bottom: 1em;
@@ -544,8 +552,10 @@ input[text]:focus,
   margin-bottom: 0;
   
 }
-
-
+select:invalid {color: gray}
+.courier{
+  color: white !important;
+}
 .imgicon{
   width: 50% !important;
 }
@@ -772,4 +782,38 @@ i.material-icons{
   /* border-left: 4px solid #56ffb9; */
 }
 
+
+.tablaHead{
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 23px !important;
+  font-weight: 800;
+  color: white;
+}
+
+tbody tr td{
+  border: none !important;
+  font-family: 'Roboto', sans-serif !important;
+      text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+
+tr{
+  background: #2b2b2b;
+}
+tr:nth-child(even) {
+    background-color: #272727;
+}
+
+.btn-outline-primary{
+  background: #1f1f1f;
+}
+
+.disableBorder{
+  border: none !important;
+}
+
+.roboto{
+  font-family: 'Roboto', sans-serif;
+}
 </style>
