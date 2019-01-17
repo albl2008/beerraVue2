@@ -202,7 +202,7 @@ export default {
   methods: {
     getKegs() {
       axios({
-        url:'http://localhost:3000/keg',
+        url:'http://157.230.157.236/keg',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
@@ -216,7 +216,7 @@ export default {
     },
     getPayments() {
       axios({
-        url:'http://localhost:3000/payment',
+        url:'http://157.230.157.236/payment',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
@@ -232,7 +232,7 @@ export default {
         
        
         axios({
-          url:`http://localhost:3000/payment/${idPayment}`,
+          url:`http://157.230.157.236/payment/${idPayment}`,
           headers: {authorization: `Bearer ${localStorage.token}`}
           })
         .then(res => {
@@ -252,7 +252,7 @@ export default {
     },
     getBreweries() {
       axios({
-        url:'http://localhost:3000/brewery',
+        url:'http://157.230.157.236/brewery',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
@@ -264,7 +264,7 @@ export default {
       if(this.validPay()){
       axios({
         method:'put',
-        url:`http://localhost:3000/keg/pay/${this.newPay.keg}`,
+        url:`http://157.230.157.236/keg/pay/${this.newPay.keg}`,
         headers: {authorization: `Bearer ${localStorage.token}`},
         
         })
@@ -275,7 +275,7 @@ export default {
         })
      axios({
        method:'post',
-       url:'http://localhost:3000/payment',
+       url:'http://157.230.157.236/payment',
        data:this.newPay,
        headers: {authorization: `Bearer ${localStorage.token}`},
         }).then(res => {

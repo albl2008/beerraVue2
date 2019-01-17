@@ -482,7 +482,7 @@ export default {
   methods: {
     getSizes(){
 axios({
-        url:'http://localhost:3000/pricize/size',
+        url:'http://157.230.157.236/pricize/size',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
@@ -496,7 +496,7 @@ axios({
     },
     getOutflows() {
       axios({
-        url:'http://localhost:3000/outflow',
+        url:'http://157.230.157.236/outflow',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
@@ -514,7 +514,7 @@ axios({
 
         axios({
           method:'POST',  
-          url:'http://localhost:3000/outflow',
+          url:'http://157.230.157.236/outflow',
           data: this.newOutflow,
           headers: {authorization: `Bearer ${localStorage.token}`}
           }).then(res => {
@@ -542,7 +542,7 @@ axios({
       } else {
         axios({
           method:'PUT',
-          url:`http://localhost:3000/outflow/${this.newOutflow.id}`,
+          url:`http://157.230.157.236/outflow/${this.newOutflow.id}`,
           data:this.newOutflow,
           headers: {authorization: `Bearer ${localStorage.token}`}
         }).then(res => {
@@ -572,7 +572,7 @@ axios({
     deleteOutflow(idOutflow) {
       axios({
         method:'DELETE',
-        url:`http://localhost:3000/outflow/${idOutflow}`,
+        url:`http://157.230.157.236/outflow/${idOutflow}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(res => {
@@ -597,7 +597,7 @@ axios({
     },
     updateOutflow(idOutflow) {
       axios({
-        url:`http://localhost:3000/outflow/${idOutflow}`,
+        url:`http://157.230.157.236/outflow/${idOutflow}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(res => {

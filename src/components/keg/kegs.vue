@@ -254,7 +254,7 @@ export default {
   methods: {
     getKegs() {
       axios({
-        url: 'http://localhost:3000/keg',
+        url: 'http://157.230.157.236/keg',
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
         .then(response => {
@@ -272,7 +272,7 @@ export default {
 
         axios({
             method:'POST',
-            url:'http://localhost:3000/keg',
+            url:'http://157.230.157.236/keg',
             data: this.newKeg,
             headers: {authorization: `Bearer ${localStorage.token}`}
           }).then(res => {
@@ -289,7 +289,7 @@ export default {
       } else {
         axios({
           method: 'PUT',
-          url:`http://localhost:3000/keg/${this.newKeg.id}`,
+          url:`http://157.230.157.236/keg/${this.newKeg.id}`,
           data:this.newKeg,
           headers: {authorization: `Bearer ${localStorage.token}`}
         }).then(res => {
@@ -309,7 +309,7 @@ export default {
     },
     getBreweries() {
       axios({
-        url:'http://localhost:3000/brewery',
+        url:'http://157.230.157.236/brewery',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
@@ -333,7 +333,7 @@ export default {
       if(this.edit === false ){
       axios({
         method:'DELETE',
-        url:`http://localhost:3000/keg/${idKeg}`,
+        url:`http://157.230.157.236/keg/${idKeg}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
 
         })
@@ -353,7 +353,7 @@ export default {
     },
     updateKeg(idKeg) {
       axios({
-        url:`http://localhost:3000/keg/${idKeg}`,
+        url:`http://157.230.157.236/keg/${idKeg}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(res => {
@@ -381,7 +381,7 @@ export default {
       if(!this.edit){
      axios({
        method:'PUT',
-       url:`http://localhost:3000/keg/connect/${idKeg}`,
+       url:`http://157.230.157.236/keg/connect/${idKeg}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
      })
      .then(res => {
@@ -400,7 +400,7 @@ export default {
     if(!this.edit){
        axios({
          method:'PUT',
-         url:`http://localhost:3000/keg/disconect/${idKeg}`,
+         url:`http://157.230.157.236/keg/disconect/${idKeg}`,
          headers: {authorization: `Bearer ${localStorage.token}`}
        })
      .then(res => {

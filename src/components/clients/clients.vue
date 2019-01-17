@@ -214,7 +214,7 @@ export default {
       if (this.edit === false) {
         axios({
           method: "POST",
-          url: "http://localhost:3000/clients",
+          url: "http://157.230.157.236/clients",
           data: this.newClient,
           headers: { authorization: `Bearer ${localStorage.token}` }
         })
@@ -243,7 +243,7 @@ export default {
       } else {
         axios({
           method: "PUT",
-          url: `http://localhost:3000/clients/${this.newClient.id}`,
+          url: `http://157.230.157.236/clients/${this.newClient.id}`,
           data: this.newClient,
           headers: { authorization: `Bearer ${localStorage.token}` }
         })
@@ -274,7 +274,7 @@ export default {
     },
     getClients() {
       axios({
-        url: "http://localhost:3000/clients",
+        url: "http://157.230.157.236/clients",
         headers: { authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
@@ -297,7 +297,7 @@ export default {
       this.hideModal();
       axios({
         method: "delete",
-        url: `http://localhost:3000/clients/${idClient}`,
+        url: `http://157.230.157.236/clients/${idClient}`,
         headers: { authorization: `Bearer ${localStorage.token}` }
       })
       
@@ -324,7 +324,7 @@ export default {
     },
     counterLitres(idClient) {
       axios({
-        url: `http://localhost:3000/sale/counter/${idClient}`,
+        url: `http://157.230.157.236/sale/counter/${idClient}`,
         headers: { authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
@@ -352,7 +352,7 @@ export default {
     },
     updateClient(idClient) {
       axios({
-        url: `http://localhost:3000/clients/${idClient}`,
+        url: `http://157.230.157.236/clients/${idClient}`,
         headers: { authorization: `Bearer ${localStorage.token}` }
       }).then(res => {
         this.newClient = new newClient(

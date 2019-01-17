@@ -101,7 +101,7 @@ export default {
         login(){
             if(this.validUser()){
                 this.signingIN = true
-               axios.post('http://localhost:3000/signin',
+               axios.post('http://157.230.157.236/signin',
                this.user)
                .then(response => {
                     this.signingIN = false

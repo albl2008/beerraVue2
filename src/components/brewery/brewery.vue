@@ -280,7 +280,7 @@ methods:{
     }else{
       axios({
       method:'POST',
-      url:'http://localhost:3000/brewery',
+      url:'http://157.230.157.236/brewery',
       data:this.newBrewery,
       headers: {authorization: `Bearer ${localStorage.token}`}
       }).then(res => {
@@ -317,7 +317,7 @@ methods:{
         }else{
         axios({
           method:'PUT',
-          url:`http://localhost:3000/brewery/${this.newBrewery.id}`,
+          url:`http://157.230.157.236/brewery/${this.newBrewery.id}`,
           data:this.newBrewery,
           headers: {authorization: `Bearer ${localStorage.token}`}
         }).then(res => {
@@ -351,7 +351,7 @@ methods:{
   },
   getBreweries(){
     axios({
-      url:'http://localhost:3000/brewery',
+      url:'http://157.230.157.236/brewery',
       headers: {authorization: `Bearer ${localStorage.token}`}
     })
     .then(res=>{
@@ -364,7 +364,7 @@ methods:{
   },
   getcontact(idBrewery){
     axios({
-      url:`http://localhost:3000/brewery/${idBrewery}`,
+      url:`http://157.230.157.236/brewery/${idBrewery}`,
       headers: {authorization: `Bearer ${localStorage.token}`}
       })
     .then(res =>{
@@ -393,7 +393,7 @@ methods:{
     this.hideModal()
     axios({
       method:'delete',
-      url:`http://localhost:3000/brewery/${idBrewery}`,
+      url:`http://157.230.157.236/brewery/${idBrewery}`,
       headers: {authorization: `Bearer ${localStorage.token}`}
     })
     .then(res => {
@@ -429,7 +429,7 @@ methods:{
   },
   updateBrewery(idBrewery){
       axios({
-        url:`http://localhost:3000/brewery/${idBrewery}`,
+        url:`http://157.230.157.236/brewery/${idBrewery}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
     })
     .then(res =>{
