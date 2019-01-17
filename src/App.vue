@@ -99,9 +99,11 @@
         <vue-glide>
           <vue-glide-slide></vue-glide-slide>
         </vue-glide>
+
       </transition>
         <notifications group="foo" position="bottom right" width="450px"/>
      
+
       <div class="sticky-footer footer">
         <p class="footP">
           <!--<img class="footerImg" src="./beerrazeiv0.png">-->
@@ -157,9 +159,13 @@ export default {
         error => {
           console.log(error);
           if (error.response.status == 401) {
-            let message = "El token expiro inicie sesion";
+            let message = error.response.data;
             localStorage.removeItem("token");
             this.$router.push({ path: `/signin/${message}` });
+          }
+          if(error.response.status == 403){
+            let message = error.response.data;
+            this.$router.push({ path: `/dashboard/${message}` });
           }
 
           return Promise.reject(error);

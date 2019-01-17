@@ -3,12 +3,14 @@
         <div class="row justify-content-center">
             <div class="col-md-6 ">
                 <div class="midcontainer">
-                 <div v-if="errorMessage" class="alert alert-danger animated fadeInDown mid" role="alert">
-                   {{ errorMessage }}
+                    <div v-if="errorMessage" class="alert alert-danger animated fadeInDown mid" role="alert">
+                    {{ errorMessage }}
+                    </div>
+            
+                    <div v-if="resetPassword" class="alert alert-success animated fadeInDown mid" role="alert">
+                    {{ resetPassword }}
+                    </div>
                 </div>
-                  <div v-if="resetPassword" class="alert alert-success animated fadeInDown mid" role="alert">
-                   {{ resetPassword }}
-                </div></div>
                 <div class="card cardlogin">
                     <div class="card-header">
                         <h1 class="text-center">Login</h1>
@@ -111,7 +113,7 @@ export default {
                     } 
                 }).catch(err =>{
                     this.signingIN = false
-                    this.errorMessage = err.response.data + "😡"
+                    this.errorMessage = err.response.data + "😰"
                     
                 })
             }
