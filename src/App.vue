@@ -99,9 +99,11 @@
         <vue-glide>
           <vue-glide-slide></vue-glide-slide>
         </vue-glide>
-      
+
       </transition>
         <notifications group="foo" position="bottom right" width="450px"/>
+     
+
       <div class="sticky-footer footer">
         <p class="footP">
           <!--<img class="footerImg" src="./beerrazeiv0.png">-->
@@ -142,7 +144,7 @@ export default {
     this.checkIfAuthorized();
     this.isLogged = localStorage.token;
   },
-  data() {
+  data() { counter: 0
     return {
       active: null,
       isLogged: localStorage.token
@@ -185,7 +187,8 @@ export default {
       this.bounce = "";
     }
   },
-  name: "App"
+  name: "App",
+  
 };
 </script>
 
@@ -400,10 +403,11 @@ textarea {
 .custom-select {
   color: white;
   font-family: "Courier New", Courier, monospace;
-  background: #343a40 !important;
+  border: 1px solid #414141 !important;
+  background: #2B2B2B !important;
 }
 
-input {
+input, textarea {
   font-family: "Courier New", Courier;
   color: white !important;
 }
@@ -490,6 +494,23 @@ input[text]:focus,
   border-radius: 0.5em;
 }
 
+.alert-success {
+  background: #1f1f1f !important;
+  border: solid 1px #00ff95;
+  color: #00ff95;
+  border-radius: 0.5em;
+}
+
+.btn-outline-primary{
+  color: rgb(0, 195, 255);
+  background: #1f1f1f;
+  border: rgb(0, 195, 255) 1px solid;
+}
+
+.btn-outline-primary:hover{
+  background: rgb(0, 195, 255);
+  color: #1f1f1f;
+}
 .isonav {
   width: 75%;
   margin-bottom: 1em;
@@ -537,8 +558,10 @@ input[text]:focus,
   margin-bottom: 0;
   
 }
-
-
+select:invalid {color: gray}
+.courier{
+  color: white !important;
+}
 .imgicon{
   width: 50% !important;
 }
@@ -585,5 +608,218 @@ input[text]:focus,
 .yellowB:hover{
   border: 1px solid white !important;
   transition: 0.4s;
+}
+
+.centerhead{
+margin-left: 35%;
+}
+
+.h1head{
+  font-family: 'Lobster', cursive !important;
+  font-size: 43px !important;
+  margin-top: 1.8em;
+}
+
+.underh1{
+  width: 15%;
+  height: 100%;
+  margin-top: 3em;
+}
+
+.carousel-3d-slide{
+  background: none !important;
+  border-radius: 0.4em;
+  
+ 
+}
+.carousel-3d-slide.current{
+ -webkit-box-shadow: 3px 10px 81px -10px rgb(54, 54, 54);
+-moz-box-shadow: 3px 10px 81px -10px rgb(54, 54, 54);
+box-shadow: 3px 10px 81px -10px rgb(54, 54, 54);
+
+}
+
+.btn-outline-danger{
+  background: #1f1f1f;
+  border: 1px solid #ff0050;
+  color: #ff0050;
+}
+
+.btn-outline-danger:hover{
+  background: #ff0050;
+  color: #1f1f1f;
+}
+
+.btn.btn-outline-danger.btn-sm{
+  margin-bottom: 0.4em !important;
+}
+
+i.material-icons{
+  margin-top: 0.2em !important;
+}
+
+.badge-danger{
+  background: #2b2b2b;
+  border: 1px solid #ff3776;
+  color: #ff0050;
+}
+
+.badge-success{
+  background: #2b2b2b;
+  color: #00ff95;
+  border: 1px solid #56ffb9;
+}
+
+.litros{
+  font-family: 'Lobster', cursive ;
+  opacity: 0.5;
+}
+
+.table  thead th{
+  border: none;
+  font-family: 'Arial', sans-serif;
+  background: #22222286;
+}
+
+.precios{
+  font-family: 'Roboto', sans-serif !important;
+  
+}
+
+.resize{
+  font-size: 12px;
+  padding: 0.2em;
+}
+
+.nowrap{
+   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow:hidden;
+}
+
+.badgeGradient{
+ color: rgba(252, 150, 7, 1);
+ border: 1px rgba(252, 150, 7, 1) solid;
+ background: #222;
+}
+.v--modal-box.v--modal{
+  background: transparent !important;
+}
+
+.v--modal-overlay{
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+.btn-outline-success{
+  color: #00ff95;
+  background: #1f1f1f;
+  border: 1px solid #00ff95;
+}
+
+.btn-outline-success:hover{
+  background: #00ff95;
+  color: #2b2b2b;
+}
+
+.modalRedcrumb{
+  border: #ff3776 1px solid;
+  background: #222222 !important;
+  width: 48%;
+  margin: 0 !important;
+  float: left;
+  height: 130px;
+}
+
+.redh5{
+  color: #ff0050 !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 16px !important;
+}
+
+.greenh5{
+  color: #00ff95 !important;
+    font-family: 'Roboto', sans-serif !important;
+  font-size: 16px !important;
+}
+
+.modalGreencrumb{
+  border: 1px solid #56ffb9;
+  background: #222 !important;
+  width: 48%;
+  float: right;
+  height: 130px;  
+}
+
+.brewandbeer{
+  width: 48%;
+  float: left;
+  margin-bottom: 1.2em;
+}
+
+.vue-notification {
+  font-size: 12px;
+  padding: 10px;
+  margin: 0 5px 5px;
+
+  color: white;
+  background: #44A4FC;
+  border-left: 5px solid #187FE7;
+  margin-bottom: 1em !important;
+}
+
+.vue-notification.warn {
+  background: #222;
+  border-radius: 0.3em;
+  border: 1px solid rgba(252, 150, 7, 1);
+  /* border-left: 4px solid  rgba(252, 150, 7, 1); */
+}
+
+.vue-notification.error {
+   background: #222;
+  border-radius: 0.3em;
+  border: 1px solid #ff0050;
+  /* border-left: 4px solid #ff0050; */
+}
+
+.vue-notification.success {
+  background: #222;
+  border-radius: 0.3em;
+  border: 1px solid #56ffb9;
+  /* border-left: 4px solid #56ffb9; */
+}
+
+
+.tablaHead{
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 23px !important;
+  font-weight: 800;
+  color: white;
+}
+
+tbody tr td{
+  border: none !important;
+  font-family: 'Roboto', sans-serif !important;
+      text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+
+tr{
+  background: #2b2b2b;
+}
+tr:nth-child(even) {
+    background-color: #272727;
+}
+
+.btn-outline-primary{
+  background: #1f1f1f;
+}
+
+.disableBorder{
+  border: none !important;
+}
+
+.roboto{
+  font-family: 'Roboto', sans-serif;
 }
 </style>

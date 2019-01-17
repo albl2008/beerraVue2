@@ -279,12 +279,15 @@
                   </div>
                 </div>
                 <div class="col-md-12">
+                  
                   <center>
+                    <div class="row signinG breadcrumb">
                     <button
                       type="submit"
                       class="btn btn-outline-warning btn-send btn-lg"
                       value="Enviar"
                     >Enviar</button>
+                    </div>
                   </center>
                   <br>
                 </div>
@@ -305,15 +308,15 @@
                   class="agenda"
                 >
              <!--  </button> -->
-             <p style="font-family: 'Roboto', sans-serif;">
+             <p style="font-family: 'Roboto', sans-serif; font-size: 16px;">
               <!-- <p v-if="contact"> -->
                 <i class="material-icons">mail_outline</i> info@beerra.com.ar
               </p>
-              <p style="font-family: 'Roboto', sans-serif;">
+              <p style="font-family: 'Roboto', sans-serif; font-size: 16px;">
              <!--  <p v-if="contact"> -->
                 <i class="material-icons">phone</i> 2616563848
               </p>
-              <p style="font-family: 'Roboto', sans-serif;">
+              <p style="font-family: 'Roboto', sans-serif; font-size: 16px;">
              <!--  <p v-if="contact"> -->
                 <i class="material-icons">phone</i> 2616585487
               </p>
@@ -374,6 +377,18 @@ export default {
 
 <style scoped>
 
+.row.signinG.breadcrumb{
+  margin: 0 auto; 
+  margin-top: 1em;
+  width: 97%;
+ background: -moz-linear-gradient(45deg, rgba(28,28,28,0.3) 0%, rgba(255,255,255,0) 100%);
+background: -webkit-linear-gradient(45deg, rgba(28,28,28,0.3) 0%,rgba(255,255,255,0) 100%);
+background: linear-gradient(45deg, rgba(28,28,28,0.3) 0%,rgba(255,255,255,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c1c1c', endColorstr='#00ffffff',GradientType=1 );
+  border: solid 1px #2b2b2b;
+
+}
+
 .contact{
   width: 30%;
   position: absolute;
@@ -381,6 +396,7 @@ export default {
   border-radius: 0.4em;
   right: 0;
   height: 100%;
+  
 }
 .beerra {
   font-size: 32px !important;
@@ -390,7 +406,9 @@ export default {
 }
 
 .agenda{
-  width: 50%;
+  width: 37%;
+  margin-top: 3em;
+  margin-bottom: 4em;
 }
 .subcontainer {
   border-radius: 0.5em !important;
@@ -400,22 +418,17 @@ export default {
   
 }
 
-.contact{
-  background: rgb(118,50,255) !important;
-background: -moz-linear-gradient(45deg, rgba(118,50,255,0.7) 0%, rgba(255,0,144,0.7) 100%) !important;
-background: -webkit-linear-gradient(45deg, rgba(118,50,255,0.7) 0%,rgba(255,00.7144,0.7) 100%) !important;
-background: linear-gradient(45deg, rgba(118,50,255,0.7) 0%,rgba(255,0,144,0.7) 100%) !important;
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7632ff', endColorstr='#ff0090',GradientType=1 ) !important;
-}
-
 .breadcrumb-item::before{
   display: none;
 }
 
 .notsolidblack{
-  background: rgba(0, 0, 0, 0.304);
+  background: -moz-linear-gradient(45deg, rgba(28,28,28,0.3) 0%, rgba(255,255,255,0) 100%);
+background: -webkit-linear-gradient(45deg, rgba(28,28,28,0.3) 0%,rgba(255,255,255,0) 100%);
+background: linear-gradient(45deg, rgba(28,28,28,0.3) 0%,rgba(255,255,255,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c1c1c', endColorstr='#00ffffff',GradientType=1 );
   margin-top: 13px;
-  border: 1px solid #2b2b2b !important;
+
   margin-bottom: 13px;
 }
 
