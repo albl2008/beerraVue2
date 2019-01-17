@@ -472,12 +472,7 @@ export default {
      
      
   },
-  mounted(){
-     setTimeout(
-    _ => this.timeout = true, // enable the input
-    400 // after 1 second
-  )
-  },
+
 
   methods:{
     getClients(){
@@ -495,14 +490,14 @@ export default {
     },
    
      getKegs() {
-       
+       this.timeout = false
       axios({
         url:'http://157.230.157.236/keg/kegConnected',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
           this.kegs = response.data.Kegs
-         
+         this.timeout = true
         }).catch(e => {
           console.log(e)
 
