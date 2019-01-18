@@ -1,8 +1,12 @@
 <template>
 <div> 
-<div id="brewery">
-          <center><h1>CERVECERIAS</h1></center>
-          <center><img :src="require('@/assets/sections/brewery.png')" alt="" class="position"></center>
+<div id="brewery" >
+          <div class="row" style="width: 50%; margin: 0 auto; "><div class="centerhead">
+        <h1 class="h1head">Cervecerías</h1>
+        </div>
+        <img :src="require('@/assets/beerra/cerveceria2x.png')" alt class="underh1">
+        
+      </div>
           
       </div>  
   <div class="container">
@@ -11,63 +15,72 @@
         <div v-if="errorMessage" class="alert alert-danger" role="alert">
             {{ errorMessage }}
           </div>
+          <div class=""> <!-- -->
          <form v-on:submit.prevent="addBrewery">
-         <div class="card mb-2 bg-dark">
-           <div class="card-header">
-             <h3>{{Cerveceria}}</h3>
-           </div>
-           <div class="card-body">
-             <input type="text" class="form-control mb-1" placeholder="Cerveceria" v-model="newBrewery.name" required>
-          <input type="text" class="form-control mb-3" placeholder="Direccion" v-model="newBrewery.address" required>
-            <template v-if="edit === false">
-              <div class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >AGREGAR</button></div>
-            </template>
-            <template v-else>
-              <div class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >ACTUALIZAR</button></div>
-            </template>
-           </div>
-         </div>
-          <div class="card bg-dark">
-           <div class="card-header">
-            <h3>{{ContactoForm}}</h3>
-           </div>
-           <div class="card-body">
+         <div class="card bg-dark" style="padding: 1em;">
+           <h3 class="tablaHead">Nueva entrada</h3>
+          <div class="" style="border: none !important;">
+          
+           <div class="card-body change" style="width: 48%;">
+             <h3 class="tablaHead" style="">{{ContactoForm}}</h3>
                <form v-on:submit.prevent="addcontact">
             <input type="text" class="form-control mb-1" placeholder="Nombre" v-model="newcontact.name" required>
             <input type="text" class="form-control mb-1" placeholder="Telefono" v-model="newcontact.tel" required>
             <input type="email" class="form-control mb-3" placeholder="Mail" v-model="newcontact.mail" required>
             <template v-if="editContact === false">
-              <div class="col-12"><button class="btn btn-outline-primary btn-block" >AÑADIR CONTACTO</button></div>
+              <div class="" ><button style=" width: 73px; float: left; margin-right: 1em;" class="btn btn-outline-primary btn-block" >Añadir</button>
+              <span style="color: gray; margin: 0 auto;">Primer paso.</span>
+              </div>
             </template>
             <template v-else>
-              <div class="col-12"><button class="btn btn-outline-primary btn-block" >ACTUALIZAR CONTACTO</button></div>
+              <div class="" style="width: 79px; "><button class="btn btn-outline-primary btn-block" >Actualizar</button></div>
             </template>
           </form>
            </div>
          </div> 
+
+         <div class="" style="border: none !important;">
+          
+           <div class="card-body change" style="width: 48%; position: absolute; margin-left: 47%; top: 3.5em; height: 214px;">
+             <h3 class="tablaHead">{{Cerveceria}}</h3>
+             <input type="text" class="form-control mb-1" placeholder="Cerveceria" v-model="newBrewery.name" required>
+          <input type="text" class="form-control mb-3" placeholder="Direccion" v-model="newBrewery.address" required>
+            <template v-if="edit === false">
+              <div class="" style="margin-top: 3.8em;" ><button style="width: 73px; float: left; margin-right: 1em;" class="btn btn-outline-success btn-block " >Agregar</button>
+              <span style="color: gray; margin: 0 auto;">Segundo paso.</span></div>
+            </template>
+            <template v-else>
+              <div class="" style="width: 82px; margin-top: 3.8em;"><button class="btn btn-outline-success btn-block " >Actualizar</button></div>
+            </template>
+           </div>
+         </div>
+         </div>
         </form>
+        </div>
       </div>
       <div class="col-12 col-sm-6 table-responsive">
-         <div class="card nuevacerveceria">
-           <div class="card-header bg-dark ">
-             <h3>{{Contacto}}</h3>
+         <div class="card nuevacerveceria" style="">
+           <div class="card-header tituloCardHeader bg-dark " style="border-radius: 0">
+             <h3 class="tablaHead">{{Contacto}}</h3>
            </div>
-           <div class="card-body">
+           <div class="card-body change" >
              <table class="table ">
             <thead>
               <th>Nombre</th>
-              <th>Telefono</th>
+              <th>Teléfono</th>
               <th>Email</th>
-              <th>Eliminar</th>
-              <th>Modificar</th>
+              <th>Opciones</th>
+              
             </thead>
             <tbody>
               <tr v-for="cont in contact">
-                <td>{{cont.name}}</td>
-                <td>{{cont.tel}}</td>
-                <td>{{cont.mail}}</td>
-                <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteContact(cont)"><i class="material-icons">delete</i></button></td>
-                <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateContact(cont)"><i class="material-icons">edit</i></button></td>
+                <td style="max-width: 120px;" class="nowrap hoverShow">{{cont.name}}</td>
+                <td style="max-width: 105px;" class="nowrap hoverShow">{{cont.tel}}</td>
+                <td style="max-width: 160px;" class="nowrap hoverShow">{{cont.mail}}</td>
+                <div class="options">
+                <td style="width: 75px;"><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteContact(cont)"><i class="material-icons resize">clear</i></button></td>
+                <td><button class="btn btn-outline-primary btn-sm fix disableBorder" v-on:click="updateContact(cont)"><i class="material-icons resize">edit</i></button></td>
+             </div>
               </tr>
             </tbody>
           </table>
@@ -75,48 +88,50 @@
          </div>          
       </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-bottom: 3em;">
       <div class="col-12  col-md-6">
-        <div class="card">
-          <div class="card-header bg-dark">
-            <h3>Cervecerias</h3>
+        <div class="card nuevacerveceria" style="margin-top: 1.4em;">
+          <div class="card-header tituloCardHeader bg-dark">
+            <h3 class="tablaHead">Cervecerías</h3>
           </div>
-          <div class="card-body">
+          <div class="card-body change">
             <table class="table  ">
             <thead>
-              <th>Cerveceria</th>
-              <th>Direccion</th>
-              <th>contacto</th>
-              <th>Eliminar</th>
-              <th>Editar</th>
+              <th>Cervecería</th>
+              <th>Dirección</th>
+              <th>Opciones</th>
+             
             </thead>
             <tbody>
               <tr v-for="brewery in breweries">
-                <td>{{brewery.name}}</td>
-                <th>{{brewery.address}}</th>
-                <td><button class="btn btn-outline-success btn-sm" v-on:click="getcontact(brewery._id)"><i v-on:click="getcontact(brewery._id)" class="material-icons">contact_phone</i></button></td>
-                <td><button class="btn btn-outline-danger btn-sm" v-on:click="showModal(brewery._id)"><i class="material-icons">delete</i></button></td>
-                <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateBrewery(brewery._id)"><i class="material-icons">edit</i></button></td>
-              </tr>
+                <td class="nowrap" style="max-width: 160px;">{{brewery.name}}</td>
+                <th class="nowrap hoverShow roboto" style="max-width: 150px; font-weight: normal;">{{brewery.address}}</th>
+                <div class="options">
+                <td><button class="btn btn-outline-success btn-sm fix disableBorder" v-on:click="getcontact(brewery._id)"><i v-on:click="getcontact(brewery._id)" class="material-icons resize">contact_phone</i></button></td>
+                <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="showModal(brewery._id)"><i class="material-icons resize">clear</i></button></td>
+                <td><button class="btn btn-outline-primary btn-sm fix disableBorder" v-on:click="updateBrewery(brewery._id)"><i class="material-icons resize">edit</i></button></td>
+              </div></tr>
             </tbody>
           </table>
           </div>
         </div>        
       </div>
        <div class="col-12 col-md-6 table-responsive">
-         <div class="card">
+         <div class="card nuevacerveceria" style="margin-top: 1.4em;">
            <div class="card-header bg-dark">
-              <h3>Contactos cerveceria</h3>
+              <h3 class="tablaHead">Contactos actuales</h3>
            </div>
-           <div class="card-body">
-            <table class="table table-striped ">
+           <div class="card-body change">
+            <table class="table">
               <thead>
+                <!-- <th>Cervecería</th> -->
                 <th>Nombre</th>
-                <th>Telefono</th>
-                <th>Direccion</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th></th>
               </thead>
               <tbody>
-                <tr v-for="contact in contactBrewery">
+                <tr v-for="contact in contactBrewery">               
                   <td>{{contact.name}}</td>
                   <td>{{contact.tel}}</td>
                   <td>{{contact.mail}}</td>
@@ -130,14 +145,14 @@
   </div>
     </div>
         <modal name="delete" height="auto">
-        <div class="container bg-dark">
-          <div class="breadcrumb bg-warning">
-            <h5 class>¿Esta seguro que desea eliminar la cerveceria?</h5>
-          </div>
+        <div class="container bg-dark card tabla" style="background: rgb(34, 34, 34) !important;">
+          <div class=""><center>
+            <h5 class="tablaHead" style="margin-bottom: 0.7em;">¿Esta seguro que desea eliminar la cerveceria?</h5>
+          </center></div>
 
-          <div class="input-group-pretend mb-3">
-            <button class="btn btn-success" v-on:click="deleteBrewery(idBrewery)">Aceptar</button>
-            <button class="btn btn-danger" v-on:click="hideModal()">Cancelar</button>
+          <div class="input-group-pretend mb-3" style="margin-bottom: 0 !important;"><center>
+            <button class="btn btn-outline-success" v-on:click="deleteBrewery(idBrewery)">Aceptar</button>
+            <button class="btn btn-outline-danger" v-on:click="hideModal()">Cancelar</button></center>
           </div>
         </div>
       </modal>
@@ -187,9 +202,9 @@ data(){
       contactBrewery:[],
       edit:false,
       editContact: false,
-      Cerveceria :'Nueva cerveceria',
-      Contacto : 'Contactos nueva cerveceria',
-      ContactoForm: 'Nuevo contacto',
+      Cerveceria :'+ Cervecería',
+      Contacto : 'Contactos de la nueva cervecería',
+      ContactoForm: '+ Contacto',
       whatsapp: 'https://wa.me/54',
       
   }
@@ -326,8 +341,8 @@ methods:{
           this.newBrewery={}
           this.contact=[]
           this.edit = false
-          this.Cerveceria ='Nueva cerveceria'
-          this.Contacto = 'Contactos nueva cerveceria'
+          this.Cerveceria ='+ Cervecería'
+          this.Contacto = 'Contactos de la nueva cervecería'
           if(res.status == 200){
           Vue.notify({
             group: 'foo',
@@ -342,7 +357,7 @@ methods:{
             group: 'foo',
             type:'error',
             title: 'Cerveceria',
-            text: `Error al actualizar la cerveceria ${e}`
+            text: `Error al actualizar la cervecería ${e}`
       })
         })
       }
@@ -478,6 +493,28 @@ methods:{
 
 }
 </script>
-<style>
+<style scoped >
+.card-body.change{
+  background: #272727 !important;
+ 
+}
 
+.change{
+  border-radius: 0.6em;
+}
+
+.options{
+  width: 20%;
+}
+
+.hoverShow{
+  transition: 1s
+}
+.hoverShow:active{
+  width: 100%;
+    text-overflow:unset !important;
+  white-space: unset !important;
+  overflow:auto !important;
+  
+}
 </style>

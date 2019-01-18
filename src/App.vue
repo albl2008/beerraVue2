@@ -34,7 +34,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/brewery">Cerveceria
+            <a class="nav-link" href="http://localhost:8080/#/brewery">Cervecerías
               <img :src="require('@/assets/navbar/cerveceria.png')" alt class>
             </a>
           </li>
@@ -99,11 +99,9 @@
         <vue-glide>
           <vue-glide-slide></vue-glide-slide>
         </vue-glide>
-
       </transition>
         <notifications group="foo" position="bottom right" width="450px"/>
      
-
       <div class="sticky-footer footer">
         <p class="footP">
           <!--<img class="footerImg" src="./beerrazeiv0.png">-->
@@ -159,13 +157,9 @@ export default {
         error => {
           console.log(error);
           if (error.response.status == 401) {
-            let message = error.response.data;
+            let message = "El token expiro inicie sesion";
             localStorage.removeItem("token");
             this.$router.push({ path: `/signin/${message}` });
-          }
-          if(error.response.status == 403){
-            let message = error.response.data;
-            this.$router.push({ path: `/dashboard/${message}` });
           }
 
           return Promise.reject(error);
@@ -679,8 +673,11 @@ i.material-icons{
   border: none;
   font-family: 'Arial', sans-serif;
   background: #22222286;
+  border-top: none;
 }
-
+.table th{
+  border: none !important;
+}
 .precios{
   font-family: 'Roboto', sans-serif !important;
   
@@ -821,5 +818,9 @@ tr:nth-child(even) {
 
 .roboto{
   font-family: 'Roboto', sans-serif;
+}
+
+.card.nuevacerveceria{
+  background: #272727 !important;
 }
 </style>

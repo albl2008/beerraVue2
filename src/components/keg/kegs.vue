@@ -92,7 +92,7 @@
 
                 
                   <template v-if="edit === false">
-                    <button class="btn btn-outline-success btn-block">Agregar</button>
+                    <button style="width: 33% !important; float: left;" class="btn btn-outline-success btn-block">Agregar</button>
                   </template>
                   <template v-else>
                     <button style="margin-top:1em" class="btn btn-outline-primary btn-block">Actualizar</button>
@@ -159,7 +159,7 @@
           <center>
             <div class="input-group-pretend mb-3" style="margin-bottom: 0 !important;">
                   <button class="btn btn-outline-success"  v-on:click="deleteKeg(idKeg)" >Aceptar</button>
-                  <button class="btn btn-outline-danger" v-on:click="hideModal()">Cancelar</button>
+                  <button class="btn btn-outline-danger" style="" v-on:click="hideModal()">Cancelar</button>
             </div></center>
             
         </div>
