@@ -127,14 +127,14 @@
                 <!-- <th>Cervecería</th> -->
                 <th>Nombre</th>
                 <th>Teléfono</th>
-                <th>Dirección</th>
+                <th>Mail</th>
                 <th></th>
               </thead>
               <tbody>
                 <tr v-for="contact in contactBrewery">               
-                  <td>{{contact.name}}</td>
-                  <td>{{contact.tel}}</td>
-                  <td>{{contact.mail}}</td>
+                  <td style="max-width: 130px;" class="nowrap hoverShow">{{contact.name}}</td>
+                  <td >{{contact.tel}}</td>
+                  <td style="max-width: 240px;" class="nowrap hoverShow">{{contact.mail}}</td>
                   <td><a v-bind:href="whatsapp+contact.tel" target="_blank"  class="fab fa-whatsapp fa-lg"></a></td>
                 </tr>
               </tbody>
