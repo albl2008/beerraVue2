@@ -16,14 +16,19 @@
            <div class="card-header">
              <h3>{{Cerveceria}}</h3>
            </div>
-           <div class="card-body">
+            <div class="text-center"><img class="mt-5 mb-5" v-if="load" height="70px" width="70px" src="../../assets/loadWhite.svg" ></div>
+           <div v-if="!load" class="card-body">
              <input type="text" class="form-control mb-1" placeholder="Cerveceria" v-model="newBrewery.name" required>
           <input type="text" class="form-control mb-3" placeholder="Direccion" v-model="newBrewery.address" required>
             <template v-if="edit === false">
-              <div class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >AGREGAR</button></div>
+               
+              <div class="col-12 mb-3 text-center">  
+                <button  class="btn btn-outline-success btn-block " >AGREGAR</button></div>
             </template>
             <template v-else>
-              <div class="col-12 mb-3"><button class="btn btn-outline-success btn-block " >ACTUALIZAR</button></div>
+             
+              <div class="col-12 mb-3 text-center">
+                <button  class="btn btn-outline-success btn-block " >ACTUALIZAR</button></div>
             </template>
            </div>
          </div>
@@ -94,9 +99,12 @@
               <tr v-for="brewery in breweries">
                 <td>{{brewery.name}}</td>
                 <th>{{brewery.address}}</th>
-                <td><button class="btn btn-outline-success btn-sm" v-on:click="getcontact(brewery._id)"><i v-on:click="getcontact(brewery._id)" class="material-icons">contact_phone</i></button></td>
-                <td><button class="btn btn-outline-danger btn-sm" v-on:click="showModal(brewery._id)"><i class="material-icons">delete</i></button></td>
-                <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateBrewery(brewery._id)"><i class="material-icons">edit</i></button></td>
+                <td>
+                  <button class="btn btn-outline-success btn-sm" v-on:click="getcontact(brewery._id)"><i v-on:click="getcontact(brewery._id)" class="material-icons">contact_phone</i></button></td>
+                <td>
+                  <button class="btn btn-outline-danger btn-sm" v-on:click="showModal(brewery._id)"><i class="material-icons">delete</i></button></td>
+                <td>
+                  <button class="btn btn-outline-primary btn-sm" v-on:click="updateBrewery(brewery._id)"><i class="material-icons">edit</i></button></td>
               </tr>
             </tbody>
           </table>
@@ -108,7 +116,8 @@
            <div class="card-header bg-dark">
               <h3>Contactos cerveceria</h3>
            </div>
-           <div class="card-body">
+            <div class="text-center"><img class="mt-5 mb-5" v-if="loadContact" height="70px" width="70px" src="../../assets/loadWhite.svg" ></div>
+           <div v-if="!loadContact" class="card-body">
             <table class="table table-striped ">
               <thead>
                 <th>Nombre</th>
@@ -191,6 +200,9 @@ data(){
       Contacto : 'Contactos nueva cerveceria',
       ContactoForm: 'Nuevo contacto',
       whatsapp: 'https://wa.me/54',
+      load: false,
+      loadContact:false,
+      
       
   }
 
@@ -278,6 +290,7 @@ methods:{
             text: 'Ingrese al menos un contacto'
       })
     }else{
+      this.load = true
       axios({
       method:'POST',
       url:'http://localhost:3000/brewery',
@@ -305,6 +318,7 @@ methods:{
             text: e.response.data
       })
       })
+      this.load = false
     }
       }else{
         if(this.contact.length === 0){
@@ -315,6 +329,7 @@ methods:{
             text: 'Ingrese al menos un contacto'
       })
         }else{
+          this.load = true
         axios({
           method:'PUT',
           url:`http://localhost:3000/brewery/${this.newBrewery.id}`,
@@ -345,6 +360,7 @@ methods:{
             text: `Error al actualizar la cerveceria ${e}`
       })
         })
+        this.load = false
       }
       }
     
@@ -363,6 +379,7 @@ methods:{
     })
   },
   getcontact(idBrewery){
+    this.loadContact = true
     axios({
       url:`http://localhost:3000/brewery/${idBrewery}`,
       headers: {authorization: `Bearer ${localStorage.token}`}
@@ -371,6 +388,7 @@ methods:{
       console.log(res.data.brewery.contact)
       this.contactBrewery = res.data.brewery.contact
     })
+    this.loadContact = false
   },
    showModal(idBrewery) {
      if(!this.edit){
@@ -391,6 +409,7 @@ methods:{
   deleteBrewery(idBrewery){
 
     this.hideModal()
+    this.load = true
     axios({
       method:'delete',
       url:`http://localhost:3000/brewery/${idBrewery}`,
@@ -425,9 +444,10 @@ methods:{
             text: e.response.data
       })
     })
-    
+    this.load = false
   },
   updateBrewery(idBrewery){
+    this.load = true
       axios({
         url:`http://localhost:3000/brewery/${idBrewery}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
@@ -440,6 +460,7 @@ methods:{
       this.Contacto = 'Editar contactos'
       this.edit = true
     })
+    this.load = false
   },
   validBrewery(){
     this.id = id

@@ -11,6 +11,7 @@
           <div v-if="errorMessage" class="alert alert-danger" role="alert">
             {{ errorMessage }}
           </div>
+          
           <div class="card bg-dark">
             <div class="card-header">
               <template v-if="edit === false && buy===false">
@@ -32,8 +33,10 @@
            
           
                <template v-if="edit === false && buy === false">  
-                  <div class="card-body">
-                           <form v-on:submit.prevent="addBottle" >
+                 <div class="text-center"><img class="mt-5 mb-5" v-if="load" height="70px" width="70px" src="../../assets/loadWhite.svg" ></div>
+                  <div v-if="!load" class="card-body">
+                    
+          <form v-on:submit.prevent="addBottle" >
           
           <div class="input-group-pretend mb-4">
               <label>Estilo</label>
@@ -55,8 +58,7 @@
 
           </div>
               <div class="text-center">
-                <button v-if="!sendBottle" class="btn btn-outline-warning btn-block">AGREGAR</button>
-                <img v-if="sendBottle" height="40px" width="40px" src="../../assets/loadWhite.svg" >
+                <button  class="btn btn-outline-warning btn-block">AGREGAR</button>
               </div>
 
         </form>
@@ -94,8 +96,7 @@
 
           </div>
              <div class="text-center">
-                <button v-if="!editBottle" class="btn btn-outline-warning btn-block">Actualizar</button>
-                <img v-if="editBottle" height="40px" width="40px" src="../../assets/loadWhite.svg" >
+                <button  class="btn btn-outline-warning btn-block">Actualizar</button>
               </div>
 
         </form>
@@ -145,8 +146,8 @@
           
              
             <div class="text-center">
-                <button v-if="!buyB" class="btn btn-outline-primary btn-block">COMPRAR</button>
-                <img v-if="buyB" height="40px" width="40px" src="../../assets/loadWhite.svg" >
+                <button v-if="!load" class="btn btn-outline-primary btn-block">COMPRAR</button>
+                <img v-if="load" height="40px" width="40px" src="../../assets/loadWhite.svg" >
               </div>
 
         </form>
@@ -161,8 +162,10 @@
       
           <div class="col-12 col-sm-12 col-md-8">
             <div class="card ">
-              <div class="card-header bg-dark">
-                <h3 class="">LISTADO DE BOTELLAS</h3>
+              <div class="card-header bg-dark col-md-12">
+                <div class="col-md-8">
+                  <h3 class="">LISTADO DE BOTELLAS </h3>     
+                </div>
               </div>
               <div class="card-body">
                 <table class="table ">
@@ -183,11 +186,14 @@
                   <td>{{bottle.stock}}</td>
                   <td>{{bottle.size}}</td>
                   <td>{{bottle.price}}</td>
-                  <td><button class="btn btn-outline-primary btn-sm" v-on:click="buyBottle(bottle._id)"><i class="material-icons">attach_money</i></button></td>
-                  <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateBottle(bottle._id)"><i class="material-icons">edit</i></button></td>
                   <td>
-                    <img v-if="removeBottle" height="40px" width="40px" src="../../assets/loadWhite.svg" >
-                    <button v-if="!removeBottle" class="btn btn-outline-danger btn-sm" v-on:click="showModal(bottle._id)"><i class="material-icons">delete</i></button></td>
+                    <button  class="btn btn-outline-primary btn-sm" v-on:click="loadottle(bottle._id)"><i class="material-icons">attach_money</i></button></td>
+                  <td>
+                
+                    <button class="btn btn-outline-primary btn-sm" v-on:click="updateBottle(bottle._id)"><i class="material-icons">edit</i></button></td>
+                  <td>
+                   
+                    <button  class="btn btn-outline-danger btn-sm" v-on:click="showModal(bottle._id)"><i class="material-icons">delete</i></button></td>
                  
                 </tr>
               </tbody>
@@ -393,10 +399,8 @@ export default {
       edit: false,
       buy:false,
       bottleToEdit:'',
-      sendBottle: false,
-      editBottle: false,
-      removeBottle: false
-
+      load: false,
+     
 
 
     }
@@ -432,7 +436,7 @@ export default {
     addBottle(){
       if(this.validBottle()){
       if(this.edit === false && this.buy===false){
-        this.sendBottle = true
+        this.load = true
       axios({
         method:'POST',
         url:'http://localhost:3000/bottle',
@@ -460,9 +464,9 @@ export default {
         text: `Error al guardar barril ${e}`
       })
       })
-   this.sendBottle = false
+   this.load = false
       }else if(this.edit === true && this.buy===false){
-        this.editBottle = true
+        this.load = true
         axios({
           method: 'put',
           url:`http://localhost:3000/bottle/${this.newBottle.id}`,
@@ -490,9 +494,9 @@ export default {
           text: `Error al actualizar el barril ${e}`
       })
         })
-      this.editBottle = false
+      this.load = false
       }else if (this.buy === true && this.edit===false && this.validBottleBuy()){
-        this.buyB = true
+        this.load = true
         axios({
           method: 'POST',
           url:`http://localhost:3000/outflow/bottle`,
@@ -524,7 +528,7 @@ export default {
           text: `Error al actualizar el barril ${e}`
       })
         })
-        
+        this.load = false
       }
       }
     },
@@ -573,7 +577,7 @@ export default {
     },
     deleteBottle(idBottle){
        this.$modal.hide('delete');
-       this.removeBottle = true
+       this.load = true
       axios({
         method: 'delete',
         url:`http://localhost:3000/bottle/${idBottle}`,
@@ -601,7 +605,7 @@ export default {
           text: `No es posible eliminar la botella se han realizado ventas o compras.`
         })
       })
-      this.removeBottle = false
+    this.load = false
     },
     agregar(){
       this.buy=false;
@@ -610,7 +614,8 @@ export default {
       this.edit=false;
     },
     updateBottle(idBottle){
-     
+   
+     this.load = true
       axios({
         url:`http://localhost:3000/bottle/${idBottle}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
@@ -625,15 +630,17 @@ export default {
           this.edit = true;
           this.buy=false;
       })
+      this.load = false
     },
-    buyBottle(idBottle){
-   
+    loadottle(idBottle){
+      this.load = true
       if(!this.edit){
       axios({
         url:`http://localhost:3000/bottle/${idBottle}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
        .then(res => {
+          
         console.log(res)
         this.newBottle = new newBottle  (res.data.bottle._id,res.data.bottle.beer,res.data.bottle.size,res.data.bottle.ibu,
         res.data.bottle.alcohol, res.data.bottle.brewery,res.data.bottle.price,res.data.bottle.stock
@@ -643,6 +650,7 @@ export default {
           this.buy=true;
           this.edit=false;
       })
+     this.load = true
       }else{
           this.notifyWarning("Botella","Termine de editar la botella")
       }

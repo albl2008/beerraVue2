@@ -35,7 +35,8 @@
                   <td>{{keg.ibu}}</td>
                   <td>{{keg.alcohol}}</td>
                   <td>{{keg.brewery.name}}</td>
-                  <td><button class="btn btn-outline-primary btn-sm" v-on:click="getKeg(keg)"><i class="material-icons">attach_money</i></button></td>
+                  <td>
+                    <button  class="btn btn-outline-primary btn-sm" v-on:click="getKeg(keg)"><i class="material-icons">attach_money</i></button></td>
                   </template>
                 </tr>
               </tbody>
@@ -49,7 +50,8 @@
           </div>
           <div class="card bg-dark">
             <div class="card-header"><h3>Pagar Barril</h3></div>
-            <div class="card-body">
+            <div class="text-center"><img class="mt-5 mb-5" v-if="load" height="70px" width="70px" src="../../assets/loadWhite.svg" ></div>
+            <div v-if="!load" class="card-body">
               <form v-on:submit.prevent="addPay">
 
                 <div class="input-group-pretend mb-3">
@@ -58,7 +60,10 @@
                     <input type="date" class="form-control mb-1 " v-model="newPay.date" required>
                   <input type="text" class="form-control mb-1" v-model="newPay.ammount" placeholder="Precio" required>
                 </div>
-                        <button class="btn btn-outline-danger btn-block">Confirmar Pago</button>
+                <div class="text-center">
+                  <button  class="btn btn-outline-danger btn-block">Confirmar Pago</button>
+                 
+                </div>
               
         </form>
             </div>
@@ -181,6 +186,8 @@ export default {
       ],
     
       kegToEdit: '',
+      load:false,
+     
 
 
 
@@ -201,6 +208,7 @@ export default {
   },
   methods: {
     getKegs() {
+     
       axios({
         url:'http://localhost:3000/keg',
         headers: {authorization: `Bearer ${localStorage.token}`}
@@ -213,6 +221,7 @@ export default {
           console.log(e)
 
         })
+      
     },
     getPayments() {
       axios({
@@ -245,10 +254,13 @@ export default {
         })
     },
     getKeg(keg) {
+      this.load = true
+      this.load = 
       this.newPay={}
       this.newPay.keg = keg._id
       this.displayPay.brewery = keg.brewery.name
       this.displayPay.beer = keg.beer
+      this.load = false
     },
     getBreweries() {
       axios({
@@ -262,6 +274,7 @@ export default {
     },
     addPay(){
       if(this.validPay()){
+        this.load = true
       axios({
         method:'put',
         url:`http://localhost:3000/keg/pay/${this.newPay.keg}`,
@@ -299,7 +312,7 @@ export default {
             text: `Error al procesar el pago ${e}`
       })
       })
-      
+      this.load = false
       }    
          
   },

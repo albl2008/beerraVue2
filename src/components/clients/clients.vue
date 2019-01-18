@@ -19,7 +19,8 @@
                   <h3>Agregar Cliente</h3>
                 </center>
               </div>
-              <div class="card-body">
+               <div class="text-center"><img class="mt-5 mb-5" v-if="load" height="70px" width="70px" src="../../assets/loadWhite.svg" ></div>
+              <div v-if="!load" class="card-body">
                 <input
                   type="text"
                   class="form-control mb-1"
@@ -117,14 +118,16 @@
                       >
                         <i class="material-icons">shutter_speed</i>
                       </button>
+                      
                     </td>
                     <td>
-                      <button
+                      <button                   
                         class="btn btn-outline-danger btn-xs"
                         v-on:click="showModal(client._id)"
                       >
                         <i class="material-icons">delete</i>
                       </button>
+                       
                     </td>
                     <td>
                       <button
@@ -193,7 +196,9 @@ export default {
       dni: "",
       edit: false,
       whatsapp: "https://wa.me/54",
-      contador: 0
+      contador: 0,
+      load:false,
+     
     };
   },
   computed: {},
@@ -212,6 +217,7 @@ export default {
     addClient() {
       if(this.validClient()){
       if (this.edit === false) {
+        this.load = true
         axios({
           method: "POST",
           url: "http://localhost:3000/clients",
@@ -240,7 +246,9 @@ export default {
               text: `Error al guardar el Cliente ${e}`
             });
           });
+          this.load = false
       } else {
+        this.load = true
         axios({
           method: "PUT",
           url: `http://localhost:3000/clients/${this.newClient.id}`,
@@ -269,6 +277,7 @@ export default {
               text: `Error al actualizar el Cliente ${e}`
             });
           });
+          this.load = true
       }
       }
     },
@@ -293,7 +302,7 @@ export default {
       this.$modal.hide("delete");
     },
     deleteClient(idClient) {
-      const config  =
+      this.load = true
       this.hideModal();
       axios({
         method: "delete",
@@ -321,8 +330,10 @@ export default {
             text: "No se puede eliminar el cliente ha realizado compras anteriormente"
           });
         });
+        this.load = false
     },
     counterLitres(idClient) {
+      this.load = true
       axios({
         url: `http://localhost:3000/sale/counter/${idClient}`,
         headers: { authorization: `Bearer ${localStorage.token}` }
@@ -334,6 +345,7 @@ export default {
         .catch(e => {
           console.log(e);
         });
+        this.load = false
     },
     Contador(sales) {
       this.contador = 0;
