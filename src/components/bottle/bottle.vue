@@ -54,9 +54,10 @@
             
 
           </div>
-            
-                <button class="btn btn-outline-warning btn-block">AGREGAR</button>
-            
+              <div class="text-center">
+                <button v-if="!sendBottle" class="btn btn-outline-warning btn-block">AGREGAR</button>
+                <img v-if="sendBottle" height="40px" width="40px" src="../../assets/loadWhite.svg" >
+              </div>
 
         </form>
 
@@ -92,7 +93,10 @@
             
 
           </div>
-             <button class="btn btn-outline-primary btn-block" >ACTUALIZAR</button>
+             <div class="text-center">
+                <button v-if="!editBottle" class="btn btn-outline-warning btn-block">Actualizar</button>
+                <img v-if="editBottle" height="40px" width="40px" src="../../assets/loadWhite.svg" >
+              </div>
 
         </form>
 
@@ -139,8 +143,11 @@
               <input-date v-model="newBottleBuy.date"></input-date>
           </div>
           
-                <button class="btn btn-outline-primary btn-block" >COMPRAR</button>
-            
+             
+            <div class="text-center">
+                <button v-if="!buyB" class="btn btn-outline-primary btn-block">COMPRAR</button>
+                <img v-if="buyB" height="40px" width="40px" src="../../assets/loadWhite.svg" >
+              </div>
 
         </form>
 
@@ -178,7 +185,9 @@
                   <td>{{bottle.price}}</td>
                   <td><button class="btn btn-outline-primary btn-sm" v-on:click="buyBottle(bottle._id)"><i class="material-icons">attach_money</i></button></td>
                   <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateBottle(bottle._id)"><i class="material-icons">edit</i></button></td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="showModal(bottle._id)"><i class="material-icons">delete</i></button></td>
+                  <td>
+                    <img v-if="removeBottle" height="40px" width="40px" src="../../assets/loadWhite.svg" >
+                    <button v-if="!removeBottle" class="btn btn-outline-danger btn-sm" v-on:click="showModal(bottle._id)"><i class="material-icons">delete</i></button></td>
                  
                 </tr>
               </tbody>
@@ -384,6 +393,9 @@ export default {
       edit: false,
       buy:false,
       bottleToEdit:'',
+      sendBottle: false,
+      editBottle: false,
+      removeBottle: false
 
 
 
@@ -420,7 +432,7 @@ export default {
     addBottle(){
       if(this.validBottle()){
       if(this.edit === false && this.buy===false){
-
+        this.sendBottle = true
       axios({
         method:'POST',
         url:'http://localhost:3000/bottle',
@@ -448,7 +460,9 @@ export default {
         text: `Error al guardar barril ${e}`
       })
       })
+   this.sendBottle = false
       }else if(this.edit === true && this.buy===false){
+        this.editBottle = true
         axios({
           method: 'put',
           url:`http://localhost:3000/bottle/${this.newBottle.id}`,
@@ -476,7 +490,9 @@ export default {
           text: `Error al actualizar el barril ${e}`
       })
         })
+      this.editBottle = false
       }else if (this.buy === true && this.edit===false && this.validBottleBuy()){
+        this.buyB = true
         axios({
           method: 'POST',
           url:`http://localhost:3000/outflow/bottle`,
@@ -508,7 +524,7 @@ export default {
           text: `Error al actualizar el barril ${e}`
       })
         })
-      
+        
       }
       }
     },
@@ -557,6 +573,7 @@ export default {
     },
     deleteBottle(idBottle){
        this.$modal.hide('delete');
+       this.removeBottle = true
       axios({
         method: 'delete',
         url:`http://localhost:3000/bottle/${idBottle}`,
@@ -584,6 +601,7 @@ export default {
           text: `No es posible eliminar la botella se han realizado ventas o compras.`
         })
       })
+      this.removeBottle = false
     },
     agregar(){
       this.buy=false;
