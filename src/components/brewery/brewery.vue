@@ -18,15 +18,18 @@
           <div class=""> <!-- -->
          <form v-on:submit.prevent="addBrewery">
          <div class="card bg-dark" style="padding: 1em;">
-           <h3 class="tablaHead">Nueva entrada</h3>
+           <h3 class="tablaHead bg-dark">Nueva entrada</h3>
           <div class="" style="border: none !important;">
           
            <div class="card-body change" style="width: 48%;">
              <h3 class="tablaHead" style="">{{ContactoForm}}</h3>
                <form v-on:submit.prevent="addcontact">
-            <input type="text" class="form-control mb-1" placeholder="Nombre" v-model="newcontact.name" required>
-            <input type="text" class="form-control mb-1" placeholder="Telefono" v-model="newcontact.tel" required>
-            <input type="email" class="form-control mb-3" placeholder="Mail" v-model="newcontact.mail" required>
+                 <label>Nombre</label>
+            <input type="text" class="form-control mb-1" placeholder="" v-model="newcontact.name" required>
+            <label>Teléfono</label>
+            <input type="text" class="form-control mb-1" placeholder="" v-model="newcontact.tel" required>
+            <label>Email</label>
+            <input type="email" class="form-control mb-3" placeholder="" v-model="newcontact.mail" required>
             <template v-if="editContact === false">
               <div class="" ><button style=" width: 73px; float: left; margin-right: 1em;" class="btn btn-outline-primary btn-block" >Añadir</button>
               <span style="color: gray; margin: 0 auto;">Primer paso.</span>
@@ -41,16 +44,18 @@
 
          <div class="" style="border: none !important;">
           
-           <div class="card-body change" style="width: 48%; position: absolute; margin-left: 47%; top: 3.5em; height: 214px;">
+           <div class="card-body change" style="width: 48%; position: absolute; margin-left: 47%; top: 3.5em; height: 325px;">
              <h3 class="tablaHead">{{Cerveceria}}</h3>
-             <input type="text" class="form-control mb-1" placeholder="Cerveceria" v-model="newBrewery.name" required>
-          <input type="text" class="form-control mb-3" placeholder="Direccion" v-model="newBrewery.address" required>
+             <label>Cervecería</label>
+             <input type="text" class="form-control mb-1" placeholder="" v-model="newBrewery.name" required>
+             <label>Dirección</label>
+          <input type="text" class="form-control mb-3" placeholder="" v-model="newBrewery.address" required>
             <template v-if="edit === false">
-              <div class="" style="margin-top: 3.8em;" ><button style="width: 73px; float: left; margin-right: 1em;" class="btn btn-outline-success btn-block " >Agregar</button>
+              <div class="" style="margin-top: 6.4em;" ><button style="width: 73px; float: left; margin-right: 1em;" class="btn btn-outline-success btn-block " >Agregar</button>
               <span style="color: gray; margin: 0 auto;">Segundo paso.</span></div>
             </template>
             <template v-else>
-              <div class="" style="width: 82px; margin-top: 3.8em;"><button class="btn btn-outline-success btn-block " >Actualizar</button></div>
+              <div class="" style="width: 82px; margin-top: 6.4em;"><button class="btn btn-outline-success btn-block " >Actualizar</button></div>
             </template>
            </div>
          </div>
@@ -73,7 +78,7 @@
               
             </thead>
             <tbody>
-              <tr v-for="cont in contact">
+              <tr class="trHigh" v-for="cont in contact">
                 <td style="max-width: 120px;" class="nowrap hoverShow">{{cont.name}}</td>
                 <td style="max-width: 105px;" class="nowrap hoverShow">{{cont.tel}}</td>
                 <td style="max-width: 160px;" class="nowrap hoverShow">{{cont.mail}}</td>
@@ -103,7 +108,7 @@
              
             </thead>
             <tbody>
-              <tr v-for="brewery in breweries">
+              <tr class="trHigh" v-for="brewery in breweries">
                 <td class="nowrap" style="max-width: 160px;">{{brewery.name}}</td>
                 <th class="nowrap hoverShow roboto" style="max-width: 150px; font-weight: normal;">{{brewery.address}}</th>
                 <div class="options">
@@ -131,7 +136,7 @@
                 <th></th>
               </thead>
               <tbody>
-                <tr v-for="contact in contactBrewery">               
+                <tr class="trHigh" v-for="contact in contactBrewery">               
                   <td style="max-width: 130px;" class="nowrap hoverShow">{{contact.name}}</td>
                   <td >{{contact.tel}}</td>
                   <td style="max-width: 240px;" class="nowrap hoverShow">{{contact.mail}}</td>

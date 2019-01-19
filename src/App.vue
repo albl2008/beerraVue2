@@ -823,4 +823,8 @@ tr:nth-child(even) {
 .card.nuevacerveceria{
   background: #272727 !important;
 }
+
+.trHigh:hover{
+background: rgba(255, 255, 255, 0.063) !important;
+}
 </style>
