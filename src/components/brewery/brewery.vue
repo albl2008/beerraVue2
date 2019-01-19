@@ -44,7 +44,7 @@
 
          <div class="" style="border: none !important;">
           
-           <div class="card-body change" style="width: 48%; position: absolute; margin-left: 47%; top: 3.5em; height: 325px;">
+           <div class="card-body change" style="width: 48%; position: absolute; margin-left: 47%; top: 2.9em; height: 325px;">
              <h3 class="tablaHead">{{Cerveceria}}</h3>
              <label>Cervecería</label>
              <input type="text" class="form-control mb-1" placeholder="" v-model="newBrewery.name" required>
