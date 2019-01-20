@@ -143,7 +143,7 @@
                       <td><button class="btn btn-outline-danger btn-sm fix disableBorder " v-on:click="disconnect(keg._id)"><i class="material-icons resize">power_off</i></button></td>
                     </template>
                     <template v-else>
-                      <td><button class="btn btn-outline-primary btn-sm disabled disableBorder"><i class="material-icons">power</i></button></td>
+                      <td><button class="btn btn-outline-primary btn-sm fix disabled disableBorder vacio"><i class="material-icons resize"><strong>remove_circle_outline</strong></i></button></td>
                     </template>
 </div>
                   </tr>
