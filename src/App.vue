@@ -827,4 +827,14 @@ tr:nth-child(even) {
 .trHigh:hover{
 background: rgba(255, 255, 255, 0.063) !important;
 }
+
+.vacio{
+  background: #1f1f1f !important;
+  color: #FD9326 !important; 
+}
+
+.vacio:hover{
+ background: #FD9326 !important;
+ color: #1f1f1f !important;
+}
 </style>
