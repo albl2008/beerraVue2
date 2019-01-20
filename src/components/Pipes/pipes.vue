@@ -122,7 +122,7 @@
                   <th>Eliminar</th>
                 </thead>
                 <tbody>
-                  <tr v-for="growler in growlers">
+                  <tr class="trHigh" v-for="growler in growlers">
                     <td class="nowrap" style="max-width: 65px;">{{growler.beer}}</td>
                     <td class="nowrap" style="max-width: 65px;">{{growler.brewery}}</td>
                     <td>{{growler.quantity}} <span class="litros">l</span></td>
@@ -140,7 +140,7 @@
                   <th>Eliminar</th>
                 </thead>
                 <tbody>
-                  <tr v-for="container in containers">
+                  <tr class="trHigh" v-for="container in containers">
                     <td>{{container.size}} <span class="litros">l</span></td>
                     <td>{{container.quantitySaled}}</td>
                     <td>$ {{container.price}}</td>
@@ -177,7 +177,7 @@
                   <th>Eliminar</th>
                 </thead>
                 <tbody>
-                  <tr v-for="bottle in bottles">
+                  <tr class="trHigh" v-for="bottle in bottles">
                     <td>{{bottle.beer}}</td>
                     <td>{{bottle.brewery}}</td>
                     <td>{{bottle.quantitySaled}}</td>
@@ -218,7 +218,7 @@
 
                 </thead>
                 <tbody>
-                  <tr v-for="pint in pints">
+                  <tr class="trHigh" v-for="pint in pints">
                     <td class="nowrap" style="max-width: 65px;">{{pint.beer}}</td>
                     <td class="nowrap" style="max-width: 65px;">{{pint.brewery}}</td>
                     <td>{{pint.quantity}} <span class="litros">l</span></td>
@@ -249,11 +249,11 @@
 
                 </thead>
                 <tbody>
-                  <tr v-for="other in others">
+                  <tr class="trHigh" v-for="other in others">
                     <td>{{other.beer}}</td>
                     <td>{{other.brewery}}</td>
-                    <td>{{other.quantity}}</td>
-                    <td>{{other.price}}</td>
+                    <td>{{other.quantity}} <span class="litros">l</span></td>
+                    <td>$ {{other.price}}</td>
                     <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteOther(other.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
