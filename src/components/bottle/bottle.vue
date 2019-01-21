@@ -236,10 +236,10 @@
               </div>
             </div>            
      
-    <modal name="delete" height="auto">
-        <div class="container bg-dark ">
-          <div class="breadcrumb bg-warning">
-              <h5 class="">¿Esta seguro que desea eliminar el Barril?</h5>
+    <!-- <modal name="delete" height="auto">
+       <div class="container bg-dark card tabla" style="background: rgb(34, 34, 34) !important;">
+          <div class="">
+              <h5 class="tablaHead">¿Esta seguro que desea eliminar el Barril?</h5>
           </div>
           
             <div class="input-group-pretend mb-3">
@@ -248,7 +248,7 @@
             </div>
             
         </div>
-      </modal>
+      </modal> -->
 </div>
 <div class="col-md-4" style="margin-top: 1em;">
   
@@ -284,14 +284,16 @@
       </div>
 
      <modal name="delete" height="auto">
-        <div class="container bg-dark ">
-          <div class="breadcrumb bg-warning">
-              <h5 class="">¿Esta seguro que desea eliminar la botella?</h5>
+        <div class="container card bg-dark " style="background: rgb(34, 34, 34) !important;">
+          <div class="">
+            <center>
+              <h5 class="tablaHead" style="margin-bottom: 0.5em;">¿Está seguro que desea eliminar la botella?</h5></center>
           </div>
           
             <div class="input-group-pretend mb-3">
-                  <button class="btn btn-success"  v-on:click="deleteBottle(idBottle)" >Aceptar</button>
-                  <button class="btn btn-danger" v-on:click="hideModal()">Cancelar</button>
+              <center>
+                  <button class="btn btn-outline-success"  v-on:click="deleteBottle(idBottle)" >Aceptar</button>
+                  <button class="btn btn-outline-danger" v-on:click="hideModal()">Cancelar</button></center>
             </div>
             
         </div>
