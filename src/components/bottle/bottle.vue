@@ -9,7 +9,7 @@
       </div>
          
  </div>   
-    <div class="container">
+    <div class="container" style="margin-bottom: 3em;">
       <div class="row">
         <div class="col-12 col-sm-12  col-md-3">
           <div v-if="errorMessage" class="alert alert-danger" role="alert">
@@ -155,7 +155,7 @@
               <input-date style="width: 62%; float: right; height: 33px" v-model="newBottleBuy.date"></input-date>
           </div></div>
           </br>
-                <button class="btn btn-outline-primary" style="width: 78px;">Comprar</button>
+                <button class="btn btn-outline-primary" style="width: 78px; margin-top: 2em;">Comprar</button>
             
 
         </form>
@@ -168,33 +168,33 @@
           </div>
  </div>
       
-          <div class="col-12 col-sm-12 col-md-8">
-            <div class="card ">
+          <div class="col-12 col-sm-12 col-md-9">
+            <div class="card " style="background: #272727;">
               <div class="card-header bg-dark">
                 <h3 class="tablaHead">Botellas</h3>
               </div>
               <div class="card-body">
                 <table class="table ">
               <thead>
-              <th>Fabrica</th>
+              <th>Fábrica</th>
               <th>Cerveza</th>
               <th>Stock</th>
               <th>Tamaño</th>
               <th>Precio</th>
-            <th>Opciones<small> comprar/editar/eliminar</small></th>
+            <th>Opciones<small> comprar / editar / eliminar</small></th>
 
               </thead>
               <tbody>
-                <tr v-for="bottle in bottles" v-bind:key="bottle._id" >
-                  <td>{{bottle.brewery.name}}</td>
-                  <td>{{bottle.beer}}</td>
+                <tr class="trHigh" v-for="bottle in bottles" v-bind:key="bottle._id" >
+                  <td style="max-width: 200px; width: 200px;" class="nowrap">{{bottle.brewery.name}}</td>
+                  <td style="max-width: 160px; width: 160px;" class="nowrap">{{bottle.beer}}</td>
                   <td>{{bottle.stock}}</td>
-                  <td>{{bottle.size}}</td>
-                  <td>{{bottle.price}}</td>
-                  <div id="options" class="opacityOut">
+                  <td>{{bottle.size}}<span class="litros"> l</span></td>
+                  <td>$ {{bottle.price}}</td>
+                  <div id="options" class="opacityOut" style="width:">
                   <td><button class="btn btn-outline-primary fix disableBorder btn-sm" v-on:click="buyBottle(bottle._id)"><i class="material-icons resize">attach_money</i></button></td>
                   <td><button class="btn btn-outline-primary fix disableBorder btn-sm" v-on:click="updateBottle(bottle._id)"><i class="material-icons resize">edit</i></button></td>
-                  <td><button class="btn btn-outline-danger fix disableBorder btn-sm" v-on:click="showModal(bottle._id)"><i class="material-icons resize  ">delete</i></button></td>
+                  <td><button class="btn btn-outline-danger fix disableBorder btn-sm" v-on:click="showModal(bottle._id)"><i class="material-icons resize  ">clear</i></button></td>
                   </div>
                 </tr>
               </tbody>
@@ -204,30 +204,30 @@
       </div>
  </div><br>   
  <div class="row">
-<div class="col-12 col-sm-12 col-md-8">
+<div class="col-12 col-sm-12 col-md-8" style="margin-top: 1em;">
   
-            <div class="card ">
+            <div class="card " style="background: #272727;">
               <div class="card-header bg-dark">
-                <h3 class="">COMPRAS DE BOTELLAS</h3>
+                <h3 class="tablaHead">Compras de Botellas</h3>
               </div>
               <div class="card-body">
                 <table class="table ">
               <thead>
-              <th>Fabrica</th>
+              <th>Fábrica</th>
               <th>Cerveza</th>
               <th>Tamaño</th>
               <th>Cantidad</th>
-              <th>Costo Unitario</th>
+              <th>Costo</th>
               <th>Fecha</th>
               
               </thead>
               <tbody>
-                <tr v-for="bottleBuy in bottleBuys" v-bind:key="bottleBuy._id">
-                  <td>{{bottleBuy.bottle.brewery.name}}</td>
-                  <td>{{bottleBuy.bottle.beer}}</td>
-                  <td>{{bottleBuy.bottle.size}}</td>
+                <tr class="trHigh" v-for="bottleBuy in bottleBuys" v-bind:key="bottleBuy._id">
+                  <td style="max-width: 200px; width: 200px;" class="nowrap">{{bottleBuy.bottle.brewery.name}}</td>
+                  <td style="max-width: 140px; width: 140px;" class="nowrap"> {{bottleBuy.bottle.beer}}</td>
+                  <td>{{bottleBuy.bottle.size}}<span class="litros"> l</span></td>
                   <td>{{bottleBuy.quantity}}</td>
-                  <td>{{bottleBuy.unityPrice}}</td>
+                  <td>$ {{bottleBuy.unityPrice}}</td>
                   <td>{{format(bottleBuy.date)}}</td>
                  
                 </tr>
@@ -250,26 +250,26 @@
         </div>
       </modal>
 </div>
-<div class="col-md-4">
+<div class="col-md-4" style="margin-top: 1em;">
   
-            <div class="card ">
+            <div class="card " style="background: #272727;">
               <div class="card-header bg-dark">
-                <h3 class="">INFORMACION ADICIONAL</h3>
+                <h3 class="tablaHead">Información adicional</h3>
               </div>
               <div class="card-body">
                 <table class="table ">
               <thead>
-              <th>Fabrica</th>
+              <th>Fábrica</th>
               <th>Cerveza</th>
               <th>IBU</th>
               <th>Alcohol</th>
               </thead>
               <tbody>
-                <tr v-for="bottle in bottles" v-bind:key="bottle._id">
-                  <td>{{bottle.brewery.name}}</td>
-                  <td>{{bottle.beer}}</td>
+                <tr class="trHigh" v-for="bottle in bottles" v-bind:key="bottle._id">
+                  <td style="max-width: 100px; width: 100px;" class="nowrap">{{bottle.brewery.name}}</td>
+                  <td style="max-width: 100px; width: 100px;" class="nowrap">{{bottle.beer}}</td>
                   <td>{{bottle.ibu}}</td>
-                  <td>{{bottle.alcohol}}</td>
+                  <td>{{bottle.alcohol}} %</td>
                   
                  
                 </tr>

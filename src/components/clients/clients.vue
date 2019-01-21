@@ -105,7 +105,7 @@
           
                 </thead>
                 <tbody>
-                  <tr v-for="client in clients">
+                  <tr v-for="client in clients" class="trHigh">
                     <th>
                       <canvas
                         id="identicon"
@@ -115,13 +115,16 @@
                         class="img-responsive img-circle"
                       ></canvas>
                     </th>
-                    <td class="nowrap" style="max-width: 200px; width: 200px !important;">{{client.name}}</td>
-                    <th class="nowrap" style="max-width: 150px; width: 150px !important;">{{client.dni}}</th>
-                    <th>{{client.tel}}</th>
+                    <td class="nowrap" style="max-width: 200px; width: 200px !important; font-family: 'Roboto', sans-serif;">{{client.name}}</td>
+                    <th class="nowrap" style="max-width: 150px; width: 150px !important; 
+                    font-family: 'Roboto', sans-serif !important;
+                    font-weight: normal;">{{client.dni}}</th>
+                    <th style="font-family: 'Roboto', sans-serif !important;
+                    ">{{client.tel}}</th>
                     <div class="" style="width: 10%;">
                     <td style="width: 2%;">
                       <button
-                        class="btn btn-outline-warning btn-xs fix disableBorder"
+                        class="btn btn-outline-warning btn-sm fix disableBorder"
                         v-on:click="counterLitres(client._id)"
                       >
                         <i class="material-icons resize">shutter_speed</i>
@@ -129,15 +132,15 @@
                     </td>
                     <td>
                       <button
-                        class="btn btn-outline-danger btn-xs fix disableBorder"
+                        class="btn btn-outline-danger btn-sm fix disableBorder"
                         v-on:click="showModal(client._id)"
                       >
-                        <i class="material-icons resize">delete</i>
+                        <i class="material-icons resize">clear</i>
                       </button>
                     </td>
                     <td>
                       <button
-                        class="btn btn-outline-primary btn-xs fix disableBorder"
+                        class="btn btn-outline-primary btn-sm fix disableBorder"
                         v-on:click="updateClient(client._id)"
                       >
                         <i class="material-icons resize">edit</i>
