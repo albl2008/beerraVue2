@@ -45,7 +45,7 @@
               <label>Fábrica</label>
             <select v-model="newBottle.brewery" class="custom-select mb-1" required>
               <option value="" disabled hidden>Brewery</option>
-              <option v-for="brewery in breweries" v-bind:value="brewery._id">
+              <option v-for="brewery in breweries" v-bind:value="brewery._id" v-bind:key="brewery._id">
                 {{ brewery.name }}
               </option>
             </select>
@@ -80,7 +80,7 @@
               <label>Fabrica</label>
             <select v-model="newBottle.brewery" class="custom-select mb-1" required>
               <option value="" disabled hidden>Brewery</option>
-              <option v-for="brewery in breweries" v-bind:value="brewery._id">
+              <option v-for="brewery in breweries" v-bind:value="brewery._id" v-bind:key="brewery._id">
                 {{ brewery.name }}
               </option>
             </select>
@@ -119,21 +119,26 @@
           <div class="input-group-pretend mb-4">
               <label>Estilo</label>
             <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="Beer" disabled>
-              <label>Stock Actual</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="Stock" disabled> 
-              <label>Tamaño (en L)</label> 
-            <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" disabled>
-              <label>Fabrica</label>
+              <label>Stock <small>Actual</small></label><label style="float: right; text-align: left;">Tamaño<small>
+                Litros</small></label> 
+                <div class="">
+            <input  style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="Stock" disabled> 
+              
+            <input style="width: 48%; float: right;" type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" disabled>
+                </div>
+              <label>Fábrica</label>
             <select v-model="newBottle.brewery" class="custom-select mb-1" disabled>
               <option value="" disabled hidden>Brewery</option>
-              <option v-for="brewery in breweries" v-bind:value="brewery._id">
+              <option v-for="brewery in breweries" v-bind:value="brewery._id" v-bind:key="brewery._id">
                 {{ brewery.name }}
               </option>
             </select>
-              <label>Cantidad</label>
-            <input type="text" class="form-control mb-1" v-model="newBottleBuy.quantity" placeholder="Cantidad" required>
-              <label>Costo Unitario</label>
-            <input type="text" class="form-control mb-1" v-model="newBottleBuy.unityPrice" placeholder="Costo" required> 
+
+              <label>Cantidad</label><label style="float: right; text-align: left;">Costo<small> Unitario</small></label>
+              <div>
+            <input style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newBottleBuy.quantity" placeholder="" required>
+            <input style="width: 48%; float: right;" type="text" class="form-control mb-1" v-model="newBottleBuy.unityPrice" placeholder="" required> 
+              </div>
             <template v-if="newBottleBuy.quantity && newBottleBuy.unityPrice">
                <label>Total</label>
              <template v-show="edit">
@@ -142,14 +147,15 @@
              </template>
             <input type="text" class="form-control mb-1" v-model="newBottleBuy.totalPrice" placeholder="Total" disabled required>
             </template>
-            <label>Precio de Venta</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="Precio" required>
-              <br>
-            <code>Fecha: {{format(newBottleBuy.date)}}</code>                
-              <input-date v-model="newBottleBuy.date"></input-date>
-          </div>
-          
-                <button class="btn btn-outline-primary btn-block" >COMPRAR</button>
+            <label>P<small>recio Venta</small></label>   <code style="float: right; text-align: left; margin-top: 0.8em;" >Fecha: {{format(newBottleBuy.date)}}</code>   
+            <div>
+            <input style="width: 34%; float: left;" type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="" required>
+            
+                      
+              <input-date style="width: 62%; float: right; height: 33px" v-model="newBottleBuy.date"></input-date>
+          </div></div>
+          </br>
+                <button class="btn btn-outline-primary" style="width: 78px;">Comprar</button>
             
 
         </form>
@@ -179,7 +185,7 @@
 
               </thead>
               <tbody>
-                <tr v-for="bottle in bottles" >
+                <tr v-for="bottle in bottles" v-bind:key="bottle._id" >
                   <td>{{bottle.brewery.name}}</td>
                   <td>{{bottle.beer}}</td>
                   <td>{{bottle.stock}}</td>
@@ -216,7 +222,7 @@
               
               </thead>
               <tbody>
-                <tr v-for="bottleBuy in bottleBuys" >
+                <tr v-for="bottleBuy in bottleBuys" v-bind:key="bottleBuy._id">
                   <td>{{bottleBuy.bottle.brewery.name}}</td>
                   <td>{{bottleBuy.bottle.beer}}</td>
                   <td>{{bottleBuy.bottle.size}}</td>
@@ -259,7 +265,7 @@
               <th>Alcohol</th>
               </thead>
               <tbody>
-                <tr v-for="bottle in bottles" >
+                <tr v-for="bottle in bottles" v-bind:key="bottle._id">
                   <td>{{bottle.brewery.name}}</td>
                   <td>{{bottle.beer}}</td>
                   <td>{{bottle.ibu}}</td>
