@@ -56,12 +56,12 @@
               <tbody>
                 <tr class="trHigh" v-for="keg in kegs" >
                    <template v-if="keg.sta === 3">
-                  <td>{{keg.beer}}</td>
-                  <td>{{keg.quantity}}</td>
+                  <td class="nowrap" style="width: 100px;">{{keg.beer}}</td>
+                  <td>{{keg.quantity}}<span class="litros"> l</span></td>
                   <td>{{keg.sta}}</td>
                   <td>{{keg.ibu}}</td>
-                  <td>{{keg.alcohol}}</td>
-                  <td>{{keg.brewery.name}}</td>
+                  <td>{{keg.alcohol}} %</td>
+                  <td class="nowrap" style="width: 200px;">{{keg.brewery.name}}</td>
                   <td><button class="btn btn-outline-primary btn-sm fix disableBorder" v-on:click="getKeg(keg)"><i class="material-icons resize">attach_money</i></button></td>
                   </template>
                 </tr>
@@ -94,12 +94,12 @@
               <tbody>
                 <tr class="trHigh" v-for="payment in Payments" >
                    <template v-if="payment.keg.sta === 5">
-                  <td>{{payment.keg.beer}}</td>
-                  <td>{{payment.keg.quantity}}</td>
+                  <td class="nowrap" style="width: 230px;">{{payment.keg.beer}}</td>
+                  <td>{{payment.keg.quantity}}<span class="litros"> l</span></td>
                   <td>{{payment.keg.sta}}</td>
-                  <td>{{payment.keg.brewery.name}}</td>
-                  <td>{{payment.ammount}}</td>
-                  <td><button class="btn btn-outline-success btn-sm fix disableBorder"><i class="material-icons resize">done</i></button></td>
+                  <td class="nowrap" style="width: 200px;">{{payment.keg.brewery.name}}</td>
+                  <td style="width: 100px;">$ {{payment.ammount}}</td>
+                  <td style="width: 10%;"><button class="btn btn-outline-success btn-sm fix disableBorder"><i class="material-icons resize">done</i></button></td>
                   </template>
                 </tr>
                 
