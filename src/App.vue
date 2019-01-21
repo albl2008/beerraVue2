@@ -54,12 +54,12 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/buy">Pago
+            <a class="nav-link" href="http://localhost:8080/#/buy">Pagos
               <img :src="require('@/assets/navbar/pago.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/pricize">Configuracion
+            <a class="nav-link" href="http://localhost:8080/#/pricize">Configuración
               <img :src="require('@/assets/navbar/config.png')" alt class>
             </a>
           </li>

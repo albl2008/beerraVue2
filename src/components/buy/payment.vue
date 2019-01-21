@@ -1,19 +1,46 @@
 <template>
 <div>
      <div id="payment">
-          <center><h1>PAGO A PROVEEDORES</h1></center>
-          <center><img :src="require('@/assets/sections/compras.png')" alt=""></center>
+          <div class="row" style="width: 50%; margin: 0 auto;"><div class="centerhead">
+        <h1 class="h1head">Pagos</h1></div>
+        <img :src="require('@/assets/beerra/ventass2x.png')" alt class="underh1">
+      </div>
          
       </div> 
     <div class="container">
      
       <div class="row">
-        
+        <div class="col-12 col-sm-12  col-md-3" style="margin-bottom: 3em;">
+        <div v-if="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+          <div class="card bg-dark">
+            <div class="card-header bg-dark">
+              <h3 class="tablaHead">Pagar barril</h3></div>
+            <div class="card-body" style="background: #272727;">
+              <form v-on:submit.prevent="addPay">
 
-          <div class="col-12 col-sm-12 col-md-8">
-            <div class="card">
+                <div class="input-group-pretend mb-3">
+                  <label>Cervecería</label>
+                  <input type="text" class="form-control mb-1" v-model="displayPay.brewery"  placeholder="" disabled>
+                  <label>Estilo</label>
+                  <input type="text" class="form-control mb-1" v-model="displayPay.beer" placeholder="" disabled>
+                  <label>Fecha</label>
+                    <input type="date" class="form-control mb-1 " v-model="newPay.date" required>
+                    <label>Precio</label>
+                  <input type="text" class="form-control mb-1" v-model="newPay.ammount" placeholder="" required>
+                </div>
+                        <button class="btn btn-outline-danger btn-block" style="width: 85px;">Confirmar</button>
+              
+        </form>
+            </div>
+          </div>
+      </div>
+
+          <div class="col-12 col-sm-12 col-md-9">
+            <div class="card bg-dark" style="background: #272727 !important;">
               <div class="card-header bg-dark">
-                   <h3>Barriles Vacios</h3>
+                   <h3 class="tablaHead">Barriles vacíos</h3>
               </div>
               <div class="card-body">
                   <table class="table s">
@@ -22,12 +49,12 @@
               <th>Cantidad</th>
               <th>Estado</th>
               <th>IBU</th>
-              <th>alcohol</th>
-              <th>brewery</th>
+              <th>Alcohol</th>
+              <th>Cervecería</th>
               <th>Pagar</th>
               </thead>
               <tbody>
-                <tr v-for="keg in kegs" >
+                <tr class="trHigh" v-for="keg in kegs" >
                    <template v-if="keg.sta === 3">
                   <td>{{keg.beer}}</td>
                   <td>{{keg.quantity}}</td>
@@ -35,7 +62,7 @@
                   <td>{{keg.ibu}}</td>
                   <td>{{keg.alcohol}}</td>
                   <td>{{keg.brewery.name}}</td>
-                  <td><button class="btn btn-outline-primary btn-sm" v-on:click="getKeg(keg)"><i class="material-icons">attach_money</i></button></td>
+                  <td><button class="btn btn-outline-primary btn-sm fix disableBorder" v-on:click="getKeg(keg)"><i class="material-icons resize">attach_money</i></button></td>
                   </template>
                 </tr>
               </tbody>
@@ -43,36 +70,16 @@
               </div>
             </div>           
       </div>
-      <div class="col-12 col-sm-12  col-md-4">
-        <div v-if="errorMessage" class="alert alert-danger" role="alert">
-            {{ errorMessage }}
-          </div>
-          <div class="card bg-dark">
-            <div class="card-header"><h3>Pagar Barril</h3></div>
-            <div class="card-body">
-              <form v-on:submit.prevent="addPay">
-
-                <div class="input-group-pretend mb-3">
-                  <input type="text" class="form-control mb-1" v-model="displayPay.brewery"  placeholder="Cerveceria" disabled>
-                  <input type="text" class="form-control mb-1" v-model="displayPay.beer" placeholder="Estilo" disabled>
-                    <input type="date" class="form-control mb-1 " v-model="newPay.date" required>
-                  <input type="text" class="form-control mb-1" v-model="newPay.ammount" placeholder="Precio" required>
-                </div>
-                        <button class="btn btn-outline-danger btn-block">Confirmar Pago</button>
-              
-        </form>
-            </div>
-          </div>
-      </div>
+      
        
 
     </div>
     <div class="row">
 
-          <div class="col-12 col-sm-12 col-md-12">
-            <div class="card">
+          <div class="col-12 col-sm-12 col-md-12" style="margin-bottom: 3em;">
+            <div class="card bg-dark" style="background: #272727 !important;">
               <div class="card-header bg-dark">
-                   <h3>Barriles Pagados</h3>
+                   <h3 class="tablaHead">Barriles pagados</h3>
               </div>
               <div class="card-body">
                   <table class="table s">
@@ -80,19 +87,19 @@
               <th>Cerveza</th>
               <th>Cantidad</th>
               <th>Estado</th>
-              <th>Cerveceria</th>
+              <th>Cervecería</th>
               <th>Monto</th>
               <th>Pagado</th>
               </thead>
               <tbody>
-                <tr v-for="payment in Payments" >
+                <tr class="trHigh" v-for="payment in Payments" >
                    <template v-if="payment.keg.sta === 5">
                   <td>{{payment.keg.beer}}</td>
                   <td>{{payment.keg.quantity}}</td>
                   <td>{{payment.keg.sta}}</td>
                   <td>{{payment.keg.brewery.name}}</td>
                   <td>{{payment.ammount}}</td>
-                  <td><button class="btn btn-outline-success btn-sm"><i class="material-icons">done</i></button></td>
+                  <td><button class="btn btn-outline-success btn-sm fix disableBorder"><i class="material-icons resize">done</i></button></td>
                   </template>
                 </tr>
                 
@@ -330,6 +337,8 @@ export default {
 
 }
 </script>
-<style>
-
+<style scoped>
+.card-body{
+  border-radius: 0.6em;
+}
 </style>
