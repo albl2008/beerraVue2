@@ -50,6 +50,13 @@
     </div>
 
     <div class="container">
+      <div class="card bg-dark">
+        <div class="subcontainer2">
+            </div>
+          </div>
+        </div>
+
+    <div class="container">
       <nav id="funcionalidades" aria-label="breadcrumb">
         <ol class="breadcrumb bg-warning">
           <li class="breadcrumb-item active divider" aria-current="page">Funcionalidades</li>
@@ -416,6 +423,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c1c1c', end
   background: url('quees.png');
   background-size: cover;
   
+}
+
+.subcontainer2{
+  border-radius: 0.5em !important;
+  padding: 1em;
+  background: url('screenshot.png');
+  background-size: cover;
+  height: 500px;
 }
 
 .breadcrumb-item::before{
