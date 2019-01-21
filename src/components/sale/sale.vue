@@ -1,19 +1,119 @@
 <template>
   <div>
     <div id="sales">
-      <center>
-        <h1>VENTAS</h1>
-      </center>
-      <center>
-        <img :src="require('@/assets/sections/sell.png')" alt class="position">
-      </center>
+        <div class="row" style="width: 50%; margin: 0 auto; "><div class="centerhead">
+        <h1 class="h1head">Ventas</h1>
+        </div>
+        <img :src="require('@/assets/beerra/moneyy2x.png')" alt class="underh1">
+        
+      </div>
+         
     </div>
     <div class="container">
       <div class="row">
+
+<div class="col-md-4">
+          <div class="card bg-dark sticky-top">
+            <div class="card-header bg-dark">
+              <h3 class="tablaHead">Productos</h3>
+            </div>
+            <div class="card-body" style="background: #272727;">
+              <template v-if="isGrowlers === true">
+                <table class="table">
+                  <thead>
+                    <th>Cerveza</th>
+                    <th>Cantidad (Litros)</th>
+                    <th>Precio</th>
+                  </thead>
+                  <tbody>
+                    <tr v-for="growler in growlers">
+                      <td>{{growler.keg.beer}}</td>
+                      <td>{{growler.quantity}}</td>
+                      <td>{{growler.price}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </template>
+              <template v-else-if="isPints === true">
+                <table class="table">
+                  <thead>
+                    <th>Cerveza</th>
+                    <th>Cantidad (Litros)</th>
+                    <th>Precio</th>
+                  </thead>
+                  <tbody>
+                    <tr v-for="pint in pints">
+                      <td>{{pint.keg.beer}}</td>
+                      <td>{{pint.quantity}}</td>
+                      <td>{{pint.price}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </template>
+              <template v-else-if="isOther===true">
+                <table class="table">
+                  <thead>
+                    <th>Cerveza</th>
+                    <th>Cantidad (Litros)</th>
+                    <th>Precio</th>
+                  </thead>
+                  <tbody>
+                    <tr v-for="other in others">
+                      <td>{{other.keg.beer}}</td>
+                      <td>{{other.quantity}}</td>
+                      <td>{{other.price}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </template>
+              <template v-else-if="isBottles===true">
+                <table class="table">
+                  <thead>
+                    <th>Cerveza</th>
+                    <th>Cantidad</th>
+                    <th>tamaño botella</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                  </thead>
+                  <tbody>
+                    <tr v-for="bottle in bottles">
+                      <td>{{bottle.bottle.beer}}</td>
+                      <td>{{bottle.quantitySaled}}</td>
+                      <td>{{bottle.bottle.size}}</td>
+                      <td>{{bottle.unitPrice}}</td>
+                      <td>{{bottle.totalPrice}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </template>
+              <template v-else-if="isContainers===true">
+                <table class="table">
+                  <thead>
+                    <th>Tamaño</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                  </thead>
+                  <tbody>
+                    <tr v-for="containerSaled in containers">
+                      <td>{{containerSaled.container.size}}</td>
+                      <td>{{containerSaled.quantitySaled}}</td>
+                      <td>{{containerSaled.totalPrice}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </template>
+              <template v-else>
+                <p class="seleccione">Seleccione articulos de la venta para ver su información</p>
+              </template>
+            </div>
+          </div>
+        </div>
+
+
         <div class="col-md-8">
           <div class="card">
             <div class="card-header bg-dark">
-              <h3>LISTADO DE VENTAS</h3>
+              <h3 class="tablaHead">Ventas</h3>
             </div>
             <div class="card-body">
               <table class="table">
@@ -119,102 +219,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card bg-dark sticky-top">
-            <div class="card-header">
-              <h3>PRODUCTOS</h3>
-            </div>
-            <div class="card-body">
-              <template v-if="isGrowlers === true">
-                <table class="table">
-                  <thead>
-                    <th>Cerveza</th>
-                    <th>Cantidad (Litros)</th>
-                    <th>Precio</th>
-                  </thead>
-                  <tbody>
-                    <tr v-for="growler in growlers">
-                      <td>{{growler.keg.beer}}</td>
-                      <td>{{growler.quantity}}</td>
-                      <td>{{growler.price}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </template>
-              <template v-else-if="isPints === true">
-                <table class="table">
-                  <thead>
-                    <th>Cerveza</th>
-                    <th>Cantidad (Litros)</th>
-                    <th>Precio</th>
-                  </thead>
-                  <tbody>
-                    <tr v-for="pint in pints">
-                      <td>{{pint.keg.beer}}</td>
-                      <td>{{pint.quantity}}</td>
-                      <td>{{pint.price}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </template>
-              <template v-else-if="isOther===true">
-                <table class="table">
-                  <thead>
-                    <th>Cerveza</th>
-                    <th>Cantidad (Litros)</th>
-                    <th>Precio</th>
-                  </thead>
-                  <tbody>
-                    <tr v-for="other in others">
-                      <td>{{other.keg.beer}}</td>
-                      <td>{{other.quantity}}</td>
-                      <td>{{other.price}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </template>
-              <template v-else-if="isBottles===true">
-                <table class="table">
-                  <thead>
-                    <th>Cerveza</th>
-                    <th>Cantidad</th>
-                    <th>tamaño botella</th>
-                    <th>Precio</th>
-                    <th>Total</th>
-                  </thead>
-                  <tbody>
-                    <tr v-for="bottle in bottles">
-                      <td>{{bottle.bottle.beer}}</td>
-                      <td>{{bottle.quantitySaled}}</td>
-                      <td>{{bottle.bottle.size}}</td>
-                      <td>{{bottle.unitPrice}}</td>
-                      <td>{{bottle.totalPrice}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </template>
-              <template v-else-if="isContainers===true">
-                <table class="table">
-                  <thead>
-                    <th>Tamaño</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                  </thead>
-                  <tbody>
-                    <tr v-for="containerSaled in containers">
-                      <td>{{containerSaled.container.size}}</td>
-                      <td>{{containerSaled.quantitySaled}}</td>
-                      <td>{{containerSaled.totalPrice}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </template>
-              <template v-else>
-                <p class="seleccione">Seleccione articulos de la venta para ver su información</p>
-              </template>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
           <modal name="delete" height="auto">
@@ -419,5 +424,11 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
+.card-body{
+  border-radius: 0.6em;
+}
+
+
+
 </style>
