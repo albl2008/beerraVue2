@@ -1,13 +1,63 @@
 <template>
 <div>
       <div id="pricize">
-          <center><h1>PRECIOS Y TAMAÑOS</h1></center>
-          <center><img :src="require('@/assets/sections/pricize.png')" alt=""></center>
+         <div class="row" style="width: 50%; margin: 0 auto;"><div class="centerhead">
+        <h1 class="h1head">Configuración</h1></div>
+        <img :src="require('@/assets/beerra/different2x.png')" alt class="underh1">
+      </div>
           
       </div> 
     <div class="container">
       <div class="row">
-       <div class="col-12 col-sm-12 col-md-8">
+
+<div class="col-12 col-sm-12  col-md-3 " style="margin-bottom: 2em;">
+         <div v-if="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+          <div class="card bg-dark">
+            <div class="card-header bg-dark"><h3 class="tablaHead">Precios</h3></div>
+            <div class="card-body" style="background: #272727; border-radius: 0.6em;">
+              <form v-on:submit.prevent="addPricize()">
+
+                <div class="input-group-pretend" style="margin-bottom: 1em;">
+                  <label>Growler<small> grande</small></label> <label style="float: right;">Growler<small> chico</small></label>
+                  <input type="text" style="width: 48%; float: left;" class="form-control mb-1" v-model="newPricize.growlerprice" placeholder="" required>
+                  <input type="text" style="width: 48%; float: right;" class="form-control mb-1" v-model="newPricize.growlerprice2" placeholder="" required>
+
+                  <label>Pinta<small></small></label> <label style="float: right;"><small>1/2 </small>Pinta<small></small></label>
+                  <div>
+                  <input type="text" style="width: 48%; float: left;" class="form-control mb-1" v-model="newPricize.pintprice" placeholder="" required>
+                  <input type="text" style="width: 48%; float: right;" class="form-control mb-1" v-model="newPricize.pintprice2" placeholder="" required>
+                  </div>
+
+                  <label>Carga<small> grande</small></label> <label style="float: right;">Carga<small> chica</small></label>
+                  <div>
+                  <input type="text" style="width: 48%; float: left;" class="form-control mb-1" v-model="newPricize.loadprice" placeholder="" required>
+                  <input type="text" style="width: 48%; float: right;" class="form-control mb-1" v-model="newPricize.loadprice2" placeholder="" required>
+                  </div>
+                  <label>2x1<small> de pintas (p/ unidad)</small></label> 
+                  <input type="text" class="form-control mb-1" v-model="newPricize.hhourprice" placeholder="" required>
+                </div>
+                  <template v-if="existpricize === false">
+                  <button class="btn btn-primary btn-block" >Agregar precios y tamaños</button>
+              </template>
+                <template v-else-if="editprice===true">
+                  <button class="btn btn-primary btn-block" >Actualizar precios y tamaños</button>
+              </template>
+               <template v-else>
+                  <p class="seleccione">Solo puede Editar la lista de precios existente</p>
+              </template>
+
+              
+        </form>
+            </div>
+          </div>
+      
+       
+
+    </div>
+
+       <div class="col-12 col-sm-12 col-md-9">
             <div class="card">
               <div class="card-header bg-dark">
                    <h3>Precios Actuales</h3>
@@ -45,75 +95,11 @@
             </div>           
       </div>
       
-      <div class="col-12 col-sm-12  col-md-4 ">
-         <div v-if="errorMessage" class="alert alert-danger" role="alert">
-            {{ errorMessage }}
-          </div>
-          <div class="card bg-dark">
-            <div class="card-header "><h3>Precios</h3></div>
-            <div class="card-body">
-              <form v-on:submit.prevent="addPricize()">
-
-                <div class="input-group-pretend">
-                  <input type="text" class="form-control mb-1" v-model="newPricize.growlerprice" placeholder="Precio Growler Grande (en $)" required>
-                  <input type="text" class="form-control mb-1" v-model="newPricize.growlerprice2" placeholder="Precio Growler Chico (en $)" required>
-                  <input type="text" class="form-control mb-1" v-model="newPricize.pintprice" placeholder="Precio Pinta (en $)" required>
-                  <input type="text" class="form-control mb-1" v-model="newPricize.pintprice2" placeholder="Precio Media Pinta (en $)" required>
-                  <input type="text" class="form-control mb-1" v-model="newPricize.loadprice" placeholder="Precio Carga Grande (en $)" required>
-                  <input type="text" class="form-control mb-1" v-model="newPricize.loadprice2" placeholder="Precio Carga Chica (en $)" required>
-                  <input type="text" class="form-control mb-1" v-model="newPricize.hhourprice" placeholder="Precio 2x1 de pintas (en $)" required>
-                </div>
-                  <template v-if="existpricize === false">
-                  <button class="btn btn-primary btn-block" >Agregar precios y tamaños</button>
-              </template>
-                <template v-else-if="editprice===true">
-                  <button class="btn btn-primary btn-block" >Actualizar precios y tamaños</button>
-              </template>
-               <template v-else>
-                  <p class="seleccione">Solo puede Editar la lista de precios existente</p>
-              </template>
-
-              
-        </form>
-            </div>
-          </div>
       
-       
-
-    </div>
       </div>
         <div class="row">
-       <div class="col-12 col-sm-12 col-md-8">
-            <div class="card">
-              <div class="card-header bg-dark">
-                   <h3>Tamaños Actuales</h3>
-              </div>
-              <div class="card-body">
-              <table class="table s">
-              <thead>
-              <th>Growler Grande</th>
-              <th>Growler Pequeño</th>
-              <th>Pinta</th>
-              <th>Media Pinta</th>
-              <th>Editar</th>
-              </thead>
-              <tbody>
-                <tr v-for="size in sizes" :key="size.id">
-                  <td>{{size.growlersize}}</td>
-                  <td>{{size.growlersize2}}</td>
-                  <td>{{size.pintsize}}</td>
-                  <td>{{size.pintsize2}}</td>
-                  <td><button class="btn btn-outline-primary " v-on:click="updateSize(size._id)"><i class="material-icons">edit</i></button></td>
-                </tr>
-              </tbody>
-             
-            </table>
-             
-              </div>
-            </div>           
-      </div>
-      
-      <div class="col-12 col-sm-12  col-md-4 ">
+
+          <div class="col-12 col-sm-12  col-md-3 ">
          <div v-if="errorMessage2" class="alert alert-danger" role="alert">
             {{ errorMessage2 }}
           </div>
@@ -146,6 +132,37 @@
        
 
     </div>
+       <div class="col-12 col-sm-12 col-md-9">
+            <div class="card">
+              <div class="card-header bg-dark">
+                   <h3>Tamaños Actuales</h3>
+              </div>
+              <div class="card-body">
+              <table class="table s">
+              <thead>
+              <th>Growler Grande</th>
+              <th>Growler Pequeño</th>
+              <th>Pinta</th>
+              <th>Media Pinta</th>
+              <th>Editar</th>
+              </thead>
+              <tbody>
+                <tr v-for="size in sizes" :key="size.id">
+                  <td>{{size.growlersize}}</td>
+                  <td>{{size.growlersize2}}</td>
+                  <td>{{size.pintsize}}</td>
+                  <td>{{size.pintsize2}}</td>
+                  <td><button class="btn btn-outline-primary " v-on:click="updateSize(size._id)"><i class="material-icons">edit</i></button></td>
+                </tr>
+              </tbody>
+             
+            </table>
+             
+              </div>
+            </div>           
+      </div>
+      
+      
       </div>
     </div>
 </div>
