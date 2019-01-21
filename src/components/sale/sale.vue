@@ -12,8 +12,8 @@
     <div class="container">
       <div class="row">
 
-<div class="col-md-4">
-          <div class="card bg-dark sticky-top">
+<div class="col-md-4"> <!-- GROWLERS-->
+          <div class="card bg-dark" style="position: fixed; width: 359px;">
             <div class="card-header bg-dark">
               <h3 class="tablaHead">Productos</h3>
             </div>
@@ -22,14 +22,14 @@
                 <table class="table">
                   <thead>
                     <th>Cerveza</th>
-                    <th>Cantidad (Litros)</th>
+                    <th>Cantidad<small> Litros</small></th>
                     <th>Precio</th>
                   </thead>
                   <tbody>
-                    <tr v-for="growler in growlers">
-                      <td>{{growler.keg.beer}}</td>
-                      <td>{{growler.quantity}}</td>
-                      <td>{{growler.price}}</td>
+                    <tr class="trHigh" v-for="growler in growlers">
+                      <td class="nowrap" style="max-width: 120px;">{{growler.keg.beer}}</td>
+                      <td>{{growler.quantity}}<span class="litros"> l</span></td>
+                      <td>$ {{growler.price}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -38,14 +38,14 @@
                 <table class="table">
                   <thead>
                     <th>Cerveza</th>
-                    <th>Cantidad (Litros)</th>
+                    <th>Cantidad<small> Litros</small></th>
                     <th>Precio</th>
                   </thead>
                   <tbody>
-                    <tr v-for="pint in pints">
-                      <td>{{pint.keg.beer}}</td>
-                      <td>{{pint.quantity}}</td>
-                      <td>{{pint.price}}</td>
+                    <tr class="trHigh" v-for="pint in pints">
+                      <td class="nowrap" style="max-width: 120px;">{{pint.keg.beer}}</td>
+                      <td>{{pint.quantity}}<span class="litros"> l</span></td>
+                      <td>$ {{pint.price}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -54,14 +54,14 @@
                 <table class="table">
                   <thead>
                     <th>Cerveza</th>
-                    <th>Cantidad (Litros)</th>
+                  <th>Cantidad<small> Litros</small></th>
                     <th>Precio</th>
                   </thead>
                   <tbody>
-                    <tr v-for="other in others">
-                      <td>{{other.keg.beer}}</td>
-                      <td>{{other.quantity}}</td>
-                      <td>{{other.price}}</td>
+                    <tr class="trHigh" v-for="other in others">
+                      <td class="nowrap" style="max-width: 100px;">{{other.keg.beer}}</td>
+                      <td>{{other.quantity}}<span class="litros"> l</span></td>
+                      <td>$ {{other.price}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -70,18 +70,18 @@
                 <table class="table">
                   <thead>
                     <th>Cerveza</th>
-                    <th>Cantidad</th>
-                    <th>tamaño botella</th>
+                    <th>Cant.</th>
+                    <th>Tamaño</th>
                     <th>Precio</th>
                     <th>Total</th>
                   </thead>
                   <tbody>
-                    <tr v-for="bottle in bottles">
-                      <td>{{bottle.bottle.beer}}</td>
+                    <tr class="trHigh" v-for="bottle in bottles">
+                      <td class="nowrap" style="max-width: 50px;">{{bottle.bottle.beer}}</td>
                       <td>{{bottle.quantitySaled}}</td>
-                      <td>{{bottle.bottle.size}}</td>
-                      <td>{{bottle.unitPrice}}</td>
-                      <td>{{bottle.totalPrice}}</td>
+                      <td>{{bottle.bottle.size}}<span class="litros"> l</span></td>
+                      <td>$ {{bottle.unitPrice}}</td>
+                      <td>$ {{bottle.totalPrice}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -94,10 +94,10 @@
                     <th>Precio</th>
                   </thead>
                   <tbody>
-                    <tr v-for="containerSaled in containers">
-                      <td>{{containerSaled.container.size}}</td>
+                    <tr class="trHigh" v-for="containerSaled in containers">
+                      <td>{{containerSaled.container.size}}<span class="litros"> l</span></td>
                       <td>{{containerSaled.quantitySaled}}</td>
-                      <td>{{containerSaled.totalPrice}}</td>
+                      <td>$ {{containerSaled.totalPrice}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -111,106 +111,104 @@
 
 
         <div class="col-md-8">
-          <div class="card">
+          <div class="card" style="background: #272727; margin-bottom: 3em;">
             <div class="card-header bg-dark">
               <h3 class="tablaHead">Ventas</h3>
             </div>
             <div class="card-body">
               <table class="table">
-                <thead>
+                <thead class=""> <!-- should be sticky-->
                   <th>Cliente</th>
                   <th>Fecha</th>
-                  <th>Total venta</th>
-                  <th>Growlers</th>
-                  <th>Pintas</th>
-                  <th>Botellas</th>
-                  <th>Cantidad</th>
-                  <th>Envases</th>
+                  <th>Total</th>
+                  <th>Formatos <small> growler /pinta /botella /cantidad /envase</small></th>
+               
                   <th>Elim.</th>
                 </thead>
                 <tbody>
-                  <tr v-for="sale in sales">
-                    <td>{{sale.client.name}}</td>
+                  <tr class="trHigh" v-for="sale in sales">
+                    <td class="nowrap" style="max-width: 100px;">{{sale.client.name}}</td>
 
                     <td>{{format(sale.date)}}</td>
 
-                    <td>{{sale.totalSale}}</td>
+                    <td style="width: 100px;">$ {{sale.totalSale}}</td>
+                    <div style="width: 290px;">
                     <template v-if="Object.keys(sale.growlers).length === 0">
                       <td>
-                        <button class="btn btn-outline-dark disabled">
-                          <img :src="require('@/assets/growlerlleno.png')" alt="carga">
+                        <button class="btn btn-outline-dark disabled disableBorder btn-sm">
+                          <img class="fix" :src="require('@/assets/growlerlleno.png')" alt="carga">
                         </button>
                       </td>
                     </template>
                     <template v-else>
                       <td>
-                        <button class="btn btn-light" v-on:click="getGrowler(sale._id)">
+                        <button class="btn btn-light add disableBorder" v-on:click="getGrowler(sale._id)">
                           <img :src="require('@/assets/growlerlleno.png')" alt="carga">
                         </button>
                       </td>
                     </template>
                     <template v-if="Object.keys(sale.pints).length === 0">
                       <td>
-                        <button class="btn btn-outline-dark disabled">
+                        <button class="btn btn-outline-dark disabled disableBorder">
                           <img :src="require('@/assets/pinta.png')" alt>
                         </button>
                       </td>
                     </template>
                     <template v-else>
                       <td>
-                        <button class="btn btn-light" v-on:click="getPints(sale._id)">
+                        <button class="btn add btn-light disableBorder" v-on:click="getPints(sale._id)">
                           <img :src="require('@/assets/pinta.png')" alt>
                         </button>
                       </td>
                     </template>
                     <template v-if="Object.keys(sale.bottles).length === 0">
                       <td>
-                        <button class="btn btn-outline-dark disabled">
+                        <button class="btn btn-outline-dark disabled disableBorder">
                           <img :src="require('@/assets/bottle.png')" alt>
                         </button>
                       </td>
                     </template>
                     <template v-else>
                       <td>
-                        <button class="btn btn-light" v-on:click="getBottles(sale._id)">
+                        <button class="btn add btn-light disableBorder" v-on:click="getBottles(sale._id)">
                           <img :src="require('@/assets/bottle.png')" alt>
                         </button>
                       </td>
                     </template>
                     <template v-if="Object.keys(sale.others).length === 0">
                       <td>
-                        <button class="btn btn-outline-dark disabled">
+                        <button class="btn btn-outline-dark disabled disableBorder">
                           <img :src="require('@/assets/other.png')" alt>
                         </button>
                       </td>
                     </template>
                     <template v-else>
                       <td>
-                        <button class="btn btn-light" v-on:click="getOther(sale._id)">
+                        <button class="btn add btn-light disableBorder" v-on:click="getOther(sale._id)">
                           <img :src="require('@/assets/other.png')" alt>
                         </button>
                       </td>
                     </template>
                     <template v-if="Object.keys(sale.containers).length === 0">
                       <td>
-                        <button class="btn btn-outline-dark disabled">
+                        <button class="btn btn-outline-dark disabled disableBorder">
                           <img :src="require('@/assets/carga2.png')" alt>
                         </button>
                       </td>
                     </template>
                     <template v-else>
                       <td>
-                        <button class="btn btn-light" v-on:click="getContainers(sale._id)">
+                        <button class="btn add btn-light disableBorder" v-on:click="getContainers(sale._id)">
                           <img :src="require('@/assets/carga2.png')" alt>
                         </button>
                       </td>
-                    </template>
+                    </template></div>
                     <td>
                       <button
-                        class="btn btn-outline-danger btn-sm"
+                        class="btn btn-outline-danger btn-sm fix disableBorder"
                         v-on:click="showModal(sale._id)"
                       >
-                        <i class="material-icons">delete</i>
+                        <i class="material-icons resize">clear</i>
                       </button>
                     </td>
                   </tr>
@@ -223,14 +221,16 @@
       </div>
     </div>
           <modal name="delete" height="auto">
-        <div class="container bg-dark ">
-          <div class="breadcrumb bg-warning">
-              <h5 class="">¿Esta seguro que desea eliminar la venta?</h5>
+        <div class="container card bg-dark " style="background: #222 !important;">
+          <div class="">
+            <center>
+              <h5 class="tablaHead" style="margin-bottom: 0.7em;">¿Esta seguro que desea eliminar la venta?</h5></center>
           </div>
           
             <div class="input-group-pretend mb-3">
-                  <button class="btn btn-success"  v-on:click="deleteSale()" >Aceptar</button>
-                  <button class="btn btn-danger" v-on:click="hideModal()">Cancelar</button>
+              <center>
+                  <button class="btn btn-outline-success"  v-on:click="deleteSale()" >Aceptar</button>
+                  <button class="btn btn-outline-danger" v-on:click="hideModal()">Cancelar</button></center>
             </div>
             
         </div>
@@ -429,6 +429,18 @@ export default {
   border-radius: 0.6em;
 }
 
+.add{
+ background: #4b4b4b !important;
+ border: 1px solid #616161 !important;
+}
 
+.add:hover{
+  background: #fff !important;
+  color: #242424 !important;
+}
+
+.disabled{
+  width: 47px;
+}
 
 </style>
