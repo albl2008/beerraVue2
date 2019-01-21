@@ -36,7 +36,7 @@
               style="letter-spacing: 0.1em; text-transform: capitalize; color: #FB9336; 
               font-weight: bold; font-size: 29px; border: 1px solid white; padding: 3px 10px 6px 10px; 
               border-radius: 0.2em; background:  rgba(0, 0, 0, 0.042);"
-            >gratis</span> por 30 días
+            >gratis</span> por 2 semanas
           </p>
           <p class="lead">
             <a
