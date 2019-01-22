@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <nav aria-label="breadcrumb" class="sticky-top">
+    
+    <nav aria-label="breadcrumb" class="sticky-top nav">
       <ol class="breadcrumb bg-dark card">
         <li class="breadcrumb-item">
           <a href="#funcionalidades">Funcionalidades</a>
@@ -592,5 +593,20 @@ h1.card-text{
 
 .banner{
   width: 50%;
+}
+
+@media screen and (max-width: 768px){
+ .sticky-top.nav{
+   display: none;
+ }
+
+  .subcontainer2{
+    background: url('miniscreen.png') center;
+    background-size: cover !important;
+  }
+
+.contact{
+  display: none;
+}
 }
 </style>
