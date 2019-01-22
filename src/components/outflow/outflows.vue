@@ -1,13 +1,18 @@
 <template>
-    <div class="container">
+   
       <div id="barriles">
-          <center><h1>Compras - Gastos</h1></center>
-          <center><img :src="require('@/assets/sections/compras.png')" alt=""></center>
-      </div>  
+         <div class="row" style="width: 50%; margin: 0 auto; "><div class="centerhead">
+        <h1 class="h1head">Compras</h1>
+        </div>
+        <img :src="require('@/assets/beerra/byemoney2x.png')" alt class="underh1">
+        
+ 
+      </div>   <div class="container">
       <div class="row">
-        <div class="col-12 col-sm-12 col-md-4">
-          <div class="card">
-            <div class="card-header"><h3>Nuevo Gasto</h3></div>
+        <div class="col-12 col-sm-12 col-md-3">
+          <div class="card" style="background: #272727;">
+            <div class="card-header bg-dark">
+              <h3 class="tablaHead">Nuevo Gasto</h3></div>
             <div class="card-body">
                       <form v-on:submit.prevent="addOutflow" >
 
@@ -29,9 +34,9 @@
                       </option>
              </select>
               <label>Cantidad</label>
-           <input type="text" class="form-control mb-1" v-model="newOutflow.quantity" placeholder="Cantidad" required>
+           <input type="text" class="form-control mb-1" v-model="newOutflow.quantity" placeholder="" required>
            <label>Costo por unidad</label>
-            <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="Costo" required>
+            <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="" required>
             <br>
                     
               <code>Fecha: {{format(newOutflow.date)}}</code>                
@@ -49,18 +54,18 @@
                       </option>
                     </select>
                         <label>Cantidad</label>
-           <input type="text" class="form-control mb-1" v-model="newOutflow.quantity" placeholder="Cantidad" required>
+           <input type="text" class="form-control mb-1" v-model="newOutflow.quantity" placeholder="" required>
            <label>Costo por unidad</label>
-            <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="Costo" required>
+            <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="" required>
              <br>
             <code>Fecha: {{format(newOutflow.date)}}</code>                
               <input-date v-model="newOutflow.date"></input-date>
              </template>
               <template v-if="newOutflow.type === 3 ">
-                  <label>Descripcion</label>
-                  <input type="text" class="form-control mb-1" v-model="newOutflow.description" placeholder="Descripcion" required>
+                  <label>Descripción</label>
+                  <input type="text" class="form-control mb-1" v-model="newOutflow.description" placeholder="" required>
                     <label>Costo</label>
-            <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="Costo" required>
+            <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="" required>
              <br>
             <code>Fecha: {{format(newOutflow.date)}}</code>                
               <input-date v-model="newOutflow.date"></input-date>
@@ -78,7 +83,7 @@
             </template>
             <template v-if="newOutflow.type === 5">
                  
-                  <label>Mes/Periodo</label>
+                  <label>Mes <small>/Periodo</small></label>
                   
            <input type="text" class="form-control mb-1" v-model="newOutflow.month" placeholder="Mes/Periodo" required>
            <label>Importe</label>
@@ -100,7 +105,7 @@
             </template>
             <template v-if="newOutflow.type === 7">
                  
-                  <label>Descripcion</label>
+                  <label>Descripción</label>
                   
            <input type="text" class="form-control mb-1" v-model="newOutflow.description" placeholder="Descripcion" required>
            <label>Costo</label>
@@ -111,20 +116,20 @@
             </template>
         </div>
              <template v-if="edit === false">
-                  <button class="btn btn-primary btn-block">GUARDAR</button>
+                  <button class="btn btn-outline-primary">Guardar</button>
               </template>
                 <template v-else>
-                  <button class="btn btn-primary btn-block" >ACTUALIZAR</button>
+                  <button class="btn btn-outline-primary" >Actualizar</button>
               </template>
 
         </form>
             </div>
           </div>
       </div>
-     <div class="col-12 col-sm-12 col-md-8">
-            <div class="card">
+     <div class="col-12 col-sm-12 col-md-9">
+            <div class="card" style="background: #272727;">
               <div class="card-header bg-dark">
-                   <h3>Pintas y Botellones</h3>
+                   <h3 class="tablaHead">Pintas y Botellones</h3>
               </div>
               <div class="card-body">
               <table class="table s">
@@ -132,9 +137,9 @@
               <th>Tipo</th>
               <th>Tamaño</th>
               <th>Cantidad</th>
-              <th>Costo/unidad</th>
+              <th>Costo <small>/unidad</small></th>
               <th>Fecha</th>
-              <th>Total $</th>
+              <th>Total</th>
               <th>Eliminar</th>
               <th>Editar</th>
               </thead>
@@ -144,21 +149,21 @@
                     <td>Pintas</td>
                     <td>{{outflow.size}}</td>
                   <td>{{outflow.quantity}}</td>
-                  <td>{{outflow.price}}</td>
+                  <td>$ {{outflow.price}}</td>
                   <td>{{format(outflow.date)}}</td>
                    <td>{{outflow.price*outflow.quantity}}</td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons">delete</i></button></td>
-                    <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateOutflow(outflow._id)"><i class="material-icons">edit</i></button></td>
+                  <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons resize">clear</i></button></td>
+                    <td><button class="btn btn-outline-primary btn-sm fix disableBorder" v-on:click="updateOutflow(outflow._id)"><i class="material-icons resize">edit</i></button></td>
                   </template>
                    <template v-if="outflow.type===2">
                     <td>Botellones</td>
-                    <td>{{outflow.size}}</td>
+                    <td>{{outflow.size}}<span class="litros"> l</span></td>
                   <td>{{outflow.quantity}}</td>
-                  <td>{{outflow.price}}</td>
+                  <td>$ {{outflow.price}}</td>
                   <td>{{format(outflow.date)}}</td>
-                   <td>{{outflow.price*outflow.quantity}}</td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons">delete</i></button></td>
-                    <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateOutflow(outflow._id)"><i class="material-icons">edit</i></button></td>
+                   <td>$ {{outflow.price*outflow.quantity}}</td>
+                  <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons resize">clear</i></button></td>
+                    <td><button class="btn btn-outline-primary btn-sm fix disableBorder" v-on:click="updateOutflow(outflow._id)"><i class="material-icons resize">edit</i></button></td>
                   </template>
                   
                  
@@ -169,21 +174,21 @@
              
               </div>
             </div>           
-      </div>
+      </div>   </div>
       
-      <div class="container">
-        <div class="row">
+  
+        <div class="row" style="margin-top: 2.5em;">
         <div class="col-12 col-md-6" >
           
-            <div class="card">
+            <div class="card" style="background: #272727;">
               <div class="card-header bg-dark">
-                   <h3>Luz - Alquiler</h3>
+                   <h3 class="tablaHead">Luz / Alquiler</h3>
               </div>
               <div class="card-body">
               <table class="table s">
               <thead>
               <th>Tipo</th>
-              <th>Mes/Periodo</th>
+              <th>Mes<small> /Periodo</small></th>
               <th>Monto</th>
               <th>Fecha</th>
               <th>Eliminar</th>
@@ -194,18 +199,18 @@
                   <template v-if="outflow.type===5">
                     <td>Alquiler</td>
                     <td>{{outflow.month}}</td>
-                  <td>{{outflow.price}}</td>
+                  <td>$ {{outflow.price}}</td>
                   <td>{{format(outflow.date)}}</td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons">delete</i></button></td>
-                    <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateOutflow(outflow._id)"><i class="material-icons">edit</i></button></td>
+                  <td><button class="btn btn-outline-danger btn-sm disableBorder fix" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons resize">clear</i></button></td>
+                    <td><button class="btn btn-outline-primary btn-sm disableBorder fix" v-on:click="updateOutflow(outflow._id)"><i class="material-icons resize">edit</i></button></td>
                   </template>
                    <template v-if="outflow.type===6">
                     <td>Luz</td>
                     <td>{{outflow.month}}</td>
-                  <td>{{outflow.price}}</td>
+                  <td>$ {{outflow.price}}</td>
                   <td>{{format(outflow.date)}}</td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons">delete</i></button></td>
-                    <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateOutflow(outflow._id)"><i class="material-icons">edit</i></button></td>
+                  <td><button class="btn btn-outline-danger btn-sm disableBorder fix" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons resize ">clear</i></button></td>
+                    <td><button class="btn btn-outline-primary btn-sm disableBorder fix" v-on:click="updateOutflow(outflow._id)"><i class="material-icons resize">edit</i></button></td>
                   </template>
                   
                  
@@ -221,15 +226,15 @@
       </div>
       <div class="col-12 col-md-6" >
           
-            <div class="card">
+            <div class="card" style="background: #272727;">
               <div class="card-header bg-dark">
-                   <h3>Limpieza - Otros</h3>
+                   <h3 class="tablaHead">Limpieza / Otros</h3>
               </div>
               <div class="card-body">
               <table class="table s">
               <thead>
               <th>Tipo</th>
-              <th>Descripcion</th>
+              <th>Descripción</th>
               <th>Monto</th>
               <th>Fecha</th>
               <th>Eliminar</th>
@@ -239,19 +244,19 @@
                 <tr v-for="outflow in outflows" :key="outflow.id">
                   <template v-if="outflow.type===3">
                     <td>Limpieza</td>
-                    <td>{{outflow.description}}</td>
-                  <td>{{outflow.price}}</td>
+                    <td class="nowrap" style="width: 100px; max-width: 150px;">{{outflow.description}}</td>
+                  <td>$ {{outflow.price}}</td>
                   <td>{{format(outflow.date)}}</td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons">delete</i></button></td>
-                    <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateOutflow(outflow._id)"><i class="material-icons">edit</i></button></td>
+                  <td><button class="btn btn-outline-danger btn-sm disableBorder fix" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons resize">clear</i></button></td>
+                    <td><button class="btn btn-outline-primary btn-sm disableBorder fix" v-on:click="updateOutflow(outflow._id)"><i class="material-icons resize">edit</i></button></td>
                   </template>
                    <template v-if="outflow.type===7">
                     <td>Otros</td>
                     <td>{{outflow.description}}</td>
-                  <td>{{outflow.price}}</td>
+                  <td>$ {{outflow.price}}</td>
                   <td>{{format(outflow.date)}}</td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons">delete</i></button></td>
-                    <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateOutflow(outflow._id)"><i class="material-icons">edit</i></button></td>
+                  <td><button class="btn btn-outline-danger btn-sm disableBorder fix" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons resize">clear</i></button></td>
+                    <td><button class="btn btn-outline-primary btn-sm disableBorder fix" v-on:click="updateOutflow(outflow._id)"><i class="material-icons resize">edit</i></button></td>
                   </template>
                   
                  
@@ -261,28 +266,28 @@
             </table>
              
               </div>
-            </div> 
+        
 
         
       </div>
       </div>
 </div>
-  <div class="container">
-        <div class="row">
-        <div class="col-12 col-md-7" >
+
+        <div class="row" style="margin-top: 2.5em; margin-bottom: 3em;">
+        <div class="col-12 col-md-6" >
           
-            <div class="card">
+            <div class="card" style="background: #272727;">
               <div class="card-header bg-dark">
-                   <h3>Gas CO2</h3>
+                   <h3 class="tablaHead">Gas CO2</h3>
               </div>
               <div class="card-body">
               <table class="table s">
               <thead>
               <th>Tipo</th>
-              <th>Cantidad (Kg)</th>
-              <th>Costo/Kg</th>
+              <th>Cant. <small>(Kg)</small></th>
+              <th>Costo<small>/Kg</small></th>
               <th>Fecha</th>
-              <th>Total $</th>
+              <th>Total</th>
               <th>Eliminar</th>
               <th>Editar</th>
               </thead>
@@ -291,12 +296,12 @@
                   <template v-if="outflow.type===4">
                     <td>CO2</td>
                     <td>{{outflow.quantity}}</td>
-                  <td>{{outflow.price}}</td>
+                  <td>$ {{outflow.price}}</td>
                   
                   <td>{{format(outflow.date)}}</td>
-                  <td>{{outflow.price*outflow.quantity}}</td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons">delete</i></button></td>
-                    <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateOutflow(outflow._id)"><i class="material-icons">edit</i></button></td>
+                  <td>$ {{outflow.price*outflow.quantity}}</td>
+                  <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteOutflow(outflow._id)"><i class="material-icons resize">clear</i></button></td>
+                    <td><button class="btn btn-outline-primary btn-sm fix disableBorder" v-on:click="updateOutflow(outflow._id)"><i class="material-icons resize">edit</i></button></td>
                   </template>
                   
                  
@@ -662,7 +667,7 @@ axios({
       if(result.error.message.includes('month'))
         this.errorMessage = 'Ingrese el numero correspondiente al mes'
       if(result.error.message.includes('description'))
-        this.errorMessage = 'Ingrese una descripcion del gasto'
+        this.errorMessage = 'Ingrese una descripción del gasto'
       if(result.error.message.includes('quantity'))
         this.errorMessage = 'Ingrese correctamente la cantidad'
     }
