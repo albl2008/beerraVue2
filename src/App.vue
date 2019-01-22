@@ -837,4 +837,29 @@ background: rgba(255, 255, 255, 0.063) !important;
  background: #FD9326 !important;
  color: #1f1f1f !important;
 }
+
+@media screen and (max-width: 768px){
+  nav{
+    display: none;
+   
+  }
+
+  body{
+   width: 100% !important;
+  }
+
+  .container{
+
+  }
+
+
+  #app{
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .footer{
+    display: none;
+  }
+}
 </style>
