@@ -35,14 +35,14 @@
                   <input type="text" style="width: 48%; float: left;" class="form-control mb-1" v-model="newPricize.loadprice" placeholder="" required>
                   <input type="text" style="width: 48%; float: right;" class="form-control mb-1" v-model="newPricize.loadprice2" placeholder="" required>
                   </div>
-                  <label>2x1<small> de pintas (p/ unidad)</small></label> 
+                  <label>2x1<small> de pintas</small></label> 
                   <input type="text" class="form-control mb-1" v-model="newPricize.hhourprice" placeholder="" required>
                 </div>
                   <template v-if="existpricize === false">
-                  <button class="btn btn-primary btn-block" >Agregar precios y tamaños</button>
+                  <button style="width: 80px" class="btn btn-outline-primary btn-block" >Agregar</button>
               </template>
                 <template v-else-if="editprice===true">
-                  <button class="btn btn-primary btn-block" >Actualizar precios y tamaños</button>
+                  <button style="width: 85px" class="btn btn-outline-primary btn-block" >Actualizar</button>
               </template>
                <template v-else>
                   <p class="seleccione">Solo puede Editar la lista de precios existente</p>
@@ -58,32 +58,32 @@
     </div>
 
        <div class="col-12 col-sm-12 col-md-9">
-            <div class="card">
+            <div class="card" style="background: #272727;">
               <div class="card-header bg-dark">
-                   <h3>Precios Actuales</h3>
+                   <h3 class="tablaHead">Precios actuales</h3>
               </div>
               <div class="card-body">
               <table class="table s">
               <thead>
-              <th>Carga Grande</th>
-              <th>Carga Pequeña</th>
-              <th>Growler Grande</th>
-              <th>Growler Pequeño</th>
+              <th>Carga <small>Grande</small></th>
+              <th>Carga <small>Pequeña</small></th>
+              <th>Growler <small>Grande</small> </th>
+              <th>Growler <small>Pequeño</small></th>
               <th>Pinta</th>
-              <th>Media Pinta</th>
-              <th>2x1 (Pintas)</th>
+              <th><small>1/2</small> Pinta</th>
+              <th>2x1 <small>Pintas</small></th>
               <th>Editar</th>
               </thead>
               <tbody>
                 <tr v-for="pricize in pricizes" :key="pricize.id">
-                  <td>{{pricize.loadprice}}</td>
-                  <td>{{pricize.loadprice2}}</td>
-                  <td>{{pricize.growlerprice}}</td>
-                  <td>{{pricize.growlerprice2}}</td>
-                  <td>{{pricize.pintprice}}</td>
-                  <td>{{pricize.pintprice2}}</td>
-                  <td>{{pricize.hhourprice}}</td>
-                  <td><button class="btn btn-outline-primary btn-block" v-on:click="updatePricize(pricize._id)"><i class="material-icons">edit</i></button></td>
+                  <td>$ {{pricize.loadprice}}</td>
+                  <td>$ {{pricize.loadprice2}}</td>
+                  <td>$ {{pricize.growlerprice}}</td>
+                  <td>$ {{pricize.growlerprice2}}</td>
+                  <td>$ {{pricize.pintprice}}</td>
+                  <td>$ {{pricize.pintprice2}}</td>
+                  <td>$ {{pricize.hhourprice}}</td>
+                  <td><button class="btn btn-outline-primary btn-sm fix disableBorder" v-on:click="updatePricize(pricize._id)"><i class="material-icons resize">edit</i></button></td>
                 </tr>
                 
 
@@ -99,29 +99,34 @@
       </div>
         <div class="row">
 
-          <div class="col-12 col-sm-12  col-md-3 ">
+          <div class="col-12 col-sm-12  col-md-3 " style="margin-bottom: 3em;" >
          <div v-if="errorMessage2" class="alert alert-danger" role="alert">
             {{ errorMessage2 }}
           </div>
-          <div class="card bg-dark">
-            <div class="card-header"><h3>Tamaños</h3></div>
+          <div class="card " style="background: #272727;" >
+            <div class="card-header bg-dark"><h3 class="tablaHead">Tamaños <small>en litros</small></h3></div>
             <div class="card-body">
               <form v-on:submit.prevent="addSize()">
 
-                <div class="input-group-pretend">
-                  <input type="text" class="form-control mb-1" v-model="newSize.growlersize" placeholder="Tamaño Growler Grande (en L)" required>
-                  <input type="text" class="form-control mb-1" v-model="newSize.growlersize2" placeholder="Tamaño Growler Pequeño (en L)" required>
-                  <input type="text" class="form-control mb-1" v-model="newSize.pintsize" placeholder="Tamaño Pinta (en L)" required>
-                  <input type="text" class="form-control mb-1" v-model="newSize.pintsize2" placeholder="Tamaño Media Pinta (en L)" required>
-                </div>
+                <div class="input-group-pretend" style="margin-bottom: 1em;">
+                  <label>Growler<small> grande</small></label> <label style="float: right;">Growler<small> chico</small></label>
+                  <input type="text" style="width: 48%; float: left;" class="form-control mb-1" v-model="newSize.growlersize" placeholder="" required>
+                  <input type="text" style="width: 48%; float: right;" class="form-control mb-1" v-model="newSize.growlersize2" placeholder="" required>
+
+                  <label>Pinta<small></small></label> <label style="float: right;"><small>1/2 </small>Pinta</label>
+                  <div style="margin-bottom: 3.5em;">
+                  <input type="text" style="width: 48%; float: left;" class="form-control mb-1" v-model="newSize.pintsize" placeholder="" required>
+                  <input type="text" style="width: 48%; float: right;" class="form-control mb-1" v-model="newSize.pintsize2" placeholder="" required>
+      
+                  </div></div>
                   <template v-if="existsize === false">
-                  <button class="btn btn-outline-primary btn-block" >Agregar tamaños</button>
+                  <button class="btn btn-outline-primary btn-block" style="width: 78px; position: margin-top: 1em;" >Agregar</button>
               </template>
                 <template v-else-if="editsize===true">
-                  <button class="btn btn-outline-primary btn-block" >Actualizar tamaños</button>
+                  <button class="btn btn-outline-primary btn-block" style="width: 85px; margin-top: 1em;">Actualizar</button>
               </template>
                <template v-else>
-                  <p class="seleccione">Solo puede Editar la lista de tamaños existente</p>
+                  <p class="seleccione" style="top: 1em;">Solo puede Editar la lista de tamaños existente</p>
               </template>
 
               
@@ -132,27 +137,27 @@
        
 
     </div>
-       <div class="col-12 col-sm-12 col-md-9">
-            <div class="card">
+       <div class="col-12 col-sm-12 col-md-9" >
+            <div class="card " style="background: #272727;">
               <div class="card-header bg-dark">
-                   <h3>Tamaños Actuales</h3>
+                   <h3 class="tablaHead">Tamaños actuales</h3>
               </div>
               <div class="card-body">
               <table class="table s">
               <thead>
-              <th>Growler Grande</th>
-              <th>Growler Pequeño</th>
+              <th>Growler <small>Grande</small></th>
+              <th>Growler <small>Pequeño</small></th>
               <th>Pinta</th>
-              <th>Media Pinta</th>
+              <th><small>1/2</small> Pinta</th>
               <th>Editar</th>
               </thead>
               <tbody>
                 <tr v-for="size in sizes" :key="size.id">
-                  <td>{{size.growlersize}}</td>
-                  <td>{{size.growlersize2}}</td>
-                  <td>{{size.pintsize}}</td>
-                  <td>{{size.pintsize2}}</td>
-                  <td><button class="btn btn-outline-primary " v-on:click="updateSize(size._id)"><i class="material-icons">edit</i></button></td>
+                  <td>{{size.growlersize}}<span class="litros"> l</span></td>
+                  <td>{{size.growlersize2}}<span class="litros"> l</span></td>
+                  <td>{{size.pintsize}}<span class="litros"> l</span></td>
+                  <td>{{size.pintsize2}}<span class="litros"> l</span></td>
+                  <td><button class="btn btn-outline-primary btn-sm fix disableBorder " v-on:click="updateSize(size._id)"><i class="material-icons resize">edit</i></button></td>
                 </tr>
               </tbody>
              
@@ -525,6 +530,6 @@ export default {
 
 }
 </script>
-<style>
+<style scoped>
 
 </style>
