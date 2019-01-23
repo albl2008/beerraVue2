@@ -122,7 +122,7 @@
                   <th>Eliminar</th>
                 </thead>
                 <tbody>
-                  <tr v-for="growler in growlers">
+                  <tr class="trHigh" v-for="growler in growlers">
                     <td class="nowrap" style="max-width: 65px;">{{growler.beer}}</td>
                     <td class="nowrap" style="max-width: 65px;">{{growler.brewery}}</td>
                     <td>{{growler.quantity}} <span class="litros">l</span></td>
@@ -140,7 +140,7 @@
                   <th>Eliminar</th>
                 </thead>
                 <tbody>
-                  <tr v-for="container in containers">
+                  <tr class="trHigh" v-for="container in containers">
                     <td>{{container.size}} <span class="litros">l</span></td>
                     <td>{{container.quantitySaled}}</td>
                     <td>$ {{container.price}}</td>
@@ -177,12 +177,12 @@
                   <th>Eliminar</th>
                 </thead>
                 <tbody>
-                  <tr v-for="bottle in bottles">
-                    <td>{{bottle.beer}}</td>
-                    <td>{{bottle.brewery}}</td>
-                    <td>{{bottle.quantitySaled}}</td>
-                    <td>{{bottle.price}}</td>
-                    <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteBottle(bottle.idDelete)"><i class="material-icons">delete</i></button></td>
+                  <tr class="trHigh" v-for="bottle in bottles">
+                    <td class="nowrap" style="max-width: 100px;">{{bottle.beer}}</td>
+                    <td class="nowrap" style="max-width: 100px;">{{bottle.brewery}}</td>
+                    <td>{{bottle.quantitySaled}} <span class="litros">l</span></td>
+                    <td>$ {{bottle.price}}</td>
+                    <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteBottle(bottle.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
               </table>
@@ -218,7 +218,7 @@
 
                 </thead>
                 <tbody>
-                  <tr v-for="pint in pints">
+                  <tr class="trHigh" v-for="pint in pints">
                     <td class="nowrap" style="max-width: 65px;">{{pint.beer}}</td>
                     <td class="nowrap" style="max-width: 65px;">{{pint.brewery}}</td>
                     <td>{{pint.quantity}} <span class="litros">l</span></td>
@@ -249,11 +249,11 @@
 
                 </thead>
                 <tbody>
-                  <tr v-for="other in others">
+                  <tr class="trHigh" v-for="other in others">
                     <td>{{other.beer}}</td>
                     <td>{{other.brewery}}</td>
-                    <td>{{other.quantity}}</td>
-                    <td>{{other.price}}</td>
+                    <td>{{other.quantity}} <span class="litros">l</span></td>
+                    <td>$ {{other.price}}</td>
                     <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteOther(other.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
@@ -306,7 +306,9 @@
          </center>
           
           <form v-on:submit.prevent="hide()">
+              <label>Precio</label><label style="float: right;">Cantidad<small> Litros</small></label>
             <div class="input-group-pretend mb-3">
+            
               <input style="float: left; width: 48%; 
               margin-bottom: 1em !important;" type="number" class="form-control mb-1" v-model="newOther.price" placeholder="Precio" required>
               <input type="text" style="width: 48%; float: right;" class="form-control mb-1" v-model="newOther.quantity" placeholder="Cantidad" required>
@@ -353,19 +355,19 @@
       <modal name='bottles'
       height='auto'
       >
-        <div class="container bg-dark">
+        <div class="container" style="width: 100%;">
           <div class="row">
-            <div class="col-12  col-md-12">
-              <div class="card">
-                <div class="card-header">
-                  <h3>Cervezas</h3>
+            <div class="col-12 col-md-12">
+              <div class="card" style="background: #272727;">
+                <div class="card-header bg-dark">
+                  <h3 class="tablaHead">Botellas</h3>
                 </div>
                 <div class="card-body">
                   <table class="table ">
                     <thead>
                       <th>Cerveza</th>
                       <th>Stock</th>
-                      <th>brewery</th>
+                      <th>Cervecería</th>
                       <th>Precio</th>
                       <th>Cantidad</th>
                     </thead>
@@ -373,9 +375,9 @@
                       <tr v-for="bottle in BottlesStock">
                         <td>{{bottle.beer}}</td>
                         <td>{{bottle.stock}}</td>
-                        <td>{{bottle.brewery.name}}</td>
-                        <td>{{bottle.price}}</td>
-                        <td><input type="number form-control" v-model="newBottle.quantitySaled" placeholder="Cantidad"><button class="btn btn-sm btn-outline-warning" v-on:click="createBottle(bottle)">Agregar</button></td>
+                        <td class="nowrap" style="max-width: 100px;">{{bottle.brewery.name}}</td>
+                        <td>$ {{bottle.price}}</td>
+                        <td ><input style="width: 100px;" type="number form-control" v-model="newBottle.quantitySaled" placeholder="Cantidad"><button class="btn btn-sm btn-outline-warning" v-on:click="createBottle(bottle)">Agregar</button></td>
                        
                       </tr>
                     </tbody>
