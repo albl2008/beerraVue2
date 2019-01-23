@@ -5,19 +5,22 @@
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <center class="centerC">
-            <a id class="nav-link" href="http://localhost:8080/#/">
-            <h1>{{storage.load}}</h1>
+
               <img v-if="!storage.load" class="isonav" src="./beerraisol.png">
             <img v-if="storage.load" class="isonav" src="./assets/dots.svg">
+
+            <a id class="nav-link" href="http://157.230.154.101/#/">
+          
+
               <span class="sr-only">(current)</span>
             </a>
           </center>
-          <!-- <center><a id="animate1" class="nav-link" href="http://localhost:8080/#/"><img class="isonav" src="./beerrazeiv0.png"><span class="sr-only">(current)</span></a></center> -->
+          <!-- <center><a id="animate1" class="nav-link" href="http://157.230.154.101/#/"><img class="isonav" src="./beerrazeiv0.png"><span class="sr-only">(current)</span></a></center> -->
         </li>
         <template v-if="isLogged ">
           <center>
             <li class="nav-item">
-              <a id="dashboard" class="nav-link" href="http://localhost:8080/#/dashboard">
+              <a id="dashboard" class="nav-link" href="http://157.230.154.101/#/dashboard">
                 <i class="material-icons">dashboard</i>
               </a>
               <a id="logout" class="nav-link" v-on:click="logout()">
@@ -26,65 +29,71 @@
             </li>
           </center>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/pipes">Canillas
+            <a class="nav-link" href="http://157.230.154.101/#/pipes">Canillas
               <img :src="require('@/assets/navbar/canilla.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/keg">Barriles
+            <a class="nav-link" href="http://157.230.154.101/#/keg">Barriles
               <img :src="require('@/assets/navbar/barriles.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/brewery">Cervecerías
+
+            <a class="nav-link" href="http://157.230.154.101/#/brewery">Cervecerías
+
               <img :src="require('@/assets/navbar/cerveceria.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/clients">Clientes
+            <a class="nav-link" href="http://157.230.154.101/#/clients">Clientes
               <img :src="require('@/assets/navbar/clients.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/bottle">Botellas
+            <a class="nav-link" href="http://157.230.154.101/#/bottle">Botellas
               <img :src="require('@/assets/navbar/bottles.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/sale">Ventas
+            <a class="nav-link" href="http://157.230.154.101/#/sale">Ventas
               <img :src="require('@/assets/navbar/ventas.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/buy">Pagos
+
+            <a class="nav-link" href="http://157.230.154.101/#/buy">Pagos
+
               <img :src="require('@/assets/navbar/pago.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/pricize">Configuración
+
+            <a class="nav-link" href="http://157.230.154.101/#/pricize">Configuración
+
               <img :src="require('@/assets/navbar/config.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/container">Envases
+            <a class="nav-link" href="http://157.230.154.101/#/container">Envases
               <img :src="require('@/assets/navbar/container.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/outflow">Compras
+            <a class="nav-link" href="http://157.230.154.101/#/outflow">Compras
               <img :src="require('@/assets/navbar/buy.png')" alt class>
             </a>
           </li>
         </template>
         <template v-else>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/signin">Ingresar
+            <a class="nav-link" href="http://157.230.154.101/#/signin">Ingresar
               <i class="material-icons">account_circle</i>
             </a>
-            <!--  <a class="nav-link " href="http://localhost:8080/#/signin">Login <i class="material-icons">account_circle</i></a> -->
+            <!--  <a class="nav-link " href="http://157.230.154.101/#/signin">Login <i class="material-icons">account_circle</i></a> -->
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/signup">Registrarse
+            <a class="nav-link" href="http://157.230.154.101/#/signup">Registrarse
               <i class="material-icons">person_add</i>
             </a>
           </li>

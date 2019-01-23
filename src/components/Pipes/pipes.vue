@@ -474,17 +474,12 @@ export default {
      
      
   },
-  mounted(){
-     setTimeout(
-    _ => this.timeout = true, // enable the input
-    400 // after 1 second
-  )
-  },
+
 
   methods:{
     getClients(){
     axios({
-      url:'http://localhost:3000/clients',
+      url:'http://157.230.157.236/clients',
       headers: {authorization: `Bearer ${localStorage.token}`}
     })
     .then(res=>{
@@ -497,14 +492,14 @@ export default {
     },
    
      getKegs() {
-       
+       this.timeout = false
       axios({
-        url:'http://localhost:3000/keg/kegConnected',
+        url:'http://157.230.157.236/keg/kegConnected',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
           this.kegs = response.data.Kegs
-         
+         this.timeout = true
         }).catch(e => {
           console.log(e)
 
@@ -513,7 +508,7 @@ export default {
     },
     getBottles(){
       axios({
-        url:'http://localhost:3000/bottle',
+        url:'http://157.230.157.236/bottle',
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
       .then(response =>{
@@ -526,7 +521,7 @@ export default {
     },
      getPrices() {
       axios({
-        url:'http://localhost:3000/pricize/price',
+        url:'http://157.230.157.236/pricize/price',
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
         .then(response => {
@@ -539,7 +534,7 @@ export default {
     },
      getSizes() {
       axios({
-        url:'http://localhost:3000/pricize/size',
+        url:'http://157.230.157.236/pricize/size',
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
         .then(response => {
@@ -552,7 +547,7 @@ export default {
     },
     getContainers(){
       axios({url:
-      'http://localhost:3000/container',
+      'http://157.230.157.236/container',
       headers: {authorization: `Bearer ${localStorage.token}`}
       })
       .then(response => {
@@ -801,7 +796,7 @@ export default {
   sendSale(){
     axios({
     method:'POST',
-    url:`http://localhost:3000/sale`,
+    url:`http://157.230.157.236/sale`,
     data:{
       date: this.date,
       client: this.client,
@@ -872,7 +867,7 @@ started(idKeg){
     }
      axios({
        method:'PUT',
-       url:`http://localhost:3000/keg/started/${idKeg}` ,
+       url:`http://157.230.157.236/keg/started/${idKeg}` ,
        headers: {authorization: `Bearer ${localStorage.token}`}
      })
      .then(res => {
@@ -889,7 +884,7 @@ started(idKeg){
     }
      axios({
       method: 'PUT',
-      url:`http://localhost:3000/keg/empty/${idKeg}`,
+      url:`http://157.230.157.236/keg/empty/${idKeg}`,
       headers: {authorization: `Bearer ${localStorage.token}`}
      })
      .then(res => {

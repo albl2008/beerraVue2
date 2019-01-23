@@ -251,7 +251,7 @@ export default {
   methods: {
     getPricizes() {
       axios({
-        url:'http://localhost:3000/pricize/price',
+        url:'http://157.230.157.236/pricize/price',
         headers: {authorization: `Bearer ${localStorage.token}`}        
         })
         .then(response => {
@@ -270,7 +270,7 @@ export default {
     },
      getSizes() {
       axios({
-        url:'http://localhost:3000/pricize/size',
+        url:'http://157.230.157.236/pricize/size',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
@@ -288,7 +288,7 @@ export default {
     },
     getPricize(idPricize) {
         axios({
-          url:`http://localhost:3000/pricize/price/${idPricize}`,
+          url:`http://157.230.157.236/pricize/price/${idPricize}`,
           headers: {authorization: `Bearer ${localStorage.token}`}
           })
         .then(res => {
@@ -303,7 +303,7 @@ export default {
     },
       getSize(idSize) {
         axios({
-          url:`http://localhost:3000/pricize/size/${idSize}`,
+          url:`http://157.230.157.236/pricize/size/${idSize}`,
           headers: {authorization: `Bearer ${localStorage.token}`}
           })
         .then(res => {
@@ -320,7 +320,7 @@ export default {
 
       axios({
         method:'POST',
-        url:'http://localhost:3000/pricize/price',
+        url:'http://157.230.157.236/pricize/price',
         data:this.newPricize,
         headers: {authorization: `Bearer ${localStorage.token}`}
       }).then(res =>{
@@ -347,7 +347,7 @@ export default {
       }else{
         axios({
           method:'PUT',
-          url:`http://localhost:3000/pricize/price/${this.newPricize.id}`,
+          url:`http://157.230.157.236/pricize/price/${this.newPricize.id}`,
           data:this.newPricize,
           headers: {authorization: `Bearer ${localStorage.token}`}
         }).then(res => {
@@ -382,7 +382,7 @@ export default {
 
       axios({
         method:'POST',
-        url:'http://localhost:3000/pricize/size',
+        url:'http://157.230.157.236/pricize/size',
         data:this.newSize,
         headers: {authorization: `Bearer ${localStorage.token}`}
       }).then(res =>{
@@ -409,7 +409,7 @@ export default {
       }else{
         axios({
           method:'PUT',
-          url:`http://localhost:3000/pricize/size/${this.newSize.id}`,
+          url:`http://157.230.157.236/pricize/size/${this.newSize.id}`,
           headers: {authorization: `Bearer ${localStorage.token}`},
           data:this.newSize
         }).then(res => {
@@ -441,7 +441,7 @@ export default {
    updatePricize(idPricize) {
       axios({
         
-        url:`http://localhost:3000/pricize/price/${idPricize}`,
+        url:`http://157.230.157.236/pricize/price/${idPricize}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(res => {
@@ -456,7 +456,7 @@ export default {
     },
     updateSize(idSize) {
       axios({
-        url:`http://localhost:3000/pricize/size/${idSize}`,
+        url:`http://157.230.157.236/pricize/size/${idSize}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(res => {
