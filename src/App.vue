@@ -6,8 +6,8 @@
         <li class="nav-item">
           <center class="centerC">
 
-              <img v-if="storage.load" class="isonav" src="./beerraisol.png">
-            <img v-if="!storage.load" class="isonav" src="./assets/dots.svg">
+              <img class="isonav" src="./beerraisol.png">
+            
 
             <a id class="nav-link" href="http://157.230.154.101/#/">
           
@@ -191,6 +191,7 @@ export default {
     logout() {
       localStorage.isLoggIn = false;
       localStorage.removeItem("token");
+       
       this.$router.go("/signin");
     },
     hoverIn() {
