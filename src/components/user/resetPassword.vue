@@ -80,7 +80,7 @@ export default {
                     password:'',
                     confirmPassword:'',
                 },
-                url:'http://157.230.157.236/',
+                url:'http://localhost:3000/',
                 token: this.$route.params.token,
                 message:''
         }
@@ -89,7 +89,7 @@ export default {
         resetPassword(){
             if(this.validPassword()){
                 console.log(this.token)
-                axios.post('http://157.230.157.236/newPassword',{
+                axios.post('http://localhost:3000/newPassword',{
                     password: this.user.password,
                     token:this.token
                 }).then(response =>{

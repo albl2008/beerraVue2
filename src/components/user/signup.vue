@@ -127,7 +127,7 @@ export default {
             
             if(this.validUser()){
                 this.signingUP = true
-                axios.post('http://157.230.157.236/signup',
+                axios.post('http://localhost:3000/signup',
                 {
                     username: this.user.username,
                     password: this.user.password,

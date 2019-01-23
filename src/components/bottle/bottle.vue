@@ -423,7 +423,7 @@ export default {
    methods:{
      getBottles(){
     axios({
-      url:'http://157.230.157.236/bottle',
+      url:'http://localhost:3000/bottle',
       headers: {authorization: `Bearer ${localStorage.token}`}
       })
       .then(response =>{
@@ -441,7 +441,7 @@ export default {
 
       axios({
         method:'POST',
-        url:'http://157.230.157.236/bottle',
+        url:'http://localhost:3000/bottle',
         data: this.newBottle,
         headers: {authorization: `Bearer ${localStorage.token}`}
       }).then(res =>{
@@ -469,7 +469,7 @@ export default {
       }else if(this.edit === true && this.buy===false){
         axios({
           method: 'put',
-          url:`http://157.230.157.236/bottle/${this.newBottle.id}`,
+          url:`http://localhost:3000/bottle/${this.newBottle.id}`,
           data:this.newBottle,
           headers: {authorization: `Bearer ${localStorage.token}`}
         }).then(res => {
@@ -497,7 +497,7 @@ export default {
       }else if (this.buy === true && this.edit===false && this.validBottleBuy()){
         axios({
           method: 'POST',
-          url:`http://157.230.157.236/outflow/bottle`,
+          url:`http://localhost:3000/outflow/bottle`,
           data:{newBottleBuy:this.newBottleBuy,newPrice:this.newBottle.price},
           headers: {authorization: `Bearer ${localStorage.token}`}
         }).then(res => {
@@ -532,7 +532,7 @@ export default {
     },
    // getBreweryName(idBrewery){
    //   axios({
-   //    url:`http://157.230.157.236/brewery/${idBrewery}`,
+   //    url:`http://localhost:3000/brewery/${idBrewery}`,
    //     headers: {authorization: `Bearer ${localStorage.token}`}
    //   })
    //   .then(response =>{
@@ -544,7 +544,7 @@ export default {
    // },
     getBreweries(){
       axios({
-        url:'http://157.230.157.236/brewery',
+        url:'http://localhost:3000/brewery',
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
       .then(response =>{
@@ -554,7 +554,7 @@ export default {
     },
     getBottleBuys(){
       axios({
-        url:'http://157.230.157.236/bottle/buy',
+        url:'http://localhost:3000/bottle/buy',
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
       .then(response =>{
@@ -577,7 +577,7 @@ export default {
        this.$modal.hide('delete');
       axios({
         method: 'delete',
-        url:`http://157.230.157.236/bottle/${idBottle}`,
+        url:`http://localhost:3000/bottle/${idBottle}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
       .then(res =>
@@ -612,7 +612,7 @@ export default {
     updateBottle(idBottle){
      
       axios({
-        url:`http://157.230.157.236/bottle/${idBottle}`,
+        url:`http://localhost:3000/bottle/${idBottle}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
       .then(res => {
@@ -630,7 +630,7 @@ export default {
    
       if(!this.edit){
       axios({
-        url:`http://157.230.157.236/bottle/${idBottle}`,
+        url:`http://localhost:3000/bottle/${idBottle}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
        .then(res => {

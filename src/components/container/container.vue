@@ -114,7 +114,7 @@ export default {
    methods:{
      getContainers(){
     axios({
-      url:'http://157.230.157.236/container',
+      url:'http://localhost:3000/container',
       headers: {authorization: `Bearer ${localStorage.token}`}
       })
       .then(response =>{
@@ -128,7 +128,7 @@ export default {
     },
     showSales(idContainer){
             axios({
-                url:`http://157.230.157.236/sale/containersaled/${idContainer}`,
+                url:`http://localhost:3000/sale/containersaled/${idContainer}`,
                 headers: {authorization: `Bearer ${localStorage.token}`}
                 })
             .then(response =>{
@@ -141,7 +141,7 @@ export default {
         },
     getSizes() {
       axios({
-        url:'http://157.230.157.236/pricize/size',
+        url:'http://localhost:3000/pricize/size',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
@@ -154,7 +154,7 @@ export default {
     },
      getContainerSizes() {
       axios({
-        url:'http://157.230.157.236/pricize/size/growler',
+        url:'http://localhost:3000/pricize/size/growler',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
@@ -173,7 +173,7 @@ export default {
         console.log(this.newContainer)
       axios({
         method:'POST',
-        url:'http://157.230.157.236/container',
+        url:'http://localhost:3000/container',
         data:this.newContainer,
         headers: {authorization: `Bearer ${localStorage.token}`}
 
@@ -201,7 +201,7 @@ export default {
       }else{
         axios({
           method:'PUT',
-          url:`http://157.230.157.236/container/${this.newContainer.id}`,
+          url:`http://localhost:3000/container/${this.newContainer.id}`,
           data:this.newContainer,
           headers: {authorization: `Bearer ${localStorage.token}`}
         }).then(res => {
@@ -229,7 +229,7 @@ export default {
     },
     updateContainer(idContainer){
       axios({
-        url:`http://157.230.157.236/container/${idContainer}`,
+        url:`http://localhost:3000/container/${idContainer}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
       .then(res => {

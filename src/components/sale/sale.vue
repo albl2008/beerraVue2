@@ -266,7 +266,7 @@ export default {
   methods: {
     getSales() {
       axios({
-        url: "http://157.230.157.236/sale",
+        url: "http://localhost:3000/sale",
         headers: { authorization: `Bearer ${localStorage.token}` }
       })
         .then(response => {
@@ -279,7 +279,7 @@ export default {
     },
     getGrowler(idSale) {
       axios({
-        url: `http://157.230.157.236/sale/growlers/${idSale}`,
+        url: `http://localhost:3000/sale/growlers/${idSale}`,
         headers: { authorization: `Bearer ${localStorage.token}` }
       })
         .then(response => {
@@ -297,7 +297,7 @@ export default {
     },
     getPints(idSale) {
       axios({
-        url: `http://157.230.157.236/sale/pints/${idSale}`,
+        url: `http://localhost:3000/sale/pints/${idSale}`,
         headers: { authorization: `Bearer ${localStorage.token}` }
       })
         .then(response => {
@@ -315,7 +315,7 @@ export default {
     },
     getOther(idSale) {
       axios({
-        url: `http://157.230.157.236/sale/other/${idSale}`,
+        url: `http://localhost:3000/sale/other/${idSale}`,
         headers: { authorization: `Bearer ${localStorage.token}` }
       })
         .then(response => {
@@ -333,7 +333,7 @@ export default {
     },
     getBottles(idSale) {
       axios({
-        url: `http://157.230.157.236/sale/bottles/${idSale}`,
+        url: `http://localhost:3000/sale/bottles/${idSale}`,
         headers: { authorization: `Bearer ${localStorage.token}` }
       })
         .then(response => {
@@ -351,7 +351,7 @@ export default {
     },
     getContainers(idSale) {
       axios({
-        url: `http://157.230.157.236/sale/containers/${idSale}`,
+        url: `http://localhost:3000/sale/containers/${idSale}`,
         headers: { authorization: `Bearer ${localStorage.token}` }
       })
         .then(response => {
@@ -370,7 +370,7 @@ export default {
     deleteSale() {
       axios({
         method: "DELETE",
-        url: `http://157.230.157.236/sale/${this.idSale}`,
+        url: `http://localhost:3000/sale/${this.idSale}`,
         headers: { authorization: `Bearer ${localStorage.token}` }
       })
         .then(response => {

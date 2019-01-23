@@ -78,7 +78,7 @@ export default {
         this.litresForBrewery()
         axios({
             method: 'get',
-            url: 'http://157.230.157.236/',
+            url: 'http://localhost:3000/',
             headers: {authorization: `Bearer ${localStorage.token}`}
         }).then( response => {
             if(response.data.user){
@@ -134,7 +134,7 @@ export default {
         },
            getSales(){
             axios({
-                url:'http://157.230.157.236/sale/salesformonth',
+                url:'http://localhost:3000/sale/salesformonth',
                 headers: {authorization: `Bearer ${localStorage.token}`}
                 })
             .then(response =>{
@@ -152,7 +152,7 @@ export default {
         },
         typesForMonth(){
             axios({
-                 url:'http://157.230.157.236/sale/typesformonth',
+                 url:'http://localhost:3000/sale/typesformonth',
                  headers: {authorization: `Bearer ${localStorage.token}`}
             }).then(response => {
                     console.log(response)
@@ -169,7 +169,7 @@ export default {
         },
         litresForMonth(){
             axios({
-                url:'http://157.230.157.236/sale/litresformonth',
+                url:'http://localhost:3000/sale/litresformonth',
                 headers: {authorization: `Bearer ${localStorage.token}`}
                 })
             .then(response =>{
@@ -203,7 +203,7 @@ export default {
         },
         litresForBrewery(){
                 axios({
-                    url: 'http://157.230.157.236/sale/litresforbrewery',
+                    url: 'http://localhost:3000/sale/litresforbrewery',
                     headers: {authorization: `Bearer ${localStorage.token}`}
                 }).then(response => {
                    

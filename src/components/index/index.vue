@@ -13,10 +13,10 @@
           <a href="#precios">Planes</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="http://157.230.154.101/#/signup">Registrarse</a>
+          <a href="http://localhost:8080/#/signup">Registrarse</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="http://157.230.154.101/#/signin">Ingresar</a>
+          <a href="http://localhost:8080/#/signin">Ingresar</a>
         </li>
       </ol>
     </nav>
@@ -42,7 +42,7 @@
           <p class="lead">
             <a
               class="btn btn-outline-light btn-lg"
-              href="http://157.230.154.101/#/signup"
+              href="http://localhost:8080/#/signup"
               role="button"
             >Registrarse</a>
           </p>
