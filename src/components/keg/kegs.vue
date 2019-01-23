@@ -263,6 +263,7 @@ export default {
       })
         .then(response => {
           console.log(response)
+       
           this.kegs = response.data.Kegs
 
         }).catch(e => {
@@ -273,6 +274,7 @@ export default {
     addKeg() {
       if(this.validKeg()){
       if (this.edit === false) {
+           console.log(this.storage.load)
           this.storage.load = true
         axios({
             method:'POST',
@@ -290,7 +292,9 @@ export default {
           .catch(e => {
             this.notifyError("Barril","Error al guardar el barril")
           })
-                 this.storage.load = false
+                
+          this.storage.load = false
+            console.log(this.storage.load)
       } else {
         axios({
           method: 'PUT',

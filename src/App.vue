@@ -6,7 +6,7 @@
         <li class="nav-item">
           <center class="centerC">
             <a id class="nav-link" href="http://localhost:8080/#/">
-            <h1>{{storage.load}}</h1>
+         
               <img v-if="!storage.load" class="isonav" src="./beerraisol.png">
             <img v-if="storage.load" class="isonav" src="./assets/dots.svg">
               <span class="sr-only">(current)</span>
@@ -144,7 +144,7 @@ export default {
    
     this.checkIfAuthorized();
     this.isLogged = localStorage.token;
-    this.storage.load = true
+    
   },
   data() { counter: 0
     return {

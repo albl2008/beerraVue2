@@ -9,9 +9,7 @@ import 'vuetify/dist/vuetify.min.css'
 import VModal from 'vue-js-modal'
 import persistentState from 'vue-persistent-state'
 import ReactiveStorage from "vue-reactive-localstorage";
-const initialState = {
-  load: false
-};
+
 import Chart from 'vue2-frappe'
 
 Vue.use(Chart)
