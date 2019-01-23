@@ -309,6 +309,7 @@ export default {
           console.log(e.data)
           this.notifyError("Barril","Error al modificar barril ")
         })
+
       }
       }
     },

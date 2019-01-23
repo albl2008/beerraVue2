@@ -6,8 +6,8 @@
         <li class="nav-item">
           <center class="centerC">
 
-              <img v-if="!storage.load" class="isonav" src="./beerraisol.png">
-            <img v-if="storage.load" class="isonav" src="./assets/dots.svg">
+              <img v-if="storage.load" class="isonav" src="./beerraisol.png">
+            <img v-if="!storage.load" class="isonav" src="./assets/dots.svg">
 
             <a id class="nav-link" href="http://157.230.154.101/#/">
           
@@ -153,7 +153,7 @@ export default {
    
     this.checkIfAuthorized();
     this.isLogged = localStorage.token;
-    this.storage.load = true
+   
   },
   data() { counter: 0
     return {
