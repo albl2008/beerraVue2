@@ -66,7 +66,7 @@ export default {
         verify(){
             console.log(this.token)
             this.verifying =true
-            axios.post('http://localhost:3000/verify',
+            axios.post('http://157.230.157.236/verify',
             {token:this.token.token})
             .then(res =>{
                 console.log(res)
