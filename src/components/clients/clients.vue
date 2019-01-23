@@ -1,103 +1,111 @@
 <template>
   <div>
     <div id="brewery">
-      <center>
-        <h1>CLIENTES</h1>
-      </center>
-      <center>
-        <img :src="require('@/assets/beerra/clients.png')" alt class="position">
-      </center>
+      <div class="row" style="width: 50%; margin: 0 auto;  "><div class="centerhead">
+        <h1 class="h1head">Clientes</h1>
+        </div>
+        <img :src="require('@/assets/beerra/people2x.png')" alt class="underh1">
+        
+      </div>
     </div>
-    <div class="container">
+    <div class="container" style="margin-bottom: 3em;">
       <div class="row mb-3">
-        <div class="col-12 col-sm-4">
+        <div class="col-12 col-sm-3">
           <div v-if="errorMessage" class="alert alert-danger" role="alert">{{ errorMessage }}</div>
           <form v-on:submit.prevent="addClient">
             <div class="card mb-2 bg-dark">
-              <div class="card-header">
-                <center>
-                  <h3>Agregar Cliente</h3>
-                </center>
+              <div class="card-header bg-dark">
+               
+                  <h3 class="tablaHead">Agregar Cliente</h3>
+               
               </div>
-              <div class="card-body">
+              <div class="card-body" style="background: #272727; border-radius: 0.6em;">
+                
+                <label>Nombre</label>
                 <input
                   type="text"
                   class="form-control mb-1"
-                  placeholder="Nombre"
+                  placeholder=""
                   v-model="newClient.name"
                   required
                 >
+                 <label>DNI</label>
                 <input
                   type="text"
                   class="form-control mb-3"
-                  placeholder="DNI"
+                  placeholder=""
                   v-model="newClient.dni"
                   required
                 >
+                 <label>Teléfono</label>
                 <input
                   type="text"
                   class="form-control mb-3"
-                  placeholder="Telefono"
+                  placeholder=" "
                   v-model="newClient.tel"
                   required
                 >
                 <template v-if="edit === false">
-                  <div class="col-12 mb-3">
-                    <button class="btn btn-outline-success btn-block">AGREGAR</button>
+                  <div class="mb-3">
+                    <button style="width: 75px; " class="btn btn-outline-success btn-block">Agregar</button>
                   </div>
                 </template>
                 <template v-else>
-                  <div class="col-12 mb-3">
-                    <button class="btn btn-outline-success btn-block">ACTUALIZAR</button>
+                  <div class=" mb-3">
+                    <button style="width: 85px" class="btn btn-outline-primary btn-block">Actualizar</button>
                   </div>
                 </template>
               </div>
             </div>
           </form>
-          <template v-if="contador>0">
+         
+        </div>
+
+        <div class="col-12 col-md-9">
+          <div class="card bg-dark">
+            <div class="card-header bg-dark">
+               <template v-if="contador>0">
             <div class="sticky-top">
-              <div class="breadcrumb bg-warning">
-                <center>
-                  <h3>Litros comprados:
-                    <span class="badge-pill badge-dark">{{contador}}</span>
+              <div class="bg-dark">
+                
+                  <h3 class="tablaHead">Litros comprados:
+                    <span class="">{{contador}}<span class="litros"> l</span></span>
                   </h3>
-                </center>
+                
               </div>
             </div>
           </template>
           <template v-else-if="contador==0">
             <div class="sticky-top">
-              <div class="breadcrumb bg-warning">
-                <center>
-                  <h3>Presione
-                    <i class="material-icons badge-pill bg-dark down">shutter_speed</i> del cliente
+              <div class="bg-dark">
+            
+                  <h3 class="tablaHead">Presione el contador del cliente   <small style="
+                  margin-left: 1.6em;
+                  color: gray;">(botón amarillo)</small>
                   </h3>
-                </center>
+                <i class="material-icons" style="position: absolute;
+                 color: white;
+                  z-index: 999;
+                  margin-left: 13.6em;
+                  top: -0.1em;">shutter_speed</i>
               </div>
             </div>
           </template>
-        </div>
-
-        <div class="col-12 col-md-8">
-          <div class="card">
-            <div class="card-header bg-dark">
-              <center>
-                <h3>Clientes</h3>
-              </center>
+                
+              
             </div>
-            <div class="card-body">
-              <table class="table">
-                <thead class="thead-dark">
+            <div class="card-body" style="background: #272727; border-radius: 0.6em;">
+              <table class="tabla table">
+                <thead class="">
                   <th scope="col">Avatar</th>
-                  <th scope="col">Nombre</th>
+                  <th class="" scope="col">Nombre</th>
                   <th scope="col">DNI</th>
-                  <th scope="col">Telefono</th>
-                  <th scope="col">Contador</th>
-                  <th scope="col">Eliminar</th>
-                  <th scope="col">Editar</th>
+                  <th scope="col">Teléfono</th>
+                  <th style="width: 190px;" scope="col">Opciones</th>
+          
                 </thead>
                 <tbody>
-                  <tr v-for="client in clients">
+                  <tr v-for="client in clients" class="trHigh">
                     <th>
                       <canvas
                         id="identicon"
@@ -107,33 +115,37 @@
                         class="img-responsive img-circle"
                       ></canvas>
                     </th>
-                    <td>{{client.name}}</td>
-                    <th>{{client.dni}}</th>
-                    <th>{{client.tel}}</th>
-                    <td>
+                    <td class="nowrap" style="max-width: 200px; width: 200px !important; font-family: 'Roboto', sans-serif;">{{client.name}}</td>
+                    <th class="nowrap" style="max-width: 150px; width: 150px !important; 
+                    font-family: 'Roboto', sans-serif !important;
+                    font-weight: normal;">{{client.dni}}</th>
+                    <th style="font-family: 'Roboto', sans-serif !important;
+                    ">{{client.tel}}</th>
+                    <div class="" style="width: 10%;">
+                    <td style="width: 2%;">
                       <button
-                        class="btn btn-outline-warning btn-xs"
+                        class="btn btn-outline-warning btn-sm fix disableBorder"
                         v-on:click="counterLitres(client._id)"
                       >
-                        <i class="material-icons">shutter_speed</i>
+                        <i class="material-icons resize">shutter_speed</i>
                       </button>
                     </td>
                     <td>
                       <button
-                        class="btn btn-outline-danger btn-xs"
+                        class="btn btn-outline-danger btn-sm fix disableBorder"
                         v-on:click="showModal(client._id)"
                       >
-                        <i class="material-icons">delete</i>
+                        <i class="material-icons resize">clear</i>
                       </button>
                     </td>
                     <td>
                       <button
-                        class="btn btn-outline-primary btn-xs"
+                        class="btn btn-outline-primary btn-sm fix disableBorder"
                         v-on:click="updateClient(client._id)"
                       >
-                        <i class="material-icons">edit</i>
+                        <i class="material-icons resize">edit</i>
                       </button>
-                    </td>
+                    </td></div>
                   </tr>
                 </tbody>
               </table>
@@ -143,14 +155,16 @@
       </div>
 
       <modal name="delete" height="auto">
-        <div class="container bg-dark">
-          <div class="breadcrumb bg-warning">
-            <h5 class>¿Esta seguro que desea eliminar el cliente?</h5>
+        <div class="container bg-dark card tabla  " style="background: rgb(34, 34, 34) !important;">
+          <div class="">
+            <center>
+            <h5 class="tablaHead" style="margin-bottom: 0.7em;">¿Esta seguro que desea eliminar el cliente?</h5></center>
           </div>
 
           <div class="input-group-pretend mb-3">
-            <button class="btn btn-success" v-on:click="deleteClient(idClient)">Aceptar</button>
-            <button class="btn btn-danger" v-on:click="hideModal()">Cancelar</button>
+            <center>
+            <button class="btn btn-outline-success" v-on:click="deleteClient(idClient)">Aceptar</button>
+            <button class="btn btn-outline-danger" v-on:click="hideModal()">Cancelar</button></center>
           </div>
         </div>
       </modal>
@@ -381,8 +395,17 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .down {
   margin-top: 10px;
+}
+
+.btn-outline-warning{
+  background: #1f1f1f;
+}
+
+.btn-outline-warning:hover{
+  color: #1f1f1f;
+  background: #ffc107;
 }
 </style>

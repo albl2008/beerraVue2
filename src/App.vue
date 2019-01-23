@@ -5,8 +5,13 @@
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <center class="centerC">
+
+              <img v-if="!storage.load" class="isonav" src="./beerraisol.png">
+            <img v-if="storage.load" class="isonav" src="./assets/dots.svg">
+
             <a id class="nav-link" href="http://157.230.154.101/#/">
-              <img class="isonav" src="./beerraisol.png">
+          
+
               <span class="sr-only">(current)</span>
             </a>
           </center>
@@ -34,7 +39,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://157.230.154.101/#/brewery">Cerveceria
+
+            <a class="nav-link" href="http://157.230.154.101/#/brewery">Cervecerías
+
               <img :src="require('@/assets/navbar/cerveceria.png')" alt class>
             </a>
           </li>
@@ -54,12 +61,16 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://157.230.154.101/#/buy">Pago
+
+            <a class="nav-link" href="http://157.230.154.101/#/buy">Pagos
+
               <img :src="require('@/assets/navbar/pago.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://157.230.154.101/#/pricize">Configuracion
+
+            <a class="nav-link" href="http://157.230.154.101/#/pricize">Configuración
+
               <img :src="require('@/assets/navbar/config.png')" alt class>
             </a>
           </li>
@@ -99,11 +110,9 @@
         <vue-glide>
           <vue-glide-slide></vue-glide-slide>
         </vue-glide>
-
       </transition>
         <notifications group="foo" position="bottom right" width="450px"/>
      
-
       <div class="sticky-footer footer">
         <p class="footP">
           <!--<img class="footerImg" src="./beerrazeiv0.png">-->
@@ -139,16 +148,24 @@ $(function() {
 });
 
 export default {
+
   created() {
-    console.log("hola");
+   
     this.checkIfAuthorized();
     this.isLogged = localStorage.token;
+    this.storage.load = true
   },
   data() { counter: 0
     return {
       active: null,
-      isLogged: localStorage.token
+      isLogged: localStorage.token,
+     dots: ''
     };
+  },
+  watch:{
+    dots:{
+      dots:localStorage.getItem('load')
+    }
   },
   methods: {
     checkIfAuthorized() {
@@ -159,13 +176,9 @@ export default {
         error => {
           console.log(error);
           if (error.response.status == 401) {
-            let message = error.response.data;
+            let message = "El token expiro inicie sesion";
             localStorage.removeItem("token");
             this.$router.push({ path: `/signin/${message}` });
-          }
-          if(error.response.status == 403){
-            let message = error.response.data;
-            this.$router.push({ path: `/dashboard/${message}` });
           }
 
           return Promise.reject(error);
@@ -679,8 +692,11 @@ i.material-icons{
   border: none;
   font-family: 'Arial', sans-serif;
   background: #22222286;
+  border-top: none;
 }
-
+.table th{
+  border: none !important;
+}
 .precios{
   font-family: 'Roboto', sans-serif !important;
   
@@ -821,5 +837,48 @@ tr:nth-child(even) {
 
 .roboto{
   font-family: 'Roboto', sans-serif;
+}
+
+.card.nuevacerveceria{
+  background: #272727 !important;
+}
+
+.trHigh:hover{
+background: rgba(255, 255, 255, 0.063) !important;
+}
+
+.vacio{
+  background: #1f1f1f !important;
+  color: #FD9326 !important; 
+}
+
+.vacio:hover{
+ background: #FD9326 !important;
+ color: #1f1f1f !important;
+}
+
+@media screen and (max-width: 768px){
+  nav{
+    display: none;
+   
+  }
+
+  body{
+   width: 100% !important;
+  }
+
+  .container{
+
+  }
+
+
+  #app{
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .footer{
+    display: none;
+  }
 }
 </style>

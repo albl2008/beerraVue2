@@ -1,30 +1,34 @@
 <template>
 <div>
  <div id="botellas">
-          <center><h1>BOTELLAS</h1></center>
-          <center><img :src="require('@/assets/sections/botellas.png')" alt=""></center>
+         <div class="row" style="width: 50%; margin: 0 auto; "><div class="centerhead">
+        <h1 class="h1head">Botellas</h1>
+        </div>
+        <img :src="require('@/assets/beerra/bottlee2x.png')" alt class="underh1">
+        
+      </div>
          
  </div>   
-    <div class="container">
+    <div class="container" style="margin-bottom: 3em;">
       <div class="row">
-        <div class="col-12 col-sm-12  col-md-4">
+        <div class="col-12 col-sm-12  col-md-3">
           <div v-if="errorMessage" class="alert alert-danger" role="alert">
             {{ errorMessage }}
           </div>
           <div class="card bg-dark">
-            <div class="card-header">
+            <div class="card-header bg-dark">
               <template v-if="edit === false && buy===false">
-                   <div class="card-header"><h3>AGREGAR BOTELLA</h3></div>
+                  <h3 class="tablaHead">Nueva</h3>
                   
               </template>
                 <template v-else-if="edit === true && buy===false">
-                  <div class="card-header"><h3>ACTUALIZAR BOTELLA</h3>
-                  <center><button class="btn btn-outline-warning btn-sm" v-on:click="agregar()"><i class="material-icons">add_circle_outline</i></button></center></div>
+                  <h3 class="tablaHead">Actualizar</h3>
+                  <center><button class="btn btn-outline-warning btn-sm fix disableBorder yell" v-on:click="agregar()"><i class="material-icons resize">add_circle_outline</i></button></center>
                    
               </template>
               <template v-else-if="edit === false && buy===true">
-                  <div class="card-header"><h3>COMPRAR BOTELLAS</h3>
-                  <center><button class="btn btn-outline-warning btn-sm" v-on:click="agregar()"><i class="material-icons">add_circle_outline</i></button></center></div>
+                  <h3 class="tablaHead">Comprar</h3>
+                  <center><button style="" class="btn btn-outline-warning btn-sm fix disableBorder yell" v-on:click="agregar()"><i class="material-icons resize">add_circle_outline</i></button></center>
                   
               </template>
 
@@ -32,30 +36,33 @@
            
           
                <template v-if="edit === false && buy === false">  
-                  <div class="card-body">
+                  <div class="card-body" style="background: #272727;">
                            <form v-on:submit.prevent="addBottle" >
           
           <div class="input-group-pretend mb-4">
               <label>Estilo</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="Estilo" required>
-              <label>Fabrica</label>
+            <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="" required>
+              <label>Fábrica</label>
             <select v-model="newBottle.brewery" class="custom-select mb-1" required>
               <option value="" disabled hidden>Brewery</option>
-              <option v-for="brewery in breweries" v-bind:value="brewery._id">
+              <option v-for="brewery in breweries" v-bind:value="brewery._id" v-bind:key="brewery._id">
                 {{ brewery.name }}
               </option>
             </select>
-              <label>Tamaño (en L)</label> 
-            <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" required>
-              <label>IBU</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.ibu" placeholder="IBU" required>
-              <label>Alcohol</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.alcohol" placeholder="Alcohol" required>
+              <label>Tamaño <small>Litros</small></label> 
+              
+            <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="" required>
+            
+              <label>IBU</label>  <label style="float: right; text-align: left;">Alcohol</label>
+              <div class="ibuandalco">
+            <input  style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newBottle.ibu" placeholder="" required>
+            <input style="width: 48%; float: right;" type="text" class="form-control mb-1" v-model="newBottle.alcohol" placeholder="" required>
+              </div>
             
 
           </div>
             
-                <button class="btn btn-outline-warning btn-block">AGREGAR</button>
+                <button class="btn btn-outline-success" style="width: 75px; margin-top: 2em;">Agregar</button>
             
 
         </form>
@@ -64,35 +71,38 @@
         </template>
          
         <template v-if="edit=== true && buy === false">
-           <div class="card-body">
+           <div class="card-body" style="background: #272727; ">
             <form v-on:submit.prevent="addBottle" >
 
           <div class="input-group-pretend mb-4">
               <label>Estilo</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="Estilo" required>
+            <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="" required>
               <label>Fabrica</label>
             <select v-model="newBottle.brewery" class="custom-select mb-1" required>
               <option value="" disabled hidden>Brewery</option>
-              <option v-for="brewery in breweries" v-bind:value="brewery._id">
+              <option v-for="brewery in breweries" v-bind:value="brewery._id" v-bind:key="brewery._id">
                 {{ brewery.name }}
               </option>
             </select>
-              <label>Stock Actual</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="Stock" disabled> 
             <template  v-if="newBottle.price !== undefined ">
             <label>Precio de Venta</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="Precio" required>
+            <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="" required>
             </template>  
-              <label>Tamaño (en L)</label> 
-            <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" required>
-              <label>IBU</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.ibu" placeholder="IBU" required>
-              <label>Alcohol</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.alcohol" placeholder="Alcohol" required>
+              <label>Stock <small>Actual</small></label><label style="float: right; text-align: left;">
+                Tamaño <small>Litros</small></label>
+<div class="">
+            <input style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="" disabled> 
+            <input style="width: 48%; float: right;" type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="" required>
+</div>
+            <label>IBU</label>  <label style="float: right; text-align: left;">Alcohol</label>
+            <div class="">
+            <input style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newBottle.ibu" placeholder="" required>
             
+            <input style="width: 48%; float: right;" type="text" class="form-control mb-1" v-model="newBottle.alcohol" placeholder="" required>
+            </div>
 
           </div>
-             <button class="btn btn-outline-primary btn-block" >ACTUALIZAR</button>
+             <button class="btn btn-outline-primary" style="width: 85px; margin-top: 2em;">Actualizar</button>
 
         </form>
 
@@ -102,28 +112,33 @@
             </template>
        
        <template v-if="edit === false && buy===true">  
-          <div class="card-body">
+          <div class="card-body" style="background: #272727;">
 
                         <form v-on:submit.prevent="addBottle" >
 
           <div class="input-group-pretend mb-4">
               <label>Estilo</label>
             <input type="text" class="form-control mb-1" v-model="newBottle.beer" placeholder="Beer" disabled>
-              <label>Stock Actual</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="Stock" disabled> 
-              <label>Tamaño (en L)</label> 
-            <input type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" disabled>
-              <label>Fabrica</label>
+              <label>Stock <small>Actual</small></label><label style="float: right; text-align: left;">Tamaño<small>
+                Litros</small></label> 
+                <div class="">
+            <input  style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newBottle.stock" placeholder="Stock" disabled> 
+              
+            <input style="width: 48%; float: right;" type="text" class="form-control mb-1" v-model="newBottle.size" placeholder="Tamaño" disabled>
+                </div>
+              <label>Fábrica</label>
             <select v-model="newBottle.brewery" class="custom-select mb-1" disabled>
               <option value="" disabled hidden>Brewery</option>
-              <option v-for="brewery in breweries" v-bind:value="brewery._id">
+              <option v-for="brewery in breweries" v-bind:value="brewery._id" v-bind:key="brewery._id">
                 {{ brewery.name }}
               </option>
             </select>
-              <label>Cantidad</label>
-            <input type="text" class="form-control mb-1" v-model="newBottleBuy.quantity" placeholder="Cantidad" required>
-              <label>Costo Unitario</label>
-            <input type="text" class="form-control mb-1" v-model="newBottleBuy.unityPrice" placeholder="Costo" required> 
+
+              <label>Cantidad</label><label style="float: right; text-align: left;">Costo<small> Unitario</small></label>
+              <div>
+            <input style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newBottleBuy.quantity" placeholder="" required>
+            <input style="width: 48%; float: right;" type="text" class="form-control mb-1" v-model="newBottleBuy.unityPrice" placeholder="" required> 
+              </div>
             <template v-if="newBottleBuy.quantity && newBottleBuy.unityPrice">
                <label>Total</label>
              <template v-show="edit">
@@ -132,14 +147,15 @@
              </template>
             <input type="text" class="form-control mb-1" v-model="newBottleBuy.totalPrice" placeholder="Total" disabled required>
             </template>
-            <label>Precio de Venta</label>
-            <input type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="Precio" required>
-              <br>
-            <code>Fecha: {{format(newBottleBuy.date)}}</code>                
-              <input-date v-model="newBottleBuy.date"></input-date>
-          </div>
-          
-                <button class="btn btn-outline-primary btn-block" >COMPRAR</button>
+            <label>P<small>recio Venta</small></label>   <code style="float: right; text-align: left; margin-top: 0.8em;" >Fecha: {{format(newBottleBuy.date)}}</code>   
+            <div>
+            <input style="width: 34%; float: left;" type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="" required>
+            
+                      
+              <input-date style="width: 62%; float: right; height: 33px" v-model="newBottleBuy.date"></input-date>
+          </div></div>
+          </br>
+                <button class="btn btn-outline-primary" style="width: 78px; margin-top: 2em;">Comprar</button>
             
 
         </form>
@@ -152,34 +168,34 @@
           </div>
  </div>
       
-          <div class="col-12 col-sm-12 col-md-8">
-            <div class="card ">
+          <div class="col-12 col-sm-12 col-md-9">
+            <div class="card " style="background: #272727;">
               <div class="card-header bg-dark">
-                <h3 class="">LISTADO DE BOTELLAS</h3>
+                <h3 class="tablaHead">Botellas</h3>
               </div>
               <div class="card-body">
                 <table class="table ">
               <thead>
-              <th>Fabrica</th>
+              <th>Fábrica</th>
               <th>Cerveza</th>
               <th>Stock</th>
               <th>Tamaño</th>
               <th>Precio</th>
-              <th>Comprar</th>
-              <th>Editar</th>
-              <th>Eliminar</th>
+            <th>Opciones<small> comprar / editar / eliminar</small></th>
+
               </thead>
               <tbody>
-                <tr v-for="bottle in bottles" >
-                  <td>{{bottle.brewery.name}}</td>
-                  <td>{{bottle.beer}}</td>
+                <tr class="trHigh" v-for="bottle in bottles" v-bind:key="bottle._id" >
+                  <td style="max-width: 200px; width: 200px;" class="nowrap">{{bottle.brewery.name}}</td>
+                  <td style="max-width: 160px; width: 160px;" class="nowrap">{{bottle.beer}}</td>
                   <td>{{bottle.stock}}</td>
-                  <td>{{bottle.size}}</td>
-                  <td>{{bottle.price}}</td>
-                  <td><button class="btn btn-outline-primary btn-sm" v-on:click="buyBottle(bottle._id)"><i class="material-icons">attach_money</i></button></td>
-                  <td><button class="btn btn-outline-primary btn-sm" v-on:click="updateBottle(bottle._id)"><i class="material-icons">edit</i></button></td>
-                  <td><button class="btn btn-outline-danger btn-sm" v-on:click="showModal(bottle._id)"><i class="material-icons">delete</i></button></td>
-                 
+                  <td>{{bottle.size}}<span class="litros"> l</span></td>
+                  <td>$ {{bottle.price}}</td>
+                  <div id="options" class="opacityOut" style="width:">
+                  <td><button class="btn btn-outline-primary fix disableBorder btn-sm" v-on:click="buyBottle(bottle._id)"><i class="material-icons resize">attach_money</i></button></td>
+                  <td><button class="btn btn-outline-primary fix disableBorder btn-sm" v-on:click="updateBottle(bottle._id)"><i class="material-icons resize">edit</i></button></td>
+                  <td><button class="btn btn-outline-danger fix disableBorder btn-sm" v-on:click="showModal(bottle._id)"><i class="material-icons resize  ">clear</i></button></td>
+                  </div>
                 </tr>
               </tbody>
             </table>
@@ -188,30 +204,30 @@
       </div>
  </div><br>   
  <div class="row">
-<div class="col-12 col-sm-12 col-md-8">
+<div class="col-12 col-sm-12 col-md-8" style="margin-top: 1em;">
   
-            <div class="card ">
+            <div class="card " style="background: #272727;">
               <div class="card-header bg-dark">
-                <h3 class="">COMPRAS DE BOTELLAS</h3>
+                <h3 class="tablaHead">Compras de Botellas</h3>
               </div>
               <div class="card-body">
                 <table class="table ">
               <thead>
-              <th>Fabrica</th>
+              <th>Fábrica</th>
               <th>Cerveza</th>
               <th>Tamaño</th>
               <th>Cantidad</th>
-              <th>Costo Unitario</th>
+              <th>Costo</th>
               <th>Fecha</th>
               
               </thead>
               <tbody>
-                <tr v-for="bottleBuy in bottleBuys" >
-                  <td>{{bottleBuy.bottle.brewery.name}}</td>
-                  <td>{{bottleBuy.bottle.beer}}</td>
-                  <td>{{bottleBuy.bottle.size}}</td>
+                <tr class="trHigh" v-for="bottleBuy in bottleBuys" v-bind:key="bottleBuy._id">
+                  <td style="max-width: 200px; width: 200px;" class="nowrap">{{bottleBuy.bottle.brewery.name}}</td>
+                  <td style="max-width: 140px; width: 140px;" class="nowrap"> {{bottleBuy.bottle.beer}}</td>
+                  <td>{{bottleBuy.bottle.size}}<span class="litros"> l</span></td>
                   <td>{{bottleBuy.quantity}}</td>
-                  <td>{{bottleBuy.unityPrice}}</td>
+                  <td>$ {{bottleBuy.unityPrice}}</td>
                   <td>{{format(bottleBuy.date)}}</td>
                  
                 </tr>
@@ -220,10 +236,10 @@
               </div>
             </div>            
      
-    <modal name="delete" height="auto">
-        <div class="container bg-dark ">
-          <div class="breadcrumb bg-warning">
-              <h5 class="">¿Esta seguro que desea eliminar el Barril?</h5>
+    <!-- <modal name="delete" height="auto">
+       <div class="container bg-dark card tabla" style="background: rgb(34, 34, 34) !important;">
+          <div class="">
+              <h5 class="tablaHead">¿Esta seguro que desea eliminar el Barril?</h5>
           </div>
           
             <div class="input-group-pretend mb-3">
@@ -232,28 +248,28 @@
             </div>
             
         </div>
-      </modal>
+      </modal> -->
 </div>
-<div class="col-md-4">
+<div class="col-md-4" style="margin-top: 1em;">
   
-            <div class="card ">
+            <div class="card " style="background: #272727;">
               <div class="card-header bg-dark">
-                <h3 class="">INFORMACION ADICIONAL</h3>
+                <h3 class="tablaHead">Información adicional</h3>
               </div>
               <div class="card-body">
                 <table class="table ">
               <thead>
-              <th>Fabrica</th>
+              <th>Fábrica</th>
               <th>Cerveza</th>
               <th>IBU</th>
               <th>Alcohol</th>
               </thead>
               <tbody>
-                <tr v-for="bottle in bottles" >
-                  <td>{{bottle.brewery.name}}</td>
-                  <td>{{bottle.beer}}</td>
+                <tr class="trHigh" v-for="bottle in bottles" v-bind:key="bottle._id">
+                  <td style="max-width: 100px; width: 100px;" class="nowrap">{{bottle.brewery.name}}</td>
+                  <td style="max-width: 100px; width: 100px;" class="nowrap">{{bottle.beer}}</td>
                   <td>{{bottle.ibu}}</td>
-                  <td>{{bottle.alcohol}}</td>
+                  <td>{{bottle.alcohol}} %</td>
                   
                  
                 </tr>
@@ -268,14 +284,16 @@
       </div>
 
      <modal name="delete" height="auto">
-        <div class="container bg-dark ">
-          <div class="breadcrumb bg-warning">
-              <h5 class="">¿Esta seguro que desea eliminar la botella?</h5>
+        <div class="container card bg-dark " style="background: rgb(34, 34, 34) !important;">
+          <div class="">
+            <center>
+              <h5 class="tablaHead" style="margin-bottom: 0.5em;">¿Está seguro que desea eliminar la botella?</h5></center>
           </div>
           
             <div class="input-group-pretend mb-3">
-                  <button class="btn btn-success"  v-on:click="deleteBottle(idBottle)" >Aceptar</button>
-                  <button class="btn btn-danger" v-on:click="hideModal()">Cancelar</button>
+              <center>
+                  <button class="btn btn-outline-success"  v-on:click="deleteBottle(idBottle)" >Aceptar</button>
+                  <button class="btn btn-outline-danger" v-on:click="hideModal()">Cancelar</button></center>
             </div>
             
         </div>
@@ -733,6 +751,22 @@ notifyError(title,text){
 
 }
 </script>
-<style>
+<style scoped>
+
+.yell{
+  z-index: 999; position: absolute;
+  background: #1f1f1f;
+  top: 0.9em;
+  left: 14em;
+}
+
+.yell:hover{
+  background: #ffc107;
+  color: #1f1f1f;
+}
+
+.card-body{
+  border-radius: 0.6em;
+}
 
 </style>

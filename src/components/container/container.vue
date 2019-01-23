@@ -1,16 +1,21 @@
 <template>
-    <div class="container">
-      <div id="canillas">
-      <center><h1>ENVASES</h1></center>
-      <center><img :src="require('@/assets/sections/envases.png')" alt=""></center>
-     
+    <div>
+      <div id="envases">
+    <div class="row" style="width: 50%; margin: 0 auto; "><div class="centerhead">
+        <h1 class="h1head">Envases</h1>
+        </div>
+        <img :src="require('@/assets/beerra/envases2x.png')" alt class="underh1">
+        
     </div>
+    </div>
+    <div class="container">
+      
       <div class="row">
         
           <div class="col-12 col-sm-12 col-md-4">
-            <div class="card">
-              <div class="card-header">
-                <h3>Botellones</h3>
+            <div class="card" style="background: #272727;">
+              <div class="card-header bg-dark">
+                <h3 class="tablaHead">Botellones</h3>
               </div>
               <div class="card-body">
                 <table class="table ">
@@ -21,20 +26,20 @@
               </thead>
               <tbody>
                 <tr v-for="container in containers" >
-                  <td>{{container.size}}</td>
+                  <td>{{container.size}}<span class="litros"> l</span></td>
                   <td>{{container.stock}}</td>
-                  <td><button v-on:click="showSales(container._id)" class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
-                      data-placement="top" title="Desconectar Barril"><i class="material-icons">attach_money</i></button></td>
+                  <td style="width: 30%;"><button v-on:click="showSales(container._id)" class="btn btn-outline-danger btn-sm fix disableBorder" data-toggle="tooltip"
+                      data-placement="top" title="Desconectar Barril"><i class="material-icons resize">attach_money</i></button></td>
                 </tr>
               </tbody>
             </table>
               </div>
             </div>            
       </div>
-      <div class="col-12 col-sm-12  col-md-3">
-          <div class="card">
-            <div class="card-header">
-               <h3>Ver ventas</h3> 
+      <div class="col-12 col-sm-12  col-md-8">
+          <div class="card" style="background: #272727;">
+            <div class="card-header bg-dark">
+               <h3 class="tablaHead">Ver ventas</h3> 
             </div> 
             <template v-if="show"> 
 
@@ -54,8 +59,8 @@
                 
                 <tr v-for="sale in sales" v-bind:key="sale._id">
                   
-                  <td>{{sale.quantitySaled}}</td>
-                  <td>{{sale.totalPrice}}</td>
+                  <td>$ {{sale.quantitySaled}}</td>
+                  <td>$ {{sale.totalPrice}}</td>
                   
                   
                  
@@ -70,7 +75,7 @@
       </div>
 
     </div>
-    </div>
+    </div></div>
 
 </template>
 <script>

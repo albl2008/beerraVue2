@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <nav aria-label="breadcrumb" class="sticky-top">
+    
+    <nav aria-label="breadcrumb" class="sticky-top nav">
       <ol class="breadcrumb bg-dark card">
         <li class="breadcrumb-item">
           <a href="#funcionalidades">Funcionalidades</a>
@@ -36,7 +37,7 @@
               style="letter-spacing: 0.1em; text-transform: capitalize; color: #FB9336; 
               font-weight: bold; font-size: 29px; border: 1px solid white; padding: 3px 10px 6px 10px; 
               border-radius: 0.2em; background:  rgba(0, 0, 0, 0.042);"
-            >gratis</span> por 30 días
+            >gratis</span> por 2 semanas
           </p>
           <p class="lead">
             <a
@@ -48,6 +49,13 @@
         </div>
       </div>
     </div>
+
+    <div class="container">
+      <div class="card bg-dark">
+        <div class="subcontainer2">
+            </div>
+          </div>
+        </div>
 
     <div class="container">
       <nav id="funcionalidades" aria-label="breadcrumb">
@@ -418,6 +426,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c1c1c', end
   
 }
 
+.subcontainer2{
+  border-radius: 0.5em !important;
+  padding: 1em;
+  background: url('screenshot.png');
+  background-size: cover;
+  height: 500px;
+}
+
 .breadcrumb-item::before{
   display: none;
 }
@@ -577,5 +593,20 @@ h1.card-text{
 
 .banner{
   width: 50%;
+}
+
+@media screen and (max-width: 768px){
+ .sticky-top.nav{
+   display: none;
+ }
+
+  .subcontainer2{
+    background: url('miniscreen.png') center;
+    background-size: cover !important;
+  }
+
+.contact{
+  display: none;
+}
 }
 </style>

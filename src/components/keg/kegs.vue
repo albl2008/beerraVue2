@@ -24,7 +24,7 @@
             </template>
 
             <template v-else>
-              <div class="card-header">
+              <div class="card-header bg-dark">
                 <h3 class="tablaHead">Actualizar barril</h3>
               </div>
             </template>
@@ -47,9 +47,11 @@
                 "number">{{Object.keys(kegs).length}}</span></span> </center>
                 </template>
               </div> -->
-            <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="Estilo" required>
+              <label>Estilo</label>
+            <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="" required>
         
             <template v-if="sale === false">
+              <label>Tamaño</label>
               <select v-model="newKeg.quantity" class="custom-select mb-1" required >
                   <option class="courier" value="" disabled selected>Tamaño</option>
                   <option v-for="q in quantities" v-bind:value="q.text">
@@ -57,11 +59,11 @@
                   </option>
               </select>
             
-  <center>
+<label>Estado</label></br>
               <div v-for="s in status" class="form-check form-check-inline courier">
                 <input required type="radio"  name="status" v-on:click="changeStatus(s.value)" v-bind:value="s.value"  v-model="newKeg.sta"  class="form-check-input mb-1" >
                 <label class="roboto" style="font-size: 16px;" for="one">{{s.text}}</label>
-              </div></center>
+              </div></br>
     </template>
               
                
@@ -72,12 +74,14 @@
                     <input type="text" class="form-control mb-1" v-model="newKeg.quantitySaled" placeholder="Cantidad disponible"
                       required>
                   </template>
+<label>IBU</label>  <label style="float: right; text-align: left;">Alcohol</label>
+<div class="ibuandalco">
 
-
-
-                  <input type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="IBU" required>
-                  <input type="text" class="form-control mb-1" v-model="newKeg.alcohol" placeholder="Alcohol" required>
-
+                  <input style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="" required>
+                
+                  <input style="width: 48%; float: right;" type="text" class="form-control mb-1" v-model="newKeg.alcohol" placeholder="" required>
+</div>
+  <label>Cervecería</label>
                   <select  style="margin-bottom: 1em !important;" v-model="newKeg.brewery" class="custom-select mb-1" required >
                     <option class="courier" value="" disabled selected>Cerveceria</option>
                     <option v-for="brewery in breweries" v-bind:value="brewery._id">
@@ -85,17 +89,17 @@
                     </option>
 
                   </select>
-                  <swatches style="" class="text-center" v-model="color" :colors="colors" row-length="5" shapes="circles"
+                  <!-- <swatches style="" class="text-center" v-model="color" :colors="colors" row-length="5" shapes="circles"
                     show-border popover-to="right">
                   </swatches>
-                
+                 -->
 
                 
                   <template v-if="edit === false">
-                    <button class="btn btn-outline-success btn-block">Agregar</button>
+                    <button style="width: 33% !important; float: left;" class="btn btn-outline-success btn-block">Agregar</button>
                   </template>
                   <template v-else>
-                    <button style="margin-top:1em" class="btn btn-outline-primary btn-block">Actualizar</button>
+                    <button style="margin-top:1em; width: 37% !important; float: left;" class="btn btn-outline-primary btn-block">Actualizar</button>
                   </template>
        
               </form>
@@ -139,7 +143,7 @@
                       <td><button class="btn btn-outline-danger btn-sm fix disableBorder " v-on:click="disconnect(keg._id)"><i class="material-icons resize">power_off</i></button></td>
                     </template>
                     <template v-else>
-                      <td><button class="btn btn-outline-primary btn-sm disabled disableBorder"><i class="material-icons">power</i></button></td>
+                      <td><button class="btn btn-outline-primary btn-sm fix disabled disableBorder vacio"><i class="material-icons resize"><strong>remove_circle_outline</strong></i></button></td>
                     </template>
 </div>
                   </tr>
@@ -159,7 +163,7 @@
           <center>
             <div class="input-group-pretend mb-3" style="margin-bottom: 0 !important;">
                   <button class="btn btn-outline-success"  v-on:click="deleteKeg(idKeg)" >Aceptar</button>
-                  <button class="btn btn-outline-danger" v-on:click="hideModal()">Cancelar</button>
+                  <button class="btn btn-outline-danger" style="" v-on:click="hideModal()">Cancelar</button>
             </div></center>
             
         </div>
@@ -269,7 +273,7 @@ export default {
     addKeg() {
       if(this.validKeg()){
       if (this.edit === false) {
-
+          this.storage.load = true
         axios({
             method:'POST',
             url:'http://157.230.157.236/keg',
@@ -286,6 +290,7 @@ export default {
           .catch(e => {
             this.notifyError("Barril","Error al guardar el barril")
           })
+                 this.storage.load = false
       } else {
         axios({
           method: 'PUT',
@@ -557,7 +562,7 @@ background: rgba(255, 255, 255, 0.063);
 }
 
 .limitHeight{
-  height: 423px;
+
   /* position: static !important; */
   width: 257px !important;
 }
