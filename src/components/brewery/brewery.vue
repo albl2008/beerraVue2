@@ -233,6 +233,7 @@ watch:{
 },
 created(){
   this.getBreweries();
+      this.storage.load = false
 },
 methods:{
   addcontact(){

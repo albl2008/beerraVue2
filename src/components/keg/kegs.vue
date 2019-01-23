@@ -273,7 +273,7 @@ export default {
     addKeg() {
       if(this.validKeg()){
       if (this.edit === false) {
-
+          this.storage.load = true
         axios({
             method:'POST',
             url:'http://localhost:3000/keg',
@@ -290,6 +290,7 @@ export default {
           .catch(e => {
             this.notifyError("Barril","Error al guardar el barril")
           })
+                 this.storage.load = false
       } else {
         axios({
           method: 'PUT',
