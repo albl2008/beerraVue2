@@ -80,7 +80,7 @@ export default {
                     password:'',
                     confirmPassword:'',
                 },
-                url:'http://localhost:3000/',
+                url:process.env.ROOT_API + '',
                 token: this.$route.params.token,
                 message:''
         }
@@ -89,7 +89,7 @@ export default {
         resetPassword(){
             if(this.validPassword()){
                 console.log(this.token)
-                axios.post('http://localhost:3000/newPassword',{
+                axios.post(process.env.ROOT_API + 'newPassword',{
                     password: this.user.password,
                     token:this.token
                 }).then(response =>{
