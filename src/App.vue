@@ -149,7 +149,7 @@ $(function() {
 export default {
 
   created() {
-   
+   console.log("URL",process.env.ROOT_API)
     this.checkIfAuthorized();
     this.isLogged = localStorage.token;
     
