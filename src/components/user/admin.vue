@@ -67,7 +67,7 @@ export default {
     methods:{
         getUsers(){
             axios({
-                url:'http://localhost:3000/admin',
+                url:process.env.ROOT_API + 'admin',
                 headers: {authorization: `Bearer ${localStorage.token}`}
             }).then(response => {
                 console.log(response.data)
@@ -84,7 +84,7 @@ export default {
           
             axios({
                 method:'POST',
-                url: `http://localhost:3000/payToken/${this.idUser}`,
+                url: process.env.ROOT_API + `payToken/${this.idUser}`,
                 data: {time:this.time},
                 headers: {authorization: `Bearer ${localStorage.token}`},
                 
