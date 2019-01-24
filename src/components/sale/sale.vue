@@ -239,7 +239,7 @@
 </template>
 <script>
 import Vue from "vue";
-const moment = require("moment");
+const moment = require('moment-timezone')
 const axios = require("axios");
 export default {
   data() {
@@ -394,7 +394,7 @@ export default {
       this.$modal.hide('delete');
     },
     format(date) {
-      if (date) return moment(date).format("DD/MM/YYYY");
+      if (date) return moment(date).tz('UTC').format("DD/MM/YYYY");
       else return "";
     },
     notifyWarning(title, text) {
