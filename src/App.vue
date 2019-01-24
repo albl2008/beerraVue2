@@ -8,18 +8,18 @@
               <img v-if="!storage.load" class="isonav" src="./beerraisol.png">
             <img v-if="storage.load" class="isonav" src="./assets/dots.svg">
 
-            <a id class="nav-link" href="http://localhost:8080/#/">
+            <a id class="nav-link" v-bind:href="root">
           
 
               <span class="sr-only">(current)</span>
             </a>
           </center>
-          <!-- <center><a id="animate1" class="nav-link" href="http://localhost:8080/#/"><img class="isonav" src="./beerrazeiv0.png"><span class="sr-only">(current)</span></a></center> -->
+          <!-- <center><a id="animate1" class="nav-link" v-bind:href="process.env.ROOT +"><img class="isonav" src="./beerrazeiv0.png"><span class="sr-only">(current)</span></a></center> -->
         </li>
         <template v-if="isLogged ">
           <center>
             <li class="nav-item">
-              <a id="dashboard" class="nav-link" href="http://localhost:8080/#/dashboard">
+              <a id="dashboard" class="nav-link" v-bind:href="dashboard">
                 <i class="material-icons">dashboard</i>
               </a>
               <a id="logout" class="nav-link" v-on:click="logout()">
@@ -28,71 +28,71 @@
             </li>
           </center>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/pipes">Canillas
+            <a class="nav-link" v-bind:href="pipes">Canillas
               <img :src="require('@/assets/navbar/canilla.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/keg">Barriles
+            <a class="nav-link" v-bind:href="keg">Barriles
               <img :src="require('@/assets/navbar/barriles.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
 
-            <a class="nav-link" href="http://localhost:8080/#/brewery">Cervecerías
+            <a class="nav-link" v-bind:href="brewery">Cervecerías
 
               <img :src="require('@/assets/navbar/cerveceria.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/clients">Clientes
+            <a class="nav-link" v-bind:href="clients">Clientes
               <img :src="require('@/assets/navbar/clients.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/bottle">Botellas
+            <a class="nav-link" v-bind:href="bottle">Botellas
               <img :src="require('@/assets/navbar/bottles.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/sale">Ventas
+            <a class="nav-link" v-bind:href="sale">Ventas
               <img :src="require('@/assets/navbar/ventas.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
 
-            <a class="nav-link" href="http://localhost:8080/#/buy">Pagos
+            <a class="nav-link" v-bind:href="buy">Pagos
 
               <img :src="require('@/assets/navbar/pago.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
 
-            <a class="nav-link" href="http://localhost:8080/#/pricize">Configuración
+            <a class="nav-link" v-bind:href="pricize">Configuración
 
               <img :src="require('@/assets/navbar/config.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/container">Envases
+            <a class="nav-link" v-bind:href="container">Envases
               <img :src="require('@/assets/navbar/container.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/outflow">Compras
+            <a class="nav-link" v-bind:href="outflow">Compras
               <img :src="require('@/assets/navbar/buy.png')" alt class>
             </a>
           </li>
         </template>
         <template v-else>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/signin">Ingresar
+            <a class="nav-link" v-bind:href="signin">Ingresar
               <i class="material-icons">account_circle</i>
             </a>
-            <!--  <a class="nav-link " href="http://localhost:8080/#/signin">Login <i class="material-icons">account_circle</i></a> -->
+            <!--  <a class="nav-link " v-bind:href="process.env.ROOT +signin">Login <i class="material-icons">account_circle</i></a> -->
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/signup">Registrarse
+            <a class="nav-link" v-bind:href="signup">Registrarse
               <i class="material-icons">person_add</i>
             </a>
           </li>
@@ -149,7 +149,7 @@ $(function() {
 export default {
 
   created() {
-   console.log("URL",process.env.ROOT_API)
+  
     this.checkIfAuthorized();
     this.isLogged = localStorage.token;
     
@@ -158,7 +158,25 @@ export default {
     return {
       active: null,
       isLogged: localStorage.token,
-     dots: ''
+     dots: '',
+      dashboard: process.env.ROOT + 'dashboard',
+      root: process.env.ROOT,
+      pipes: process.env.ROOT +'pipes',
+      keg: process.env.ROOT +'keg',
+      brewery: process.env.ROOT +'brewery',
+      clients: process.env.ROOT +'clients',
+      bottle: process.env.ROOT +'bottle',
+      sale:process.env.ROOT +'sale',
+      buy:process.env.ROOT +'buy',
+      pricize: process.env.ROOT +'pricize',
+      container: process.env.ROOT +'container',
+      outflow: process.env.ROOT +'outflow',
+      signin: process.env.ROOT +'signin',
+      signup: process.env.ROOT +'signup'
+
+
+
+
     };
   },
   watch:{

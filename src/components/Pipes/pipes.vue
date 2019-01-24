@@ -479,7 +479,7 @@ export default {
   methods:{
     getClients(){
     axios({
-      url:'http://localhost:3000/clients',
+      url:process.env.ROOT_API + 'clients',
       headers: {authorization: `Bearer ${localStorage.token}`}
     })
     .then(res=>{
@@ -494,7 +494,7 @@ export default {
      getKegs() {
        this.timeout = false
       axios({
-        url:'http://localhost:3000/keg/kegConnected',
+        url:process.env.ROOT_API + 'keg/kegConnected',
         headers: {authorization: `Bearer ${localStorage.token}`}
         })
         .then(response => {
@@ -508,7 +508,7 @@ export default {
     },
     getBottles(){
       axios({
-        url:'http://localhost:3000/bottle',
+        url:process.env.ROOT_API + 'bottle',
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
       .then(response =>{
@@ -521,7 +521,7 @@ export default {
     },
      getPrices() {
       axios({
-        url:'http://localhost:3000/pricize/price',
+        url:process.env.ROOT_API + 'pricize/price',
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
         .then(response => {
@@ -534,7 +534,7 @@ export default {
     },
      getSizes() {
       axios({
-        url:'http://localhost:3000/pricize/size',
+        url:process.env.ROOT_API + 'pricize/size',
         headers: {authorization: `Bearer ${localStorage.token}`}
       })
         .then(response => {
@@ -547,7 +547,7 @@ export default {
     },
     getContainers(){
       axios({url:
-      'http://localhost:3000/container',
+      process.env.ROOT_API + 'container',
       headers: {authorization: `Bearer ${localStorage.token}`}
       })
       .then(response => {
@@ -796,7 +796,7 @@ export default {
   sendSale(){
     axios({
     method:'POST',
-    url:`http://localhost:3000/sale`,
+    url:process.env.ROOT_API + `sale`,
     data:{
       date: this.date,
       client: this.client,
@@ -867,7 +867,7 @@ started(idKeg){
     }
      axios({
        method:'PUT',
-       url:`http://localhost:3000/keg/started/${idKeg}` ,
+       url:process.env.ROOT_API + `keg/started/${idKeg}` ,
        headers: {authorization: `Bearer ${localStorage.token}`}
      })
      .then(res => {
@@ -884,7 +884,7 @@ started(idKeg){
     }
      axios({
       method: 'PUT',
-      url:`http://localhost:3000/keg/empty/${idKeg}`,
+      url:process.env.ROOT_API + `keg/empty/${idKeg}`,
       headers: {authorization: `Bearer ${localStorage.token}`}
      })
      .then(res => {

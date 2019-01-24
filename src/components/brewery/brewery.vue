@@ -301,7 +301,7 @@ methods:{
     }else{
       axios({
       method:'POST',
-      url:'http://localhost:3000/brewery',
+      url:process.env.ROOT_API + 'brewery',
       data:this.newBrewery,
       headers: {authorization: `Bearer ${localStorage.token}`}
       }).then(res => {
@@ -338,7 +338,7 @@ methods:{
         }else{
         axios({
           method:'PUT',
-          url:`http://localhost:3000/brewery/${this.newBrewery.id}`,
+          url:process.env.ROOT_API + `brewery/${this.newBrewery.id}`,
           data:this.newBrewery,
           headers: {authorization: `Bearer ${localStorage.token}`}
         }).then(res => {
@@ -372,7 +372,7 @@ methods:{
   },
   getBreweries(){
     axios({
-      url:'http://localhost:3000/brewery',
+      url:process.env.ROOT_API + 'brewery',
       headers: {authorization: `Bearer ${localStorage.token}`}
     })
     .then(res=>{
@@ -385,7 +385,7 @@ methods:{
   },
   getcontact(idBrewery){
     axios({
-      url:`http://localhost:3000/brewery/${idBrewery}`,
+      url:process.env.ROOT_API + `brewery/${idBrewery}`,
       headers: {authorization: `Bearer ${localStorage.token}`}
       })
     .then(res =>{
@@ -414,7 +414,7 @@ methods:{
     this.hideModal()
     axios({
       method:'delete',
-      url:`http://localhost:3000/brewery/${idBrewery}`,
+      url:process.env.ROOT_API + `brewery/${idBrewery}`,
       headers: {authorization: `Bearer ${localStorage.token}`}
     })
     .then(res => {
@@ -450,7 +450,7 @@ methods:{
   },
   updateBrewery(idBrewery){
       axios({
-        url:`http://localhost:3000/brewery/${idBrewery}`,
+        url:process.env.ROOT_API + `brewery/${idBrewery}`,
         headers: {authorization: `Bearer ${localStorage.token}`}
     })
     .then(res =>{

@@ -63,7 +63,7 @@ export default {
                 email:''
             },
             sending : false,
-            url:'http://localhost:3000/'
+            url:process.env.ROOT_API + ''
         }
     },
     methods:{  
