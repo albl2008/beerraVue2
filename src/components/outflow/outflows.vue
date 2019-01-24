@@ -326,7 +326,7 @@
 import Vue from 'vue'
 import axios  from 'axios'
 import Joi from "joi";
-import moment from 'moment'
+import moment from 'moment-timezone'
 
 
 
@@ -648,7 +648,7 @@ axios({
     },
     format(date){
       if(date)
-          return moment(date).format('DD/MM/YYYY');
+          return moment(date).tz('UTC').format("DD/MM/YYYY");
       else
           return ""
   },
