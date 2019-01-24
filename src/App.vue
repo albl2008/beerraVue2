@@ -27,26 +27,38 @@
               </a>
             </li>
           </center>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/pipes">Canillas
-              <img :src="require('@/assets/navbar/canilla.png')" alt class>
+            <li class="nav-item">
+
+            <a class="nav-link" href="http://localhost:8080/#/pricize">Configuración
+
+              <img :src="require('@/assets/navbar/config.png')" alt class>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/keg">Barriles
-              <img :src="require('@/assets/navbar/barriles.png')" alt class>
-            </a>
-          </li>
-          <li class="nav-item">
+            <li class="nav-item">
 
             <a class="nav-link" href="http://localhost:8080/#/brewery">Cervecerías
 
               <img :src="require('@/assets/navbar/cerveceria.png')" alt class>
             </a>
           </li>
-          <li class="nav-item">
+            <li class="nav-item">
+            <a class="nav-link" href="http://localhost:8080/#/keg">Barriles
+              <img :src="require('@/assets/navbar/barriles.png')" alt class>
+            </a>
+          </li>
+            <li class="nav-item">
             <a class="nav-link" href="http://localhost:8080/#/clients">Clientes
               <img :src="require('@/assets/navbar/clients.png')" alt class>
+            </a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="http://localhost:8080/#/outflow">Compras
+              <img :src="require('@/assets/navbar/buy.png')" alt class>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:8080/#/pipes">Canillas
+              <img :src="require('@/assets/navbar/canilla.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
@@ -67,22 +79,16 @@
             </a>
           </li>
           <li class="nav-item">
-
-            <a class="nav-link" href="http://localhost:8080/#/pricize">Configuración
-
-              <img :src="require('@/assets/navbar/config.png')" alt class>
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="http://localhost:8080/#/container">Envases
               <img :src="require('@/assets/navbar/container.png')" alt class>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/outflow">Compras
-              <img :src="require('@/assets/navbar/buy.png')" alt class>
+             <li class="nav-item">
+            <a class="nav-link" href="http://localhost:8080/#/container">Ayuda
+              <img :src="require('@/assets/navbar/ayuda.png')" alt class>
             </a>
           </li>
+        
         </template>
         <template v-else>
           <li class="nav-item">

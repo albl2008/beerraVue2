@@ -10,9 +10,9 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 sticky-top" style="height: 30%;">
           <!-- GROWLERS-->
-          <div class="card bg-dark limitProduct" style="position: fixed; width: 359px;">
+          <div class="card bg-dark limitProduct " style="width: 359px;">
             <div class="card-header bg-dark">
               <h3 class="tablaHead" >Productos</h3>
             </div>
@@ -132,7 +132,7 @@
             </div>
           </div>
 
-<div class="card  overload col-md-3" style="background: #272727;">
+<div class="card  overload col-md-12" style="background: #272727; margin-top: 1em;">
   <div class=" " >
     <h3 class="tablaHead" style="margin-top: 0.45em;">Cierre de caja <small> </small></h3> 
     
@@ -506,12 +506,14 @@ export default {
 }
 
 .overload{
-  position: fixed;
-  top: 40em;
+display: block;
+position: relative !important;
+width: 358px;
+
 }
 
 .limitProduct{
-height: 337px;
+max-height: 290px;
 overflow: scroll;
 }
 
