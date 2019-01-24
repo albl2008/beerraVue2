@@ -6,11 +6,11 @@
         <li class="nav-item">
           <center class="centerC">
 
-              <img class="isonav" src="./beerraisol.png">
+             
             
 
-            <a id class="nav-link" href="http://157.230.154.101/#/">
-          
+            <a id class="nav-link" href="http://157.230.154.101/#/" >
+           <img class="isonav" src="./beerraisol.png">
 
               <span class="sr-only">(current)</span>
             </a>
