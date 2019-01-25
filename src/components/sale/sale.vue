@@ -139,9 +139,8 @@
   </div>
   
   <div class="" style=" width: 100% !important; padding: 0 !important; margin-bottom: 0.45em;">
-    <input style="margin-bottom: 0.45em;" type="date" class="form-control fecha" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-    <h3 class="text-center badge badge-dark precios" style="background: #2b2b2b; border: 1px solid #444444;">Total: $ 0</h3>
-    <span style="color: gray;"><small>La función todavía no está disponible.</small><i  style="color: gray;" class="material-icons resize">query_builder</i></span>
+    <input style="margin-bottom: 0.45em;" type="date" class="form-control fecha" v-model="day" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+    <h3 class="text-center badge badge-dark precios" style="background: #2b2b2b; border: 1px solid #444444;">{{'Total: '+ totalDay }}</h3>
   </div>
 </div>
 
@@ -320,14 +319,33 @@ export default {
       isPints: false,
       isOther: false,
       isContainers: false,
-      search: ""
+      search: "",
+      day:'',
+      totalDay:''
     };
   },
   created() {
     this.getSales();
   },
-
+  watch:{
+    day(){
+      this.calculateTotal()
+    }
+  },
   methods: {
+    calculateTotal(){
+      console.log('day',this.day)
+      axios({
+        method:'POST',
+        url: process.env.ROOT_API + `sale/totalDay`,
+        data:{day:this.day},
+        headers: { authorization: `Bearer ${localStorage.token}` }
+      }).then(res => {
+        this.totalDay = res.data.total
+      }).catch(err => {
+        console.log(res.response.data)
+      })
+    },
     getSales() {
       axios({
         url: process.env.ROOT_API + "sale",
