@@ -13,10 +13,10 @@
           <a href="#precios">Planes</a>
         </li>
         <li class="breadcrumb-item">
-          <a href=process.env.ROOT + "#/signup">Registrarse</a>
+          <a href="process.env.ROOT + '#/signup'">Registrarse</a>
         </li>
         <li class="breadcrumb-item">
-          <a href=process.env.ROOT + "#/signin">Ingresar</a>
+          <a href="process.env.ROOT + '#/signin'">Ingresar</a>
         </li>
       </ol>
     </nav>
@@ -42,7 +42,7 @@
           <p class="lead">
             <a
               class="btn btn-outline-light btn-lg"
-              href=process.env.ROOT + "#/signup"
+              href="process.env.ROOT + '#/signup'"
               role="button"
             >Registrarse</a>
           </p>
@@ -60,7 +60,7 @@
     <div class="container">
       <nav id="funcionalidades" aria-label="breadcrumb">
         <ol class="breadcrumb bg-warning">
-          <li class="breadcrumb-item active divider" aria-current="page">Funcionalidades</li>
+          <li class="breadcrumb-item divider" aria-current="page">Funcionalidades</li>
         </ol>
       </nav>
       <div class="card-columns">
@@ -132,7 +132,7 @@
     <div class="container">
       <nav id="precios" aria-label="breadcrumb">
         <ol class="breadcrumb bg-warning">
-          <li class="breadcrumb-item active divider" aria-current="page">Planes</li>
+          <li class="breadcrumb-item divider" aria-current="page">Planes</li>
         </ol>
       </nav>
       <div class="card-columns">
@@ -197,7 +197,7 @@
     <div class="container">
       <nav id="contacto" class="" aria-label="breadcrumb">
         <ol class="breadcrumb bg-warning">
-          <li class="breadcrumb-item active divider" aria-current="page">Contacto</li>
+          <li class="breadcrumb-item divider" aria-current="page">Contacto</li>
         </ol>
       </nav>
       <div class=" card contactBack bg-dark" >
@@ -320,13 +320,17 @@
               <!-- <p v-if="contact"> -->
                 <i class="material-icons">mail_outline</i> info@beerra.com.ar
               </p>
-              <p style="font-family: 'Roboto', sans-serif; font-size: 16px;">
+              <p style="font-family: 'Roboto', sans-serif; font-size: 16px; margin-bottom: 0;">
              <!--  <p v-if="contact"> -->
                 <i class="material-icons">phone</i> 2616563848
               </p>
-              <p style="font-family: 'Roboto', sans-serif; font-size: 16px;">
+              <p style="font-family: 'Roboto', sans-serif; font-size: 16px; margin-bottom: 0;">
              <!--  <p v-if="contact"> -->
                 <i class="material-icons">phone</i> 2616585487
+              </p>
+              <p style="font-family: 'Roboto', sans-serif; font-size: 16px;">
+             <!--  <p v-if="contact"> -->
+                <i class="material-icons">phone</i> 2616585672
               </p>
             </div>
           </div>
@@ -534,7 +538,7 @@ form {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fc9607', endColorstr='#ffc107',GradientType=1 );
 }
 
-.breadcrumb-item.active.divider li {
+.breadcrumb-item.divider li {
   color: #2b2b2b !important;
   font-family: "Roboto", sans-serif !important;
   font-weight: bold;
