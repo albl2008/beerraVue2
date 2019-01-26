@@ -5,10 +5,11 @@
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <center class="centerC">
+            <a id class="nav-link" v-bind:href="root">
               <img v-if="!storage.load" class="isonav" src="./beerraisol.png">
             <img v-if="storage.load" class="isonav" src="./assets/dots.svg">
 
-            <a id class="nav-link" v-bind:href="root">
+          
           
 
               <span class="sr-only">(current)</span>
@@ -22,12 +23,12 @@
               <a id="dashboard" v-on:click="setActive('dash')" :class="{ active: isActive('dash') }"  class="nav-link" v-bind:href="dashboard">
                 <i class="material-icons">dashboard</i>
               </a>
-              <a id="logout" class="nav-link" v-on:click="logout()">
+                <a id="logout" class="nav-link" v-on:click="logout()">
                 <i class="material-icons">exit_to_app</i>
               </a>
             </li>
           </center>
- <li class="nav-item">
+        <li class="nav-item">
 
      <!-- <a class="nav-link" v-on:click="available = !available" v-bind:class="{available: available}" v-bind:href="pricize">Configuración -->
   <a class="nav-link" v-on:click="setActive('config')" :class="{ active: isActive('config') }" v-bind:href="pricize">Configuración
