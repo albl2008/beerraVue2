@@ -58,7 +58,7 @@
           </li>
 
         <li class="nav-item">
-            <a class="nav-link" v-on:click="setActive('bought')" :class="{ active: isActive('bought') }" href="http://localhost:8080/#/outflow">Compras
+            <a class="nav-link" v-on:click="setActive('bought')" :class="{ active: isActive('bought') }" v-bind:href="buy">Compras
               <img :src="require('@/assets/navbar/buy.png')" alt class>
             </a>
           </li>
