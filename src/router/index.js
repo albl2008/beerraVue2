@@ -22,6 +22,7 @@ import pricize from '../components/pricize/pricize'
 import outflow from '../components/outflow/outflows'
 import container from '../components/container/container'
 import admin from '../components/user/admin'
+import help from '../components/help/help'
 
 Vue.use(vueResource)
 Vue.use(Router);
@@ -103,6 +104,12 @@ export default new Router({
       component: signup,
       beforeEnter: redirectToDashboard
     },
+
+  { path: '/help',
+    name: help,
+    component: help
+
+  },
     {
       path: '/signin',
      

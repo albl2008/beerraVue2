@@ -27,23 +27,25 @@
               </a>
             </li>
           </center>
+ <li class="nav-item">
 
-          <li class="nav-item">
-            <a class="nav-link" v-bind:href="pipes">Canillas
-              <img :src="require('@/assets/navbar/canilla.png')" alt class>
+     <a class="nav-link" v-bind:href="pricize">Configuración
+
+              <img :src="require('@/assets/navbar/config.png')" alt class>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" v-bind:href="keg">Barriles
-              <img :src="require('@/assets/navbar/barriles.png')" alt class>
 
-            </a>
-          </li>
             <li class="nav-item">
 
             <a class="nav-link" v-bind:href="brewery">Cervecerías
 
               <img :src="require('@/assets/navbar/cerveceria.png')" alt class>
+            </a>
+          </li>
+  <li class="nav-item">
+            <a class="nav-link" v-bind:href="keg">Barriles
+              <img :src="require('@/assets/navbar/barriles.png')" alt class>
+
             </a>
           </li>
 
@@ -53,13 +55,15 @@
               <img :src="require('@/assets/navbar/clients.png')" alt class>
             </a>
           </li>
-            <li class="nav-item">
+
+        <li class="nav-item">
             <a class="nav-link" href="http://localhost:8080/#/outflow">Compras
               <img :src="require('@/assets/navbar/buy.png')" alt class>
             </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/pipes">Canillas
+            <a class="nav-link" v-bind:href="pipes">Canillas
               <img :src="require('@/assets/navbar/canilla.png')" alt class>
             </a>
           </li>
@@ -81,25 +85,19 @@
             </a>
           </li>
           <li class="nav-item">
-
-
-            <a class="nav-link" v-bind:href="pricize">Configuración
-
-              <img :src="require('@/assets/navbar/config.png')" alt class>
-            </a>
-          </li>
+           
           <li class="nav-item">
             <a class="nav-link" v-bind:href="container">Envases
               <img :src="require('@/assets/navbar/container.png')" alt class>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" v-bind:href="outflow">Compras
-              <img :src="require('@/assets/navbar/buy.png')" alt class>
 
+             <li class="nav-item">
+            <a class="nav-link" target="_blank" v-bind:href="help">Ayuda
+              <img :src="require('@/assets/navbar/ayuda.png')" alt class>
             </a>
           </li>
-        
+
         </template>
         <template v-else>
           <li class="nav-item">
@@ -189,7 +187,8 @@ export default {
       container: process.env.ROOT +'container',
       outflow: process.env.ROOT +'outflow',
       signin: process.env.ROOT +'signin',
-      signup: process.env.ROOT +'signup'
+      signup: process.env.ROOT +'signup',
+      help: process.env.ROOT +'help'
 
 
 

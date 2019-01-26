@@ -9,11 +9,12 @@ import 'vuetify/dist/vuetify.min.css'
 import VModal from 'vue-js-modal'
 import persistentState from 'vue-persistent-state'
 import ReactiveStorage from "vue-reactive-localstorage";
+import pdf from 'vue-pdf'
 
 import Chart from 'vue2-frappe'
 
 Vue.use(Chart)
-
+Vue.use(pdf)
 Vue.use(Chart)
 Vue.use(ReactiveStorage,{
   load: false
