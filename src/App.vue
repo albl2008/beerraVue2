@@ -19,7 +19,7 @@
         <template v-if="isLogged ">
           <center>
             <li class="nav-item">
-              <a id="dashboard" class="nav-link" v-bind:href="dashboard">
+              <a id="dashboard" v-on:click="setActive('dash')" :class="{ active: isActive('dash') }"  class="nav-link" v-bind:href="dashboard">
                 <i class="material-icons">dashboard</i>
               </a>
               <a id="logout" class="nav-link" v-on:click="logout()">
@@ -29,57 +29,57 @@
           </center>
  <li class="nav-item">
 
-     <a class="nav-link" v-bind:href="pricize">Configuración
-
+     <!-- <a class="nav-link" v-on:click="available = !available" v-bind:class="{available: available}" v-bind:href="pricize">Configuración -->
+  <a class="nav-link" v-on:click="setActive('config')" :class="{ active: isActive('config') }" v-bind:href="pricize">Configuración
               <img :src="require('@/assets/navbar/config.png')" alt class>
             </a>
           </li>
 
             <li class="nav-item">
 
-            <a class="nav-link" v-bind:href="brewery">Cervecerías
+            <a class="nav-link"  v-on:click="setActive('breweries')" :class="{ active: isActive('breweries') }" v-bind:href="brewery">Cervecerías
 
               <img :src="require('@/assets/navbar/cerveceria.png')" alt class>
             </a>
           </li>
   <li class="nav-item">
-            <a class="nav-link" v-bind:href="keg">Barriles
+            <a class="nav-link" v-on:click="setActive('kegs')" :class="{ active: isActive('kegs') }" v-bind:href="keg">Barriles
               <img :src="require('@/assets/navbar/barriles.png')" alt class>
 
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" v-bind:href="clients">Clientes
+            <a class="nav-link" v-on:click="setActive('clients')" :class="{ active: isActive('clients') }" v-bind:href="clients">Clientes
 
               <img :src="require('@/assets/navbar/clients.png')" alt class>
             </a>
           </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/#/outflow">Compras
+            <a class="nav-link" v-on:click="setActive('bought')" :class="{ active: isActive('bought') }" href="http://localhost:8080/#/outflow">Compras
               <img :src="require('@/assets/navbar/buy.png')" alt class>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" v-bind:href="pipes">Canillas
+            <a class="nav-link" v-on:click="setActive('quills')" :class="{ active: isActive('quills') }" v-bind:href="pipes">Canillas
               <img :src="require('@/assets/navbar/canilla.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-bind:href="bottle">Botellas
+            <a class="nav-link" v-on:click="setActive('bottles')" :class="{ active: isActive('bottles') }" v-bind:href="bottle">Botellas
               <img :src="require('@/assets/navbar/bottles.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-bind:href="sale">Ventas
+            <a class="nav-link" v-on:click="setActive('sales')" :class="{ active: isActive('sales') }" v-bind:href="sale">Ventas
               <img :src="require('@/assets/navbar/ventas.png')" alt class>
             </a>
           </li>
           <li class="nav-item">
 
-            <a class="nav-link" v-bind:href="buy">Pagos
+            <a class="nav-link" v-on:click="setActive('payments')" :class="{ active: isActive('payments') }" v-bind:href="buy">Pagos
 
               <img :src="require('@/assets/navbar/pago.png')" alt class>
             </a>
@@ -87,13 +87,15 @@
           <li class="nav-item">
            
           <li class="nav-item">
-            <a class="nav-link" v-bind:href="container">Envases
+            <a class="nav-link" v-on:click="setActive('contain')" :class="{ active: isActive('contain') }" v-bind:href="container">Envases
               <img :src="require('@/assets/navbar/container.png')" alt class>
             </a>
           </li>
 
              <li class="nav-item">
-            <a class="nav-link" target="_blank" v-bind:href="help">Ayuda
+            <!-- <a class="nav-link" target="_blank" v-on:click="setActive('help')" :class="{ active: isActive('help') }" v-bind:href="help">Ayuda 
+              -->
+              <a class="nav-link" target="_blank" v-bind:href="help">Ayuda
               <img :src="require('@/assets/navbar/ayuda.png')" alt class>
             </a>
           </li>
@@ -173,7 +175,7 @@ export default {
     return {
       active: null,
       isLogged: localStorage.token,
-     dots: '',
+      dots: '',
       dashboard: process.env.ROOT + 'dashboard',
       root: process.env.ROOT,
       pipes: process.env.ROOT +'pipes',
@@ -188,7 +190,11 @@ export default {
       outflow: process.env.ROOT +'outflow',
       signin: process.env.ROOT +'signin',
       signup: process.env.ROOT +'signup',
-      help: process.env.ROOT +'help'
+      help: process.env.ROOT +'help',
+      activeBar: true,
+      activeItem: ""
+
+      
 
 
 
@@ -199,6 +205,14 @@ export default {
     dots:{
       dots:localStorage.getItem('load')
     }
+  },
+   computed: {
+     compClasses(){
+       return {
+         activeBar: this.available,
+         nearby: this.nearby
+       }
+     }
   },
   methods: {
     checkIfAuthorized() {
@@ -231,8 +245,14 @@ export default {
     },
     hoverOut() {
       this.bounce = "";
+    },
+    isActive: function (menuItem) {
+      return this.activeItem === menuItem
+    },
+    setActive: function (menuItem) {
+      this.activeItem = menuItem // no need for Vue.set()
     }
-  },
+  }, 
   name: "App",
   
 };
@@ -403,7 +423,9 @@ textarea, input{
   font-size: 10px;
 }
 .active {
-  color: grey;
+  background: #242424 !important;
+  font-family: 'Lobster', cursive !important;
+  transition: 0.3s;
 }
 textarea {
   font-family: "Courier New", Courier;
@@ -888,6 +910,18 @@ background: rgba(255, 255, 255, 0.063) !important;
 .vacio:hover{
  background: #FD9326 !important;
  color: #1f1f1f !important;
+}
+
+.available{
+  background: #2b2b2b !important;
+}
+
+.nearby{
+  background:#242424 !important;
+}
+
+.activeBar{
+  color: #00ff95 !important;
 }
 
 @media screen and (max-width: 768px){
