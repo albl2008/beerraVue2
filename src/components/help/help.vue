@@ -21,7 +21,7 @@ export default {
     data() {
         return {
             src: loadingTask,
-            numPages: undefined,
+            numPages: undefined
         }
     },
     mounted() {
