@@ -10,9 +10,10 @@ import VModal from 'vue-js-modal'
 import persistentState from 'vue-persistent-state'
 import ReactiveStorage from "vue-reactive-localstorage";
 import pdf from 'vue-pdf'
-
+import { Slide } from 'vue-burger-menu'
 import Chart from 'vue2-frappe'
 
+Vue.use(Slide)
 Vue.use(Chart)
 Vue.use(pdf)
 Vue.use(Chart)

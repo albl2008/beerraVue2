@@ -23,6 +23,7 @@ import outflow from '../components/outflow/outflows'
 import container from '../components/container/container'
 import admin from '../components/user/admin'
 import help from '../components/help/help'
+import board from '../components/board/board'
 
 Vue.use(vueResource)
 Vue.use(Router);
@@ -110,6 +111,12 @@ export default new Router({
     component: help
 
   },
+
+{ path: '/board',
+name: board,
+component: board
+
+},
     {
       path: '/signin',
      

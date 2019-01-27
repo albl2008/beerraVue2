@@ -1,8 +1,10 @@
 <template>
-  <div class="wrapper">
-    <!-- Sidebar -->
-    <nav id="sidebar" class="bg-dark sticky-footer">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+  <div id="page-wrap" class="wrapper">
+    <!-- Sidebar --><Slide isOpen disableEsc>
+     
+
+      <nav id="sidebar" class="bg-dark sticky-footer">
+      <ul v-on:click.stop="isClosed" class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <center class="centerC">
             <a id class="nav-link" v-bind:href="root">
@@ -93,6 +95,12 @@
             </a>
           </li>
 
+           <li class="nav-item">
+            <a class="nav-link" v-on:click="setActive('board')" :class="{ active: isActive('board') }" v-bind:href="board">Pizarra
+              <img :src="require('@/assets/navbar/board.png')" alt class>
+            </a>
+          </li>
+
              <li class="nav-item">
             <!-- <a class="nav-link" target="_blank" v-on:click="setActive('help')" :class="{ active: isActive('help') }" v-bind:href="help">Ayuda 
               -->
@@ -119,9 +127,10 @@
       </ul>
       
     </nav>
+    </Slide>
 
     <!-- Page Content -->
-    <div id="app">
+    <div id="app" v-on:click.stop="isClosed">
       <transition name="fade" mode="out-in">
         <router-view/>
         <vue-glide>
@@ -144,6 +153,7 @@
 
 <script>
 import axios from "axios";
+import { Slide } from 'vue-burger-menu';
 $(function() {
   $.fn.extend({
     animateCss: function(animationName) {
@@ -165,7 +175,10 @@ $(function() {
 });
 
 export default {
+  components: {
+    Slide
 
+  },
   created() {
   
     this.checkIfAuthorized();
@@ -192,6 +205,7 @@ export default {
       signin: process.env.ROOT +'signin',
       signup: process.env.ROOT +'signup',
       help: process.env.ROOT +'help',
+      board: process.env.ROOT +'board',
       activeBar: true,
       activeItem: ""
 
@@ -392,11 +406,26 @@ textarea, input{
   align-items: stretch;
 }
 
-
-
+.bm-menu{
+  background: #2b2b2b;
+  padding: 0;
+ 
+}
+.bm-burger-bars{
+  background: white !important;
+}
+.bm-item-list>*{
+  padding: 0;
+}
+.bm-item-list{
+  margin-left: 0;
+  width: 100%;
+}
+#sideNav.bm-menu{
+  max-width: 15% ;
+}
 #sidebar {
-  width: 15%;
-  position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
   z-index: 999;
@@ -924,6 +953,8 @@ background: rgba(255, 255, 255, 0.063) !important;
 .activeBar{
   color: #00ff95 !important;
 }
+
+
 
 @media screen and (max-width: 768px){
   nav{
