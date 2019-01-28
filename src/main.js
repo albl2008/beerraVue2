@@ -12,7 +12,9 @@ import ReactiveStorage from "vue-reactive-localstorage";
 import pdf from 'vue-pdf'
 import { Slide } from 'vue-burger-menu'
 import Chart from 'vue2-frappe'
-
+import EasySlider from 'vue-easy-slider'
+ 
+Vue.use(EasySlider)
 Vue.use(Slide)
 Vue.use(Chart)
 Vue.use(pdf)

@@ -8,9 +8,16 @@
        
         
       </div>
+     
     <div class="container">
-        
-        <div class="row">
+     <slider animation="fade" interval="6000">
+<slider-item
+    v-for="(i, index) in list"
+    :key="index"
+    :style="i"
+    @click="hello"
+  >
+  <div class="row rowX">
             <div class="col-md-4">
             <div class="cardX card bg-dark">
                 <div class="card-header">
@@ -21,6 +28,7 @@
                 <p>Amargor: <small class="insideText">Bajo</small></p>
                 <p>Alcohol: <small class="insideText">6%</small></p>
                 <p>Cervecería: <small class="insideText">KM7</small></p>
+                <div class="bar rubia"></div>
                </div>
                 </div>
             </div>
@@ -30,13 +38,14 @@
                  <div class="col-md-4">
             <div class="cardX card bg-dark">
                 <div class="card-header">
-               <h3 class="birra nowrap">ipa</h3></div>
+               <h3 class="birra nowrap">irish red</h3></div>
                <div class="card-body subcontainer">
-               <img class="image" src="./coordenatix2x.png"/>
+               <img class="image" src="./tintaroja.png"/>
                <div class="inside">
                 <p>Amargor: <small class="insideText">Bajo</small></p>
                 <p>Alcohol: <small class="insideText">6%</small></p>
-                 <p>Cervecería: <small class="insideText">Green Man</small></p>
+                 <p>Cervecería: <small class="insideText">Tinta Roja</small></p>
+                 <div class="bar roja"></div>
                </div>
                 </div>
             </div>
@@ -48,11 +57,63 @@
                 <div class="card-header">
                <h3 class="birra nowrap">imperial stout</h3></div>
                <div class="card-body subcontainer">
+               <img class="image" src="./greenman.png"/>
+               <div class="inside">
+                <p>Amargor: <small class="insideText">Bajo</small></p>
+                <p>Alcohol: <small class="insideText">6%</small></p>
+                 <p>Cervecería: <small class="insideText">Green Man</small></p>
+                  <div class="bar negra"></div>
+               </div>
+                </div>
+            </div>
+            </div>
+
+
+            <div class="col-md-4">
+            <div class="cardX card bg-dark">
+                <div class="card-header">
+               <h3 class="birra nowrap">Golden Ale</h3></div>
+               <div class="card-body subcontainer">
                <img class="image" src="./coordenatix2x.png"/>
                <div class="inside">
                 <p>Amargor: <small class="insideText">Bajo</small></p>
                 <p>Alcohol: <small class="insideText">6%</small></p>
+                <p>Cervecería: <small class="insideText">KM7</small></p>
+                <div class="bar rubia"></div>
+               </div>
+                </div>
+            </div>
+            </div>
+
+
+                 <div class="col-md-4">
+            <div class="cardX card bg-dark">
+                <div class="card-header">
+               <h3 class="birra nowrap">irish red</h3></div>
+               <div class="card-body subcontainer">
+               <img class="image" src="./tintaroja.png"/>
+               <div class="inside">
+                <p>Amargor: <small class="insideText">Bajo</small></p>
+                <p>Alcohol: <small class="insideText">6%</small></p>
                  <p>Cervecería: <small class="insideText">Tinta Roja</small></p>
+                 <div class="bar roja"></div>
+               </div>
+                </div>
+            </div>
+            </div>
+
+
+            <div class="col-md-4">
+            <div class="cardX card bg-dark">
+                <div class="card-header">
+               <h3 class="birra nowrap">imperial stout</h3></div>
+               <div class="card-body subcontainer">
+               <img class="image" src="./greenman.png"/>
+               <div class="inside">
+                <p>Amargor: <small class="insideText">Bajo</small></p>
+                <p>Alcohol: <small class="insideText">6%</small></p>
+                 <p>Cervecería: <small class="insideText">Green Man</small></p>
+                  <div class="bar negra"></div>
                </div>
                 </div>
             </div>
@@ -60,17 +121,113 @@
 
 
         </div>
-    </div>
+    <p style="line-height: 280px; font-size: 5rem; text-align: center;">Page{{ index + 1 }}</p>
+  </slider-item>
+<slider-item
+ 
+  >
+  <div class="row rowX">
+       <div class="col-md-4">
+            <div class="cardX card bg-dark">
+                <div class="card-header">
+               <h3 class="birra nowrap">imperial stout</h3></div>
+               <div class="card-body subcontainer">
+               <img class="image" src="./greenman.png"/>
+               <div class="inside">
+                <p>Amargor: <small class="insideText">Bajo</small></p>
+                <p>Alcohol: <small class="insideText">6%</small></p>
+                 <p>Cervecería: <small class="insideText">Green Man</small></p>
+                  <div class="bar negra"></div>
+               </div>
+                </div>
+            </div>
+            </div>
+
+
+<div class="col-md-4">
+            <div class="cardX card bg-dark">
+                <div class="card-header">
+               <h3 class="birra nowrap">Golden Ale</h3></div>
+               <div class="card-body subcontainer">
+               <img class="image" src="./coordenatix2x.png"/>
+               <div class="inside">
+                <p>Amargor: <small class="insideText">Bajo</small></p>
+                <p>Alcohol: <small class="insideText">6%</small></p>
+                <p>Cervecería: <small class="insideText">KM7</small></p>
+                <div class="bar rubia"></div>
+               </div>
+                </div>
+            </div>
+            </div>
+
+                     <div class="col-md-4">
+            <div class="cardX card bg-dark">
+                <div class="card-header">
+               <h3 class="birra nowrap">irish red</h3></div>
+               <div class="card-body subcontainer">
+               <img class="image" src="./tintaroja.png"/>
+               <div class="inside">
+                <p>Amargor: <small class="insideText">Bajo</small></p>
+                <p>Alcohol: <small class="insideText">6%</small></p>
+                 <p>Cervecería: <small class="insideText">Tinta Roja</small></p>
+                 <div class="bar roja"></div>
+               </div>
+                </div>
+            </div>
+            </div>
+
+            
+            
+            </div>
+
+  </slider-item>
+
+    </slider>    
+    </div> 
 
 </div>
 </template>
 
 <script>
+import { Slider, SliderItem } from 'vue-easy-slider'
 
+export default {
+    data() {
+    return {
+      list: [
+        { backgroundColor: 'transparent', width: '100%', height: '100%' },
+        
+      ]
+    }
+  },
+  methods: {
+    hello($event) {
+      console.log(`hello index: ${$event}`)
+    },
+  }
+}
 </script>
 
 <style scoped>
 
+.bar{
+    height: 1em;
+    width: 30%;
+    border-radius: 0.3em;
+    float: right;
+}
+
+.rubia{
+    background: #ffa600;
+}
+
+.negra{
+    background: #240e00;
+}
+
+.roja{
+    background: rgb(163, 52, 0);
+}
 .board{
     background: url('536.jpg');
     background-size: cover;
@@ -78,12 +235,17 @@
 }
 
 .cardX{
-    height: 14em;
+    margin-top: 2em;
     width: 100%;
+    z-index: 999;
 
--webkit-box-shadow: 10px 10px 92px 1px rgba(0,0,0,0.75);
--moz-box-shadow: 10px 10px 92px 1px rgba(0,0,0,0.75);
-box-shadow: 10px 10px 92px 1px rgba(0,0,0,0.75)    /* padding: 1em; */
+-webkit-box-shadow: 10px 10px 31px -7px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 31px -7px rgba(0,0,0,0.75);
+box-shadow: 10px 10px 31px -7px rgba(0,0,0,0.75);
+}
+
+.col-md-4{
+  
 }
 
 .card-body{
@@ -91,9 +253,15 @@ box-shadow: 10px 10px 92px 1px rgba(0,0,0,0.75)    /* padding: 1em; */
     border-radius: 0.6em;
 }
 
+
 .card-header{
-    padding-top: 0.3em;
-    background: #2b2b2b !important;
+    
+    background: rgb(34,34,34);
+background: rgb(34,34,34);
+background: -moz-linear-gradient(45deg, rgba(34,34,34,1) 0%, rgba(43,43,43,1) 65%) !important;
+background: -webkit-linear-gradient(45deg, rgba(34,34,34,1) 0%,rgba(43,43,43,1) 65%) !important;
+background: linear-gradient(45deg, rgba(34,34,34,1) 0%,rgba(43,43,43,1) 65%) !important;
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#2b2b2b',GradientType=1 ) !important;
 }
 .birra{
   font-family: 'Major Mono Display', monospace !important;
@@ -102,9 +270,12 @@ box-shadow: 10px 10px 92px 1px rgba(0,0,0,0.75)    /* padding: 1em; */
     /* text-transform:; */
     text-align: right;
     margin: 0 auto;
-    font-weight: bold;
+    font-weight: 900;
 }
 
+p{
+    margin-bottom: 0.3em;
+}
 .image{
     width: 35%;
     float: left;
@@ -127,4 +298,20 @@ box-shadow: 10px 10px 92px 1px rgba(0,0,0,0.75)    /* padding: 1em; */
   background-size: center;
    
 }
+
+.slider{
+    height: 40em !important;
+
+}
+
+.container{
+    padding: 0;
+}
+
+.rowX{
+    padding-left: 3em;
+    padding-right: 3em;
+    background: transparent !important;
+}
+
 </style>
