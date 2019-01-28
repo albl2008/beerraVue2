@@ -8,6 +8,9 @@
                   <h1 v-if="user">Bienvendido, {{user.username}}!! 😎</h1>
                   <h1 v-if="!user">Trayendo informacion del usuario</h1>                 
             </div>
+            <div>
+                <h1>{{'Fecha de vencimiento de pago: ' + dateExpired}}</h1>
+            </div>
             <div class="text-center mb-5"><h1>Cantida de ventas por mes.</h1></div>
             <div class="row mb-5">
                 <div class="col-md-12 ">
@@ -76,6 +79,7 @@ export default {
         this.typesForMonth()
         this.litresForMonth()
         this.litresForBrewery()
+        this.expired()
         axios({
             method: 'get',
             url: process.env.ROOT_API + '',
@@ -119,6 +123,7 @@ export default {
             litresGrowlers:[],
             litresOthers:[],
             message: this.$route.params.message,
+            dateExpired : '',
 
             //colors
             coloresBotellon: ['rgba(0, 235, 141, 0.93)','rgba(0, 235, 141, 0.42)'],
@@ -257,6 +262,16 @@ export default {
                  
              }
             return data
+        },
+        expired(){
+            axios({
+                url:process.env.ROOT_API + 'expired',
+                headers: {authorization: `Bearer ${localStorage.token}`}
+            }).then(res => {
+               this.dateExpired = res.data.date
+            }).catch(err => {
+                console.log(err)
+            })
         }
        
        
