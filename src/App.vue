@@ -228,6 +228,10 @@ export default {
             localStorage.removeItem("token");
             this.$router.push({ path: `/signin/${message}` });
           }
+          if (error.response.status == 403) {
+            let message = error.response.data;
+            this.$router.push({ path: `/dashboard/${message}` });
+          }
 
           return Promise.reject(error);
         }

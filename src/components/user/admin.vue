@@ -15,6 +15,7 @@
                   <th>Email</th>
                   <th>verificado</th>
                   <th>Estado de pago</th>
+                  <th>Vencimiento</th>
                   <th>Pago</th>
                   <th>Suspender</th>
                 </thead>
@@ -24,6 +25,7 @@
                         <td>{{user.email}}</td>
                         <td>{{user.verify}}</td>
                         <td>{{isPayed(user)}}</td>
+                        <th>{{expired(user)}}</th>
                         <td><button class="btn btn-outline-success btn-sm" v-on:click="showModal(user._id)" ><i class="material-icons">attach_money</i></button></td>
                         <td><button class="btn btn-outline-danger btn-sm" ><i class="material-icons">highlight_off</i></button></td>
                     </tr>
@@ -53,6 +55,7 @@
 <script>
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
+import moment from 'moment-timezone'
 export default {
     data(){
         return{
@@ -101,12 +104,27 @@ export default {
         },
         isPayed(user){
             const token ='SDFSDFSDFSD,.,.,Fsfsdfsdffsdfsdfllokokkhhhdhcxzc'
+         
            return jwt.verify(user.payToken,token, function(err, decoded) {
                     if(err){
                         return "No pagado"
                     }else{
+                           const d = new Date(0)
+                          d.setUTCSeconds(decoded.exp)
+                           console.log(moment(d).format('DD/MM/YYYY'))
                         return "Pagado"
                     }
+            })
+        },
+        expired(user){
+            const token ='SDFSDFSDFSD,.,.,Fsfsdfsdffsdfsdfllokokkhhhdhcxzc'
+         
+           return jwt.verify(user.payToken,token, function(err, decoded) {
+                   
+                        const d = new Date(0)
+                        d.setUTCSeconds(decoded.exp)
+                        return moment(d).tz('UTC').format('DD/MM/YYYY')
+                    
             })
         }
     }
