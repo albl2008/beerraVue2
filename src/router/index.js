@@ -24,6 +24,7 @@ import container from '../components/container/container'
 import admin from '../components/user/admin'
 import help from '../components/help/help'
 import board from '../components/board/board'
+import cash from '../components/cash/cash'
 
 Vue.use(vueResource)
 Vue.use(Router);
@@ -104,6 +105,12 @@ export default new Router({
       name: signup,
       component: signup,
       beforeEnter: redirectToDashboard
+    },
+
+    {
+      path: '/cash',
+      name: cash,
+      component: cash
     },
 
   { path: '/help',
