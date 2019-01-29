@@ -255,13 +255,8 @@ box-shadow: 10px 10px 31px -7px rgba(0,0,0,0.75);
 
 
 .card-header{
-    
-    background: rgb(34,34,34);
-background: rgb(34,34,34);
-background: -moz-linear-gradient(45deg, rgba(34,34,34,1) 0%, rgba(43,43,43,1) 65%) !important;
-background: -webkit-linear-gradient(45deg, rgba(34,34,34,1) 0%,rgba(43,43,43,1) 65%) !important;
-background: linear-gradient(45deg, rgba(34,34,34,1) 0%,rgba(43,43,43,1) 65%) !important;
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#2b2b2b',GradientType=1 ) !important;
+   
+    background: #2b2b2b;
 }
 .birra{
   font-family: 'Major Mono Display', monospace !important;
@@ -295,7 +290,7 @@ p{
 
 .subcontainer {
   background: url('quees.png');
-  background-size: center;
+  background-size: cover;
    
 }
 
@@ -312,6 +307,10 @@ p{
     padding-left: 3em;
     padding-right: 3em;
     background: transparent !important;
+}
+
+.card{
+  
 }
 
 </style>

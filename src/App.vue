@@ -7,13 +7,11 @@
       <ul v-on:click.stop="isClosed" class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <center class="centerC">
-            <a id class="nav-link" v-bind:href="root">
+            <a id class="" v-bind:href="root">
               <img v-if="!storage.load" class="isonav" src="./beerraisol.png">
             <img v-if="storage.load" class="isonav" src="./assets/dots.svg">
 
           
-          
-
               <span class="sr-only">(current)</span>
             </a>
           </center>
@@ -60,7 +58,7 @@
           </li>
 
         <li class="nav-item">
-            <a class="nav-link" v-on:click="setActive('bought')" :class="{ active: isActive('bought') }" v-bind:href="buy">Compras
+            <a class="nav-link" v-on:click="setActive('bought')" :class="{ active: isActive('bought') }" v-bind:href="outflow">Compras
               <img :src="require('@/assets/navbar/buy.png')" alt class>
             </a>
           </li>
@@ -610,8 +608,9 @@ input[text]:focus,
   color: #1f1f1f;
 }
 .isonav {
-  width: 75%;
-  margin-bottom: 1em;
+  width: 70%;
+  
+  padding: 0.5em;
 }
 /*
 .isonav:hover{
