@@ -23,6 +23,7 @@ import outflow from '../components/outflow/outflows'
 import container from '../components/container/container'
 import admin from '../components/user/admin'
 import help from '../components/help/help'
+import food from '../components/food/food'
 
 Vue.use(vueResource)
 Vue.use(Router);
@@ -160,6 +161,11 @@ export default new Router({
     {
       path: '/clients',
       component: clients,
+      beforeEnter:isLogin
+    },
+    {
+      path: '/food',
+      component: food,
       beforeEnter:isLogin
     }
   ]
