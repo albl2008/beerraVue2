@@ -10,7 +10,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-6">
-          <div class="card">
+          <div class="card bg-dark">
             <div class="card-body">
               <div class="stat-widget-five">
                 <div class="stat-icon dib flat-color-1">
@@ -32,7 +32,7 @@
         </div>
 
         <div class="col-lg-3 col-md-6">
-          <div class="card">
+          <div class="card bg-dark">
             <div class="card-body">
               <div class="stat-widget-five">
                 <div class="stat-icon dib flat-color-2">
@@ -54,7 +54,7 @@
         </div>
 
         <div class="col-lg-3 col-md-6">
-          <div class="card">
+          <div class="card bg-dark">
             <div class="card-body">
               <div class="stat-widget-five">
                 <div class="stat-icon dib flat-color-3">
@@ -76,7 +76,7 @@
         </div>
 
         <div class="col-lg-3 col-md-6">
-          <div class="card">
+          <div class="card bg-dark">
             <div class="card-body">
               <div class="stat-widget-five">
                 <div class="stat-icon dib flat-color-4">
