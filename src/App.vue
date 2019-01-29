@@ -63,6 +63,13 @@
             </a>
           </li>
 
+
+           <li class="nav-item">
+            <a class="nav-link" v-on:click="setActive('cash')" :class="{ active: isActive('cash') }" v-bind:href="cash">Caja
+              <img :src="require('@/assets/navbar/caja.png')" alt class>
+            </a>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" v-on:click="setActive('quills')" :class="{ active: isActive('quills') }" v-bind:href="pipes">Canillas
               <img :src="require('@/assets/navbar/canilla.png')" alt class>
@@ -87,11 +94,11 @@
           </li>
           <li class="nav-item">
            
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" v-on:click="setActive('contain')" :class="{ active: isActive('contain') }" v-bind:href="container">Envases
               <img :src="require('@/assets/navbar/container.png')" alt class>
             </a>
-          </li>
+          </li> -->
 
            <li class="nav-item">
             <a class="nav-link" v-on:click="setActive('board')" :class="{ active: isActive('board') }" v-bind:href="board">Pizarra
@@ -99,11 +106,7 @@
             </a>
           </li>
 
-            <li class="nav-item">
-            <a class="nav-link" v-on:click="setActive('cash')" :class="{ active: isActive('cash') }" v-bind:href="cash">Caja
-              <img :src="require('@/assets/navbar/board.png')" alt class>
-            </a>
-          </li>
+           
 
              <li class="nav-item">
             <!-- <a class="nav-link" target="_blank" v-on:click="setActive('help')" :class="{ active: isActive('help') }" v-bind:href="help">Ayuda 
