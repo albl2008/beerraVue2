@@ -74,8 +74,8 @@
                     <input type="text" class="form-control mb-1" v-model="newKeg.quantitySaled" placeholder="Cantidad disponible"
                       required>
                   </template>
-<label>IBU</label>  <label style="float: right; text-align: left;">Alcohol</label>
-<div class="ibuandalco">
+                    <label>IBU</label>  <label style="float: right; text-align: left;">Alcohol</label>
+                    <div class="ibuandalco">
 
                   <input style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="" required>
                 

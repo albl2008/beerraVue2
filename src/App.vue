@@ -215,9 +215,9 @@ export default {
       board: process.env.ROOT +'board',
       cash: process.env.ROOT +'cash',
       activeBar: true,
-      activeItem: ""
+      activeItem: "",
 
-      
+     
 
 
 

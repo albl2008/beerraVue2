@@ -99,57 +99,92 @@
       </div>
 
       <div class="row" style="margin-top: 2em;">
-        <div class="col-md-2" style>
+        <div class="col-md-3" style>
           <div class="card" style="background: #272727;">
             <div class="card-header bg-dark">
               <h3 class="tablaHead">Ingreso +</h3>
             </div>
             <div class="card-body">
-              <label>Monto</label>
-              <input type="text" class="form-control mb-1">
-              <label>Palabra clave</label>
-              <input type="text" class="form-control mb-1">
-              <button class="btn btn-outline-success" style="width: 75px; margin-top: 1em;">Agregar</button>
+              <form v-on:submit.prevent="addInFlow">
+                <label>Monto</label>
+                <input type="text" class="form-control mb-1" v-model="newInFlow.amount" required>
+                <label>Descripción</label>
+                <input type="text" class="form-control mb-1" v-model="newInFlow.description" required>
+                <label>Fecha</label>
+                <input type="date" class="form-control mb-1" v-model="newInFlow.date" required>
+                <button  class="btn btn-outline-success" style="width: 75px; margin-top: 1em;">Agregar</button>
+              </form>
+              
             </div>
           </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-3">
           <div class="card" style="background: #272727;">
             <div class="card-header bg-dark">
               <h3 class="tablaHead">Egreso -</h3>
             </div>
             <div class="card-body">
-              <label>Monto</label>
-              <input type="text" class="form-control mb-1">
-              <label>Palabra clave</label>
-              <input type="text" class="form-control mb-1">
-              <button class="btn btn-outline-danger" style="width: 75px; margin-top: 1em;">Agregar</button>
+              <form v-on:submit.prevent="addOutFlow">
+                <label>Monto</label>
+                <input type="text" class="form-control mb-1" v-model="newOutFlow.amount">
+                <label>Descripción</label>
+                <input type="text" class="form-control mb-1" v-model="newOutFlow.description">
+                <label>Fecha</label>
+                <input type="date" class="form-control mb-1" v-model="newOutFlow.date">
+                <button class="btn btn-outline-danger" style="width: 75px; margin-top: 1em;">Agregar</button>
+              </form>
             </div>
           </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-6">
           <div class="card tabla" style="background: #272727;">
             <div class="card-header tituloCardHeader bg-dark">
               <h3 class="tablaHead">Operaciones</h3>
             </div>
             <div class="card-body tabla">
+              <span>Ingresos</span>
               <table class="table s">
                 <thead>
                   <th>Monto</th>
                   <th>Descripción</th>
-                  <th>Tipo</th>
                   <th>Fecha</th>
                   <th>Opciones</th>
                 </thead>
                 <tbody>
-                  <tr class="trHigh">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-
+                  <tr class="trHigh" v-for="inflow in inF">
+                    <td>{{inflow.amount}}</td>
+                    <td>{{inflow.description}}</td>
+                    <td>{{format(inflow.date)}}</td>
+                    <div id="options" class="opacityOut">
+                      <td>
+                        <button class="btn btn-outline-danger btn-sm fix disableBorder">
+                          <i class="material-icons resize">clear</i>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="btn btn-outline-primary btn-sm fix disableBorder">
+                          <i class="material-icons resize">edit</i>
+                        </button>
+                      </td>
+                    </div>
+                  </tr>
+                </tbody>
+              </table>
+              <span>Egresos</span>
+              <table class="table s">
+                <thead>
+                  <th>Monto</th>
+                  <th>Descripción</th>
+                  <th>Fecha</th>
+                  <th>Opciones</th>
+                </thead>
+                <tbody>
+                  <tr class="trHigh" v-for="outflow in out">
+                    <td>{{outflow.amount}}</td>
+                    <td>{{outflow.description}}</td>
+                    <td>{{format(outflow.date)}}</td>
                     <div id="options" class="opacityOut">
                       <td>
                         <button class="btn btn-outline-danger btn-sm fix disableBorder">
@@ -174,6 +209,92 @@
 </template>
 
 <script>
+import axios from 'axios'
+import moment from 'moment-timezone'
+
+class newInFlow {
+  constructor(amount,description,date){
+    this.amount = amount,
+    this.description = description,
+    this.date = date
+  }
+
+}
+class newOutFlow {
+  constructor(amount,description,date){
+    this.amount = amount,
+    this.description = description,
+    this.date = date
+  }
+
+}
+export default {
+  data(){
+    return{
+      newInFlow:{},
+      newOutFlow:{},
+      inF:[],
+      out:[]
+
+    }
+  },
+  created(){
+    this.getIN()
+    this.getOut()
+  },
+  methods:{
+    addInFlow(){
+        axios({
+          method:'POST',
+          url: process.env.ROOT_API + 'cash/in',
+          data: this.newInFlow,
+          headers: {authorization: `Bearer ${localStorage.token}`}
+        }).then(res =>{
+            console.log(res)
+            this.getIN()
+        }).catch(err => {
+            console.log(err.response.data)
+        })
+    },
+    addOutFlow(){
+        axios({
+          method:'POST',
+          url: process.env.ROOT_API + 'cash/out',
+          data: this.newOutFlow,
+          headers: {authorization: `Bearer ${localStorage.token}`}
+        }).then(res =>{
+            console.log(res)
+            this.getOut()
+        }).catch(err => {
+            console.log(err.response.data)
+        })
+    },
+    getIN(){
+      axios({
+          url: process.env.ROOT_API + 'cash/in',
+          headers: {authorization: `Bearer ${localStorage.token}`}
+      }).then(res =>{
+        console.log(res)
+        this.inF = res.data.inflows 
+      }).catch(err=>{
+        console.log(err.response.data)
+      })
+    },
+    getOut(){
+      axios({
+          url: process.env.ROOT_API + 'cash/out',
+          headers: {authorization: `Bearer ${localStorage.token}`}
+      }).then(res =>{
+        this.out = res.data.outflows
+      }).catch(err=>{
+        console.log(err.response.data)
+      })
+    },
+    format(date) {
+      if (date) return moment(date).tz('UTC').format("DD/MM/YYYY");
+    },
+  }
+}
 </script>
 
 <style scoped>
