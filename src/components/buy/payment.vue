@@ -22,9 +22,9 @@
 
                 <div class="input-group-pretend mb-3">
                   <label>Cervecería</label>
-                  <input type="text" class="form-control mb-1" v-model="displayPay.brewery"  placeholder="" disabled>
+                  <input type="text" class="form-control mb-1" v-model="newPay.brewery"  placeholder="" disabled>
                   <label>Estilo</label>
-                  <input type="text" class="form-control mb-1" v-model="displayPay.beer" placeholder="" disabled>
+                  <input type="text" class="form-control mb-1" v-model="newPay.beer" placeholder="" disabled>
                   <label>Fecha</label>
                     <input type="date" class="form-control mb-1 " v-model="newPay.date" required>
                     <label>Precio</label>
@@ -97,7 +97,7 @@
                   <td class="nowrap" style="width: 230px;">{{payment.keg.beer}}</td>
                   <td>{{payment.keg.quantity}}<span class="litros"> l</span></td>
                   <td>{{payment.keg.sta}}</td>
-                  <td class="nowrap" style="width: 200px;">{{payment.keg.brewery.name}}</td>
+                  <td class="nowrap" style="width: 200px;">{{payment.brewery}}</td>
                   <td style="width: 100px;">$ {{payment.ammount}}</td>
                   <td style="width: 10%;"><button class="btn btn-outline-success btn-sm fix disableBorder"><i class="material-icons resize">done</i></button></td>
                   </template>
@@ -123,7 +123,9 @@ const schema = Joi.object().keys({
     id: Joi.string(),
     date : Joi.date().required(),
     keg : Joi.required(),
-    ammount : Joi.number().positive().required()
+    ammount : Joi.number().positive().required(),
+    brewery: Joi.string(),
+    beer: Joi.string()
 })
 
 
@@ -254,8 +256,8 @@ export default {
     getKeg(keg) {
       this.newPay={}
       this.newPay.keg = keg._id
-      this.displayPay.brewery = keg.brewery.name
-      this.displayPay.beer = keg.beer
+      this.newPay.brewery = keg.brewery.name
+      this.newPay.beer = keg.beer
     },
     getBreweries() {
       axios({
