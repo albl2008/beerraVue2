@@ -74,8 +74,8 @@
                     <input type="text" class="form-control mb-1" v-model="newKeg.quantitySaled" placeholder="Cantidad disponible"
                       required>
                   </template>
-<label>IBU</label>  <label style="float: right; text-align: left;">Alcohol</label>
-<div class="ibuandalco">
+                    <label>IBU</label>  <label style="float: right; text-align: left;">Alcohol</label>
+                    <div class="ibuandalco">
 
                   <input style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="" required>
                 
@@ -125,7 +125,9 @@
               
                 </thead>
                 <tbody>
+               
                   <tr v-for="keg in kegs" class="trHigh">
+                       <template v-if="keg.sta !== 5">
                     <td style="max-width: 120px;" class="nowrap">{{keg.beer}}</td>
                     <td><strong style="font-size: 16px;">{{keg.quantitySaled}}<span class="litros"> l</span></strong> /{{keg.quantity}}<span class="litros"> l</span></td>
                     <td>{{selectStatus(keg.sta)}}</td>
@@ -145,8 +147,10 @@
                     <template v-else>
                       <td><button class="btn btn-outline-primary btn-sm fix disabled disableBorder vacio"><i class="material-icons resize"><strong>remove_circle_outline</strong></i></button></td>
                     </template>
-</div>
+                    </div>
+                    </template>
                   </tr>
+                      
                 </tbody>
               </table>
             </div>
@@ -438,7 +442,7 @@ export default {
           return "Conectado"
           break
         case 5:
-          return "Terminado"
+          return "Pagado"
           break
      }
   },
@@ -446,7 +450,7 @@ export default {
     if(status === 1)
       this.newKeg.quantitySaled = this.newKeg.quantity
   },
-   notifyWarning(title,text){
+notifyWarning(title,text){
    Vue.notify({
                 group: 'foo',
                 type: 'warn',
