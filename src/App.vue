@@ -1,7 +1,9 @@
 <template>
-  <div class="wrapper">
-    <!-- Sidebar -->
-    <nav id="sidebar" class="bg-dark sticky-footer">
+  <div id="page-wrap" class="wrapper">
+    <!-- Sidebar --><Slide isOpen disableEsc>
+     
+
+      <nav id="sidebar" class="bg-dark sticky-footer">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <center class="centerC">
@@ -28,62 +30,80 @@
               </a>
             </li>
           </center>
+
+             <li class="nav-item">
+
+           <a class="nav-link" v-on:click="setActive('config')" :class="{ active: isActive('config') }"  href="http://157.230.154.101/#/pricize">Configuración
+
+               <i class="material-icons">settings</i>
+            </a>
+          </li>
+
+  <li class="nav-item">
+
+             <a class="nav-link"  v-on:click="setActive('breweries')" :class="{ active: isActive('breweries') }"  href="http://157.230.154.101/#/brewery">Cervecerías
+
+               <i class="material-icons">business</i>
+            </a>
+          </li>
+
+            <li class="nav-item">
+           <a class="nav-link" v-on:click="setActive('kegs')" :class="{ active: isActive('kegs') }" href="http://157.230.154.101/#/keg">Barriles
+              <i class="material-icons">dns</i>
+            </a>
+          </li>
+
+            <li class="nav-item">
+             <a class="nav-link" v-on:click="setActive('bought')" :class="{ active: isActive('bought') }" href="http://157.230.154.101/#/outflow">Compras
+               <i class="material-icons">add_shopping_cart</i>
+            </a>
+          </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="http://157.230.154.101/#/pipes">Canillas
-              <img :src="require('@/assets/navbar/canilla.png')" alt class>
+           <a class="nav-link" v-on:click="setActive('quills')" :class="{ active: isActive('quills') }"  href="http://157.230.154.101/#/pipes">Canillas
+             
+               <i class="material-icons">settings_input_component</i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://157.230.154.101/#/keg">Barriles
-              <img :src="require('@/assets/navbar/barriles.png')" alt class>
+           <a class="nav-link" v-on:click="setActive('bottles')" :class="{ active: isActive('bottles') }"  href="http://157.230.154.101/#/bottle">Botellas
+               <i class="material-icons">drag_indicator</i>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" v-on:click="setActive('clients')" :class="{ active: isActive('clients') }" href="http://157.230.154.101/#/clients">Clientes
+               <i class="material-icons">people</i>
+            </a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" v-on:click="setActive('sales')" :class="{ active: isActive('sales') }" href="http://157.230.154.101/#/sale">Ventas
+               <i class="material-icons">store</i>
             </a>
           </li>
           <li class="nav-item">
 
-            <a class="nav-link" href="http://157.230.154.101/#/brewery">Cervecerías
+            <a <a class="nav-link" v-on:click="setActive('payments')" :class="{ active: isActive('payments') }" href="http://157.230.154.101/#/buy">Pagos
 
-              <img :src="require('@/assets/navbar/cerveceria.png')" alt class>
+               <i class="material-icons">payment</i>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://157.230.154.101/#/clients">Clientes
-              <img :src="require('@/assets/navbar/clients.png')" alt class>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://157.230.154.101/#/bottle">Botellas
-              <img :src="require('@/assets/navbar/bottles.png')" alt class>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://157.230.154.101/#/sale">Ventas
-              <img :src="require('@/assets/navbar/ventas.png')" alt class>
-            </a>
-          </li>
-          <li class="nav-item">
-
-            <a class="nav-link" href="http://157.230.154.101/#/buy">Pagos
-
-              <img :src="require('@/assets/navbar/pago.png')" alt class>
-            </a>
-          </li>
-          <li class="nav-item">
-
-            <a class="nav-link" href="http://157.230.154.101/#/pricize">Configuración
-
-              <img :src="require('@/assets/navbar/config.png')" alt class>
-            </a>
-          </li>
-          <li class="nav-item">
+       
+          <!-- <li class="nav-item">
             <a class="nav-link" href="http://157.230.154.101/#/container">Envases
               <img :src="require('@/assets/navbar/container.png')" alt class>
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://157.230.154.101/#/outflow">Compras
-              <img :src="require('@/assets/navbar/buy.png')" alt class>
+          </li> -->
+        
+  <li class="nav-item">
+            <!-- <a class="nav-link" target="_blank" v-on:click="setActive('help')" :class="{ active: isActive('help') }" v-bind:href="help">Ayuda 
+              -->
+              <a class="nav-link" target="_blank" href="http://157.230.154.101/#/help">Ayuda
+              <i class="material-icons">help</i>
             </a>
           </li>
+
         </template>
         <template v-else>
           <li class="nav-item">
@@ -97,14 +117,17 @@
               <i class="material-icons">person_add</i>
             </a>
           </li>
+
+            
         </template>
 
       </ul>
       
     </nav>
+    </Slide>
 
     <!-- Page Content -->
-    <div id="app">
+    <div id="app" v-on:click.stop="isClosed">
       <transition name="fade" mode="out-in">
         <router-view/>
         <vue-glide>
@@ -127,6 +150,7 @@
 
 <script>
 import axios from "axios";
+import { Slide } from 'vue-burger-menu';
 $(function() {
   $.fn.extend({
     animateCss: function(animationName) {
@@ -148,24 +172,59 @@ $(function() {
 });
 
 export default {
+  components: {
+    Slide
 
+  },
   created() {
-   
+  
     this.checkIfAuthorized();
     this.isLogged = localStorage.token;
-   
+    
   },
   data() { counter: 0
     return {
       active: null,
       isLogged: localStorage.token,
-     dots: ''
+      dots: '',
+      dashboard: process.env.ROOT + 'dashboard',
+      root: process.env.ROOT,
+      pipes: process.env.ROOT +'pipes',
+      keg: process.env.ROOT +'keg',
+      brewery: process.env.ROOT +'brewery',
+      clients: process.env.ROOT +'clients',
+      bottle: process.env.ROOT +'bottle',
+      sale:process.env.ROOT +'sale',
+      buy:process.env.ROOT +'buy',
+      pricize: process.env.ROOT +'pricize',
+      container: process.env.ROOT +'container',
+      outflow: process.env.ROOT +'outflow',
+      signin: process.env.ROOT +'signin',
+      signup: process.env.ROOT +'signup',
+      help: process.env.ROOT +'help',
+      board: process.env.ROOT +'board',
+      activeBar: true,
+      activeItem: ""
+
+      
+
+
+
+
     };
   },
   watch:{
     dots:{
       dots:localStorage.getItem('load')
     }
+  },
+   computed: {
+     compClasses(){
+       return {
+         activeBar: this.available,
+         nearby: this.nearby
+       }
+     }
   },
   methods: {
     checkIfAuthorized() {
@@ -180,6 +239,10 @@ export default {
             localStorage.removeItem("token");
             this.$router.push({ path: `/signin/${message}` });
           }
+          if (error.response.status == 403) {
+            let message = error.response.data;
+            this.$router.push({ path: `/dashboard/${message}` });
+          }
 
           return Promise.reject(error);
         }
@@ -191,7 +254,6 @@ export default {
     logout() {
       localStorage.isLoggIn = false;
       localStorage.removeItem("token");
-       
       this.$router.go("/signin");
     },
     hoverIn() {
@@ -199,8 +261,14 @@ export default {
     },
     hoverOut() {
       this.bounce = "";
+    },
+    isActive: function (menuItem) {
+      return this.activeItem === menuItem
+    },
+    setActive: function (menuItem) {
+      this.activeItem = menuItem // no need for Vue.set()
     }
-  },
+  }, 
   name: "App",
   
 };
@@ -339,17 +407,33 @@ textarea, input{
   align-items: stretch;
 }
 
-
-
+.bm-menu{
+  background: #2b2b2b;
+  padding: 0;
+ 
+}
+.bm-burger-bars{
+  background: white !important;
+}
+.bm-item-list>*{
+  padding: 0;
+}
+.bm-item-list{
+  margin-left: 0;
+  width: 100%;
+}
+#sideNav.bm-menu{
+  max-width: 15% ;
+}
 #sidebar {
-  width: 15%;
-  position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
   z-index: 999;
   color: #fff;
   transition: all 0.3s;
   height: 100%;
+  
 }
 
 #sidebar a {
@@ -371,7 +455,9 @@ textarea, input{
   font-size: 10px;
 }
 .active {
-  color: grey;
+  background: #242424 !important;
+  font-family: 'Lobster', cursive !important;
+  transition: 0.3s;
 }
 textarea {
   font-family: "Courier New", Courier;
@@ -526,8 +612,11 @@ input[text]:focus,
   color: #1f1f1f;
 }
 .isonav {
-  width: 75%;
-  margin-bottom: 1em;
+  width: 80%;
+  padding: 0.5em;
+  top: 0;
+  bottom: 0;
+  left: 0;
 }
 /*
 .isonav:hover{
@@ -858,6 +947,20 @@ background: rgba(255, 255, 255, 0.063) !important;
  color: #1f1f1f !important;
 }
 
+.available{
+  background: #2b2b2b !important;
+}
+
+.nearby{
+  background:#242424 !important;
+}
+
+.activeBar{
+  color: #00ff95 !important;
+}
+
+
+
 @media screen and (max-width: 768px){
   nav{
     display: none;
@@ -872,6 +975,9 @@ background: rgba(255, 255, 255, 0.063) !important;
 
   }
 
+#sideNav.bm-menu{
+ display: none;
+}
 
   #app{
     width: 100%;
