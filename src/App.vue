@@ -1,6 +1,6 @@
 <template>
   <div id="page-wrap" class="wrapper">
-    <!-- Sidebar --><Slide isOpen disableEsc>
+    <!-- Sidebar -->
      
 
       <nav id="sidebar" class="bg-dark sticky-footer">
@@ -100,11 +100,11 @@
             </a>
           </li> -->
 
-           <li class="nav-item">
+           <!-- <li class="nav-item">
             <a class="nav-link" v-on:click="setActive('board')" :class="{ active: isActive('board') }" v-bind:href="board">Pizarra
               <img :src="require('@/assets/navbar/board.png')" alt class>
             </a>
-          </li>
+          </li> -->
 
            
 
@@ -134,7 +134,7 @@
       </ul>
       
     </nav>
-    </Slide>
+    
 
     <!-- Page Content -->
     <div id="app" v-on:click.stop="isClosed">
@@ -418,26 +418,9 @@ textarea, input{
   align-items: stretch;
 }
 
-.bm-menu{
-  background: #2b2b2b;
-  padding: 0;
- 
-}
-.bm-burger-bars{
-  background: white !important;
-}
-.bm-item-list>*{
-  padding: 0;
-}
-.bm-item-list{
-  margin-left: 0;
-  width: 100%;
-}
-#sideNav.bm-menu{
-  max-width: 15% ;
-}
 #sidebar {
-  width: 100%;
+ width: 15%;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
