@@ -112,14 +112,14 @@
 
               </div>
             </div>
-            <div class="card-body">
+            <div class="card-body bodyMob">
               <table class="table s">
                 <thead>
-                  <th>Cerveza</th>
-                  <th>Cerveceria</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Eliminar</th>
+                  <th class="wrapMobile">Cerveza</th>
+                  <th class="wrapMobile">Cerveceria</th>
+                  <th class="wrapMobile">Cantidad</th>
+                  <th class="wrapMobile">Precio</th>
+                  <th class="wrapMobile">Eliminar</th>
                 </thead>
                 <tbody>
                   <tr class="trHigh" v-for="growler in growlers">
@@ -170,11 +170,11 @@
             <div class="card-body">
               <table class="table s">
                 <thead>
-                  <th>Cerveza</th>
-                  <th>Cerveceria</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Eliminar</th>
+                  <th class="wrapMobile">Cerveza</th>
+                  <th class="wrapMobile">Cerveceria</th>
+                  <th class="wrapMobile">Cantidad</th>
+                  <th class="wrapMobile">Precio</th>
+                  <th class="wrapMobile">Eliminar</th>
                 </thead>
                 <tbody>
                   <tr class="trHigh" v-for="bottle in bottles">
@@ -210,11 +210,11 @@
             <div class="card-body">
               <table class="table s">
                 <thead>
-                  <th>Cerveza</th>
-                  <th>Cerveceria</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Eliminar</th>
+                  <th class="wrapMobile">Cerveza</th>
+                  <th class="wrapMobile">Cerveceria</th>
+                  <th class="wrapMobile">Cantidad</th>
+                  <th class="wrapMobile">Precio</th>
+                  <th class="wrapMobile">Eliminar</th>
 
                 </thead>
                 <tbody>
@@ -241,11 +241,11 @@
             <div class="card-body">
               <table class="table s">
                 <thead>
-                  <th>Cerveza</th>
-                  <th>Cerveceria</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Eliminar</th>
+                  <th class="wrapMobile">Cerveza</th>
+                  <th class="wrapMobile">Cerveceria</th>
+                  <th class="wrapMobile">Cantidad</th>
+                  <th class="wrapMobile">Precio</th>
+                  <th class="wrapMobile">Eliminar</th>
 
                 </thead>
                 <tbody>
@@ -1179,4 +1179,50 @@ margin-top: 0.7em;
   border: 1px solid #616161;
   color: white;
 }
+
+@media screen and (max-width: 768px){
+  html{
+    width: 100%;
+  }
+  .container{
+    width: 100%;
+  }
+
+  .col-6.col-sm-12.col-md-6{
+    width: 100% !important;
+    display: inline-block !important;
+  }
+
+  .col-6{
+    max-width: 100% !important;
+  }
+
+  .wrapMobile{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow:hidden;
+  padding-left: 0;
+  }
+
+  .bodyMob{
+    padding-top: 2em;
+  }
+
+  .mb-5{
+    margin-bottom: 0 !important;
+  }
+
+  .underh1{
+    display: none;
+  }
+
+  .centerhead{
+    margin: 0 auto;
+  }
+
+  .v--modal-box.v--modal{
+    width: 200px !important;
+  }
+}
+
 </style>

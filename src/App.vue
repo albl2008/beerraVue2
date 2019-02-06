@@ -32,7 +32,7 @@
 
      <!-- <a class="nav-link" v-on:click="available = !available" v-bind:class="{available: available}" v-bind:href="pricize">Configuración -->
   <a class="nav-link" v-on:click="setActive('config')" :class="{ active: isActive('config') }" v-bind:href="pricize">Configuración
-              <img :src="require('@/assets/navbar/config.png')" alt class>
+             <i class="material-icons">settings</i>
             </a>
           </li>
 
@@ -40,12 +40,12 @@
 
             <a class="nav-link"  v-on:click="setActive('breweries')" :class="{ active: isActive('breweries') }" v-bind:href="brewery">Cervecerías
 
-              <img :src="require('@/assets/navbar/cerveceria.png')" alt class>
+              <i class="material-icons">business</i>
             </a>
           </li>
   <li class="nav-item">
             <a class="nav-link" v-on:click="setActive('kegs')" :class="{ active: isActive('kegs') }" v-bind:href="keg">Barriles
-              <img :src="require('@/assets/navbar/barriles.png')" alt class>
+               <i class="material-icons">dns</i>
 
             </a>
           </li>
@@ -53,43 +53,43 @@
           <li class="nav-item">
             <a class="nav-link" v-on:click="setActive('clients')" :class="{ active: isActive('clients') }" v-bind:href="clients">Clientes
 
-              <img :src="require('@/assets/navbar/clients.png')" alt class>
+               <i class="material-icons">people</i>
             </a>
           </li>
 
         <li class="nav-item">
             <a class="nav-link" v-on:click="setActive('bought')" :class="{ active: isActive('bought') }" v-bind:href="outflow">Compras
-              <img :src="require('@/assets/navbar/buy.png')" alt class>
+              <i class="material-icons">add_shopping_cart</i>
             </a>
           </li>
 
 
            <li class="nav-item">
             <a class="nav-link" v-on:click="setActive('cash')" :class="{ active: isActive('cash') }" v-bind:href="cash">Caja
-              <img :src="require('@/assets/navbar/caja.png')" alt class>
+               <i class="material-icons">all_inbox</i>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" v-on:click="setActive('quills')" :class="{ active: isActive('quills') }" v-bind:href="pipes">Canillas
-              <img :src="require('@/assets/navbar/canilla.png')" alt class>
+              <i class="material-icons">settings_input_component</i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" v-on:click="setActive('bottles')" :class="{ active: isActive('bottles') }" v-bind:href="bottle">Botellas
-              <img :src="require('@/assets/navbar/bottles.png')" alt class>
+              <i class="material-icons">drag_indicator</i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" v-on:click="setActive('sales')" :class="{ active: isActive('sales') }" v-bind:href="sale">Ventas
-              <img :src="require('@/assets/navbar/ventas.png')" alt class>
+              <i class="material-icons">store</i>
             </a>
           </li>
           <li class="nav-item">
 
             <a class="nav-link" v-on:click="setActive('payments')" :class="{ active: isActive('payments') }" v-bind:href="buy">Pagos
 
-              <img :src="require('@/assets/navbar/pago.png')" alt class>
+              <i class="material-icons">payment</i>
             </a>
           </li>
           <li class="nav-item">
@@ -112,7 +112,7 @@
             <!-- <a class="nav-link" target="_blank" v-on:click="setActive('help')" :class="{ active: isActive('help') }" v-bind:href="help">Ayuda 
               -->
               <a class="nav-link" target="_blank" v-bind:href="help">Ayuda
-              <img :src="require('@/assets/navbar/ayuda.png')" alt class>
+             <i class="material-icons">help_outline </i>
             </a>
           </li>
 
@@ -965,7 +965,10 @@ background: rgba(255, 255, 255, 0.063) !important;
   .container{
 
   }
-
+  .v--modal-box.v--modal{
+    width: 28em !important;
+    margin: 0.8em;
+  }
 
   #app{
     width: 100%;
