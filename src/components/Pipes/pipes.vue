@@ -112,32 +112,32 @@
 
               </div>
             </div>
-            <div class="card-body">
+            <div class="card-body bodyMob">
               <table class="table s">
                 <thead>
-                  <th>Cerveza</th>
-                  <th>Cerveceria</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Eliminar</th>
+                  <th class="wrapMobile">Cerveza</th>
+                  <th class="wrapMobile">Cerveceria</th>
+                  <th class="wrapMobile">Cantidad</th>
+                  <th class="wrapMobile">Precio</th>
+                  <th class="wrapMobile">Eliminar</th>
                 </thead>
                 <tbody>
                   <tr class="trHigh" v-for="growler in growlers">
-                    <td class="nowrap" style="max-width: 65px;">{{growler.beer}}</td>
-                    <td class="nowrap" style="max-width: 65px;">{{growler.brewery}}</td>
-                    <td>{{growler.quantity}} <span class="litros">l</span></td>
-                    <td>$ {{growler.price}}</td>
-                    <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteGrowler(growler.idDelete)"><i class="material-icons resize">clear</i></button></td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">{{growler.beer}}</td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">{{growler.brewery}}</td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">{{growler.quantity}} <span class="litros">l</span></td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">$ {{growler.price}}</td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;"><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteGrowler(growler.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
               </table>
               <h3 class="text-center badge badge-dark precios">Total: $ {{totalGrowlers}}</h3>
               <table class="table s">
                 <thead>
-                  <th>Tamaño</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Eliminar</th>
+                  <th class="wrapMobile">Tamaño</th>
+                  <th class="wrapMobile">Cantidad</th>
+                  <th class="wrapMobile">Precio</th>
+                  <th class="wrapMobile">Eliminar</th>
                 </thead>
                 <tbody>
                   <tr class="trHigh" v-for="container in containers">
@@ -170,18 +170,18 @@
             <div class="card-body">
               <table class="table s">
                 <thead>
-                  <th>Cerveza</th>
-                  <th>Cerveceria</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Eliminar</th>
+                  <th class="wrapMobile">Cerveza</th>
+                  <th class="wrapMobile">Cerveceria</th>
+                  <th class="wrapMobile">Cantidad</th>
+                  <th class="wrapMobile">Precio</th>
+                  <th class="wrapMobile">Eliminar</th>
                 </thead>
                 <tbody>
                   <tr class="trHigh" v-for="bottle in bottles">
                     <td class="nowrap" style="max-width: 100px;">{{bottle.beer}}</td>
                     <td class="nowrap" style="max-width: 100px;">{{bottle.brewery}}</td>
-                    <td>{{bottle.quantitySaled}} <span class="litros">l</span></td>
-                    <td>$ {{bottle.price}}</td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">{{bottle.quantitySaled}} <span class="litros">l</span></td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">$ {{bottle.price}}</td>
                     <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteBottle(bottle.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
@@ -210,20 +210,20 @@
             <div class="card-body">
               <table class="table s">
                 <thead>
-                  <th>Cerveza</th>
-                  <th>Cerveceria</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Eliminar</th>
+                  <th class="wrapMobile">Cerveza</th>
+                  <th class="wrapMobile">Cerveceria</th>
+                  <th class="wrapMobile">Cantidad</th>
+                  <th class="wrapMobile">Precio</th>
+                  <th class="wrapMobile">Eliminar</th>
 
                 </thead>
                 <tbody>
-                  <tr class="trHigh" v-for="pint in pints">
+                  <tr class="trHigh" v-for="pint in pints" :key="pint._id">
                     <td class="nowrap" style="max-width: 65px;">{{pint.beer}}</td>
                     <td class="nowrap" style="max-width: 65px;">{{pint.brewery}}</td>
-                    <td>{{pint.quantity}} <span class="litros">l</span></td>
-                    <td>$ {{pint.price}}</td>
-                    <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deletePint(pint.idDelete)"><i class="material-icons resize">clear</i></button></td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">{{pint.quantity}} <span class="litros">l</span></td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">$ {{pint.price}}</td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;"><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deletePint(pint.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
               </table>
@@ -241,20 +241,20 @@
             <div class="card-body">
               <table class="table s">
                 <thead>
-                  <th>Cerveza</th>
-                  <th>Cerveceria</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Eliminar</th>
+                  <th class="wrapMobile">Cerveza</th>
+                  <th class="wrapMobile">Cerveceria</th>
+                  <th class="wrapMobile">Cantidad</th>
+                  <th class="wrapMobile">Precio</th>
+                  <th class="wrapMobile">Eliminar</th>
 
                 </thead>
                 <tbody>
                   <tr class="trHigh" v-for="other in others">
-                    <td>{{other.beer}}</td>
-                    <td>{{other.brewery}}</td>
-                    <td>{{other.quantity}} <span class="litros">l</span></td>
-                    <td>$ {{other.price}}</td>
-                    <td><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteOther(other.idDelete)"><i class="material-icons resize">clear</i></button></td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">{{other.beer}}</td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">{{other.brewery}}</td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">{{other.quantity}} <span class="litros">l</span></td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;">$ {{other.price}}</td>
+                    <td class="nowrap wrapMobile" style="max-width: 65px;"><button class="btn btn-outline-danger btn-sm fix disableBorder" v-on:click="deleteOther(other.idDelete)"><i class="material-icons resize">clear</i></button></td>
                   </tr>
                 </tbody>
               </table>
@@ -298,7 +298,7 @@
         <div class="container bg-dark card tabla" style="background: #222 !important;" >
        
             <center>
-              <h5 class="badge   tablaHead text-center" style="
+              <h5 class="badge   tablaHead text-center porCantidad" style="
               
               
               margin-bottom: 1em;">Venta por cantidad específica</h5>
@@ -314,7 +314,7 @@
               <input type="text" style="width: 48%; float: right;" class="form-control mb-1" v-model="newOther.quantity" placeholder="Cantidad" required>
             </div>
             
-            <button style="width: 275px; margin-left: 25%;" class="btn btn-outline-success ">Agregar</button>
+            <button style="width: 275px; margin-left: 25%;" class="agregarModal btn btn-outline-success ">Agregar</button>
           </form>
         </div>
       </modal>
@@ -1179,4 +1179,85 @@ margin-top: 0.7em;
   border: 1px solid #616161;
   color: white;
 }
+
+@media screen and (max-width: 768px){
+  html{
+    width: 100%;
+  }
+  .container{
+    width: 100%;
+  }
+
+  .col-6.col-sm-12.col-md-6{
+    width: 100% !important;
+    display: inline-block !important;
+  }
+
+  .col-6{
+    max-width: 100% !important;
+    flex: none;
+  }
+
+  .agregarModal{
+    margin: 0  auto !important;
+    width: 100% !important;
+  }
+
+  .porCantidad{
+    text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow:hidden;
+    max-width: 200px;
+  }
+
+  .wrapMobile{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow:hidden;
+  padding-left: 0;
+  max-width: 50px !important;
+  }
+
+  .text-center.badge.badge-dark.precios.marginprecio{
+    margin: 0 auto !important;
+    display: block;
+    position: relative;
+    margin-top: 3em !important;
+  }
+
+  .procesar{
+    margin: 0 auto;
+    display: block;
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+  }
+
+  .bodyMob{
+    padding-top: 2em;
+  }
+
+  .mb-5{
+    margin-bottom: 0 !important;
+  }
+
+  .card{
+    margin: 0 auto;
+  }
+
+  .underh1{
+    display: none;
+  }
+
+  .centerhead{
+    margin: 0 auto;
+  }
+  .redh5{
+    font-size: 14px !important;
+  }
+  .greenh5{
+    font-size: 14px !important;
+  }
+
+}
+
 </style>
