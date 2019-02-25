@@ -371,7 +371,7 @@ export default {
           url: process.env.ROOT_API + 'cash/total',
           headers: {authorization: `Bearer ${localStorage.token}`}
       }).then(res =>{
-        console.log(res)
+        console.log("totales",res)
         this.total = res.data.total
       }).catch(err=>{
         console.log(err.response.data)

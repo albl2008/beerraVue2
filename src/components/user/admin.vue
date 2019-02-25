@@ -120,10 +120,15 @@ export default {
             const token ='SDFSDFSDFSD,.,.,Fsfsdfsdffsdfsdfllokokkhhhdhcxzc'
          
            return jwt.verify(user.payToken,token, function(err, decoded) {
-                   
-                        const d = new Date(0)
-                        d.setUTCSeconds(decoded.exp)
-                        return moment(d).tz('UTC').format('DD/MM/YYYY')
+
+                        if(err){
+                            return "Vencido"    
+                        }else{
+
+                            const d = new Date(0)
+                            d.setUTCSeconds(decoded.exp)
+                            return moment(d).tz('UTC').format('DD/MM/YYYY')
+                        }
                     
             })
         }
