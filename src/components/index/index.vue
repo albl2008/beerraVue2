@@ -13,10 +13,10 @@
           <a href="#precios">Planes</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="process.env.ROOT + '#/signup'">Registrarse</a>
+          <a v-bind:href="signup">Registrarse</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="process.env.ROOT + '#/signin'">Ingresar</a>
+          <a v-bind:href="signin">Ingresar</a>
         </li>
       </ol>
     </nav>
@@ -42,7 +42,7 @@
           <p class="lead">
             <a
               class="btn btn-outline-light btn-lg"
-              href="process.env.ROOT + '#/signup'"
+              v-bind:href="signup"
               role="button"
             >Registrarse</a>
           </p>
@@ -372,6 +372,8 @@ AOS.init();
 export default {
   data() {
     return {
+      signin: process.env.ROOT +'signin',
+      signup: process.env.ROOT +'signup',
       keg: false,
       bottle: false,
       sell: false,
