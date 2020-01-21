@@ -111,7 +111,7 @@
                         id="identicon"
                         width="40"
                         height="40"
-                        v-bind:data-jdenticon-value="client.dni"
+                        v-bind:data-jdenticon-value="client.tel"
                         class="img-responsive img-circle"
                       ></canvas>
                     </th>
@@ -172,12 +172,11 @@
   </div>
 </template>
 <script>
-window.jdenticon_config = {
-  replaceMode: "observe"
-};
+
 
 import Vue from "vue";
 import Joi from "joi";
+
 
 const schema = Joi.object().keys({
     id: Joi.string(),
@@ -197,6 +196,7 @@ class newClient {
 }
 const axios = require("axios");
 
+
 export default {
   data() {
     return {
@@ -212,17 +212,24 @@ export default {
   },
   computed: {},
    watch:{
+    
     newKeg:{
       handler(){
         this.errorMessage = ''
       },
       deep : true
     }
+
   },
   created() {
     this.getClients();
+    this.refreshAvatar();
+    
   },
+  
+
   methods: {
+    
     addClient() {
       if(this.validClient()){
       if (this.edit === false) {
@@ -298,6 +305,11 @@ export default {
         .catch(e => {
           console.log(e);
         });
+    },
+    refreshAvatar(){
+      window.jdenticon_config = {
+      replaceMode: "observe"
+    };
     },
     showModal(idClient) {
       this.idClient = idClient;
@@ -394,6 +406,7 @@ export default {
   }
   }
 };
+
 </script>
 <style scoped>
 .down {

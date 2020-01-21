@@ -25,6 +25,8 @@
                   <input type="text" class="form-control mb-1" v-model="newPay.brewery"  placeholder="" disabled>
                   <label>Estilo</label>
                   <input type="text" class="form-control mb-1" v-model="newPay.beer" placeholder="" disabled>
+                   <label>N° Barril</label>
+                  <input type="text" class="form-control mb-1" v-model="newPay.nkeg" placeholder="" disabled>
                   <label>Fecha</label>
                     <input type="date" class="form-control mb-1 " v-model="newPay.date" required>
                     <label>Precio</label>
@@ -48,6 +50,7 @@
               <th>Cerveza</th>
               <th>Cantidad</th>
               <th>Estado</th>
+              <th>N°Barril</th>
               <th>IBU</th>
               <th>Alcohol</th>
               <th>Cervecería</th>
@@ -58,7 +61,8 @@
                    <template v-if="keg.sta === 3">
                   <td class="nowrap" style="width: 100px;">{{keg.beer}}</td>
                   <td>{{keg.quantity}}<span class="litros"> l</span></td>
-                  <td>{{keg.sta}}</td>
+                   <td>{{selectStatus(keg.sta)}}</td>
+                  <td>{{keg.nkeg}}</td>
                   <td>{{keg.ibu}}</td>
                   <td>{{keg.alcohol}} %</td>
                   <td class="nowrap" style="width: 200px;">{{keg.brewery.name}}</td>
@@ -87,6 +91,8 @@
               <th>Cerveza</th>
               <th>Cantidad</th>
               <th>Estado</th>
+              <th>N°Barril</th>
+              <th>Fecha</th>
               <th>Cervecería</th>
               <th>Monto</th>
               <th>Pagado</th>
@@ -94,9 +100,12 @@
               <tbody>
                 <tr class="trHigh" v-for="payment in Payments" >
                    <template v-if="payment.keg.sta === 5">
-                  <td class="nowrap" style="width: 230px;">{{payment.keg.beer}}</td>
+                  <td class="nowrap" style="width:  130px;">{{payment.keg.beer}}</td>
                   <td>{{payment.keg.quantity}}<span class="litros"> l</span></td>
-                  <td>{{payment.keg.sta}}</td>
+                  <td>{{selectStatus(payment.keg.sta)}}</td>
+                  <td>{{payment.keg.nkeg}}</td>
+                  <td>{{payment.keg.date}}</td>
+                  <td>{{payment.date}}</td>
                   <td class="nowrap" style="width: 200px;">{{payment.brewery}}</td>
                   <td style="width: 100px;">$ {{payment.ammount}}</td>
                   <td style="width: 10%;"><button class="btn btn-outline-success btn-sm fix disableBorder"><i class="material-icons resize">done</i></button></td>
@@ -123,6 +132,7 @@ const schema = Joi.object().keys({
     id: Joi.string(),
     date : Joi.date().required(),
     keg : Joi.required(),
+    nkeg : Joi.number().required(),
     ammount : Joi.number().positive().required(),
     brewery: Joi.string(),
     beer: Joi.string()
@@ -130,9 +140,10 @@ const schema = Joi.object().keys({
 
 
 class Keg {
-  constructor(id, beer, quantity, status, brewery) {
+  constructor(id, beer,nkeg, quantity, status, brewery) {
     this.id = id
     this.beer = beer
+    this.nkeg = nkeg
     this.quantity = quantity
     this.sta = status
     this.brewery = brewery
@@ -183,8 +194,16 @@ export default {
           value: 1
         },
         {
-          text: 'Empesado',
+          text: 'Empezado',
           value: 2
+        },
+        {
+          text: 'Vacio',
+          value: 3
+        },
+        {
+          text: 'PAGADO',
+          value: 5
         },
         
       ],
@@ -223,6 +242,25 @@ export default {
 
         })
     },
+     selectStatus(status){
+     switch (status) {
+       case 1:
+         return "Lleno"
+         break;
+        case 2:
+          return "Empezado"
+          break
+        case 3:
+          return "Vacio"
+          break
+        case 4:
+          return "Conectado"
+          break
+        case 5:
+          return "Pagado"
+          break
+     }
+  },
     getPayments() {
       axios({
         url:process.env.ROOT_API + 'payment',
@@ -258,6 +296,7 @@ export default {
       this.newPay.keg = keg._id
       this.newPay.brewery = keg.brewery.name
       this.newPay.beer = keg.beer
+      this.newPay.nkeg = keg.nkeg
     },
     getBreweries() {
       axios({

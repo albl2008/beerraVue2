@@ -15,7 +15,7 @@
           <div v-if="errorMessage" class="alert alert-danger" role="alert">
             {{ errorMessage }}
           </div>
-          <div class="card bg-dark limitHeight">
+          <div class="card bg-dark sticky-top limitHeight">
 
             <template v-if="edit === false">
               <div class="card-header bg-dark">
@@ -24,7 +24,7 @@
             </template>
 
             <template v-else>
-              <div class="card-header bg-dark">
+              <div class="card-header bg-dark"> 
                 <h3 class="tablaHead">Actualizar barril</h3>
               </div>
             </template>
@@ -49,6 +49,8 @@
               </div> -->
               <label>Estilo</label>
             <input type="text" class="form-control mb-1" v-model="newKeg.beer" placeholder="" required>
+             <label>N° Barril</label>
+            <input type="number" class="form-control mb-1" v-model="newKeg.nkeg" placeholder="" required>
         
             <template v-if="sale === false">
               <label>Tamaño</label>
@@ -76,10 +78,14 @@
                   </template>
                     <label>IBU</label>  <label style="float: right; text-align: left;">Alcohol</label>
                     <div class="ibuandalco">
-
-                  <input style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="" required>
+                       <input style="width: 48%; float: left;" type="text" class="form-control mb-1" v-model="newKeg.ibu" placeholder="">
                 
                   <input style="width: 48%; float: right;" type="text" class="form-control mb-1" v-model="newKeg.alcohol" placeholder="" required>
+</div>
+<div class="ibuandalco">
+  <label>Color</label>
+                  <swatches style="" class="text-left mb-1" v-model="newKeg.srm" :colors="colors" background-color= '#2b2b2b' row-length="3" shapes="squares" :show-border= "0" :popover-to="right"></swatches>
+                  
 </div>
   <label>Cervecería</label>
                   <select  style="margin-bottom: 1em !important;" v-model="newKeg.brewery" class="custom-select mb-1" required >
@@ -89,10 +95,10 @@
                     </option>
 
                   </select>
-                  <!-- <swatches style="" class="text-center" v-model="color" :colors="colors" row-length="5" shapes="circles"
-                    show-border popover-to="right">
-                  </swatches>
-                 -->
+                 
+                    
+                  
+      
 
                 
                   <template v-if="edit === false">
@@ -112,6 +118,7 @@
             <div class="card-header tituloCardHeader bg-dark">
               <h3 class="tablaHead">Barriles</h3>
             </div>
+            
             <div class="card-body tabla">
               <table class="table s">
                 <thead>
@@ -154,11 +161,17 @@
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
+           </div>
+</div>
 
-      </div>
-    </div>
+        
+</div>
+</div>
+
+
+
+      <template>
+    
          <modal name="delete" height="auto">
         <div class="container bg-dark card tabla " style="background: rgb(34, 34, 34) !important;">
           <div class=""><center>
@@ -172,6 +185,7 @@
             
         </div>
       </modal>
+  </template>
   </div>
 </template>
 <script>
@@ -181,24 +195,29 @@ import Swatches from 'vue-swatches'
 import "vue-swatches/dist/vue-swatches.min.css"
 import axios from 'axios'
 
+
 const schema = Joi.object().keys({
     id: Joi.string(),
     beer : Joi.string().min(2).max(30).required(),
+    nkeg : Joi.number().positive().required(),
     quantity : Joi.number().positive().min(20).max(50).required(),
     sta : Joi.number().positive().required(),
-    ibu : Joi.number().positive().required(),
-    alcohol : Joi.number().positive().required(),
+    ibu : Joi.number().positive(),
+    alcohol : Joi.number().positive(),
+    srm : Joi.string(),
     brewery : Joi.required(),
     quantitySaled : Joi.number().positive().max(50)
 })
 
 class newKeg {
-  constructor(id, beer, quantity, status, ibu, alcohol, brewery,quantitySaled) {
+  constructor(id, beer, srm, nkeg, quantity, status, ibu, alcohol, brewery,quantitySaled) {
     this.id = id
     this.beer = beer
+    this.nkeg = nkeg
     this.quantity = quantity
     this.sta = status
     this.ibu = ibu
+    this.srm = srm
     this.alcohol = alcohol
     this.brewery = brewery
     this.quantitySaled = quantitySaled
@@ -212,7 +231,6 @@ export default {
      idKeg: '',
       errorMessage:'',
       newKeg: {},
-      kegs: [],
       breweries: [],
       quantities: [{
           text: '20'
@@ -233,17 +251,43 @@ export default {
           value: 2
         },
       ],
+      titles: [{
+    prop: "beer",
+    label: "Estilo"
+    }, {
+    prop: "nkeg",
+    label: "N°Barril"
+    }, {
+    prop: "quantity",
+    label: "Cantidad",
+    },{
+      prop: "brewery",
+    label: "Cerveceria"
+    }, {
+    prop: "quantitySaled",
+    label: "Vendido"
+    }, {
+    prop: "sta",
+    label: "Estado",
+    },{
+    prop: "ibu",
+    label: "IBU"
+    }, {
+    prop: "srm",
+    label: "Color"
+    }, {
+    prop: "quantity",
+    label: "Cantidad"
+  },
+   {
+    prop: "alcohol",
+    label: "Alc%"
+  }],
       edit: false,
       kegToEdit: '',
       sale:false,
-      color:'#F3F993',
       colors: [
-        ['#F3F993','#F5F75C','#F6F513','#EAE615','#E0D01B' ],
-        ['#D5BC26','#CDAA37','#C1963C','#BE8C3A','#BE823A' ],
-        ['#C17A37','#BF7138','#BC6733','#B26033','#A85839' ],
-        ['#985336','#8D4C32','#7C452D','#6B3A1E','#5D341A' ],
-        ['#4E2A0C','#4A2727','#361F1B','#261716','#231716' ],
-        ['#19100F','#16100F','#120D0C','#100B0A','#050B0A' ]
+        ['#ffee33','#b30000','#000000' ]
       ],
     }
   },
@@ -269,7 +313,8 @@ export default {
           console.log(response)
        
           this.kegs = response.data.Kegs
-
+          color = response.data.Kegs.keg.srm
+          this.kegsProps = [this.kegs.beer, this.kegs.nkeg]
         }).catch(e => {
           console.log(e)
         
@@ -371,7 +416,7 @@ export default {
         })
         .then(res => {
           if(res.data.sale){
-              this.newKeg = new newKeg(res.data.keg._id, res.data.keg.beer,
+              this.newKeg = new newKeg(res.data.keg._id, res.data.keg.beer,res.data.keg.srm, res.data.keg.nkeg,
             res.data.keg.quantity, res.data.keg.sta, res.data.keg.ibu,
             res.data.keg.alcohol, res.data.keg.brewery._id,res.data.keg.quantitySaled
           )
@@ -379,8 +424,8 @@ export default {
           this.edit = true;
           this.sale = false
           }else{
-               this.newKeg = new newKeg(res.data.keg._id, res.data.keg.beer,
-            res.data.keg.quantity, res.data.keg.sta, res.data.keg.ibu,
+               this.newKeg = new newKeg(res.data.keg._id, res.data.keg.beer, res.data.keg.nkeg,
+            res.data.keg.quantity, res.data.keg.sta, res.data.keg.srm, res.data.keg.ibu,
             res.data.keg.alcohol, res.data.keg.brewery._id,res.data.keg.quantitySaled
           )
             
@@ -446,6 +491,19 @@ export default {
           break
      }
   },
+  selectColor(color){
+     switch (color) {
+       case '#ffee33':
+         return "RUBIA"
+         break;
+        case '#b30000':
+          return "ROJA"
+          break
+        case '#000000':
+          return "NEGRA"
+          break
+     }
+  },
   changeStatus(status){
     if(status === 1)
       this.newKeg.quantitySaled = this.newKeg.quantity
@@ -488,6 +546,9 @@ notifyError(title,text){
                 if(result.error.message.includes('beer')){
                     this.errorMessage = 'Hay algo mal con el estilo ingresado.'
                 }
+                if(result.error.message.includes('nkeg')){
+                    this.errorMessage = 'Ingrese numero de barril, si no tiene, ingrese un numero interno de barril'
+                }
                 if(result.error.message.includes('quantity')){
                     this.errorMessage = 'Es necesario seleccionar una cantidad.'
                 }
@@ -502,6 +563,9 @@ notifyError(title,text){
                 }
                 if(result.error.message.includes('brewery')){
                     this.errorMessage = 'Es necesarios eleccionar una cerveceria.'
+                }
+                if(result.error.message.includes('srm')){
+                    this.errorMessage = 'Color mal selccionado'
                 }
                 if(result.error.message.includes('quantitySaled')){
                     this.errorMessage = 'Hay algo mal con la cantidad disponible.'

@@ -37,6 +37,8 @@
                   </div>
                   <label>2x1<small> de pintas</small></label> 
                   <input type="text" class="form-control mb-1" v-model="newPricize.hhourprice" placeholder="" required>
+                  <label>Comisión Tarjeta<small>(en %) </small></label>
+                  <input type="text" class="form-control mb-1" v-model="newPricize.mpcomision" placeholder="" required>
                 </div>
                   <template v-if="existpricize === false">
                   <button style="width: 80px" class="btn btn-outline-primary btn-block" >Agregar</button>
@@ -72,6 +74,7 @@
               <th>Pinta</th>
               <th><small>1/2</small> Pinta</th>
               <th>2x1 <small>Pintas</small></th>
+              <th>Porcentaje <small>Tarjeta</small></th>
               <th>Editar</th>
               </thead>
               <tbody>
@@ -83,6 +86,7 @@
                   <td>$ {{pricize.pintprice}}</td>
                   <td>$ {{pricize.pintprice2}}</td>
                   <td>$ {{pricize.hhourprice}}</td>
+                  <td>% {{pricize.mpcomision}}</td>
                   <td><button class="btn btn-outline-primary btn-sm fix disableBorder" v-on:click="updatePricize(pricize._id)"><i class="material-icons resize">edit</i></button></td>
                 </tr>
                 
@@ -185,7 +189,8 @@ const schema = Joi.object().keys({
     pintprice2 : Joi.number().positive().required(),
     growlerprice : Joi.number().positive().required(),
     growlerprice2 : Joi.number().positive().required(),
-    hhourprice : Joi.number().positive().required()
+    hhourprice : Joi.number().positive().required(),
+    mpcomision : Joi.number().positive().required()
 })
 const schema2 = Joi.object().keys({
     id: Joi.string(),
@@ -196,7 +201,7 @@ const schema2 = Joi.object().keys({
 })
 
 class newPricize {
-  constructor(id, loadprice, loadprice2, pintprice, pintprice2, growlerprice, growlerprice2, hhourprice) {
+  constructor(id, loadprice, loadprice2, pintprice, pintprice2, growlerprice, growlerprice2, hhourprice, mpcomision) {
     this.id = id
     this.loadprice = loadprice
     this.loadprice2 = loadprice2
@@ -205,6 +210,7 @@ class newPricize {
     this.growlerprice = growlerprice
     this.growlerprice2 = growlerprice2
     this.hhourprice = hhourprice
+    this.mpcomision = mpcomision
   }
 }
 class newSize {
@@ -296,7 +302,7 @@ export default {
           this.pricize = new newPricize(res.data.pricize._id,res.data.pricize.growlersize, res.data.pricize.growlersize2,
             res.data.pricize.loadprice, res.data.pricize.loadprice2, res.data.pricize.pintsize, res.data.pricize.pintsize2,
             res.data.pricize.pintprice, res.data.pricize.pintprice2, res.data.pricize.growlerprice, res.data.pricize.growlerprice2,
-            res.data.pricize.hhourprice
+            res.data.pricize.hhourprice,res.data.pricize.mpcomision
           )
           
         })
@@ -449,7 +455,7 @@ export default {
           this.newPricize = new newPricize(res.data.pricize._id,
             res.data.pricize.loadprice, res.data.pricize.loadprice2,
             res.data.pricize.pintprice, res.data.pricize.pintprice2, res.data.pricize.growlerprice, res.data.pricize.growlerprice2,
-            res.data.pricize.hhourprice
+            res.data.pricize.hhourprice,res.data.pricize.mpcomision
           )
           this.editprice = true;
         })
@@ -496,6 +502,9 @@ export default {
                 }
                 if(result.error.message.includes('growlerprice2')){
                     this.errorMessage = 'Ingrese un numero correctamente'
+                }
+                if(result.error.message.includes('mpcomision')){
+                    this.errorMessage = 'Ingrese con cuanto recarga la tarjeta de credito en porcentaje'
                 }
                 //this.errorMessage = 
             }

@@ -9,7 +9,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-4">
+        <div class="col-lg-3 col-md-3">
           <div class="card bg-dark">
             <div class="card-body">
               <div class="stat-widget-five">
@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-4">
+        <div class="col-lg-3 col-md-3">
           <div class="card bg-dark">
             <div class="card-body">
               <div class="stat-widget-five">
@@ -53,29 +53,29 @@
           </div>
         </div>
 
-        <!--<div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-3">
           <div class="card bg-dark">
             <div class="card-body">
               <div class="stat-widget-five">
                 <div class="stat-icon dib flat-color-3">
-                  <span class="letra week">S</span>
+                  <span class="letra week">M</span>
                 </div>
                 <div class="stat-content">
                   <div class="text-left dib">
                     <div class="stat-text">
-                      <span class="count">$ 349</span>
+                      <span class="count">{{'$' + mpsales}}</span>
                     </div>
                     <div class="stat-heading">
-                      <span>Esta semana</span>
+                      <span>MercadoPago</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>-->
+        </div>
 
-        <div class="col-lg-4 col-md-4">
+        <div class="col-lg-3 col-md-3">
           <div class="card bg-dark">
             <div class="card-body">
               <div class="stat-widget-five">
@@ -243,8 +243,8 @@ export default {
       totalMonth:0,
       totalDay:0,
       errorMessage:'',
-      errorMessageOut:''
-    
+      errorMessageOut:'',
+      mpsales:0
 
     }
   },
@@ -267,6 +267,7 @@ export default {
     this.getOut()
     this.totals()
     this.totalsMonth()
+    this.getSalesMP()
     this.getTotalDay()
     //this.getTotalWeek()
   },
@@ -284,6 +285,7 @@ export default {
             this.totals()
             this.totalsMonth()
             this.getTotalDay()
+            this.getSalesMP()
             this.newInFlow = {}
             this.notifySucces("Ingreso",res.data.message)
         }).catch(err => {
@@ -301,6 +303,7 @@ export default {
             this.totals()
             this.totalsMonth()
             this.getTotalDay()
+            this.getSalesMP()
             this.notifySucces("Ingreso",res.data.message)
       }).catch(err => {
             this.notifyError("Ingreso",res.data.message)
@@ -319,6 +322,7 @@ export default {
             this.totals()
             this.totalsMonth()
             this.getTotalDay()
+            this.getSalesMP()
             this.newOutFlow = {}
             this.notifySucces("Egreso",res.data.message)
         }).catch(err => {
@@ -339,6 +343,7 @@ export default {
           this.totals()
           this.totalsMonth()
           this.getTotalDay()
+          this.getSalesMP()
           this.notifySucces("Egreso",res.data.message)
       }).catch(err => {
           this.notifyError("Egreso",res.data.message)
@@ -348,6 +353,17 @@ export default {
     getIN(){
       axios({
           url: process.env.ROOT_API + 'cash/in',
+          headers: {authorization: `Bearer ${localStorage.token}`}
+      }).then(res =>{
+        console.log(res)
+        this.inF = res.data.inflows 
+      }).catch(err=>{
+        console.log(err.response.data)
+      })
+    },
+    getINP(){
+      axios({
+          url: process.env.ROOT_API + 'cash/in/postnet',
           headers: {authorization: `Bearer ${localStorage.token}`}
       }).then(res =>{
         console.log(res)
@@ -402,16 +418,16 @@ export default {
           }
             return newArray
     },
-    getTotalDay(){
+    getTotalMP(){
       axios({
         method:'POST',
-        url: process.env.ROOT_API + `cash/day`,
-        data:{day: new Date()},
+        url: process.env.ROOT_API + `cash/mp`,
+        data:{mp: new Date()},
         headers: { authorization: `Bearer ${localStorage.token}` }
       }).then(res => {
         
-        console.log("respuesta dias",res)
-        this.totalDay = res.data.totalDay
+        console.log("respuesta mp",res)
+        this.totalMP = res.data.salesMercadoP
       }).catch(err => {
         console.log("hola",err.response.data)
       })
@@ -463,6 +479,16 @@ export default {
                   this.errorMessageOut = 'La descripcion ingresada es incorrecta'
                 }
             }
+    },
+getSalesMP(){
+      axios({
+        method:'get',
+        url: process.env.ROOT_API + `cash/in/postnet`,
+        headers: { authorization: `Bearer ${localStorage.token}` }
+      }).then(res => {
+        console.log(res)
+          this.mpsales = res.data.total
+      })
     },
     notifyWarning(title,text){
    Vue.notify({

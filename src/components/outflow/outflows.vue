@@ -39,8 +39,9 @@
             <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="" required>
             <br>
                     
-              <code>Fecha: {{format(newOutflow.date)}}</code>                
-              <input-date v-model="newOutflow.date"></input-date>
+                           
+             <input type="date" class="form-control fecha" v-model="newOutflow.date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          
               
              </template>
              <template v-if="newOutflow.type === 2 ">
@@ -58,8 +59,9 @@
            <label>Costo por unidad</label>
             <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="" required>
              <br>
-            <code>Fecha: {{format(newOutflow.date)}}</code>                
-              <input-date v-model="newOutflow.date"></input-date>
+                          
+             <input type="date" class="form-control fecha" v-model="newOutflow.date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          
              </template>
               <template v-if="newOutflow.type === 3 ">
                   <label>Descripción</label>
@@ -67,8 +69,9 @@
                     <label>Costo</label>
             <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="" required>
              <br>
-            <code>Fecha: {{format(newOutflow.date)}}</code>                
-              <input-date v-model="newOutflow.date"></input-date>
+                          
+              <input type="date" class="form-control fecha" v-model="newOutflow.date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          
              </template>
                   <template v-if="newOutflow.type === 4">
                  
@@ -78,8 +81,9 @@
            <label>Costo/Kg</label>
             <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="Costo/Kg" required>
              <br>
-          <code>Fecha: {{format(newOutflow.date)}}</code>                
-              <input-date v-model="newOutflow.date"></input-date>
+                       
+              <input type="date" class="form-control fecha" v-model="newOutflow.date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          
             </template>
             <template v-if="newOutflow.type === 5">
                  
@@ -89,8 +93,9 @@
            <label>Importe</label>
             <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="Importe" required>
              <br>
-            <code>Fecha: {{format(newOutflow.date)}}</code>                
-              <input-date v-model="newOutflow.date"></input-date>
+                         
+              <input type="date" class="form-control fecha" v-model="newOutflow.date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          
             </template>
             <template v-if="newOutflow.type === 6">
                  
@@ -100,8 +105,9 @@
            <label>Importe</label>
             <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="Importe" required>
              <br>
-           <code>Fecha: {{format(newOutflow.date)}}</code>                
-              <input-date v-model="newOutflow.date"></input-date>
+                         
+              <input type="date" class="form-control fecha" v-model="newOutflow.date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          
             </template>
             <template v-if="newOutflow.type === 7">
                  
@@ -111,8 +117,9 @@
            <label>Costo</label>
             <input type="text" class="form-control mb-1" v-model="newOutflow.price" placeholder="Costo" required>
             <br>
-            <code>Fecha: {{format(newOutflow.date)}}</code>                
-              <input-date v-model="newOutflow.date"></input-date>
+                           
+              <input type="date" class="form-control fecha" v-model="newOutflow.date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          
             </template>
         </div>
              <template v-if="edit === false">

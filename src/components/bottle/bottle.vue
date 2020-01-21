@@ -15,7 +15,7 @@
           <div v-if="errorMessage" class="alert alert-danger" role="alert">
             {{ errorMessage }}
           </div>
-          <div class="card bg-dark">
+          <div class="card bg-dark sticky-top">
             <div class="card-header bg-dark">
               <template v-if="edit === false && buy===false">
                   <h3 class="tablaHead">Nueva</h3>
@@ -147,13 +147,14 @@
              </template>
             <input type="text" class="form-control mb-1" v-model="newBottleBuy.totalPrice" placeholder="Total" disabled required>
             </template>
-            <label>P<small>recio Venta</small></label>   <code style="float: right; text-align: left; margin-top: 0.8em;" >Fecha: {{format(newBottleBuy.date)}}</code>   
+            <input type="date" class="form-control fecha" v-model="newBottleBuy.date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          
+            <label>Precio Venta</label>   
             <div>
             <input style="width: 34%; float: left;" type="text" class="form-control mb-1" v-model="newBottle.price" placeholder="" required>
             
                       
-              <input-date style="width: 62%; float: right; height: 33px" v-model="newBottleBuy.date"></input-date>
-          </div></div>
+              </div></div>
           </br>
                 <button class="btn btn-outline-primary" style="width: 78px; margin-top: 2em;">Comprar</button>
             
