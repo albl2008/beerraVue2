@@ -273,18 +273,31 @@
             <div class="fechacliente">
               <h3 class="tablaHead izqh3 ">Fecha</h3><h3 class="tablaHead derh3">Cliente</h3>
             <input type="date" class="form-control fecha" v-model="date" required aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-            
+
             <select v-model="client" class="custom-select cliente" required >
                   
-                  <option v-for="client in clients" v-bind:value="client._id">
+                  <option v-for="(client,i) in clients" v-bind:value="client._id" v-bind:key="i">
                     {{client.name}}
                   </option>
               </select>
+                
+           
+          </div>
+          
             
-          </div>
-          </div>
+                    </div>
+                
              <h3 class="text-center badge badge-dark precios marginprecio">Total venta: $ {{totalSale}} </h3>
-           <button class="btn btn-outline-warning procesar">Procesar venta</button>
+              
+             
+              <h3 class="text-center badge badge-dark precios" style="margin-left:1em" for="checkbox">POSTNET</h3> 
+               <input type="checkbox" id="checkbox" v-model="postnet">
+           
+            <div>
+              
+              <button class="btn btn-outline-warning procesar">Procesar venta</button>
+            </div>
+          
         </form>
         </div>
         <div class="col-md-3"></div>
@@ -354,6 +367,7 @@
 
       <modal name='bottles'
       height='auto'
+      scrollable='true'
       >
         <div class="container" style="width: 100%;">
           <div class="row">
@@ -372,12 +386,12 @@
                       <th>Cantidad</th>
                     </thead>
                     <tbody>
-                      <tr v-for="bottle in BottlesStock">
+                      <tr v-for="(bottle, index) in BottlesStock">
                         <td>{{bottle.beer}}</td>
                         <td>{{bottle.stock}}</td>
                         <td class="nowrap" style="max-width: 100px;">{{bottle.brewery.name}}</td>
                         <td>$ {{bottle.price}}</td>
-                        <td ><input style="width: 100px;" type="number form-control" v-model="newBottle.quantitySaled" placeholder="Cantidad"><button class="btn btn-sm btn-outline-warning" v-on:click="createBottle(bottle)">Agregar</button></td>
+                        <td ><input style="width: 100px;" type="number form-control" v-model="quantity[index]" v-on:change="newBottle.quantitySaled = quantity[index]" placeholder="Cantidad"><button class="btn btn-sm btn-outline-warning" v-on:click="createBottle(bottle)">Agregar</button></td>
                        
                       </tr>
                     </tbody>
@@ -442,6 +456,7 @@ export default {
       showModal: false,
       newOther:{},
       newBottle:{},
+      quantity:[],
       newContainer:{},
       date:Date.now,
       client:"",
@@ -686,6 +701,7 @@ export default {
     this.newOther.idDelete = this.others.length 
    
   },
+
   openModalBottles(){
     this.$modal.show('bottles');
   },
@@ -806,6 +822,7 @@ export default {
       others: this.others,
       containers: this.containers,
       pints: this.pints,
+      postnet:this.postnet
     },
     headers: {authorization: `Bearer ${localStorage.token}`} 
     }).then(res =>{

@@ -10,9 +10,6 @@
           <a href="#contacto">Contacto</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="#precios">Planes</a>
-        </li>
-        <li class="breadcrumb-item">
           <a v-bind:href="signup">Registrarse</a>
         </li>
         <li class="breadcrumb-item">
@@ -26,18 +23,17 @@
           <h1>
             ¿Qué es
             <span id class="beerra">Beerra</span>?
-            <!-- <span id="animate2" class="badge badge-warning badge-pill beerra">Beerra</span>? -->
           </h1>
           <p style="margin-bottom: 0.8em;">
             <span class="sistema">Es un sistema web pensado para</span>
-            <span class="centros">centros de recarga</span> <span class="sistema">de Cerveza Artesanal</span>
+            <span class="centros">venta de cerveza artesanal </span> <span class="sistema">en diversos formatos</span>
           </p>
-          <p class="proba">Proba todas las funcionalidades del sistema
+          <p class="proba"> Cuenta con varias funcionalidades entre ellas el manejo de barriles en camara por estado.
             <span
               style="letter-spacing: 0.1em; text-transform: capitalize; color: #FB9336; 
               font-weight: bold; font-size: 29px; border: 1px solid white; padding: 3px 10px 6px 10px; 
               border-radius: 0.2em; background:  rgba(0, 0, 0, 0.042);"
-            >gratis</span> por 2 semanas
+            >gratis</span> por 2 meses
           </p>
           <p class="lead">
             <a
@@ -60,7 +56,7 @@
     <div class="container">
       <nav id="funcionalidades" aria-label="breadcrumb">
         <ol class="breadcrumb bg-warning">
-          <li class="breadcrumb-item divider" aria-current="page">Funcionalidades</li>
+          <li class="breadcrumb-item divider" aria-current="page">Funcionalidades Principales</li>
         </ol>
       </nav>
       <div class="card-columns">
@@ -73,18 +69,18 @@
             <!-- <p
               v-if="keg"> -->
               <p>
-              Podras controlar los barriles por estado, desde que llegan hasta son vaciados y pagados al proveedor.</p>
+              Podras controlar los barriles por estado y su pago contra pedido, registro de cervecerias con contacto integrado via WhatsApp web.</p>
           </div>
         </div>
         <div class="card bg-dark">
           <div class="card-body text-center">
-            <h1 class="card-text">Venta en otros formatos</h1>
+            <h1 class="card-text">Venta en diversos formatos</h1>
             <!-- <button v-on:click="config = !config"> -->
               <img :src="require('@/assets/beerra/different2.png')" alt class="imgicon">
             <!-- </button> -->
             <!-- <p
               v-if="config"
-            > --><p>Podes recargar botellones y pintas, ademas de contar con la opcion 2x1 (happy hour) en pintas.</p>
+            > --><p>Podes recargar botellones y pintas, ademas de contar con la opcion 2x1 (happy hour) y categoria Granel</p>
           </div>
         </div>
         <div class="card bg-dark">
@@ -95,7 +91,7 @@
             <!-- </button> -->
             <!-- <p
               v-if="pay"
-            >--><p>Administra los gastos: alquiler, luz, gas(CO2), compras de botellones y pintas, limpieza, etc</p> 
+            >--><p>Administra los gastos: alquiler, luz, gas(CO2), compras de botellones y pintas, limpieza y otros y lleva un control interno de lo quemas se gasta.</p> 
           </div>
         </div>
         <div class="card bg-dark">
@@ -104,7 +100,7 @@
             <!-- <button v-on:click="sell = !sell"> -->
               <img :src="require('@/assets/beerra/ventass2.png')" alt class="imgicon">
             <!-- </button> -->
-         <!--    <p v-if="sell"> --><p>Podras administrar las ventas de cerveza en los distintos formatos</p>
+         <!--    <p v-if="sell"> --><p>Las ventas realizadas en el sistema se iran almacenando para despues poder tener reportes mensuales del funcionamiento del comercio</p>
           </div>
         </div>
         <div class="card bg-dark">
@@ -113,7 +109,7 @@
             <!-- <button v-on:click="bottle = !bottle"> -->
               <img :src="require('@/assets/beerra/bottlee2.png')" alt class="imgicon">
             <!-- </button> -->
-            <!-- <p v-if="bottle"> --><p>Podras cargar y administrar la venta de cerveza en botellas</p>
+            <!-- <p v-if="bottle"> --><p>Podras cargar y administrar la venta de cerveza en botellas, en 3 tipos de formato: 330cc, 660cc y 1 L</p>
           </div>
         </div>
         <div class="card bg-dark">
@@ -124,59 +120,12 @@
             <!-- </button> -->
            <!--  <p
               v-if="client"
-            > --><p>Llevaras un control sobre los clientes de tu centro de recarga, con contador de litros para cada uno</p>
+            > --><p>Listado de clientes, con contador de litros para cada uno y su propio avatar generado a partir del numero telfonico</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="container">
-      <nav id="precios" aria-label="breadcrumb">
-        <ol class="breadcrumb bg-warning">
-          <li class="breadcrumb-item divider" aria-current="page">Planes</li>
-        </ol>
-      </nav>
-      <div class="card-columns">
-        <div class="card bg-dark yellowB">
-          <div class="card-body text-center">
-            <h1 class="card-text">Hasta 3 Canillas</h1>
-            <!-- <button v-on:click="tres = !tres"> -->
-              <img :src="require('@/assets/beerra/3cani.png')" alt class="canilla">
-              
-            <!-- </button> -->
-            <!-- <p v-if="tres"> --><p>Plan básico.</p>
-            <!-- <p v-if="tres" class="lead"> --><p>
-              <a class="btn btn-outline-light btn-lg" href="#" role="button">Consultar</a>
-            </p>  
-          </div>
-        </div>
-        <div class="card bg-dark yellowB">
-          <div class="card-body text-center">
-            <h1 class="card-text">Hasta 7 Canillas</h1>
-            <!-- <button v-on:click="siete = !siete"> -->
-              <img :src="require('@/assets/beerra/7cani.png')" alt class="canilla">
-              <!-- <p>4 - 7</p> -->
-            <!-- </button> -->
-           <!--  <p v-if="siete"> --><p>Plan intermedio.</p>
-           <!--  <p v-if="siete" class="lead"> -->
-              <a class="btn btn-outline-light btn-lg" href="#" role="button">Consultar</a>
-          <!--   </p> -->
-          </div>
-        </div>
-        <div class="card bg-dark yellowB">
-          <div class="card-body text-center">
-            <h1 class="card-text">Más de 7 Canillas</h1>
-            <!-- <button v-on:click=" ocho= !ocho"> -->
-              <img :src="require('@/assets/beerra/nosecani.png')" alt class="canilla">
-              <!-- <p>+7</p> -->
-            <!-- </button> -->
-            <!-- <p v-if="ocho"> --><p>Plan avanzado.</p>
-           <!--  <p v-if="ocho" class="lead"> -->
-              <a class="btn btn-outline-light btn-lg" href="#" role="button">Consultar</a>
-          <!--   </p> -->
-          </div>
-        </div>
-      </div>
-    </div>
+        
     <div class="container">
       <center>
         <div class="jumbotron bg-dark card">
@@ -187,157 +136,16 @@
           <p
             class="bg-dark badge-pill redondeo"
           >Nuestro sistema esta en constante evolución, tomamos requirimientos de nuestros clientes y lo mejoramos día a día
-            <br>Envianos tu sugerencia con nuestro formulario de contacto o directamente a nuestra casilla.
+            <br>Envianos tu sugerencia o duda a nuestro correo
             <br>
-            <span class="badge-light badge-pill" style="font-family: 'Lobster', serif; font-size: 22px;">info@beerra.com.ar</span>
+            <span class="badge-light badge-pill" style="font-family: 'Lobster', serif; font-size: 22px;">info@beerra.com.ar</span><span class="badge-light badge-pill" style="font-family: 'Lobster', serif; font-size: 22px;">+5492616563848</span>
           </p>
         </div>
       </center>
     </div>
-    <div class="container">
-      <nav id="contacto" class="" aria-label="breadcrumb">
-        <ol class="breadcrumb bg-warning">
-          <li class="breadcrumb-item divider" aria-current="page">Contacto</li>
-        </ol>
-      </nav>
-      <div class=" card contactBack bg-dark" >
-        <div class="col-lg-8 col-lg-offset-2 ">
-          <!-- <div class="col-lg-8 col-lg-offset-2" style="padding-left: 0px !important;"> -->
-          <form id="contact-form" method="post" action role="form" class="notsolidblack">
-            <div class="imgBack">
-            <div class="messages"></div>
+        </div>
 
-            <div class="controls">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="form_name">Nombre *</label>
-                    <input
-                      id="form_name"
-                      type="text"
-                      name="name"
-                      class="form-control badge-warning"
-                      placeholder="Ingrese su nombre"
-                      required="required"
-                      data-error="Firstname is required."
-                    >
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="form_lastname">Apellido *</label>
-                    <input
-                      id="form_lastname"
-                      type="text"
-                      name="surname"
-                      class="form-control badge-warning"
-                      placeholder="Ingrese su apellido"
-                      required="required"
-                      data-error="Lastname is required."
-                    >
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="form_email">Email *</label>
-                    <input
-                      id="form_email"
-                      type="email"
-                      name="email"
-                      class="form-control badge-warning"
-                      placeholder="Ingrese su email "
-                      required="required"
-                      data-error="Valid email is required."
-                    >
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="form_phone">Telefono</label>
-                    <input
-                      id="form_phone"
-                      type="tel"
-                      name="phone"
-                      class="form-control badge-warning"
-                      placeholder="Ingrese su telefono"
-                    >
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="form_message">Mensaje *</label>
-                    <textarea
-                      id="form_message"
-                      name="message"
-                      class="form-control"
-                      placeholder="Mensaje o sugerencia"
-                      rows="4"
-                      required
-                      data-error="Please,leave us a message."
-                    ></textarea>
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  
-                  <center>
-                    <div class="row signinG breadcrumb">
-                    <button
-                      type="submit"
-                      class="btn btn-outline-warning btn-send btn-lg"
-                      value="Enviar"
-                    >Enviar</button>
-                    </div>
-                  </center>
-                  <br>
-                </div>
-              </div>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="contact col-lg-8">
-          <div class="card notsolidblack" style="height: 94%; margin-bottom: 10px;">
-            <div class="card-body text-center">
-              <h1 class="card-text">Contacto directo</h1>
-              <!-- <button v-on:click="contact = !contact"> -->
-                <img
-                  data-aos="zoom-out-left"
-                  :src="require('@/assets/beerra/agenda2.png')"
-                  alt
-                  class="agenda"
-                >
-             <!--  </button> -->
-             <p style="font-family: 'Roboto', sans-serif; font-size: 16px;">
-              <!-- <p v-if="contact"> -->
-                <i class="material-icons">mail_outline</i> info@beerra.com.ar
-              </p>
-              <p style="font-family: 'Roboto', sans-serif; font-size: 16px; margin-bottom: 0;">
-             <!--  <p v-if="contact"> -->
-                <i class="material-icons">phone</i> 2616563848
-              </p>
-              <p style="font-family: 'Roboto', sans-serif; font-size: 16px; margin-bottom: 0;">
-             <!--  <p v-if="contact"> -->
-                <i class="material-icons">phone</i> 2616585487
-              </p>
-              <p style="font-family: 'Roboto', sans-serif; font-size: 16px;">
-             <!--  <p v-if="contact"> -->
-                <i class="material-icons">phone</i> 2616585672
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
 </template>
 
 <script>

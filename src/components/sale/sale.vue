@@ -1,5 +1,6 @@
 <template>
   <div>
+    <v-paginator :resource_url="resource_url" @update="updateResource"></v-paginator>
     <div id="sales">
       <div class="row" style="width: 50%; margin: 0 auto; ">
         <div class="centerhead">
@@ -21,6 +22,7 @@
                 <table class="table">
                   <thead>
                     <th>Cerveza</th>
+                    
                     <th>Cantidad
                       <small>Litros</small>
                     </th>
@@ -29,6 +31,7 @@
                   <tbody>
                     <tr class="trHigh" v-for="growler in growlers" :key="growler._id">
                       <td class="nowrap" style="max-width: 120px;">{{growler.keg.beer}}</td>
+                      
                       <td>
                         {{growler.quantity}}
                         <span class="litros">l</span>
@@ -134,7 +137,7 @@
 
 <div class="card  overload col-md-12" style="background: #272727; margin-top: 1em;">
   <div class=" " >
-    <h3 class="tablaHead" style="margin-top: 0.45em;">Cierre de caja <small> </small></h3> 
+    <h3 class="tablaHead" style="margin-top: 0.45em;">Ventas del Día<small> </small></h3> 
     
   </div>
   
@@ -146,7 +149,6 @@
 
 
         </div>
-
         <div class="col-md-8">
           <div class="card" style="background: #272727; margin-bottom: 3em;">
             <div class="card-header bg-dark">
@@ -159,12 +161,15 @@
                   <th>Cliente</th>
                   <th>Fecha</th>
                   <th>Total</th>
-                  <th>Formatos
-                    <small>growler /pinta /botella /cantidad /envase</small>
+                  <th>Tarjeta</th>
+                  <th style="text-align: center;">Formatos
+                    <small>Toque para detalles</small>
                   </th>
+                  
 
-                  <th>Elim.</th>
+                  <th style="text-align: right">Elminar</th>
                 </thead>
+   
                 <tbody>
                   <tr class="trHigh" v-for="sale in sales" :key="sale._id">
                     <td class="nowrap" style="max-width: 100px;">{{sale.client.name}}</td>
@@ -172,6 +177,7 @@
                     <td>{{format(sale.date)}}</td>
 
                     <td style="width: 100px;">$ {{sale.totalSale}}</td>
+                    <td>{{sale.postnet}}</td>
                     <div style="width: 290px;">
                       <template v-if="Object.keys(sale.growlers).length === 0">
                         <td>
@@ -277,6 +283,7 @@
             </div>
           </div>
         </div>
+        
       </div>
     </div>
     <modal name="delete" height="auto">
@@ -302,6 +309,7 @@
 </template>
 <script>
 import Vue from "vue";
+
 const moment = require('moment-timezone')
 const axios = require("axios");
 export default {
@@ -321,6 +329,8 @@ export default {
       isContainers: false,
       search: "",
       day:'',
+      salesp:[],
+      resource_url:'process.env.ROOT_API + "sale"',
       totalDay:''
     };
   },
@@ -346,6 +356,7 @@ export default {
         console.log(res.response.data)
       })
     },
+    
     getSales() {
       axios({
         url: process.env.ROOT_API + "sale",
@@ -358,6 +369,9 @@ export default {
         .catch(e => {
           console.log(e);
         });
+    },
+    updateResource(data){
+      this.salesp = data
     },
     getGrowler(idSale) {
       axios({
