@@ -408,7 +408,7 @@
 <script>
 import Vue from 'vue'
 import { Carousel3d, Slide } from 'vue-carousel-3d';
-import RadialProgressBar from 'vue-radial-progress'
+import RadialProgressBar from './vue-radial-progress'
 const moment = require('moment-timezone')
 const axios = require('axios')
 class newGrowler {
