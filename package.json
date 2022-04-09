@@ -17,7 +17,7 @@
     "element-ui": "^2.13.0",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.4.0",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "moment-timezone": "^0.5.23",
     "random-hex-color": "^1.0.1",
     "uniq-array": "^1.0.1",
